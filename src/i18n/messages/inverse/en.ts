@@ -21,7 +21,7 @@ export const en: Record<MessageKey, string> = {
 
   "inverse.extras.title": "Adjust the calculation",
   "inverse.extras.hint":
-    "The contract changes the contributions, and so the gross you need; the group shows the values in use.",
+    "Your comune, payslips a year and contract change the gross you need; the group shows the values in use.",
   "inverse.group.contract": "Contract and INPS",
   "inverse.contract.legend": "Contract type",
   "inverse.contract.hint":
@@ -74,7 +74,7 @@ export const en: Record<MessageKey, string> = {
   "inverse.change.frequency": "payslips a year",
   "inverse.change.contract": "contract",
 
-  "inverse.ledger.title": "How it adds up",
+  "inverse.ledger.title": "Breakdown",
   "inverse.ledger.caption": "How the {year} calculation adds up, amounts in euros",
   "inverse.ledger.column.term": "Item",
   "inverse.ledger.column.monthly": "Monthly average",

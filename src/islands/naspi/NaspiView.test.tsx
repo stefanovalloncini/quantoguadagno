@@ -54,7 +54,7 @@ describe("NaspiCalculator", () => {
     const html = renderToString(<NaspiCalculator locale="it" messages={MESSAGES.it} />);
     expect(html).toContain(euro(1270.03));
     expect(html).toContain(`Circa <strong>${euro(1130, { integer: true })}</strong> netti al mese`);
-    expect(html).toContain("Come si arriva all’importo");
+    expect(html).toContain("Dettaglio del calcolo");
     expect(html).toContain("qg-chart__frame");
     expect(html).not.toContain("<template");
   });

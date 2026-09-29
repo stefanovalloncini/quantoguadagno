@@ -280,6 +280,12 @@ export function InverseView() {
 
   const rest = (
     <>
+      <div className="qg-section__intro">
+        <h2 className="qg-heading" id={IDS.extrasHeading}>
+          {t("inverse.extras.title")}
+        </h2>
+        <p className="qg-section__hint">{t("inverse.extras.hint")}</p>
+      </div>
       <ComuneField
         id={IDS.comune}
         rateId={IDS.municipalRate}
@@ -340,6 +346,7 @@ export function InverseView() {
       <CalculatorLayout
         resultId={IDS.result}
         resultLabelledBy={IDS.resultHeading}
+        restLabelledBy={IDS.extrasHeading}
         primary={primary}
         result={
           <InverseResult

@@ -19,7 +19,7 @@ export const it = {
 
   "inverse.extras.title": "Personalizza il calcolo",
   "inverse.extras.hint":
-    "Il contratto cambia i contributi e quindi la RAL che serve; il gruppo mostra i valori che stai usando.",
+    "Comune, mensilità e contratto cambiano la RAL che serve; il gruppo mostra i valori che stai usando.",
   "inverse.group.contract": "Contratto e INPS",
   "inverse.contract.legend": "Tipo di contratto",
   "inverse.contract.hint":

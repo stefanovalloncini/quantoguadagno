@@ -61,7 +61,7 @@ export const it = {
   "employerCost.change.comune": "comune",
   "employerCost.change.frequency": "mensilità",
 
-  "employerCost.ledger.title": "Dettaglio del costo",
+  "employerCost.ledger.title": "Dettaglio del calcolo",
   "employerCost.ledger.caption": "Dettaglio del costo {year}, importi in euro",
   "employerCost.ledger.column.term": "Voce",
   "employerCost.ledger.column.monthly": "Media su 12 mesi",

@@ -191,9 +191,9 @@ export const en: Record<MessageKey, string> = {
   "employee.frequency.legend": "Payslips a year",
   "employee.frequency.hint":
     "How many payslips you get in a year: 13 with the thirteenth-month pay, 14 with the fourteenth too.",
-  "employee.extras.title": "Fine-tune the calculation",
+  "employee.extras.title": "Adjust the calculation",
   "employee.extras.hint":
-    "Dependants, expenses and benefits change your net pay; each group shows the values in use.",
+    "Your comune, payslips a year and the groups below change your net pay; each group shows the values in use.",
 
   "employee.group.contract": "Contract and INPS",
   "employee.group.dependents": "Dependants",

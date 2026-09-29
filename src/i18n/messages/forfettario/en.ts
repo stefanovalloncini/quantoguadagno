@@ -99,7 +99,7 @@ export const en: Record<MessageKey, string> = {
   "forfettario.group.previdenza": "Pension fund and contributions",
   "forfettario.group.regime": "Seniority and costs",
   "forfettario.group.dipendente": "Concurrent employment",
-  "forfettario.extras.title": "Customise the calculation",
+  "forfettario.extras.title": "Adjust the calculation",
   "forfettario.extras.hint":
     "Add the details of your contribution position, if different from the standard one.",
   "forfettario.form.isAnte1996.hint":
@@ -127,7 +127,7 @@ export const en: Record<MessageKey, string> = {
   "forfettario.result.estimate": "actual contributions may vary based on your position.",
   "forfettario.result.verified": "Data checked on {date}",
   "forfettario.result.trust": "{checked}.",
-  "forfettario.ledger.title": "Calculation detail",
+  "forfettario.ledger.title": "Breakdown",
   "forfettario.ledger.caption": "Forfettario calculation detail {year}, amounts in euro",
   "forfettario.ledger.column.term": "Item",
   "forfettario.ledger.column.annual": "Annual",

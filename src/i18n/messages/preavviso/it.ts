@@ -1,5 +1,5 @@
 export const it = {
-  "preavviso.faq.title": "Domande frequenti",
+  "preavviso.faq.title": "Per capire il preavviso",
   "preavviso.faq.obbligatorio.q": "Sono obbligato a dare il preavviso?",
   "preavviso.faq.obbligatorio.a":
     "Sì, salvo dimissioni per giusta causa (Art. 2119 c.c., per esempio mancato pagamento dello stipendio o molestie) o in periodo di prova. I giorni dipendono dal CCNL, dal livello e dall’anzianità di servizio.",

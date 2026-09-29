@@ -27,6 +27,9 @@ export const it = {
   "naspi.weeksAfter.hint": "Quelle del lavoro che hai iniziato dopo le dimissioni.",
 
   "naspi.net.title": "Per stimare il netto",
+  "naspi.extras.title": "Personalizza il calcolo",
+  "naspi.extras.hint":
+    "Altri redditi, regione e comune servono solo a stimare il netto: l’importo lordo non cambia.",
   "naspi.net.recap": "{other}; {residence}",
   "naspi.net.recap.noOther": "Nessun altro reddito nel {year}",
   "naspi.net.recap.other": "{amount} di altri redditi nel {year}",
@@ -88,7 +91,7 @@ export const it = {
   "naspi.note.trust":
     "{checked}{pending, select, yes {: {count, plural, one {un valore usato in questo calcolo è ancora da verificare} other {# valori usati in questo calcolo sono ancora da verificare}}} other {}}.",
 
-  "naspi.ledger.title": "Come si arriva all’importo",
+  "naspi.ledger.title": "Dettaglio del calcolo",
   "naspi.ledger.caption": "Calcolo della NASpI {year}, importi lordi in euro",
   "naspi.ledger.term": "Voce",
   "naspi.ledger.value": "Valore",

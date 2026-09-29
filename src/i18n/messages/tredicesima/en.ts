@@ -28,7 +28,7 @@ export const en: Record<MessageKey, string> = {
   "tredicesima.breakdown.net": "Net 13th salary",
   "tredicesima.result.note":
     "The 13th carries no employee work deduction and no regional or municipal surcharge, so it is taxed more than an ordinary month.",
-  "tredicesima.ledger.title": "How the net amount is reached",
+  "tredicesima.ledger.title": "Breakdown",
   "tredicesima.ledger.caption": "13th salary calculation, {year}",
   "tredicesima.ledger.column.term": "Item",
   "tredicesima.ledger.column.amount": "Amount",

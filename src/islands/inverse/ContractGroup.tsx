@@ -70,70 +70,62 @@ export function ContractGroup({ state, open, f, onOpenChange, update }: Contract
   const rt = useRichT();
   const rates = ratesFor(state.year);
   return (
-    <section className="qg-section" aria-labelledby={IDS.extrasHeading}>
-      <div className="qg-section__intro">
-        <h2 className="qg-heading" id={IDS.extrasHeading}>
-          {t("inverse.extras.title")}
-        </h2>
-        <p className="qg-section__hint">{t("inverse.extras.hint")}</p>
-      </div>
-      <DetailsGroupList>
-        <DetailsGroup
-          id={IDS.contractGroup}
-          title={t("inverse.group.contract")}
-          recap={contractText(state, t, f, true)}
-          recapSet={!contractIsDefault(state)}
-          open={open}
-          onOpenChange={onOpenChange}
-        >
-          <RadioGroup<ContractType>
-            idPrefix={IDS.contract}
-            name="contractType"
-            legend={t("inverse.contract.legend")}
-            hint={rt("inverse.contract.hint", {
-              article: f.article(rates.apprentice),
-              rate: <Amount>{f.percent(rates.apprentice)}</Amount>,
-            })}
-            layout="stacked"
-            value={state.contractType}
-            options={CONTRACT_TYPES.map((type) => ({
-              value: type,
-              label: t(`inverse.contract.${type}`),
-            }))}
-            onValueChange={(value) => {
-              update("contractType", value);
-            }}
-          />
-          <Checkbox
-            id={IDS.isPublicEmployee}
-            name="isPublicEmployee"
-            label={t("inverse.public.label")}
-            hint={rt("inverse.public.hint", {
-              article: f.article(rates.public),
-              publicRate: <Amount>{f.percent(rates.public)}</Amount>,
-              baseArticle: f.article(rates.base),
-              rate: <Amount>{f.percent(rates.base)}</Amount>,
-            })}
-            checked={state.isPublicEmployee}
-            onCheckedChange={(checked) => {
-              update("isPublicEmployee", checked);
-            }}
-          />
-          <Checkbox
-            id={IDS.companySize}
-            name="companySize"
-            label={t("inverse.large.label")}
-            hint={rt("inverse.large.hint", {
-              article: f.article(rates.large),
-              rate: <Amount>{f.percent(rates.large)}</Amount>,
-            })}
-            checked={state.companySize === "large"}
-            onCheckedChange={(checked) => {
-              update("companySize", checked ? "large" : "small");
-            }}
-          />
-        </DetailsGroup>
-      </DetailsGroupList>
-    </section>
+    <DetailsGroupList>
+      <DetailsGroup
+        id={IDS.contractGroup}
+        title={t("inverse.group.contract")}
+        recap={contractText(state, t, f, true)}
+        recapSet={!contractIsDefault(state)}
+        open={open}
+        onOpenChange={onOpenChange}
+      >
+        <RadioGroup<ContractType>
+          idPrefix={IDS.contract}
+          name="contractType"
+          legend={t("inverse.contract.legend")}
+          hint={rt("inverse.contract.hint", {
+            article: f.article(rates.apprentice),
+            rate: <Amount>{f.percent(rates.apprentice)}</Amount>,
+          })}
+          layout="stacked"
+          value={state.contractType}
+          options={CONTRACT_TYPES.map((type) => ({
+            value: type,
+            label: t(`inverse.contract.${type}`),
+          }))}
+          onValueChange={(value) => {
+            update("contractType", value);
+          }}
+        />
+        <Checkbox
+          id={IDS.isPublicEmployee}
+          name="isPublicEmployee"
+          label={t("inverse.public.label")}
+          hint={rt("inverse.public.hint", {
+            article: f.article(rates.public),
+            publicRate: <Amount>{f.percent(rates.public)}</Amount>,
+            baseArticle: f.article(rates.base),
+            rate: <Amount>{f.percent(rates.base)}</Amount>,
+          })}
+          checked={state.isPublicEmployee}
+          onCheckedChange={(checked) => {
+            update("isPublicEmployee", checked);
+          }}
+        />
+        <Checkbox
+          id={IDS.companySize}
+          name="companySize"
+          label={t("inverse.large.label")}
+          hint={rt("inverse.large.hint", {
+            article: f.article(rates.large),
+            rate: <Amount>{f.percent(rates.large)}</Amount>,
+          })}
+          checked={state.companySize === "large"}
+          onCheckedChange={(checked) => {
+            update("companySize", checked ? "large" : "small");
+          }}
+        />
+      </DetailsGroup>
+    </DetailsGroupList>
   );
 }

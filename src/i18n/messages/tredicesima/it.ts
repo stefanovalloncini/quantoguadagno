@@ -26,7 +26,7 @@ export const it = {
   "tredicesima.breakdown.net": "Netto della tredicesima",
   "tredicesima.result.note":
     "Sulla tredicesima non si applicano le detrazioni da lavoro dipendente né le addizionali regionale e comunale: per questo è tassata più di una mensilità ordinaria.",
-  "tredicesima.ledger.title": "Come si arriva al netto",
+  "tredicesima.ledger.title": "Dettaglio del calcolo",
   "tredicesima.ledger.caption": "Calcolo della tredicesima, anno {year}",
   "tredicesima.ledger.column.term": "Voce",
   "tredicesima.ledger.column.amount": "Importo",

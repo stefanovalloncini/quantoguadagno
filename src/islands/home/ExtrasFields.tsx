@@ -58,35 +58,27 @@ export function ExtrasFields({
           if (count !== undefined) update("paymentFrequency", count);
         }}
       />
-      <section className="qg-section" aria-labelledby={IDS.extrasHeading}>
-        <div className="qg-section__intro">
-          <h2 className="qg-heading" id={IDS.extrasHeading}>
-            {t("employee.extras.title")}
-          </h2>
-          <p className="qg-section__hint">{t("employee.extras.hint")}</p>
-        </div>
-        <DetailsGroupList>
-          {VIEW_GROUPS.map((group) => (
-            <DetailsGroup
-              key={group}
-              id={GROUP_IDS[group]}
-              title={t(GROUP_TITLES[group])}
-              recap={recaps[group].text}
-              recapSet={recaps[group].set}
-              open={open[group]}
-              onOpenChange={(next) => {
-                onOpenChange(group, next);
-              }}
-            >
-              {open[group] && (
-                <ClientSuspense fallback={null}>
-                  <GroupFields group={group} {...fields} />
-                </ClientSuspense>
-              )}
-            </DetailsGroup>
-          ))}
-        </DetailsGroupList>
-      </section>
+      <DetailsGroupList>
+        {VIEW_GROUPS.map((group) => (
+          <DetailsGroup
+            key={group}
+            id={GROUP_IDS[group]}
+            title={t(GROUP_TITLES[group])}
+            recap={recaps[group].text}
+            recapSet={recaps[group].set}
+            open={open[group]}
+            onOpenChange={(next) => {
+              onOpenChange(group, next);
+            }}
+          >
+            {open[group] && (
+              <ClientSuspense fallback={null}>
+                <GroupFields group={group} {...fields} />
+              </ClientSuspense>
+            )}
+          </DetailsGroup>
+        ))}
+      </DetailsGroupList>
     </>
   );
 }

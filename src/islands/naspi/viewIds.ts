@@ -10,6 +10,7 @@ export const IDS = {
   chartHeading: "andamento-titolo",
   table: "tabella-mesi",
   topicsHeading: "capire-titolo",
+  extrasHeading: "personalizza-titolo",
   year: "cessazione",
   gross: "retribuzione",
   weeks: "settimane",

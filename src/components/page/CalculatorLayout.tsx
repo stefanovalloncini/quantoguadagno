@@ -6,6 +6,7 @@ interface CalculatorLayoutProps {
   readonly rest?: ReactNode;
   readonly resultId?: string;
   readonly resultLabelledBy?: string;
+  readonly restLabelledBy?: string;
 }
 
 export function CalculatorLayout({
@@ -14,6 +15,7 @@ export function CalculatorLayout({
   rest,
   resultId,
   resultLabelledBy,
+  restLabelledBy,
 }: CalculatorLayoutProps) {
   return (
     <div className="qg-calc">
@@ -27,7 +29,14 @@ export function CalculatorLayout({
           {result}
         </section>
       )}
-      {rest !== undefined && <div className="qg-calc__rest">{rest}</div>}
+      {rest !== undefined &&
+        (restLabelledBy === undefined ? (
+          <div className="qg-calc__rest">{rest}</div>
+        ) : (
+          <section className="qg-calc__rest" aria-labelledby={restLabelledBy}>
+            {rest}
+          </section>
+        ))}
     </div>
   );
 }

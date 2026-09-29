@@ -498,76 +498,84 @@ export function NaspiView() {
   );
 
   const rest = eligible ? (
-    <DetailsGroupList>
-      <DetailsGroup
-        id={IDS.netGroup}
-        title={t("naspi.net.title")}
-        recap={recap}
-        recapSet={recapSet}
-        open={groupOpen}
-        onOpenChange={setGroupOpen}
-      >
-        {groupOpen && (
-          <ClientSuspense fallback={null}>
-            <NetEstimateFields
-              year={state.year}
-              inputs={net}
-              list={comuni.list}
-              selection={comuni.selected}
-              otherIncomeError={errorText("otherIncome")}
-              municipalRateError={errorText("municipalRate")}
-              onOtherIncomeChange={(text) => {
-                updateNet((previous) => ({ ...previous, otherIncome: text }), true);
-              }}
-              onRegionChange={(region: RegionCode) => {
-                updateNet((previous) => ({ ...previous, region, comune: null }));
-              }}
-              onComuneChange={(id) => {
-                updateNet((previous) => ({ ...previous, comune: id }));
-              }}
-              onSwitchRegion={(region, id) => {
-                updateNet((previous) => ({ ...previous, region, comune: id }));
-              }}
-              onManualChange={(manual) => {
-                updateNet((previous) => {
-                  if (manual) {
-                    const rule = residence.comune?.rule;
+    <section className="qg-section" aria-labelledby={IDS.extrasHeading}>
+      <div className="qg-section__intro">
+        <h2 className="qg-heading" id={IDS.extrasHeading}>
+          {t("naspi.extras.title")}
+        </h2>
+        <p className="qg-section__hint">{t("naspi.extras.hint")}</p>
+      </div>
+      <DetailsGroupList>
+        <DetailsGroup
+          id={IDS.netGroup}
+          title={t("naspi.net.title")}
+          recap={recap}
+          recapSet={recapSet}
+          open={groupOpen}
+          onOpenChange={setGroupOpen}
+        >
+          {groupOpen && (
+            <ClientSuspense fallback={null}>
+              <NetEstimateFields
+                year={state.year}
+                inputs={net}
+                list={comuni.list}
+                selection={comuni.selected}
+                otherIncomeError={errorText("otherIncome")}
+                municipalRateError={errorText("municipalRate")}
+                onOtherIncomeChange={(text) => {
+                  updateNet((previous) => ({ ...previous, otherIncome: text }), true);
+                }}
+                onRegionChange={(region: RegionCode) => {
+                  updateNet((previous) => ({ ...previous, region, comune: null }));
+                }}
+                onComuneChange={(id) => {
+                  updateNet((previous) => ({ ...previous, comune: id }));
+                }}
+                onSwitchRegion={(region, id) => {
+                  updateNet((previous) => ({ ...previous, region, comune: id }));
+                }}
+                onManualChange={(manual) => {
+                  updateNet((previous) => {
+                    if (manual) {
+                      const rule = residence.comune?.rule;
+                      return {
+                        ...previous,
+                        manual,
+                        comuneBeforeManual: previous.comune,
+                        municipalRate:
+                          rule?.rate === undefined
+                            ? previous.municipalRate
+                            : percentText(rule.rate / 100, f.locale),
+                      };
+                    }
                     return {
                       ...previous,
                       manual,
-                      comuneBeforeManual: previous.comune,
-                      municipalRate:
-                        rule?.rate === undefined
-                          ? previous.municipalRate
-                          : percentText(rule.rate / 100, f.locale),
+                      comune: previous.comune ?? previous.comuneBeforeManual,
                     };
-                  }
-                  return {
-                    ...previous,
-                    manual,
-                    comune: previous.comune ?? previous.comuneBeforeManual,
-                  };
-                });
-              }}
-              onManualRateChange={(text) => {
-                updateNet(
-                  (previous) => ({
-                    ...previous,
-                    municipalRate: text,
-                    comune: null,
-                    comuneBeforeManual: previous.comune ?? previous.comuneBeforeManual,
-                  }),
-                  true,
-                );
-              }}
-              onLoadComuni={comuni.load}
-              onFieldFocus={blurErrors.onFocus}
-              onFieldBlur={onFieldBlur}
-            />
-          </ClientSuspense>
-        )}
-      </DetailsGroup>
-    </DetailsGroupList>
+                  });
+                }}
+                onManualRateChange={(text) => {
+                  updateNet(
+                    (previous) => ({
+                      ...previous,
+                      municipalRate: text,
+                      comune: null,
+                      comuneBeforeManual: previous.comune ?? previous.comuneBeforeManual,
+                    }),
+                    true,
+                  );
+                }}
+                onLoadComuni={comuni.load}
+                onFieldFocus={blurErrors.onFocus}
+                onFieldBlur={onFieldBlur}
+              />
+            </ClientSuspense>
+          )}
+        </DetailsGroup>
+      </DetailsGroupList>
+    </section>
   ) : undefined;
 
   const showChart = outcome !== null && eligible && figureState !== "empty";

@@ -28,6 +28,9 @@ export const en: Record<MessageKey, string> = {
   "naspi.weeksAfter.hint": "The weeks of the job you started after resigning.",
 
   "naspi.net.title": "To estimate the net amount",
+  "naspi.extras.title": "Adjust the calculation",
+  "naspi.extras.hint":
+    "Other income, region and comune only estimate the net amount: the gross amount does not change.",
   "naspi.net.recap": "{other}; {residence}",
   "naspi.net.recap.noOther": "No other income in {year}",
   "naspi.net.recap.other": "{amount} of other income in {year}",
@@ -89,7 +92,7 @@ export const en: Record<MessageKey, string> = {
   "naspi.note.trust":
     "{checked}{pending, select, yes {: {count, plural, one {one value used in this calculation is still to be verified} other {# values used in this calculation are still to be verified}}} other {}}.",
 
-  "naspi.ledger.title": "How the amount is worked out",
+  "naspi.ledger.title": "Breakdown",
   "naspi.ledger.caption": "NASpI calculation for {year}, gross amounts in euro",
   "naspi.ledger.term": "Item",
   "naspi.ledger.value": "Value",

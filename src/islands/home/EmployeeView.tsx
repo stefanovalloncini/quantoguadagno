@@ -366,6 +366,7 @@ export function EmployeeView() {
       <CalculatorLayout
         resultId={IDS.result}
         resultLabelledBy={IDS.resultHeading}
+        restLabelledBy={IDS.extrasHeading}
         primary={primary}
         result={
           <ResultPanel
@@ -384,26 +385,34 @@ export function EmployeeView() {
           />
         }
         rest={
-          recaps === null ? (
-            comuneField
-          ) : (
-            <ExtrasFields
-              state={state}
-              hints={hints}
-              notices={derived?.notices ?? null}
-              recaps={recaps}
-              errors={shown}
-              open={openGroups}
-              f={f}
-              comuneField={comuneField}
-              onOpenChange={(group, open) => {
-                setOpenGroups((previous) => ({ ...previous, [group]: open }));
-              }}
-              update={update}
-              onFieldFocus={blurErrors.onFocus}
-              onFieldBlur={onFieldBlur}
-            />
-          )
+          <>
+            <div className="qg-section__intro">
+              <h2 className="qg-heading" id={IDS.extrasHeading}>
+                {t("employee.extras.title")}
+              </h2>
+              <p className="qg-section__hint">{t("employee.extras.hint")}</p>
+            </div>
+            {recaps === null ? (
+              comuneField
+            ) : (
+              <ExtrasFields
+                state={state}
+                hints={hints}
+                notices={derived?.notices ?? null}
+                recaps={recaps}
+                errors={shown}
+                open={openGroups}
+                f={f}
+                comuneField={comuneField}
+                onOpenChange={(group, open) => {
+                  setOpenGroups((previous) => ({ ...previous, [group]: open }));
+                }}
+                update={update}
+                onFieldFocus={blurErrors.onFocus}
+                onFieldBlur={onFieldBlur}
+              />
+            )}
+          </>
         }
       />
       {result !== null && derived !== null && figureState !== "empty" && (

@@ -63,7 +63,7 @@ export const en: Record<MessageKey, string> = {
   "employerCost.change.comune": "comune",
   "employerCost.change.frequency": "payslips a year",
 
-  "employerCost.ledger.title": "How the cost adds up",
+  "employerCost.ledger.title": "Breakdown",
   "employerCost.ledger.caption": "How the {year} cost adds up, amounts in euros",
   "employerCost.ledger.column.term": "Item",
   "employerCost.ledger.column.monthly": "Average over 12 months",

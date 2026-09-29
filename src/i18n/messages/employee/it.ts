@@ -194,7 +194,7 @@ export const it = {
     "Quante buste paga ricevi in un anno: 13 con la tredicesima, 14 con anche la quattordicesima.",
   "employee.extras.title": "Personalizza il calcolo",
   "employee.extras.hint":
-    "Familiari, spese e benefit cambiano il netto; ogni gruppo mostra i valori che stai usando.",
+    "Comune, mensilità e i gruppi qui sotto cambiano il netto; ogni gruppo mostra i valori che stai usando.",
 
   "employee.group.contract": "Contratto e INPS",
   "employee.group.dependents": "Familiari a carico",

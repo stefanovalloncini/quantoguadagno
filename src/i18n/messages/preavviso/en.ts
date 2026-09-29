@@ -1,7 +1,7 @@
 import type { MessageKey } from "./it.ts";
 
 export const en: Record<MessageKey, string> = {
-  "preavviso.faq.title": "Frequently asked questions",
+  "preavviso.faq.title": "Understanding notice periods",
   "preavviso.faq.obbligatorio.q": "Am I required to give notice?",
   "preavviso.faq.obbligatorio.a":
     "Yes, except for resignation for just cause (Art. 2119 c.c., for example unpaid wages or harassment) or during the trial period. The days depend on the CCNL, your level, and your length of service.",
