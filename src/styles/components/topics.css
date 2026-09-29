@@ -2,13 +2,12 @@
   display: flex;
   flex-direction: column;
   gap: var(--s-4);
-  max-inline-size: var(--measure);
-  margin-block-start: var(--s-8);
 }
 
 .qg-topics__list {
   display: flex;
   flex-direction: column;
+  max-inline-size: var(--measure);
   border-block-end: 1px solid var(--filetto);
 }
 

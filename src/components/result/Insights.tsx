@@ -5,7 +5,7 @@ export interface InsightListProps {
 }
 
 export function InsightList({ children }: InsightListProps) {
-  return <div className="qg-insights">{children}</div>;
+  return <div className="qg-insights qg-band">{children}</div>;
 }
 
 interface InsightProps {

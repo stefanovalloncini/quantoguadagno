@@ -15,7 +15,7 @@ export interface TopicsProps {
 
 export function Topics({ headingId, title, topics }: TopicsProps) {
   return (
-    <section className="qg-topics" aria-labelledby={headingId}>
+    <section className="qg-topics qg-band" aria-labelledby={headingId}>
       <h2 className="qg-heading" id={headingId}>
         {title}
       </h2>

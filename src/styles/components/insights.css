@@ -2,9 +2,6 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: var(--s-7);
-  margin-block-start: var(--s-8);
-  padding-block-start: var(--s-6);
-  border-block-start: 1px solid var(--filetto);
 }
 
 .qg-insight {
