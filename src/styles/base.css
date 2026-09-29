@@ -1,0 +1,165 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  font-family: var(--font);
+  font-size: 100%;
+  font-synthesis-weight: none;
+  background: var(--carta);
+  color: var(--inchiostro);
+  scroll-padding-block-end: calc(var(--netbar) + var(--s-4));
+}
+
+body {
+  margin: 0;
+  background: var(--carta);
+  color: var(--inchiostro);
+  font-size: var(--t-17);
+  line-height: var(--lh-body);
+  font-kerning: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:where(h1, h2, h3, h4, h5, h6, p, ul, ol, dl, dd, figure, blockquote, pre) {
+  margin: 0;
+}
+
+:where(h1, h2, h3, h4, h5, h6) {
+  font-size: inherit;
+  font-weight: var(--weight-strong);
+  line-height: var(--lh-tight);
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+:where(p, li, dd, dt, figcaption, caption) {
+  text-wrap: pretty;
+}
+
+:where(ul[role="list"], ol[role="list"]) {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+:where(strong, b) {
+  font-weight: var(--weight-strong);
+}
+
+:where(small) {
+  font-size: var(--t-15);
+}
+
+:where(img, svg, video, canvas) {
+  display: block;
+  max-inline-size: 100%;
+}
+
+:where(img, video) {
+  block-size: auto;
+}
+
+:where(table) {
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+:where(th) {
+  font-weight: var(--weight-medium);
+  text-align: start;
+}
+
+:where(fieldset) {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-inline-size: 0;
+}
+
+:where(legend) {
+  padding: 0;
+}
+
+:where(button, input, select, textarea) {
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+}
+
+:where(button, summary, label, select) {
+  touch-action: manipulation;
+}
+
+:where(summary) {
+  display: block;
+  list-style: none;
+  cursor: pointer;
+}
+
+:where(summary)::-webkit-details-marker {
+  display: none;
+}
+
+:where(input, textarea, select, output) {
+  font-variant-numeric: tabular-nums;
+}
+
+:where(a) {
+  color: var(--blu);
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+:where(a:hover, a.is-hover) {
+  text-decoration-thickness: 2px;
+}
+
+:where(:focus-visible),
+:where(.is-focus) {
+  outline: var(--focus) solid var(--blu);
+  outline-offset: var(--focus-offset);
+}
+
+:where(main[tabindex="-1"]:focus) {
+  outline: none;
+}
+
+:where([hidden]:not([hidden="until-found"])) {
+  display: none !important;
+}
+
+::selection {
+  background: var(--blu);
+  color: var(--su-blu);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (forced-colors: active) {
+  :where(:focus-visible),
+  :where(.is-focus) {
+    outline-color: Highlight;
+  }
+
+  ::selection {
+    background: Highlight;
+    color: HighlightText;
+  }
+}

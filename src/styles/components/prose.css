@@ -1,0 +1,120 @@
+.qg-prose {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+  max-inline-size: var(--measure);
+  min-inline-size: 0;
+}
+
+.qg-prose h2 {
+  margin-block-start: var(--s-6);
+  font-size: var(--t-21);
+  scroll-margin-block-start: var(--s-4);
+}
+
+.qg-prose h3 {
+  margin-block-start: var(--s-3);
+  font-size: var(--t-17);
+  letter-spacing: 0;
+}
+
+.qg-prose > :first-child {
+  margin-block-start: 0;
+}
+
+.qg-prose :is(p, li) {
+  line-height: var(--lh-body);
+}
+
+.qg-prose :is(ul, ol):not([role]) {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  margin: 0;
+  padding-inline-start: 1.25em;
+}
+
+.qg-prose :is(ul, ol):not([role]) > li::marker {
+  color: var(--grigio);
+}
+
+.qg-prose :is(.qg-table-scroll, table) {
+  margin-block: var(--s-1);
+}
+
+.qg-refs {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  margin: 0;
+  padding-inline-start: 1.5em;
+  font-size: var(--t-15);
+  line-height: var(--lh-small);
+}
+
+.qg-refs > li::marker {
+  color: var(--grigio);
+  font-variant-numeric: tabular-nums;
+}
+
+.qg-refs a {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: var(--target);
+}
+
+.qg-refs__source {
+  display: block;
+  color: var(--grigio);
+}
+
+.qg-terms {
+  display: flex;
+  flex-direction: column;
+  max-inline-size: var(--measure);
+  border-block-end: 1px solid var(--filetto);
+}
+
+.qg-terms__item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  padding-block: var(--s-4) var(--s-5);
+  border-block-start: 1px solid var(--filetto);
+  scroll-margin-block-start: var(--s-4);
+}
+
+.qg-terms__term {
+  font-size: var(--t-17);
+  font-weight: var(--weight-strong);
+  line-height: var(--lh-snug);
+}
+
+.qg-terms__definition {
+  line-height: var(--lh-body);
+}
+
+@container qg-page (width >= 60rem) {
+  .qg-prose h2 {
+    font-size: var(--t-27);
+  }
+}
+
+.qg-prose .qg-ledger {
+  margin-block: var(--s-1);
+}
+
+.qg-prose .qg-ledger caption {
+  padding-block-end: var(--s-2);
+  font-size: var(--t-15);
+  font-weight: var(--weight-strong);
+  line-height: var(--lh-small);
+  text-align: start;
+  color: var(--grigio);
+}
+
+.qg-refs__reference {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: var(--target);
+}

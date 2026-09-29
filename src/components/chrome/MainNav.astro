@@ -1,0 +1,67 @@
+---
+import Icon from "@/components/icons/Icon.astro";
+import type { NavGroup } from "@/components/chrome/navigation.ts";
+import type { Locale } from "@/i18n/locales.ts";
+import { getT } from "@/i18n/messages/index.ts";
+
+interface Props {
+  readonly locale: Locale;
+  readonly groups: readonly NavGroup[];
+}
+
+const { locale, groups } = Astro.props;
+const t = getT(locale, "layout");
+---
+
+<nav class="qg-nav" aria-label={t("nav.label")}>
+  <ul class="qg-nav__list" role="list">
+    {groups.map((group) => {
+      const [single] = group.entries;
+      if (group.entries.length === 1 && single) {
+        return (
+          <li>
+            <a
+              class="qg-nav__link"
+              href={single.href}
+              aria-current={single.current ? "page" : undefined}
+            >
+              {group.label}
+            </a>
+          </li>
+        );
+      }
+      return (
+        <li>
+          <details
+            class:list={["qg-nav__group", { "qg-nav__group--current": group.current }]}
+            name="qg-nav"
+            data-disclosure="overlay"
+          >
+            <summary class="qg-nav__toggle">
+              {group.label}
+              <Icon name="chevronDown" />
+            </summary>
+            <div class="qg-nav__panel">
+              <ul class="qg-wrap qg-nav__panel-inner" role="list">
+                {group.entries.map((entry) => (
+                  <li>
+                    <a
+                      class="qg-navlink"
+                      href={entry.href}
+                      aria-current={entry.current ? "page" : undefined}
+                    >
+                      <span class="qg-navlink__name">{entry.label}</span>
+                      {entry.description && (
+                        <span class="qg-navlink__desc">{entry.description}</span>
+                      )}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </details>
+        </li>
+      );
+    })}
+  </ul>
+</nav>

@@ -1,0 +1,64 @@
+---
+import type { LocaleLink } from "@/components/chrome/navigation.ts";
+import type { Locale } from "@/i18n/locales.ts";
+import { getT } from "@/i18n/messages/index.ts";
+
+interface Props {
+  readonly locale: Locale;
+  readonly idPrefix: string;
+  readonly localeLinks: readonly LocaleLink[];
+}
+
+const { locale, idPrefix, localeLinks } = Astro.props;
+const t = getT(locale, "layout");
+const languageLabelId = `${idPrefix}-language`;
+const themeName = `${idPrefix}-theme`;
+const themeOptions = [
+  { value: "light", label: t("theme.label.light") },
+  { value: "dark", label: t("theme.label.dark") },
+  { value: "system", label: t("theme.label.system") },
+] as const;
+---
+
+<div class="qg-prefs">
+  <div class="qg-pref">
+    <span class="qg-pref__label" id={languageLabelId}>
+      {t("prefs.language")}
+    </span>
+    <ul class="qg-langs" role="list" aria-labelledby={languageLabelId}>
+      {localeLinks.map((link) => (
+        <li>
+          {link.current ? (
+            <span lang={link.locale} aria-current="true">
+              {link.label}
+            </span>
+          ) : (
+            <a href={link.href} lang={link.locale} hreflang={link.locale}>
+              {link.label}
+            </a>
+          )}
+        </li>
+      ))}
+    </ul>
+  </div>
+  <fieldset class="qg-pref" data-theme-toggle>
+    <legend class="qg-pref__label">{t("theme.prefix")}</legend>
+    <div class="qg-segmented qg-segmented--small">
+      {themeOptions.map((option) => (
+        <>
+          <input
+            class="qg-segmented__input"
+            type="radio"
+            name={themeName}
+            id={`${themeName}-${option.value}`}
+            value={option.value}
+            autocomplete="off"
+          />
+          <label class="qg-segmented__option" for={`${themeName}-${option.value}`}>
+            {option.label}
+          </label>
+        </>
+      ))}
+    </div>
+  </fieldset>
+</div>

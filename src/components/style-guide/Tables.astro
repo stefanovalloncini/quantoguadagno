@@ -1,0 +1,213 @@
+---
+import Icon from "@/components/icons/Icon.astro";
+import Section from "./Section.astro";
+import Specimen from "./Specimen.astro";
+
+const BRACKETS = [
+  { range: "fino a 28.000 €", rates: ["23%", "23%", "23%"] },
+  { range: "28.000–50.000 €", rates: ["35%", "35%", "33%"] },
+  { range: "oltre 50.000 €", rates: ["43%", "43%", "43%"] },
+] as const;
+
+const PARAMETERS = [
+  {
+    group: "Contributi INPS dei dipendenti",
+    rows: [
+      {
+        name: "Aliquota a carico del lavoratore",
+        value: "9,19%",
+        validity: "2026",
+        source: "Circolare INPS n. 6/2026",
+        checked: "28 settembre 2026",
+        status: undefined,
+      },
+      {
+        name: "Prima fascia di retribuzione",
+        value: "56.224,00 €",
+        validity: "2026",
+        source: "Circolare INPS n. 6/2026",
+        checked: "28 settembre 2026",
+        status: undefined,
+      },
+    ],
+  },
+  {
+    group: "Detrazioni e crediti",
+    rows: [
+      {
+        name: "Trattamento integrativo",
+        value: "fino a 1.200,00 €",
+        validity: "2024–2026",
+        source: "Art. 1 D.L. 3/2020",
+        checked: "28 settembre 2026",
+        status: "todo",
+      },
+      {
+        name: "Indice dei prezzi FOI, media gennaio–agosto 2026",
+        value: "124,1",
+        validity: "2026",
+        source: "ISTAT, base 2015",
+        checked: "28 settembre 2026",
+        status: "provisional",
+      },
+    ],
+  },
+] as const;
+---
+
+<Section id="tabelle">
+  <p class="qg-lede" slot="intro">
+    Tabelle vere, con didascalia e intestazioni: filetti tra le righe, cifre tabellari allineate a
+    destra, totali con un filetto nero.
+  </p>
+  <Specimen label="Tabella semplice" column>
+    <table class="qg-table">
+      <caption id="sg-scaglioni">Aliquote IRPEF per scaglione di reddito imponibile</caption>
+      <thead>
+        <tr>
+          <th scope="col">Reddito imponibile</th>
+          <th scope="col" class="qg-table__num">
+            2024
+          </th>
+          <th scope="col" class="qg-table__num">
+            2025
+          </th>
+          <th scope="col" class="qg-table__num">
+            2026
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {BRACKETS.map((bracket) => (
+          <tr>
+            <th scope="row">{bracket.range}</th>
+            {bracket.rates.map((rate) => (
+              <td class="qg-table__num">{rate}</td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </Specimen>
+  <Specimen
+    label="Tabella densa"
+    note="qg-table--compact qg-table--condensed: 15 px, e sotto 720 px la larghezza semicondensata. La colonna «Rispetto al primo mese» (qg-table__wide) sparisce sotto 720 px. Una tabella che può ancora scorrere di lato va in qg-table-scroll, che prende il focus e ripete la didascalia, come le tabelle dei colori."
+    column
+  >
+    <table class="qg-table qg-table--compact qg-table--condensed">
+      <caption id="sg-mesi">Importo mese per mese</caption>
+      <thead>
+        <tr>
+          <th scope="col">Mese</th>
+          <th scope="col" class="qg-table__num">
+            Lordo
+          </th>
+          <th scope="col" class="qg-table__num">
+            Netto stimato
+          </th>
+          <th scope="col" class="qg-table__num qg-table__wide">
+            Rispetto al primo mese
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td class="qg-table__num">1.353,36 €</td>
+          <td class="qg-table__num">1.300,58 €</td>
+          <td class="qg-table__num qg-table__wide">0,00%</td>
+        </tr>
+        <tr>
+          <th scope="row">6</th>
+          <td class="qg-table__num">1.312,76 €</td>
+          <td class="qg-table__num">1.261,56 €</td>
+          <td class="qg-table__num qg-table__wide">−3,00%</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr class="qg-table__total">
+          <th scope="row">Totale</th>
+          <td class="qg-table__num">15.169,22 €</td>
+          <td class="qg-table__num">14.577,64 €</td>
+          <td class="qg-table__wide"></td>
+        </tr>
+      </tfoot>
+    </table>
+  </Specimen>
+  <Specimen
+    label="Tabella impilata"
+    note="qg-table--stack: sotto 720 px ogni riga diventa un blocco con nome e valore in alto e i dati sotto. I ruoli ARIA espliciti tengono la tabella leggibile per i lettori di schermo."
+    column
+  >
+    <table class="qg-table qg-table--compact qg-table--stack" role="table">
+      <caption>Parametri usati nei calcoli, con fonte, data del controllo e stato</caption>
+      <thead role="rowgroup">
+        <tr role="row">
+          <th scope="col" role="columnheader">
+            Parametro
+          </th>
+          <th scope="col" role="columnheader" class="qg-table__num">
+            Valore
+          </th>
+          <th scope="col" role="columnheader">
+            Validità
+          </th>
+          <th scope="col" role="columnheader">
+            Fonte
+          </th>
+          <th scope="col" role="columnheader">
+            Controllato il
+          </th>
+          <th scope="col" role="columnheader">
+            Stato
+          </th>
+        </tr>
+      </thead>
+      {PARAMETERS.map((section) => (
+        <tbody role="rowgroup">
+          <tr role="row" class="qg-table__group">
+            <th scope="rowgroup" role="rowheader" colspan="6">
+              {section.group}
+            </th>
+          </tr>
+          {section.rows.map((row) => (
+            <tr role="row">
+              <th scope="row" role="rowheader" class="qg-table__primary">
+                {row.name}
+              </th>
+              <td role="cell" class="qg-table__num qg-table__value">
+                {row.value}
+              </td>
+              <td role="cell" class="qg-table__meta qg-table__meta--sep">
+                {row.validity}
+              </td>
+              <td role="cell" class="qg-table__meta qg-table__meta--sep">
+                <a href="#tabelle">{row.source}</a>
+              </td>
+              <td role="cell" class="qg-table__meta">
+                <span class="qg-table__inline-label" aria-hidden="true">
+                  controllato il{" "}
+                </span>
+                {row.checked}
+              </td>
+              <td role="cell" class="qg-table__meta qg-table__status">
+                {row.status === "todo" && (
+                  <span class="qg-status qg-status--todo">
+                    <Icon name="alert" />
+                    Da verificare
+                  </span>
+                )}
+                {row.status === "provisional" && (
+                  <span class="qg-status qg-status--provisional">
+                    <Icon name="clock" />
+                    Provvisorio
+                  </span>
+                )}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      ))}
+    </table>
+  </Specimen>
+</Section>

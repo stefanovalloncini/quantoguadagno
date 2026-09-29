@@ -1,0 +1,17 @@
+export const IDS = {
+  result: "risultato",
+  resultHeading: "costo-titolo",
+  assumptionsHeading: "ipotesi-titolo",
+  netAssumptionsHeading: "ipotesi-netto-titolo",
+  ledgerHeading: "dettaglio-titolo",
+  ledgerToggle: "spiega",
+  extrasHeading: "personalizza-titolo",
+  netGroup: "gruppo-netto",
+  gross: "ral",
+  year: "anno",
+  contract: "contratto",
+  region: "regione",
+  comune: "comune",
+  municipalRate: "aliquota-comunale",
+  frequency: "mensilita",
+} as const;

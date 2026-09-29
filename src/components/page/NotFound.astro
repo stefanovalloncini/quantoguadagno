@@ -1,0 +1,29 @@
+---
+import ToolList from "@/components/page/ToolList.astro";
+import type { Locale } from "@/i18n/locales.ts";
+import { getT } from "@/i18n/messages/index.ts";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { hrefFor } from "@/routePaths.ts";
+
+interface Props {
+  readonly locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getT(locale, "layout");
+---
+
+<BaseLayout locale={locale}>
+  <div class="qg-wrap">
+    <div class="qg-intro">
+      <h1 class="qg-title">{t("notFound.title")}</h1>
+      <p class="qg-lede">{t("notFound.body")}</p>
+    </div>
+    <p>
+      <a class="qg-action" href={hrefFor("home", locale)}>
+        {t("notFound.home")}
+      </a>
+    </p>
+  </div>
+  <ToolList locale={locale} heading={t("notFound.tools")} />
+</BaseLayout>

@@ -1,0 +1,141 @@
+.qg-page {
+  container: qg-page / inline-size;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-block-size: 100vh;
+  min-block-size: 100dvh;
+  background: var(--carta);
+  color: var(--inchiostro);
+}
+
+.qg-wrap {
+  inline-size: 100%;
+  max-inline-size: var(--page-max);
+  margin-inline: auto;
+  padding-inline: max(
+    var(--gutter),
+    env(safe-area-inset-left, 0px),
+    env(safe-area-inset-right, 0px)
+  );
+}
+
+.qg-main {
+  flex: 1 0 auto;
+  padding-block: var(--s-4) var(--s-8);
+}
+
+.qg-band {
+  margin-block-start: var(--s-8);
+  padding-block-start: var(--s-6);
+  border-block-start: 1px solid var(--filetto);
+}
+
+.qg-band--narrow > * {
+  max-inline-size: 45rem;
+}
+
+.qg-calc {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: var(--s-6);
+}
+
+.qg-calc__primary,
+.qg-calc__rest {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-5);
+  min-inline-size: 0;
+}
+
+.qg-calc__rest {
+  gap: var(--s-6);
+}
+
+.qg-calc__result {
+  container: qg-result / inline-size;
+  min-inline-size: 0;
+}
+
+.qg-article {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--s-7);
+}
+
+.qg-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--s-6);
+  align-items: start;
+}
+
+@container qg-page (width >= 45rem) {
+  .qg-wrap {
+    --gutter: var(--s-6);
+  }
+
+  .qg-main {
+    padding-block: var(--s-6) var(--s-8);
+  }
+}
+
+@container qg-page (width >= 60rem) {
+  .qg-wrap {
+    --gutter: 2.5rem;
+  }
+
+  .qg-main {
+    padding-block: var(--s-6) var(--s-9);
+  }
+
+  .qg-calc {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+      "primary result"
+      "rest result";
+    column-gap: var(--s-8);
+    row-gap: var(--s-7);
+  }
+
+  .qg-calc__primary {
+    grid-area: primary;
+  }
+
+  .qg-calc__rest {
+    grid-area: rest;
+  }
+
+  .qg-calc__result {
+    grid-area: result;
+  }
+
+  .qg-calc__result > * {
+    min-block-size: 100%;
+  }
+
+  .qg-article {
+    grid-template-columns: 15rem minmax(0, var(--measure));
+    column-gap: var(--s-8);
+    align-items: start;
+  }
+
+  .qg-split {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    column-gap: var(--s-7);
+  }
+}
+
+@media (min-width: 60rem) and (min-height: 30rem) {
+  html:has(.qg-result__summary) {
+    scroll-padding-block-start: 13rem;
+  }
+}
+
+@media screen {
+  .qg-print-frame {
+    min-block-size: 100vh;
+  }
+}

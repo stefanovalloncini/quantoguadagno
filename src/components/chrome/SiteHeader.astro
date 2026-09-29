@@ -1,0 +1,33 @@
+---
+import MainNav from "@/components/chrome/MainNav.astro";
+import MobileMenu from "@/components/chrome/MobileMenu.astro";
+import type { LocaleLink, NavGroup } from "@/components/chrome/navigation.ts";
+import type { Locale } from "@/i18n/locales.ts";
+import { getT } from "@/i18n/messages/index.ts";
+import { hrefFor } from "@/routePaths.ts";
+
+interface Props {
+  readonly locale: Locale;
+  readonly groups: readonly NavGroup[];
+  readonly localeLinks: readonly LocaleLink[];
+}
+
+const { locale, groups, localeLinks } = Astro.props;
+const t = getT(locale, "layout");
+const otherLocales = localeLinks.filter((link) => !link.current);
+---
+
+<header class="qg-header">
+  <div class="qg-wrap qg-header__bar">
+    <a class="qg-brand" href={hrefFor("home", locale)}>
+      {t("brand.name")}
+    </a>
+    <MobileMenu locale={locale} groups={groups} localeLinks={localeLinks} />
+    <MainNav locale={locale} groups={groups} />
+    {otherLocales.map((link) => (
+      <a class="qg-header__lang" href={link.href} lang={link.locale} hreflang={link.locale}>
+        {link.label}
+      </a>
+    ))}
+  </div>
+</header>

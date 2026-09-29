@@ -1,0 +1,15 @@
+:root[data-restoring] [data-restore-target] {
+  visibility: hidden;
+  animation: restore-reveal 0s linear 2s forwards;
+}
+
+@keyframes restore-reveal {
+  to {
+    visibility: visible;
+  }
+}
+
+:root:not([data-theme-choice]) [data-theme-toggle],
+:root:not([data-theme-choice]) [data-requires-script] {
+  display: none;
+}

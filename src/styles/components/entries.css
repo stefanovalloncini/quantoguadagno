@@ -1,0 +1,19 @@
+.qg-entries__note {
+  display: block;
+  margin-inline-start: 0;
+  font-size: var(--t-13);
+  line-height: var(--lh-small);
+}
+
+.qg-entries .qg-entries__action {
+  padding-block: 0;
+  vertical-align: baseline;
+}
+
+@container qg-page (width < 45rem) {
+  .qg-entries .qg-entries__action {
+    flex-basis: 100%;
+    order: 5;
+    text-align: start;
+  }
+}

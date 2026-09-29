@@ -1,0 +1,19 @@
+---
+import { sectionTitle, type SectionId } from "./sections.ts";
+
+interface Props {
+  readonly id: SectionId;
+}
+
+const { id } = Astro.props;
+---
+
+<section class="sg-section qg-band" id={id} aria-labelledby={`${id}-title`}>
+  <div class="sg-section__intro">
+    <h2 class="qg-heading" id={`${id}-title`}>
+      {sectionTitle(id)}
+    </h2>
+    <slot name="intro" />
+  </div>
+  <slot />
+</section>

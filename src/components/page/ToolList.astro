@@ -1,0 +1,46 @@
+---
+import { navGroupsFor } from "@/components/chrome/navigation.ts";
+import type { Locale } from "@/i18n/locales.ts";
+import { groupAnchor, isInNav, type Route, type RouteId } from "@/routes.ts";
+
+interface Props {
+  readonly locale: Locale;
+  readonly heading: string;
+  readonly exclude?: RouteId | undefined;
+}
+
+const { locale, heading, exclude } = Astro.props;
+const listed = (route: Route) => isInNav(route) && route.id !== exclude;
+const groups = navGroupsFor(locale, undefined, listed);
+---
+
+<section class="qg-wrap" aria-labelledby="tool-list-title">
+  <div class="qg-tools qg-band">
+    <h2 class="qg-heading" id="tool-list-title">
+      {heading}
+    </h2>
+    <div class="qg-tools__groups">
+      {groups.map((group) => (
+        <section
+          class="qg-tools__group"
+          id={groupAnchor(group.id)}
+          aria-labelledby={`${groupAnchor(group.id)}-title`}
+        >
+          <h3 class="qg-tools__heading" id={`${groupAnchor(group.id)}-title`}>
+            {group.label}
+          </h3>
+          <ul class="qg-tools__list" role="list">
+            {group.entries.map((entry) => (
+              <li>
+                <a class="qg-navlink" href={entry.href}>
+                  <span class="qg-navlink__name">{entry.label}</span>
+                  {entry.description && <span class="qg-navlink__desc">{entry.description}</span>}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,58 @@
+---
+import Section from "./Section.astro";
+import Specimen from "./Specimen.astro";
+---
+
+<Section id="testo">
+  <p class="qg-lede" slot="intro">
+    Per le pagine di testo: introduzione, poi il testo in una colonna di 52ch. Negli articoli lunghi
+    (LongForm) l’indice sta sopra il testo sui telefoni e a sinistra, fisso, da 60rem.
+  </p>
+  <Specimen label="Introduzione della pagina" column>
+    <div class="qg-intro">
+      <p class="qg-title">Come calcoliamo il netto</p>
+      <p class="qg-lede">
+        Il calcolatore segue la stessa sequenza della busta paga. Qui trovi ogni passaggio con il
+        suo riferimento di legge.
+      </p>
+      <p class="qg-meta">Aggiornato il 28 settembre 2026 · regole per il 2024, il 2025 e il 2026</p>
+    </div>
+  </Specimen>
+  <Specimen label="Testo" column>
+    <div class="qg-prose">
+      <h3>Contributi INPS</h3>
+      <p>
+        Il primo passaggio toglie dal lordo i contributi a tuo carico, che l’Istituto nazionale
+        della previdenza sociale (INPS) usa per la tua pensione. Nel settore privato sono il 9,19%
+        fino a 56.224&nbsp;€ di retribuzione e il 10,19% sulla parte che la supera
+        <a href="#fonte-esempio">(circolare INPS n. 6/2026)</a>.
+      </p>
+      <ul>
+        <li>Indennità, maggiorazioni e premi previsti dal tuo contratto collettivo.</li>
+        <li>Il conguaglio di fine anno e i redditi diversi dal lavoro dipendente.</li>
+      </ul>
+      <ol class="qg-refs">
+        <li id="fonte-esempio">
+          <a href="https://www.inps.it">Circolare INPS n. 6 del 30 gennaio 2026</a>
+          <span class="qg-refs__source">Aliquote dei contributi e fasce di retribuzione 2026.</span>
+        </li>
+      </ol>
+    </div>
+  </Specimen>
+  <Specimen label="Termini del glossario" column>
+    <dl class="qg-terms">
+      <div class="qg-terms__item">
+        <dt class="qg-terms__term">Reddito imponibile</dt>
+        <dd class="qg-terms__definition">
+          Il lordo meno i contributi INPS a tuo carico: è la base su cui si calcola l’IRPEF.
+        </dd>
+      </div>
+      <div class="qg-terms__item">
+        <dt class="qg-terms__term">Mensilità</dt>
+        <dd class="qg-terms__definition">
+          In quante buste paga si divide la RAL: 13 con la tredicesima, 14 con la quattordicesima.
+        </dd>
+      </div>
+    </dl>
+  </Specimen>
+</Section>

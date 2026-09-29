@@ -1,0 +1,139 @@
+---
+import Section from "./Section.astro";
+import Specimen from "./Specimen.astro";
+
+const SCALE = [
+  {
+    token: "--t-13",
+    className: "sg-t-13",
+    size: "13 px",
+    use: "Intestazioni della busta paga, tacche dei grafici",
+  },
+  {
+    token: "--t-15",
+    className: "sg-t-15",
+    size: "15 px",
+    use: "Suggerimenti, note, regole nel dettaglio, etichette di struttura",
+  },
+  {
+    token: "--t-17",
+    className: "sg-t-17",
+    size: "17 px",
+    use: "Testo, etichette, campi: ogni controllo ha almeno 16 px",
+  },
+  {
+    token: "--t-21",
+    className: "sg-t-21",
+    size: "21 px",
+    use: "Titoli di sezione, marchio, valore della barra del netto",
+  },
+  {
+    token: "--t-27",
+    className: "sg-t-27",
+    size: "27 px",
+    use: "Titolo della pagina sui telefoni, verdetti",
+  },
+  {
+    token: "--t-33",
+    className: "sg-t-33",
+    size: "33 px",
+    use: "Titolo della pagina da 720 px, netto della busta paga",
+  },
+] as const;
+
+const LINE_HEIGHTS = [
+  { token: "--lh-body", value: "1,55", use: "testo" },
+  { token: "--lh-small", value: "1,45", use: "testo piccolo" },
+  { token: "--lh-snug", value: "1,35", use: "etichette e righe di tabella" },
+  { token: "--lh-tight", value: "1,15", use: "titoli" },
+  { token: "--lh-cifra", value: "1", use: "cifre" },
+] as const;
+---
+
+<Section id="tipografia">
+  <p class="qg-lede" slot="intro">
+    Una sola famiglia, Archivo, in tre larghezze e tre pesi. Iniziale maiuscola solo a inizio frase,
+    niente maiuscoletto o spaziatura larga.
+  </p>
+  <Specimen label="Scala" column>
+    {SCALE.map((step) => (
+      <div class="sg-type">
+        <p class:list={["sg-type__sample", step.className]}>Stipendio netto 2.002,48 €</p>
+        <p class="sg-type__meta">
+          <code class="sg-code">{step.token}</code> · {step.size} · {step.use}
+        </p>
+      </div>
+    ))}
+  </Specimen>
+  <Specimen
+    label="La cifra del netto"
+    note="Si misura sulla colonna del risultato, non sulla pagina: 36 px al minimo, fino a 80 px (56 px sugli strumenti secondari). Espansa, peso 600, cifre proporzionali."
+    column
+  >
+    <div class="sg-figure-stage">
+      <p class="sg-t-cifra">2.002,48 €</p>
+      <p class="sg-type__meta">
+        <code class="sg-code">--t-cifra</code> · clamp(36 px, 13cqi, 80 px)
+      </p>
+    </div>
+    <div class="sg-figure-stage">
+      <p class="sg-t-cifra-sm">1.353,36 €</p>
+      <p class="sg-type__meta">
+        <code class="sg-code">--t-cifra-sm</code> · clamp(36 px, 9cqi, 56 px)
+      </p>
+    </div>
+  </Specimen>
+  <Specimen label="Larghezze e pesi" column>
+    <div class="sg-type">
+      <p class="sg-type__sample sg-t-21 sg-width-expanded">Quanto guadagno</p>
+      <p class="sg-type__meta">Espansa 125%, solo peso 600: marchio e cifre isolate</p>
+    </div>
+    <div class="sg-type">
+      <p class="sg-type__sample">
+        <span class="sg-weight-regular">Regolare 400</span> ·
+        <span class="sg-weight-medium">Media 500</span> ·
+        <span class="sg-weight-strong">Forte 600</span>
+      </p>
+      <p class="sg-type__meta">Normale 100%: testo, etichette, titoli</p>
+    </div>
+    <div class="sg-type">
+      <p class="sg-type__sample sg-width-condensed">
+        Aliquote IRPEF per scaglione di reddito imponibile, 2024–2026
+      </p>
+      <p class="sg-type__meta">
+        Semicondensata 87,5%, tabelle dense sotto 720 px:{" "}
+        <code class="sg-code">qg-table--condensed</code>
+      </p>
+    </div>
+  </Specimen>
+  <Specimen
+    label="Cifre"
+    note="Cifre tabellari in tabelle, dettagli, campi e barra: le colonne restano allineate. Cifre proporzionali per un numero isolato. Il segno meno è U+2212."
+  >
+    <div class="sg-figures">
+      <div class="sg-figures__column">
+        <span>1.111,11 €</span>
+        <span>8.888,88 €</span>
+        <span>−3.216,50 €</span>
+        <span class="sg-type__meta">tabellari</span>
+      </div>
+      <div class="sg-figures__column sg-figures__proportional">
+        <span>1.111,11 €</span>
+        <span>8.888,88 €</span>
+        <span>−3.216,50 €</span>
+        <span class="sg-type__meta">proporzionali</span>
+      </div>
+    </div>
+  </Specimen>
+  <Specimen label="Interlinea">
+    <div class="qg-prose">
+      <ul>
+        {LINE_HEIGHTS.map((entry) => (
+          <li>
+            <code class="sg-code">{entry.token}</code> {entry.value}, {entry.use}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </Specimen>
+</Section>

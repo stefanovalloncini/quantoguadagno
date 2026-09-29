@@ -1,0 +1,108 @@
+---
+import ToolList from "@/components/page/ToolList.astro";
+import { LOCALES, type Locale } from "@/i18n/locales.ts";
+import { getMessages, getT } from "@/i18n/messages/index.ts";
+import AboutPage from "@/islands/AboutPage.tsx";
+import ApprenticeshipCalculator from "@/islands/ApprenticeshipCalculator.tsx";
+import ComparisonCalculator from "@/islands/ComparisonCalculator.tsx";
+import CompoundInterestCalculator from "@/islands/CompoundInterestCalculator.tsx";
+import EmployeeCalculator from "@/islands/EmployeeCalculator.tsx";
+import EmployerCostCalculator from "@/islands/EmployerCostCalculator.tsx";
+import ForfettarioCalculator from "@/islands/ForfettarioCalculator.tsx";
+import GlossaryPage from "@/islands/GlossaryPage.tsx";
+import InflationCalculator from "@/islands/InflationCalculator.tsx";
+import InverseCalculator from "@/islands/InverseCalculator.tsx";
+import MethodPage from "@/islands/MethodPage.tsx";
+import NaspiCalculator from "@/islands/NaspiCalculator.tsx";
+import PreavvisoCalculator from "@/islands/PreavvisoCalculator.tsx";
+import PrintPayslip from "@/islands/PrintPayslip.tsx";
+import SalaryHistory from "@/islands/SalaryHistory.tsx";
+import SourcesPage from "@/islands/SourcesPage.tsx";
+import TfrCalculator from "@/islands/TfrCalculator.tsx";
+import TredicesimaCalculator from "@/islands/TredicesimaCalculator.tsx";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import TextPageLayout from "@/layouts/TextPageLayout.astro";
+import ToolPageLayout from "@/layouts/ToolPageLayout.astro";
+import { ROUTES, routeById, slugFor, type RouteId } from "@/routes.ts";
+
+export function getStaticPaths() {
+  return ROUTES.flatMap((route) =>
+    LOCALES.map((locale) => ({
+      params: { slug: slugFor(route, locale) },
+      props: { routeId: route.id, locale },
+    })),
+  );
+}
+
+interface Props {
+  readonly routeId: RouteId;
+  readonly locale: Locale;
+}
+
+const { routeId, locale } = Astro.props;
+const route = routeById(routeId);
+const island = route.island;
+const messages = getMessages(locale, route.namespaces);
+const home = getT(locale, "home");
+---
+
+<BaseLayout locale={locale} route={route}>
+  {route.kind === "text" ? (
+    <TextPageLayout locale={locale} route={route}>
+      {island === "MethodPage" && <MethodPage locale={locale} messages={messages} />}
+      {island === "GlossaryPage" && <GlossaryPage locale={locale} messages={messages} />}
+      {island === "SourcesPage" && <SourcesPage locale={locale} messages={messages} />}
+      {island === "AboutPage" && <AboutPage locale={locale} messages={messages} />}
+    </TextPageLayout>
+  ) : (
+    <ToolPageLayout kind={route.kind}>
+      <div data-restore-target>
+        {island === "EmployeeCalculator" && (
+          <EmployeeCalculator client:load locale={locale} messages={messages} />
+        )}
+        {island === "InverseCalculator" && (
+          <InverseCalculator client:load locale={locale} messages={messages} />
+        )}
+        {island === "TredicesimaCalculator" && (
+          <TredicesimaCalculator client:load locale={locale} messages={messages} />
+        )}
+        {island === "ComparisonCalculator" && (
+          <ComparisonCalculator client:load locale={locale} messages={messages} />
+        )}
+        {island === "EmployerCostCalculator" && (
+          <EmployerCostCalculator client:load locale={locale} messages={messages} />
+        )}
+        {island === "ForfettarioCalculator" && (
+          <ForfettarioCalculator client:load locale={locale} messages={messages} />
+        )}
+        {island === "ApprenticeshipCalculator" && (
+          <ApprenticeshipCalculator client:load locale={locale} messages={messages} />
+        )}
+        {island === "TfrCalculator" && (
+          <TfrCalculator client:load locale={locale} messages={messages} />
+        )}
+        {island === "PreavvisoCalculator" && (
+          <PreavvisoCalculator client:load locale={locale} messages={messages} />
+        )}
+        {island === "NaspiCalculator" && (
+          <NaspiCalculator client:load locale={locale} messages={messages} />
+        )}
+        {island === "SalaryHistory" && (
+          <SalaryHistory client:load locale={locale} messages={messages} />
+        )}
+        {island === "InflationCalculator" && (
+          <InflationCalculator client:load locale={locale} messages={messages} />
+        )}
+        {island === "CompoundInterestCalculator" && (
+          <CompoundInterestCalculator client:load locale={locale} messages={messages} />
+        )}
+        {island === "PrintPayslip" && (
+          <PrintPayslip client:only="react" locale={locale} messages={messages} />
+        )}
+      </div>
+    </ToolPageLayout>
+  )}
+  {route.id === "home" && (
+    <ToolList locale={locale} heading={home("home.tools.title")} exclude="home" />
+  )}
+</BaseLayout>

@@ -1,0 +1,13 @@
+.qg-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: var(--t-15);
+  line-height: var(--lh-snug);
+  white-space: nowrap;
+  color: var(--inchiostro);
+}
+
+.qg-status--todo {
+  font-weight: var(--weight-strong);
+}

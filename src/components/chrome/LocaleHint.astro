@@ -1,0 +1,33 @@
+---
+import type { LocaleLink } from "@/components/chrome/navigation.ts";
+import { dirOf } from "@/i18n/locales.ts";
+import { getT } from "@/i18n/messages/index.ts";
+import { LOCALE_HINT_CLOSE_ATTRIBUTE } from "@/layouts/inlineScripts.ts";
+
+interface Props {
+  readonly offer: LocaleLink;
+}
+
+const { offer } = Astro.props;
+const t = getT(offer.locale, "layout");
+const closeAttributes = { [LOCALE_HINT_CLOSE_ATTRIBUTE]: "" };
+---
+
+<aside
+  class="qg-locale-hint"
+  lang={offer.locale}
+  dir={dirOf(offer.locale)}
+  aria-label={t("localeHint.label")}
+>
+  <div class="qg-wrap">
+    <div class="qg-locale-hint__bar">
+      <a class="qg-locale-hint__link" href={offer.href} hreflang={offer.locale}>
+        {t("localeHint.link")}
+      </a>
+      <button class="qg-link-button qg-locale-hint__close" type="button" {...closeAttributes}>
+        {t("localeHint.close")}
+        <span class="qg-visually-hidden">{t("localeHint.closeSuffix")}</span>
+      </button>
+    </div>
+  </div>
+</aside>

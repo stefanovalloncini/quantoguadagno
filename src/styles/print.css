@@ -1,0 +1,36 @@
+@page {
+  size: A4 portrait;
+  margin: 12mm 14mm;
+}
+
+@media print {
+  .qg-header,
+  .qg-footer,
+  .qg-skip-link,
+  .qg-breadcrumbs,
+  .qg-toolbar,
+  .qg-netbar {
+    display: none !important;
+  }
+
+  .qg-page {
+    min-block-size: 0;
+  }
+
+  .qg-main {
+    padding: 0;
+  }
+
+  .qg-wrap {
+    max-inline-size: none;
+    padding-inline: 0;
+  }
+
+  .qg-toc {
+    position: static;
+  }
+
+  a {
+    color: inherit;
+  }
+}

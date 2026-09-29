@@ -1,0 +1,125 @@
+export const it = {
+  "field.error.prefix": "Errore:",
+  "field.unit.euro": "in euro",
+  "field.unit.percent": "in percentuale",
+  "result.change": "Cambia",
+  "result.assumptions.title": "Ipotesi del calcolo",
+  "result.estimate.term": "Stima:",
+  "ledger.explain": "Mostra la spiegazione di ogni voce",
+  "ledger.deducted": ", trattenuta",
+  "ledger.credited": ", credito",
+  "netbar.link": "Vedi il calcolo",
+  "region.name":
+    "{region, select, piemonte {Piemonte} valle_daosta {Valle d’Aosta} lombardia {Lombardia} bolzano {Provincia autonoma di Bolzano} trento {Provincia autonoma di Trento} veneto {Veneto} friuli_venezia_giulia {Friuli-Venezia Giulia} liguria {Liguria} emilia_romagna {Emilia-Romagna} toscana {Toscana} umbria {Umbria} marche {Marche} lazio {Lazio} abruzzo {Abruzzo} molise {Molise} campania {Campania} puglia {Puglia} basilicata {Basilicata} calabria {Calabria} sicilia {Sicilia} sardegna {Sardegna} other {}}",
+  "region.option":
+    "{region, select, bolzano {Bolzano (Provincia autonoma)} trento {Trento (Provincia autonoma)} other {{name}}}",
+  "region.in":
+    "{region, select, piemonte {in Piemonte} valle_daosta {in Valle d’Aosta} lombardia {in Lombardia} bolzano {nella Provincia autonoma di Bolzano} trento {nella Provincia autonoma di Trento} veneto {in Veneto} friuli_venezia_giulia {in Friuli-Venezia Giulia} liguria {in Liguria} emilia_romagna {in Emilia-Romagna} toscana {in Toscana} umbria {in Umbria} marche {nelle Marche} lazio {nel Lazio} abruzzo {in Abruzzo} molise {in Molise} campania {in Campania} puglia {in Puglia} basilicata {in Basilicata} calabria {in Calabria} sicilia {in Sicilia} sardegna {in Sardegna} other {}}",
+  "region.of":
+    "{region, select, piemonte {del Piemonte} valle_daosta {della Valle d’Aosta} lombardia {della Lombardia} bolzano {della Provincia autonoma di Bolzano} trento {della Provincia autonoma di Trento} veneto {del Veneto} friuli_venezia_giulia {del Friuli-Venezia Giulia} liguria {della Liguria} emilia_romagna {dell’Emilia-Romagna} toscana {della Toscana} umbria {dell’Umbria} marche {delle Marche} lazio {del Lazio} abruzzo {dell’Abruzzo} molise {del Molise} campania {della Campania} puglia {della Puglia} basilicata {della Basilicata} calabria {della Calabria} sicilia {della Sicilia} sardegna {della Sardegna} other {}}",
+  "comune.label": "Comune di residenza",
+  "comune.hint": "Scrivi almeno 2 lettere: cerchiamo tra i comuni {regionOf}.",
+  "comune.listLabel": "Comuni {regionOf}",
+  "comune.status":
+    "{count, plural, =0 {Nessun comune trovato} one {# comune} other {# comuni}} {regionIn}",
+  "comune.more":
+    "{count, plural, one {C’è un altro comune} other {Ci sono altri # comuni}}: continua a scrivere per trovare il tuo.",
+  "comune.option.none": "nessuna",
+  "comune.option.range": "{min}–{max}",
+  "comune.range":
+    "{fromArticle, select, lo {dallo } l {dall’} other {dal }}{min} {toArticle, select, lo {allo } l {all’} other {al }}{max}, a scaglioni",
+  "comune.loading": "Carico i comuni {regionOf}.",
+  "comune.loadError":
+    "Non riusciamo a caricare i comuni. Controlla la connessione e riprova, oppure inserisci l’aliquota a mano.",
+  "comune.retry": "Riprova",
+  "comune.after.rule":
+    "{name}: {rule}{exempt, select, yes {, esente fino a {amount} di reddito imponibile} other {}}.",
+  "comune.after.zero": "{name}: questo comune non applica l’addizionale.",
+  "comune.after.source":
+    "Dati {ruleYear} del Dipartimento delle Finanze{carried, select, yes {: per il {year} non c’è ancora una nuova delibera} other {}}.",
+  "comune.after.note":
+    "Il comune prevede anche esenzioni particolari che il calcolo non considera.",
+  "comune.note.summary": "Leggi la nota del comune",
+  "comune.after.none":
+    "Nessun comune scelto: per ora usiamo {article, select, lo {lo } l {l’} other {il }}{rate}. Scegli il tuo comune per aliquota ed esenzione giuste.",
+  "comune.after.pick": "Scegli un comune dall’elenco per usare la sua aliquota.",
+  "comune.after.searching":
+    "Nessun comune trovato {currentIn}: cerco «{query}» nelle altre regioni.",
+  "comune.after.elsewhere": "{name} è {otherIn}, non {currentIn}.",
+  "comune.after.maybe": "Nessun comune con questo nome {currentIn}. Forse cercavi:",
+  "comune.switch": "Scegli {name} ({province}), {otherIn}",
+  "comune.after.notFound":
+    "Nessun comune trovato con «{query}». Controlla come l’hai scritto, oppure inserisci l’aliquota a mano.",
+  "comune.after.loadingRule": "Carico l’aliquota del comune.",
+  "comune.after.missing":
+    "Il comune del link non è {currentIn}: scegli il tuo comune o inserisci l’aliquota a mano.",
+  "comune.manual.question": "Non trovi il comune?",
+  "comune.manual.open": "Inserisci l’aliquota a mano",
+  "comune.rate.label": "Aliquota dell’addizionale comunale",
+  "comune.rate.hint": "La trovi nella delibera del tuo comune, per esempio {example}.",
+  "comune.rate.pending": "Per ora resta {name}: scrivi un’aliquota per usarla al suo posto.",
+  "comune.rate.readAs": "Letto come {rate}, senza soglia di esenzione.",
+  "comune.rate.lookup": "Cerca l’aliquota sul sito del Dipartimento delle Finanze",
+  "comune.rate.back": "Cerca di nuovo il comune",
+  "employee.form.salary": "Stipendio lordo annuo",
+  "employee.form.year": "Anno fiscale",
+  "employee.form.contractType": "Tipo di contratto",
+  "employee.form.contractType.indeterminato": "Tempo indeterminato",
+  "employee.form.contractType.determinato": "Tempo determinato",
+  "employee.form.contractType.apprendistato": "Apprendistato",
+  "employee.form.paymentFrequency": "Mensilità",
+  "employee.form.paymentFrequency.option12": "12 mensilità, stipendio su 12 mesi",
+  "employee.form.paymentFrequency.option13": "13 mensilità, con tredicesima",
+  "employee.form.paymentFrequency.option14": "14 mensilità, con tredicesima e quattordicesima",
+  "employee.form.paymentFrequency.option15":
+    "15 mensilità, con tredicesima, quattordicesima e quindicesima",
+  "employee.form.paymentFrequency.option16": "16 mensilità, con bonus contrattuali aggiuntivi",
+  "employee.form.region": "Regione di residenza",
+  "employee.form.municipal": "Aliquota addizionale comunale",
+  "employee.breakdown.gross": "Lordo annuo",
+  "inverse.form.municipal.percent": "%",
+  "employee.extras.toggle.enable": "Applica al calcolo",
+  "share.button.idle": "Copia il link",
+  "share.button.copied": "Link copiato",
+  "share.button.failed": "Copia non riuscita",
+  "schedule.showAllYears": "Mostra tutti gli anni",
+  "schedule.showAllMonths": "Mostra tutti i mesi",
+  "employee.employer.section": "Costo per l’azienda",
+  "employee.employer.insight": "Ogni euro netto che ricevi costa {ratio} all’azienda.",
+  "employee.employer.inps": "Contributi INPS datoriali",
+  "employee.employer.tfr": "TFR (accantonamento)",
+  "employee.employer.otherCosts": "Altri oneri datoriali",
+  "employee.employer.inail": "INAIL",
+  "employee.employer.maternity": "Maternità",
+  "employee.employer.naspi": "NASpI",
+  "employee.employer.naspiAdditional": "Contributo addizionale NASpI",
+  "employee.employer.cig": "CIG",
+  "employee.employer.other": "Altri contributi",
+  "employee.employer.totalOtherCosts": "Totale altri oneri",
+  "employee.employer.total": "Costo totale azienda",
+  "employee.employer.disclaimer":
+    "Non include costi non contrattuali (formazione, attrezzatura, benefit, ecc.)",
+  "field.error.money": "Scrivi un importo in euro, per esempio 1.200",
+  "field.error.moneyRange": "Scrivi un importo da {min, number} € a {max, number} €",
+  "field.error.integer": "Scrivi un numero intero, per esempio 2",
+  "field.error.integerRange": "Scrivi un numero intero da {min, number} a {max, number}",
+  "field.error.number": "Scrivi un numero, per esempio 42,5",
+  "field.error.numberRange": "Scrivi un numero da {min, number} a {max, number}",
+  "field.error.percent": "Scrivi una percentuale, per esempio 0,8",
+  "field.error.percentRange": "Scrivi una percentuale da {min, number}% a {max, number}%",
+  "field.error.ral.required": "Inserisci la RAL in euro, per esempio 35.000",
+  "field.error.ral.invalid": "Inserisci la RAL in cifre, per esempio 35.000",
+  "field.error.ral.range": "Inserisci una RAL tra {min, number} € e {max, number} €",
+  "field.error.netMonthly.required": "Inserisci il netto al mese che vuoi, per esempio 1.800",
+  "field.error.netMonthly.invalid":
+    "Scrivi il netto al mese come importo in euro, per esempio 1.800",
+  "field.error.netMonthly.range":
+    "Il netto al mese deve essere tra {min, number} € e {max, number} €",
+  "field.error.netAnnual.required": "Inserisci il netto annuo che vuoi, per esempio 24.000",
+  "field.error.netAnnual.invalid":
+    "Scrivi il netto annuo come importo in euro, per esempio 24.000 o 24k",
+  "field.error.netAnnual.range": "Il netto annuo deve essere tra {min, number} € e {max, number} €",
+  "field.error.unsupportedYear": "Scegli un anno supportato.",
+} as const;
+
+export type MessageKey = keyof typeof it;

@@ -1,0 +1,65 @@
+---
+import Section from "./Section.astro";
+import Specimen from "./Specimen.astro";
+
+const YEARS = ["2024", "2025", "2026"] as const;
+const THEMES = [
+  { value: "light", label: "Chiaro" },
+  { value: "dark", label: "Scuro" },
+  { value: "system", label: "Sistema" },
+] as const;
+---
+
+<Section id="controlli">
+  <p class="qg-lede" slot="intro">
+    Radio veri in un fieldset, disegnati in linea: fino a cinque opzioni brevi. Il resto del kit dei
+    campi è nella sezione successiva, con i componenti React dei calcolatori.
+  </p>
+  <Specimen label="Opzioni che dividono la larghezza" note="qg-segmented--fill">
+    <fieldset class="sg-fieldset sg-narrow">
+      <legend class="sg-legend">Anno fiscale</legend>
+      <div class="qg-segmented qg-segmented--fill">
+        {YEARS.map((year) => (
+          <>
+            <input
+              class="qg-segmented__input"
+              type="radio"
+              name="sg-anno"
+              id={`sg-anno-${year}`}
+              value={year}
+              checked={year === "2026"}
+            />
+            <label class="qg-segmented__option" for={`sg-anno-${year}`}>
+              {year}
+            </label>
+          </>
+        ))}
+      </div>
+    </fieldset>
+  </Specimen>
+  <Specimen
+    label="Opzioni della loro misura"
+    note="qg-segmented--small, come la scelta del tema nel menu e nel piè di pagina. Questa copia non cambia il tema."
+  >
+    <fieldset class="qg-pref">
+      <legend class="qg-pref__label">Tema</legend>
+      <div class="qg-segmented qg-segmented--small">
+        {THEMES.map((theme) => (
+          <>
+            <input
+              class="qg-segmented__input"
+              type="radio"
+              name="sg-tema"
+              id={`sg-tema-${theme.value}`}
+              value={theme.value}
+              checked={theme.value === "system"}
+            />
+            <label class="qg-segmented__option" for={`sg-tema-${theme.value}`}>
+              {theme.label}
+            </label>
+          </>
+        ))}
+      </div>
+    </fieldset>
+  </Specimen>
+</Section>

@@ -1,0 +1,21 @@
+.qg-skip-link {
+  position: absolute;
+  inset-inline-start: var(--s-4);
+  inset-block-start: var(--s-2);
+  z-index: 40;
+  display: inline-flex;
+  align-items: center;
+  min-block-size: var(--target);
+  padding-inline: var(--s-4);
+  border: 1px solid transparent;
+  background: var(--inchiostro);
+  color: var(--carta);
+  font-weight: var(--weight-medium);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  translate: 0 -200%;
+}
+
+.qg-skip-link:focus {
+  translate: 0 0;
+}

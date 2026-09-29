@@ -1,0 +1,56 @@
+---
+import Section from "./Section.astro";
+import Specimen from "./Specimen.astro";
+---
+
+<Section id="confronto">
+  <p class="qg-lede" slot="intro">
+    Il confronto tra due offerte: le condizioni comuni in gruppi, un blocco per offerta aperto da un
+    filetto di 2 px, poi il verdetto con la differenza come cifra. Classi in
+    <code class="sg-code">src/styles/components/compare.css</code>.
+  </p>
+  <Specimen label="Risultato di un’offerta" column>
+    <section class="qg-offer" aria-labelledby="sg-offerta-titolo">
+      <h3 class="qg-offer__title" id="sg-offerta-titolo">
+        Offerta B
+      </h3>
+      <div class="qg-offer__result">
+        <p class="qg-offer__label">Netto annuo</p>
+        <p class="qg-offer__net">27.238,87&nbsp;€</p>
+        <p class="qg-offer__detail">Netto mensile 1.945,63&nbsp;€, su 14 mensilità</p>
+      </div>
+    </section>
+  </Specimen>
+  <Specimen label="Risultato non aggiornato" column>
+    <div class="qg-offer__result qg-offer__result--stale">
+      <p class="qg-offer__label">Netto annuo</p>
+      <p class="qg-offer__net">26.037,30&nbsp;€</p>
+      <p class="qg-offer__detail">Non aggiornato: correggi la RAL per ricalcolare.</p>
+    </div>
+  </Specimen>
+  <Specimen label="Verdetto" column>
+    <section class="qg-verdict" aria-labelledby="sg-verdetto">
+      <div class="qg-figure">
+        <h3 class="qg-figure__label qg-figure__label--answer" id="sg-verdetto">
+          Con l’offerta B ti resta di più
+        </h3>
+        <div class="qg-figure__main">
+          <p class="qg-figure__value">+1.206,66&nbsp;€</p>
+          <p class="qg-figure__basis">netti all’anno</p>
+        </div>
+        <p class="qg-figure__sub">
+          In media <strong>100,56&nbsp;€</strong> in più al mese, su 12 mesi
+        </p>
+      </div>
+      <div class="qg-verdict__text">
+        <p>
+          Ogni busta paga di B è più bassa, 1.945,63&nbsp;€ contro 2.002,48&nbsp;€, perché B divide
+          lo stipendio in 14 mensilità invece di 13: in un anno però ricevi di più.
+        </p>
+        <p>
+          Dei 3.000,00&nbsp;€ lordi in più di B ti restano 1.206,66&nbsp;€ netti, cioè il 40,22%.
+        </p>
+      </div>
+    </section>
+  </Specimen>
+</Section>

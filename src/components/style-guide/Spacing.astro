@@ -1,0 +1,52 @@
+---
+import Section from "./Section.astro";
+import Specimen from "./Specimen.astro";
+
+const STEPS = [
+  { token: "--s-1", px: "4 px", className: "sg-space__bar--s-1" },
+  { token: "--s-2", px: "8 px", className: "sg-space__bar--s-2" },
+  { token: "--s-3", px: "12 px", className: "sg-space__bar--s-3" },
+  { token: "--s-4", px: "16 px", className: "sg-space__bar--s-4" },
+  { token: "--s-5", px: "24 px", className: "sg-space__bar--s-5" },
+  { token: "--s-6", px: "32 px", className: "sg-space__bar--s-6" },
+  { token: "--s-7", px: "48 px", className: "sg-space__bar--s-7" },
+  { token: "--s-8", px: "64 px", className: "sg-space__bar--s-8" },
+  { token: "--s-9", px: "96 px", className: "sg-space__bar--s-9" },
+] as const;
+
+const MEASURES = [
+  { token: "--target", value: "44 px", use: "altezza minima di ogni cosa che si tocca" },
+  { token: "--control", value: "48 px", use: "altezza di campi e menu a tendina" },
+  { token: "--focus", value: "3 px", use: "anello di focus blu, a 2 px dal bordo" },
+  { token: "--radius", value: "2 px", use: "solo campi e pulsanti" },
+  { token: "--measure", value: "52ch", use: "circa 72 caratteri: testi, suggerimenti, note" },
+  { token: "--page-max", value: "1.280 px", use: "larghezza massima della pagina" },
+  { token: "--netbar", value: "68 px", use: "barra del netto sui telefoni" },
+] as const;
+---
+
+<Section id="spazi">
+  <p class="qg-lede" slot="intro">
+    Nove passi di spazio, sempre dai token. Il vuoto separa i gruppi, i filetti separano le righe.
+  </p>
+  <Specimen label="Scala degli spazi" column>
+    {STEPS.map((step) => (
+      <div class="sg-space">
+        <code class="sg-code">{step.token}</code>
+        <span class:list={["sg-space__bar", step.className]} />
+        <span>{step.px}</span>
+      </div>
+    ))}
+  </Specimen>
+  <Specimen label="Misure fisse">
+    <div class="qg-prose">
+      <ul>
+        {MEASURES.map((entry) => (
+          <li>
+            <code class="sg-code">{entry.token}</code> {entry.value}: {entry.use}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </Specimen>
+</Section>

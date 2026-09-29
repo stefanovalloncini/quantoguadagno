@@ -1,0 +1,17 @@
+---
+interface Props {
+  readonly label: string;
+  readonly note?: string;
+  readonly column?: boolean;
+}
+
+const { label, note, column = false } = Astro.props;
+---
+
+<div class="sg-specimen">
+  <h3 class="sg-specimen__label">{label}</h3>
+  {note && <p class="sg-specimen__note">{note}</p>}
+  <div class:list={["sg-specimen__stage", { "sg-specimen__stage--column": column }]}>
+    <slot />
+  </div>
+</div>

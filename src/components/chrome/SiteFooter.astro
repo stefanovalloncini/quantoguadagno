@@ -1,0 +1,83 @@
+---
+import Preferences from "@/components/chrome/Preferences.astro";
+import type { LocaleLink, NavGroup } from "@/components/chrome/navigation.ts";
+import { navIdFor } from "@/components/chrome/navigation.ts";
+import type { Locale } from "@/i18n/locales.ts";
+import { getT } from "@/i18n/messages/index.ts";
+import type { RouteId } from "@/routePaths.ts";
+import { hrefFor, routeById } from "@/routes.ts";
+import { licenseUrlOf, SOURCE_REPOSITORY_URL } from "@/sourceRepository.ts";
+
+interface Props {
+  readonly locale: Locale;
+  readonly groups: readonly NavGroup[];
+  readonly localeLinks: readonly LocaleLink[];
+  readonly currentId: RouteId | undefined;
+}
+
+const { locale, groups, localeLinks, currentId } = Astro.props;
+const t = getT(locale, "layout");
+const toolGroups = groups.filter((group) => group.id !== "sources");
+const siteLinks = (["sources", "about"] as const).map((id) => ({
+  href: hrefFor(id, locale),
+  label: t(routeById(id).label),
+  current: id === currentId,
+}));
+const repositoryLinks =
+  SOURCE_REPOSITORY_URL === null
+    ? []
+    : [
+        { href: SOURCE_REPOSITORY_URL, label: t("footer.repo") },
+        { href: licenseUrlOf(SOURCE_REPOSITORY_URL), label: t("footer.license") },
+      ];
+---
+
+<footer class="qg-footer">
+  <div class="qg-wrap">
+    <nav class="qg-footer__map" aria-label={t("nav.footer.label")}>
+      {toolGroups.map((group) => (
+        <div>
+          <h2 class="qg-footer__heading" id={navIdFor("footer", group.id)}>
+            {group.label}
+          </h2>
+          <ul class="qg-footer__list" role="list" aria-labelledby={navIdFor("footer", group.id)}>
+            {group.entries.map((entry) => (
+              <li>
+                <a
+                  class="qg-footer__link"
+                  href={entry.href}
+                  aria-current={entry.current ? "page" : undefined}
+                >
+                  {entry.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </nav>
+    <div class="qg-footer__base">
+      <div class="qg-footer__about">
+        <p class="qg-footer__brand">{t("brand.name")}</p>
+        <p>{t("footer.use")}</p>
+        <ul class="qg-footer__links" role="list">
+          {siteLinks.map((link) => (
+            <li>
+              <a href={link.href} aria-current={link.current ? "page" : undefined}>
+                {link.label}
+              </a>
+            </li>
+          ))}
+          {repositoryLinks.map((link) => (
+            <li>
+              <a href={link.href} rel="noreferrer">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <Preferences locale={locale} idPrefix="footer" localeLinks={localeLinks} />
+    </div>
+  </div>
+</footer>

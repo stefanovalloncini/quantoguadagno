@@ -1,0 +1,57 @@
+---
+import Icon from "@/components/icons/Icon.astro";
+import Preferences from "@/components/chrome/Preferences.astro";
+import type { LocaleLink, NavGroup } from "@/components/chrome/navigation.ts";
+import { navIdFor } from "@/components/chrome/navigation.ts";
+import type { Locale } from "@/i18n/locales.ts";
+import { getT } from "@/i18n/messages/index.ts";
+
+interface Props {
+  readonly locale: Locale;
+  readonly groups: readonly NavGroup[];
+  readonly localeLinks: readonly LocaleLink[];
+}
+
+const { locale, groups, localeLinks } = Astro.props;
+const t = getT(locale, "layout");
+---
+
+<details class="qg-menu" data-disclosure="inline">
+  <summary class="qg-menu__button">
+    <span class="qg-menu__when-closed">{t("menu.open")}</span>
+    <span class="qg-menu__when-open" aria-hidden="true">
+      {t("menu.close.visible")}
+    </span>
+    <span class="qg-menu__when-open qg-visually-hidden">{t("menu.close.label")}</span>
+    <Icon name="menu" size="lg" class="qg-menu__when-closed" />
+    <Icon name="close" size="lg" class="qg-menu__when-open" />
+  </summary>
+  <nav class="qg-menu__panel" aria-label={t("nav.label")}>
+    {groups.map((group) => (
+      <section class="qg-menu__group" aria-labelledby={navIdFor("menu", group.id)}>
+        <h2 class="qg-menu__heading" id={navIdFor("menu", group.id)}>
+          {group.label}
+        </h2>
+        <ul class="qg-menu__list" role="list">
+          {group.entries.map((entry) => (
+            <li>
+              <a
+                class="qg-navlink"
+                href={entry.href}
+                aria-current={entry.current ? "page" : undefined}
+              >
+                <span class="qg-navlink__name">{entry.label}</span>
+                {entry.description && <span class="qg-navlink__desc">{entry.description}</span>}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+    <Preferences locale={locale} idPrefix="menu" localeLinks={localeLinks} />
+    <button class="qg-menu__close" type="button" data-disclosure-close data-requires-script>
+      <Icon name="close" />
+      {t("menu.close.label")}
+    </button>
+  </nav>
+</details>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://quantoguadagno.com/sitemap.xml

@@ -1,0 +1,25 @@
+.qg-reasons {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+}
+
+.qg-reasons__title {
+  font-size: var(--t-15);
+  font-weight: var(--weight-strong);
+  line-height: var(--lh-snug);
+  letter-spacing: 0;
+  color: var(--inchiostro);
+}
+
+.qg-reasons__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  margin: 0;
+  padding-inline-start: 1.25em;
+  font-size: var(--t-15);
+  line-height: var(--lh-small);
+  list-style: disc;
+  max-inline-size: var(--measure);
+}

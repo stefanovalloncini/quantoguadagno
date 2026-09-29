@@ -1,0 +1,22 @@
+---
+import Icon from "@/components/icons/Icon.astro";
+import Section from "./Section.astro";
+import Specimen from "./Specimen.astro";
+---
+
+<Section id="stati">
+  <p class="qg-lede" slot="intro">
+    Un’etichetta di stato è un’icona e una parola, in inchiostro, senza sfondo. I valori verificati
+    non hanno etichetta: si segnala solo quello che manca.
+  </p>
+  <Specimen label="Etichette">
+    <span class="qg-status qg-status--todo">
+      <Icon name="alert" />
+      Da verificare
+    </span>
+    <span class="qg-status qg-status--provisional">
+      <Icon name="clock" />
+      Provvisorio
+    </span>
+  </Specimen>
+</Section>

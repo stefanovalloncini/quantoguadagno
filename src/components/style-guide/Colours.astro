@@ -1,0 +1,111 @@
+---
+import { formatNumber } from "@/i18n/numbers.ts";
+import {
+  CONTRAST_PAIRS,
+  MINIMUM_CONTRAST,
+  PALETTE,
+  TOKEN_NAMES,
+  contrastOf,
+  type ContrastUse,
+  type TokenName,
+} from "@/styles/palette.ts";
+import Section from "./Section.astro";
+
+const ROLES: Record<TokenName, string> = {
+  carta: "Pagina, barra del netto",
+  inchiostro: "Testo, bordi dei campi, controlli selezionati, barre dei grafici",
+  grigio: "Suggerimenti, regole nel dettaglio, importi secondari",
+  filetto: "Solo filetti decorativi",
+  velo: "Sfondo dei campi, passaggio del mouse",
+  blu: "Link, anello di focus, filetto sotto la cifra",
+  "su-blu": "Testo su blu",
+  errore: "Solo testo e bordi di errore",
+  foglio: "Il foglio della busta paga",
+  tavolo: "Il piano sotto il foglio, da 45rem",
+};
+
+const USES: readonly { readonly id: ContrastUse; readonly label: string }[] = [
+  { id: "text", label: "Testo" },
+  { id: "decorative", label: "Filetti decorativi" },
+];
+
+const ratio = (value: number) => `${formatNumber(value, "it", 2)}:1`;
+const minimum = (value: number) => `${formatNumber(value, "it")}:1`;
+---
+
+<Section id="colori">
+  <p class="qg-lede" slot="intro">
+    Carta bianca, inchiostro nero, un solo blu. Il tema scuro è il negativo della stessa struttura.
+    I colori passano solo dai token: nessun valore scritto a mano nei componenti.
+  </p>
+  <table class="qg-table qg-table--compact">
+    <caption>Token di colore nei due temi</caption>
+    <thead>
+      <tr>
+        <th scope="col">Token e uso</th>
+        <th scope="col">Chiaro</th>
+        <th scope="col">Scuro</th>
+      </tr>
+    </thead>
+    <tbody>
+      {TOKEN_NAMES.map((name) => (
+        <tr>
+          <th scope="row">
+            <code class="sg-code">--{name}</code>
+            <span class="sg-role">{ROLES[name]}</span>
+          </th>
+          <td>
+            <span class="sg-swatch">
+              <span class={`sg-chip sg-chip--${name}`} data-theme="light" />
+              {PALETTE.light[name]}
+            </span>
+          </td>
+          <td>
+            <span class="sg-swatch">
+              <span class={`sg-chip sg-chip--${name}`} data-theme="dark" />
+              {PALETTE.dark[name]}
+            </span>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+  <table class="qg-table qg-table--compact">
+    <caption>
+      Contrasto WCAG delle coppie in uso
+      <span class="qg-table__caption-note">
+        Calcolato dai valori dei token e controllato da un test a ogni build. L’anello di focus blu
+        chiede almeno 3:1 sulla carta e ne ha più di 8.
+      </span>
+    </caption>
+    <thead>
+      <tr>
+        <th scope="col">Coppia</th>
+        <th scope="col" class="qg-table__num">
+          Chiaro
+        </th>
+        <th scope="col" class="qg-table__num">
+          Scuro
+        </th>
+      </tr>
+    </thead>
+    {USES.map((use) => (
+      <tbody>
+        <tr class="qg-table__group">
+          <th scope="rowgroup" colspan="3">
+            {use.label}, almeno {minimum(MINIMUM_CONTRAST[use.id])}
+          </th>
+        </tr>
+        {CONTRAST_PAIRS.filter((pair) => pair.use === use.id).map((pair) => (
+          <tr>
+            <th scope="row">
+              {pair.foreground} su {pair.background}
+            </th>
+            <td class="qg-table__num">{ratio(contrastOf(pair, "light"))}</td>
+            <td class="qg-table__num">{ratio(contrastOf(pair, "dark"))}</td>
+          </tr>
+        ))}
+      </tbody>
+    ))}
+  </table>
+</Section>

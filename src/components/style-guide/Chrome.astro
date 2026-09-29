@@ -1,0 +1,60 @@
+---
+import { navGroupsFor } from "@/components/chrome/navigation.ts";
+import Section from "./Section.astro";
+import Specimen from "./Specimen.astro";
+
+const [salary] = navGroupsFor("it", "home");
+const sampleEntries = salary?.entries.slice(0, 3) ?? [];
+---
+
+<Section id="intestazione">
+  <div class="qg-prose" slot="intro">
+    <p>
+      L’intestazione e il piè di pagina di questa pagina sono quelli veri. Fino a 77,5rem il menu è
+      un solo <code class="sg-code">&lt;details&gt;</code>: si apre senza JavaScript, spinge in
+      basso la pagina e finisce con lingua, tema e «Chiudi il menu». Da 77,5rem ogni gruppo è un
+      <code class="sg-code">&lt;details name="qg-nav"&gt;</code> a tendina; un gruppo con un solo
+      strumento è un link diretto.
+    </p>
+    <p>
+      Uno script in linea di poche righe chiude i gruppi con Esc, con un clic fuori o quando il
+      focus esce, e fa funzionare «Chiudi il menu». Senza script tutto resta usabile e il pulsante
+      non compare.
+    </p>
+  </div>
+  <Specimen
+    label="Voci del menu"
+    note="Nome e descrizione; la pagina corrente ha il nome in grassetto, sottolineato in blu."
+    column
+  >
+    <ul class="qg-menu__list sg-narrow" role="list">
+      {sampleEntries.map((entry) => (
+        <li>
+          <a class:list={["qg-navlink", { "is-current": entry.current }]} href={entry.href}>
+            <span class="qg-navlink__name">{entry.label}</span>
+            <span class="qg-navlink__desc">{entry.description}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </Specimen>
+  <Specimen
+    label="Percorso"
+    note="Solo sulle pagine di testo, sopra il titolo: mostra i livelli sopra la pagina, non la pagina stessa."
+  >
+    <nav class="qg-breadcrumbs" aria-label="Esempio di percorso">
+      <ol class="qg-breadcrumbs__list" role="list">
+        <li class="qg-breadcrumbs__item">
+          <a class="qg-breadcrumbs__link" href="/">
+            Quanto guadagno
+          </a>
+        </li>
+        <li class="qg-breadcrumbs__item">
+          <a class="qg-breadcrumbs__link" href="/#group-taxes">
+            Capire le tasse
+          </a>
+        </li>
+      </ol>
+    </nav>
+  </Specimen>
+</Section>

@@ -1,0 +1,70 @@
+.qg-intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  max-inline-size: var(--measure);
+  margin-block-end: var(--s-5);
+}
+
+.qg-title {
+  font-size: var(--t-27);
+  font-weight: var(--weight-strong);
+  line-height: var(--lh-tight);
+  letter-spacing: -0.01em;
+}
+
+.qg-lede {
+  font-size: var(--t-17);
+  line-height: var(--lh-body);
+  color: var(--grigio);
+  max-inline-size: var(--measure);
+}
+
+.qg-meta {
+  font-size: var(--t-15);
+  line-height: var(--lh-small);
+  color: var(--grigio);
+}
+
+.qg-heading {
+  font-size: var(--t-21);
+  font-weight: var(--weight-strong);
+  line-height: var(--lh-tight);
+  letter-spacing: -0.01em;
+}
+
+.qg-subheading {
+  font-size: var(--t-17);
+  letter-spacing: 0;
+}
+
+.qg-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+  min-inline-size: 0;
+  scroll-margin-block-start: var(--s-4);
+}
+
+.qg-section__intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-1);
+}
+
+.qg-section__hint {
+  font-size: var(--t-15);
+  line-height: var(--lh-small);
+  color: var(--grigio);
+  max-inline-size: var(--measure);
+}
+
+@container qg-page (width >= 45rem) {
+  .qg-intro {
+    margin-block-end: var(--s-6);
+  }
+
+  .qg-title {
+    font-size: var(--t-33);
+  }
+}

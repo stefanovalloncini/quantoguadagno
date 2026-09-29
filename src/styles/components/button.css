@@ -1,0 +1,134 @@
+.qg-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-2);
+  min-block-size: var(--target);
+  padding-inline: var(--s-4);
+  border: 1px solid var(--inchiostro);
+  border-radius: var(--radius);
+  background: var(--inchiostro);
+  color: var(--carta);
+  font-size: var(--t-17);
+  font-weight: var(--weight-medium);
+  line-height: var(--lh-tight);
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.qg-button:hover,
+.qg-button.is-hover {
+  border-color: var(--blu);
+  background: var(--blu);
+  color: var(--su-blu);
+}
+
+.qg-button--quiet {
+  background: var(--carta);
+  color: var(--inchiostro);
+}
+
+.qg-button--quiet:hover,
+.qg-button--quiet.is-hover {
+  border-color: var(--inchiostro);
+  background: var(--velo);
+  color: var(--inchiostro);
+}
+
+.qg-button--block {
+  inline-size: 100%;
+}
+
+.qg-button:disabled,
+.qg-button[aria-disabled="true"] {
+  border-color: var(--filetto);
+  background: var(--velo);
+  color: var(--grigio);
+  cursor: not-allowed;
+}
+
+.qg-link-button {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  min-block-size: var(--target);
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--blu);
+  font-size: var(--t-15);
+  text-align: start;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  cursor: pointer;
+}
+
+.qg-link-button:hover,
+.qg-link-button.is-hover {
+  text-decoration-thickness: 2px;
+}
+
+.qg-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 var(--s-6);
+}
+
+.qg-action {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  min-block-size: var(--target);
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--blu);
+  font-size: var(--t-17);
+  font-weight: var(--weight-medium);
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  cursor: pointer;
+}
+
+.qg-action:hover,
+.qg-action.is-hover {
+  text-decoration-thickness: 2px;
+}
+
+.qg-back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-1);
+  min-block-size: var(--target);
+  font-size: var(--t-17);
+  color: var(--inchiostro);
+}
+
+.qg-back:hover,
+.qg-back.is-hover {
+  color: var(--blu);
+}
+
+@media (forced-colors: active) {
+  .qg-button:disabled,
+  .qg-button[aria-disabled="true"] {
+    border-color: GrayText;
+    color: GrayText;
+  }
+}
+
+.qg-actions__copy {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: var(--s-3);
+}
+
+.qg-action__status {
+  font-size: var(--t-15);
+  line-height: var(--lh-small);
+  color: var(--grigio);
+}

@@ -1,0 +1,138 @@
+import type { MessageKey } from "./it.ts";
+
+export const en: Record<MessageKey, string> = {
+  "forfettario.faq.title": "Frequently asked questions",
+  "forfettario.faq.what.q": "What is the forfettario regime?",
+  "forfettario.faq.what.a":
+    "An Italian tax regime for self-employed workers with revenue up to €85,000 a year. The flat substitute tax applies to taxable income, that is revenue multiplied by the profitability coefficient for your activity. No VAT, no ordinary IRPEF, no IRAP. Reference: Law 190/2014.",
+  "forfettario.faq.rates.q": "What are the substitute tax rates?",
+  "forfettario.faq.rates.a":
+    "The standard rate is 15% on taxable income. The first 5 years of activity benefit from a reduced 5% rate, if the eligibility requirements are met (new activity, not a continuation of prior employment).",
+  "forfettario.faq.contributi.q": "How are social contributions calculated?",
+  "forfettario.faq.contributi.a":
+    "It depends on the fund. INPS Gestione Separata at 26.07% for professionals without a dedicated fund, the Artigiani or Commercianti scheme for activities registered there (IVS rate plus an annual minimum), or your profession’s own fund. You pick the one that applies in the calculator.",
+  "forfettario.faq.combined.q": "Can I use forfettario while also being an employee?",
+  "forfettario.faq.combined.a":
+    "Yes, forfettario can sit alongside a job, but the law caps the employment income of the previous year and this calculator does not check it. Here you only compute substitute tax and contributions on the self-employed revenue.",
+  "forfettario.faq.startup.q": "What changes in the first 5 years?",
+  "forfettario.faq.startup.a":
+    "The substitute tax drops from 15% to 5% for the first five tax periods, if you meet the legal requirements: you have not carried out the same activity in the previous three years, and the activity is not a continuation of previous employment. The calculator applies the rate from the years of activity you enter; the other requirements are yours to check.",
+  "forfettario.faq.exit.q": "When do I exit the forfettario regime?",
+  "forfettario.faq.exit.a":
+    "Past €85,000 of revenue you leave the regime from the following year. Past €100,000 the exit is immediate, within the same year. You also leave when the other requirements lapse, for instance the €20,000 cap on staff costs. Reference: Art. 1 c. 71 L. 190/2014.",
+  "forfettario.title": "Self-employed forfettario",
+  "forfettario.lede": "The regime applies up to {limit} of revenue a year.",
+  "forfettario.form.revenue": "Expected annual revenue",
+  "forfettario.form.revenue.hint":
+    "Gross amounts you will invoice over the year on your forfettario VAT number.",
+  "forfettario.form.activity": "Business activity",
+  "forfettario.form.activity.hint": "Determines the profitability coefficient applied to revenue.",
+  "forfettario.form.year": "Tax year",
+  "forfettario.form.year.hint": "Reference year for rates and ceilings.",
+  "forfettario.form.yearsOfActivity": "Years since VAT opened",
+  "forfettario.form.yearsOfActivity.hint":
+    "In the first 5 years the substitute tax is reduced to 5%.",
+  "forfettario.form.hasOtherPension": "I have other pension coverage",
+  "forfettario.form.hasOtherPension.hint":
+    "Pension, other INPS scheme or employment: Gestione Separata rate drops to 24%.",
+  "forfettario.form.employeeCosts": "Annual employee costs",
+  "forfettario.form.employeeCosts.hint": "Above {limit} you fall out of the forfettario regime.",
+  "forfettario.form.gestion": "Pension fund",
+  "forfettario.form.gestion.hint": "Determines contribution rates and minimums.",
+  "forfettario.form.gestion.gestione-separata":
+    "INPS Gestione Separata (freelancer without dedicated cassa)",
+  "forfettario.form.gestion.artigiani": "INPS Gestione Artigiani",
+  "forfettario.form.gestion.commercianti": "INPS Gestione Commercianti",
+  "forfettario.form.gestion.cassa-professionale": "Professional cassa (manual amount)",
+  "forfettario.form.cassaManualAmount": "Annual contribution to the cassa",
+  "forfettario.form.cassaManualAmount.hint": "Enter the amount your cassa estimates for the year.",
+  "forfettario.form.mesiAttivita": "Months of activity in the year",
+  "forfettario.form.mesiAttivita.hint":
+    "The minimum annual contribution for Artigiani and Commercianti is prorated by months of registration.",
+  "forfettario.form.isConcurrentFullTimeEmployee":
+    "I am also a full-time employee (32+ hours per week)",
+  "forfettario.form.concurrentEmployeeRal": "Full-time employee gross salary",
+  "forfettario.form.concurrentEmployeeRal.hint":
+    "Forfettario is barred if the employee gross salary exceeds €35,000.",
+  "forfettario.form.isAnte1996": "Enrolled in INPS before 1996 (reduced cap)",
+  "forfettario.form.forfettarioDiscount35": "Apply the 35% forfettario reduction (Law 190/2014)",
+  "forfettario.form.newRegistrantDiscount50":
+    "I am a new registrant: 50% reduction for the first 36 months (Law 207/2024)",
+  "forfettario.eligibility.warning": "revenue is at {percent}% of the {limit} ceiling.",
+  "forfettario.eligibility.warning.term": "Close to the limit:",
+  "forfettario.eligibility.revenueExceeded": "revenue is above the {limit} ceiling.",
+  "forfettario.eligibility.employeeCostsExceeded": "staff costs are above {limit}.",
+  "forfettario.eligibility.concurrentEmployeeRalTooHigh":
+    "gross pay from employment is above 35,000 €.",
+  "forfettario.eligibility.term": "Outside the flat-rate regime:",
+  "forfettario.summary.monthlyNet": "Monthly net",
+  "forfettario.summary.monthlyBasis": "average over 12 months",
+  "forfettario.summary.annualLine": "Annual net {amount} on {revenue} of revenue",
+  "forfettario.summary.rates": "Substitute tax {tax} ({phase}), contributions {inps}",
+  "forfettario.summary.regimeType.startup": "first 5 years",
+  "forfettario.summary.regimeType.standard": "standard",
+  "forfettario.breakdown.revenue": "Annual revenue",
+  "forfettario.breakdown.imponibileLordo.rule": "{rate} of revenue (profitability coefficient)",
+  "forfettario.breakdown.imponibileLordo": "Gross taxable income",
+  "forfettario.breakdown.inps.gestione-separata": "Gestione Separata contributions",
+  "forfettario.breakdown.inps.artigiani": "INPS Artigiani contributions",
+  "forfettario.breakdown.inps.commercianti": "INPS Commercianti contributions",
+  "forfettario.breakdown.inps.cassa-professionale": "Professional cassa contributions",
+  "forfettario.breakdown.discount35": "35% discount applied (Law 190/2014).",
+  "forfettario.breakdown.discount50": "50% new-registrant discount applied (Law 207/2024).",
+  "forfettario.breakdown.imponibileNetto": "Net taxable income",
+  "forfettario.breakdown.impostaSostitutiva": "Substitute tax",
+  "forfettario.breakdown.totalTaxes": "Total taxes and contributions",
+  "forfettario.breakdown.net": "Annual net",
+  "forfettario.form.activity.error": "Choose a valid activity.",
+  "forfettario.form.gestion.error": "Choose a valid pension fund.",
+  "forfettario.activity.professionisti":
+    "Professional, scientific, technical, healthcare and education activities",
+  "forfettario.activity.altre-attivita": "Other economic activities",
+  "forfettario.activity.intermediari": "Trade intermediaries",
+  "forfettario.activity.commercio": "Wholesale and retail trade",
+  "forfettario.activity.commercio-ambulante-altro": "Street trade of other goods",
+  "forfettario.activity.commercio-ambulante-alimentare": "Street trade of food and beverages",
+  "forfettario.activity.industrie-alimentari": "Food and beverage industries",
+  "forfettario.activity.servizi-alloggio": "Accommodation and catering services",
+  "forfettario.activity.costruzioni": "Construction and real estate activities",
+  "forfettario.group.previdenza": "Pension fund and contributions",
+  "forfettario.group.regime": "Seniority and costs",
+  "forfettario.group.dipendente": "Concurrent employment",
+  "forfettario.extras.title": "Customise the calculation",
+  "forfettario.extras.hint":
+    "Add the details of your contribution position, if different from the standard one.",
+  "forfettario.form.isAnte1996.hint":
+    "Anyone enrolled in INPS before 1996 has a lower contribution ceiling.",
+  "forfettario.form.forfettarioDiscount35.hint":
+    "Only applies to Artigiani and Commercianti, and cannot be combined with the new-registrant reduction.",
+  "forfettario.form.newRegistrantDiscount50.hint":
+    "Replaces the 35% reduction: applies only for the first 36 months of registration, for Artigiani and Commercianti.",
+  "forfettario.form.isConcurrentFullTimeEmployee.hint":
+    "Lowers the Gestione Separata rate to 24% and can bar forfettario above the gross salary limit.",
+  "forfettario.assumption.regime.startup": "First 5 years of activity, 5% rate",
+  "forfettario.assumption.regime.standard": "After the first 5 years of activity, 15% rate",
+  "forfettario.assumption.year": "Tax year {year}",
+  "forfettario.change.activity": "Business activity",
+  "forfettario.change.year": "Tax year",
+  "forfettario.change.gestion": "Pension fund",
+  "forfettario.change.regime": "Seniority and reductions",
+  "forfettario.change.dipendente": "Concurrent employment",
+  "forfettario.recap.regime.startup": "first 5 years, 5% rate",
+  "forfettario.recap.regime.standard": "standard, 15% rate",
+  "forfettario.recap.dipendente.yes": "yes, gross salary {ral}",
+  "forfettario.recap.dipendente.no": "no",
+  "forfettario.result.staleNote": "Not up to date: fix the flagged field to recalculate.",
+  "forfettario.result.announce": "Estimated monthly net {amount}.",
+  "forfettario.result.estimate": "actual contributions may vary based on your position.",
+  "forfettario.result.verified": "Data checked on {date}",
+  "forfettario.result.trust": "{checked}.",
+  "forfettario.ledger.title": "Calculation detail",
+  "forfettario.ledger.caption": "Forfettario calculation detail {year}, amounts in euro",
+  "forfettario.ledger.column.term": "Item",
+  "forfettario.ledger.column.annual": "Annual",
+  "forfettario.breakdown.contributi.explain": "{rate} rate on gross taxable income.",
+  "forfettario.breakdown.contributi.explain.discounted":
+    "{rate} rate on gross taxable income, reduced by {discount}.",
+  "forfettario.breakdown.imposta.explain": "{rate} substitute tax ({phase}) on net taxable income.",
+};

@@ -1,0 +1,21 @@
+.qg-icon {
+  display: inline-block;
+  flex: none;
+  inline-size: 1rem;
+  block-size: 1rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vertical-align: -0.125em;
+}
+
+.qg-icon--lg {
+  inline-size: 1.25rem;
+  block-size: 1.25rem;
+}
+
+:dir(rtl) .qg-icon--directional {
+  scale: -1 1;
+}

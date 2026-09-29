@@ -1,0 +1,13 @@
+---
+import { FormSpecimens } from "./kit/FormSpecimens.tsx";
+import Section from "./Section.astro";
+---
+
+<Section id="campi">
+  <p class="qg-lede" slot="intro">
+    I componenti di <code class="sg-code">src/components/form</code>: ogni campo ha etichetta,
+    suggerimento, errore e una riga dopo il campo, tutti collegati al controllo. Le etichette
+    restano visibili; l’unità è nell’etichetta per i lettori di schermo.
+  </p>
+  <FormSpecimens />
+</Section>

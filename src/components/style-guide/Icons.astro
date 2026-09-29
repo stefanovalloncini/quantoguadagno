@@ -1,0 +1,23 @@
+---
+import Icon from "@/components/icons/Icon.astro";
+import { ICONS, type IconName } from "@/components/icons/icons.ts";
+import Section from "./Section.astro";
+
+const NAMES = Object.keys(ICONS) as IconName[];
+---
+
+<Section id="icone">
+  <p class="qg-lede" slot="intro">
+    Tratto di 1,5 px in <code class="sg-code">currentColor</code>, su una griglia di 16. Sempre
+    accanto a un testo e nascoste ai lettori di schermo; quelle direzionali si specchiano da destra
+    a sinistra.
+  </p>
+  <div class="sg-icons">
+    {NAMES.map((name) => (
+      <p class="sg-icon">
+        <Icon name={name} size="lg" />
+        <code class="sg-code">{name}</code>
+      </p>
+    ))}
+  </div>
+</Section>

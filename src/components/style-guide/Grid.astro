@@ -1,0 +1,76 @@
+---
+import Section from "./Section.astro";
+import Specimen from "./Specimen.astro";
+
+const BREAKPOINTS = [
+  {
+    width: "sotto 45rem (720 px)",
+    changes: "Una colonna, margini di 16 px, tabelle impilate, colonne secondarie nascoste.",
+  },
+  {
+    width: "da 45rem (720 px)",
+    changes:
+      "Margini di 32 px, titolo a 33 px, menu su tre colonne, mappa del sito nel piè di pagina.",
+  },
+  {
+    width: "da 60rem (960 px)",
+    changes:
+      "Modulo e risultato affiancati con la cifra fissa, indice fisso negli articoli, margini di 40 px.",
+  },
+  {
+    width: "da 77,5rem (1.240 px)",
+    changes: "Menu completo nell’intestazione, con i gruppi a tendina e il link alla lingua.",
+  },
+] as const;
+---
+
+<Section id="griglia">
+  <p class="qg-lede" slot="intro">
+    Stesso contenuto e stesso ordine del DOM su telefono e computer: il CSS cambia solo la
+    disposizione. I punti di rottura sono query di contenitore sulla pagina, quindi non contano la
+    barra di scorrimento.
+  </p>
+  <table class="qg-table qg-table--compact">
+    <caption>Punti di rottura</caption>
+    <thead>
+      <tr>
+        <th scope="col">Larghezza della pagina</th>
+        <th scope="col">Cosa cambia</th>
+      </tr>
+    </thead>
+    <tbody>
+      {BREAKPOINTS.map((entry) => (
+        <tr>
+          <th scope="row">{entry.width}</th>
+          <td>{entry.changes}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+  <Specimen
+    label="Pagina di un calcolatore"
+    note="CalculatorLayout: campi principali, risultato, altri campi. Sui telefoni il risultato sta sotto i campi principali; da 60rem va nella colonna a destra e il suo riepilogo resta fisso mentre si scorre."
+    column
+  >
+    <div class="qg-calc">
+      <div class="qg-calc__primary">
+        <div class="sg-region">
+          <span class="sg-region__name">Campi principali</span>
+          <span>RAL, anno, regione</span>
+        </div>
+      </div>
+      <div class="qg-calc__result">
+        <div class="sg-region sg-region--tall">
+          <span class="sg-region__name">Risultato</span>
+          <span>La cifra, le ipotesi, il dettaglio del calcolo</span>
+        </div>
+      </div>
+      <div class="qg-calc__rest">
+        <div class="sg-region">
+          <span class="sg-region__name">Altri campi</span>
+          <span>Gruppi facoltativi, chiusi con un riepilogo</span>
+        </div>
+      </div>
+    </div>
+  </Specimen>
+</Section>

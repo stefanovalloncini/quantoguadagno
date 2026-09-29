@@ -1,0 +1,77 @@
+---
+import AnswerKit from "@/components/style-guide/AnswerKit.astro";
+import Buttons from "@/components/style-guide/Buttons.astro";
+import ChartKit from "@/components/style-guide/ChartKit.astro";
+import Chrome from "@/components/style-guide/Chrome.astro";
+import Colours from "@/components/style-guide/Colours.astro";
+import CompareKit from "@/components/style-guide/CompareKit.astro";
+import ComuneKit from "@/components/style-guide/ComuneKit.astro";
+import Controls from "@/components/style-guide/Controls.astro";
+import FormKit from "@/components/style-guide/FormKit.astro";
+import Grid from "@/components/style-guide/Grid.astro";
+import Icons from "@/components/style-guide/Icons.astro";
+import LongText from "@/components/style-guide/LongText.astro";
+import Notices from "@/components/style-guide/Notices.astro";
+import PayslipKit from "@/components/style-guide/PayslipKit.astro";
+import ResultKit from "@/components/style-guide/ResultKit.astro";
+import Spacing from "@/components/style-guide/Spacing.astro";
+import Statuses from "@/components/style-guide/Statuses.astro";
+import Tables from "@/components/style-guide/Tables.astro";
+import Typography from "@/components/style-guide/Typography.astro";
+import { SECTIONS } from "@/components/style-guide/sections.ts";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import TextPageLayout from "@/layouts/TextPageLayout.astro";
+import "@/styles/pages/style-guide.css";
+
+const page = {
+  title: "Guida di stile",
+  description:
+    "Token, tipografia, struttura della pagina e componenti di Quanto guadagno, con i loro stati.",
+};
+---
+
+<BaseLayout locale="it" standalone={page}>
+  <TextPageLayout locale="it">
+    <div class="qg-intro">
+      <h1 class="qg-title">{page.title}</h1>
+      <p class="qg-lede">
+        Una busta paga composta con cura: carta bianca, inchiostro nero, un solo blu, Archivo in tre
+        larghezze, cifre tabellari, righe separate da filetti. Nessun riquadro, ombra o sfumatura.
+      </p>
+      <p class="qg-meta">Pagina interna, non indicizzata. Ogni esempio usa le classi vere.</p>
+    </div>
+    <nav class="qg-toc sg-toc" aria-labelledby="sg-indice">
+      <h2 class="qg-toc__title" id="sg-indice">
+        In questa pagina
+      </h2>
+      <ol class="qg-toc__list" role="list">
+        {SECTIONS.map((section) => (
+          <li>
+            <a class="qg-toc__link" href={`#${section.id}`}>
+              {section.title}
+            </a>
+          </li>
+        ))}
+      </ol>
+    </nav>
+    <Colours />
+    <Typography />
+    <Spacing />
+    <Grid />
+    <Chrome />
+    <LongText />
+    <Tables />
+    <Buttons />
+    <Notices />
+    <Statuses />
+    <Controls />
+    <FormKit />
+    <ComuneKit />
+    <ResultKit />
+    <AnswerKit />
+    <ChartKit />
+    <CompareKit />
+    <PayslipKit />
+    <Icons />
+  </TextPageLayout>
+</BaseLayout>

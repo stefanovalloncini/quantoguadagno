@@ -1,0 +1,97 @@
+---
+import Icon from "@/components/icons/Icon.astro";
+import Section from "./Section.astro";
+import Specimen from "./Specimen.astro";
+---
+
+<Section id="cedolino">
+  <p class="qg-lede" slot="intro">
+    La busta paga da stampare: una barra con il ritorno al calcolo e l’unico pulsante, poi il
+    foglio. Da 45rem il foglio è un A4 su fondo tavolo; in stampa la barra sparisce e il foglio usa
+    sempre la versione larga. Classi in{" "}
+    <code class="sg-code">src/styles/components/payslip.css</code>.
+  </p>
+  <Specimen label="Barra" column>
+    <div class="qg-toolbar">
+      <div class="qg-toolbar__start">
+        <a class="qg-back" href="#cedolino">
+          <Icon name="chevronBack" />
+          Torna al calcolo
+        </a>
+        <p class="qg-title">Stampa la busta paga</p>
+        <p class="qg-toolbar__note">
+          La stampa usa sempre il formato A4, in bianco e nero, anche dal telefono.
+        </p>
+      </div>
+      <button class="qg-button" type="button">
+        <Icon name="print" />
+        Stampa o salva in PDF
+      </button>
+    </div>
+  </Specimen>
+  <Specimen label="Foglio A4 con celle, riepilogo e netto" column>
+    <div class="qg-payslip-view">
+      <div class="qg-payslip">
+        <div class="qg-payslip__head">
+          <div>
+            <p class="qg-payslip__brand">Quanto guadagno</p>
+            <p class="qg-payslip__site">quantoguadagno.com</p>
+          </div>
+          <div class="qg-payslip__doc">
+            <p class="qg-payslip__doc-title">Riepilogo annuo dello stipendio</p>
+            <p class="qg-payslip__doc-meta">Anno fiscale 2026</p>
+          </div>
+        </div>
+        <section class="qg-payslip__section" aria-labelledby="sg-cedolino-dati">
+          <h3 class="qg-payslip__section-title" id="sg-cedolino-dati">
+            Dati fiscali
+          </h3>
+          <dl class="qg-payslip__cells qg-payslip__cells--row">
+            <div class="qg-payslip__cell">
+              <dt>Reddito imponibile</dt>
+              <dd>31.783,50&nbsp;€</dd>
+            </div>
+            <div class="qg-payslip__cell">
+              <dt>IRPEF lorda</dt>
+              <dd>7.688,56&nbsp;€</dd>
+            </div>
+            <div class="qg-payslip__cell">
+              <dt>Detrazione lavoro dipendente</dt>
+              <dd>1.646,52&nbsp;€</dd>
+            </div>
+            <div class="qg-payslip__cell">
+              <dt>Detrazione aggiuntiva, taglio del cuneo</dt>
+              <dd>1.000,00&nbsp;€</dd>
+            </div>
+            <div class="qg-payslip__cell qg-payslip__cell--wide">
+              <dt>IRPEF netta</dt>
+              <dd>5.042,04&nbsp;€</dd>
+            </div>
+          </dl>
+        </section>
+        <div class="qg-payslip__summary">
+          <dl class="qg-payslip__facts">
+            <div class="qg-payslip__fact">
+              <dt>Netto mensile, media su 13 mensilità</dt>
+              <dd>2.002,48&nbsp;€</dd>
+            </div>
+            <div class="qg-payslip__fact">
+              <dt>Trattenute sul lordo</dt>
+              <dd>25,62%</dd>
+            </div>
+          </dl>
+          <div class="qg-payslip__net">
+            <p class="qg-payslip__net-label">Netto annuo</p>
+            <p class="qg-payslip__net-value">26.032,21&nbsp;€</p>
+          </div>
+        </div>
+        <div class="qg-payslip__foot">
+          <p>
+            Simulazione a scopo informativo, non è un documento ufficiale: la busta paga del datore
+            di lavoro resta il riferimento.
+          </p>
+        </div>
+      </div>
+    </div>
+  </Specimen>
+</Section>

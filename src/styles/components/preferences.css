@@ -1,0 +1,49 @@
+.qg-prefs {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+
+.qg-pref {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-2) var(--s-4);
+}
+
+.qg-pref__label {
+  min-inline-size: 3.5rem;
+  font-size: var(--t-15);
+  line-height: var(--lh-snug);
+  color: var(--grigio);
+}
+
+.qg-pref > legend {
+  float: inline-start;
+  margin-inline-end: var(--s-4);
+}
+
+.qg-langs {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: var(--s-5);
+  font-size: var(--t-15);
+}
+
+.qg-langs > li {
+  display: flex;
+}
+
+.qg-langs a,
+.qg-langs [aria-current] {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: var(--target);
+  min-inline-size: var(--target);
+}
+
+.qg-langs [aria-current] {
+  font-weight: var(--weight-strong);
+  color: var(--inchiostro);
+  text-decoration: none;
+}

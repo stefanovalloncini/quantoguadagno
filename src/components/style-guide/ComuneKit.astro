@@ -1,0 +1,12 @@
+---
+import { ComuneSpecimens } from "./kit/ComuneSpecimens.tsx";
+import Section from "./Section.astro";
+---
+
+<Section id="comune">
+  <p class="qg-lede" slot="intro">
+    ComuneField: prima la regione, poi la ricerca tra i suoi comuni, caricati solo quando servono.
+    Se il nome non c’è, cerchiamo nelle altre regioni; l’aliquota a mano è l’ultima strada.
+  </p>
+  <ComuneSpecimens />
+</Section>

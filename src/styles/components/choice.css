@@ -1,0 +1,122 @@
+.qg-radios {
+  display: flex;
+  flex-direction: column;
+}
+
+.qg-radio,
+.qg-check {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: var(--s-3);
+  align-items: start;
+  min-inline-size: 0;
+}
+
+.qg-check__input,
+.qg-radio__input {
+  display: grid;
+  place-content: center;
+  inline-size: 1.5rem;
+  block-size: 1.5rem;
+  margin: 0.625rem 0 0;
+  border: 1px solid var(--inchiostro);
+  border-radius: var(--radius);
+  background: var(--carta);
+  appearance: none;
+  cursor: pointer;
+}
+
+.qg-radio__input {
+  border-radius: 50%;
+}
+
+.qg-check__input,
+.qg-radio__input {
+  position: relative;
+}
+
+.qg-check__input::after,
+.qg-radio__input::after {
+  content: "";
+  position: absolute;
+  inset-block: min(0px, calc((100% - var(--target)) / 2));
+  inset-inline: min(0px, calc((100% - var(--target)) / 2));
+}
+
+.qg-check__input::before {
+  content: "";
+  inline-size: 0.4375rem;
+  block-size: 0.8125rem;
+  border: solid var(--carta);
+  border-width: 0 2px 2px 0;
+  rotate: 45deg;
+  translate: 0 -1px;
+  opacity: 0;
+}
+
+.qg-radio__input::before {
+  content: "";
+  inline-size: 0.75rem;
+  block-size: 0.75rem;
+  border-radius: 50%;
+  background: var(--inchiostro);
+  opacity: 0;
+}
+
+.qg-check__input:checked {
+  background: var(--inchiostro);
+}
+
+.qg-check__input:checked::before,
+.qg-radio__input:checked::before {
+  opacity: 1;
+}
+
+.qg-check__input:focus-visible,
+.qg-check__input.is-focus,
+.qg-radio__input:focus-visible,
+.qg-radio__input.is-focus {
+  outline: var(--focus) solid var(--blu);
+  outline-offset: var(--focus-offset);
+}
+
+.qg-check__label,
+.qg-radio__label {
+  display: flex;
+  align-items: center;
+  min-block-size: var(--target);
+  padding-block: var(--s-2);
+  font-size: var(--t-17);
+  line-height: var(--lh-snug);
+  color: var(--inchiostro);
+  cursor: pointer;
+}
+
+.qg-check__hint,
+.qg-radio__hint {
+  grid-column: 2;
+  font-size: var(--t-15);
+  line-height: var(--lh-small);
+  color: var(--grigio);
+  max-inline-size: var(--measure);
+}
+
+.qg-check__reveal {
+  grid-column: 1 / -1;
+}
+
+@media (forced-colors: active) {
+  .qg-check__input:checked {
+    forced-color-adjust: none;
+    background: Highlight;
+  }
+
+  .qg-check__input::before {
+    border-color: HighlightText;
+  }
+
+  .qg-radio__input:checked::before {
+    forced-color-adjust: none;
+    background: Highlight;
+  }
+}

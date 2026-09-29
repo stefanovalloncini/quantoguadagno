@@ -1,0 +1,117 @@
+:root {
+  --font: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --wdth-expanded: 125%;
+  --wdth-condensed: 87.5%;
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-strong: 600;
+
+  --t-13: 0.8125rem;
+  --t-15: 0.9375rem;
+  --t-17: 1.0625rem;
+  --t-21: 1.3125rem;
+  --t-27: 1.6875rem;
+  --t-33: 2.0625rem;
+  --t-cifra: clamp(2.25rem, 11vw, 5rem);
+  --t-cifra-sm: clamp(2.25rem, 8vw, 3.5rem);
+
+  --lh-body: 1.55;
+  --lh-small: 1.45;
+  --lh-snug: 1.35;
+  --lh-tight: 1.15;
+  --lh-cifra: 1;
+
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.75rem;
+  --s-4: 1rem;
+  --s-5: 1.5rem;
+  --s-6: 2rem;
+  --s-7: 3rem;
+  --s-8: 4rem;
+  --s-9: 6rem;
+
+  --radius: 2px;
+  --focus: 3px;
+  --focus-offset: 2px;
+  --target: 2.75rem;
+  --control: 3rem;
+  --measure: 52ch;
+  --page-max: 80rem;
+  --gutter: var(--s-4);
+  --header-block: 3.5rem;
+  --netbar: 4.25rem;
+  --dur: 150ms;
+}
+
+@supports (width: 1cqi) {
+  :root {
+    --t-cifra: clamp(2.25rem, 13cqi, 5rem);
+    --t-cifra-sm: clamp(2.25rem, 9cqi, 3.5rem);
+  }
+}
+
+:root,
+[data-theme="light"] {
+  color-scheme: light;
+  --carta: #ffffff;
+  --inchiostro: #000000;
+  --grigio: #5c5c5c;
+  --filetto: #d4d4d4;
+  --velo: #f3f3f1;
+  --blu: #1d3bcb;
+  --su-blu: #ffffff;
+  --errore: #b3261e;
+  --foglio: #ffffff;
+  --tavolo: #f3f3f1;
+}
+
+@media screen and (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --carta: #101010;
+    --inchiostro: #f5f5f5;
+    --grigio: #a6a6a6;
+    --filetto: #333333;
+    --velo: #1a1a1a;
+    --blu: #8fa3ff;
+    --su-blu: #101010;
+    --errore: #ff7b6e;
+    --foglio: #1a1a1a;
+    --tavolo: #101010;
+  }
+}
+
+@media screen {
+  [data-theme="dark"] {
+    color-scheme: dark;
+    --carta: #101010;
+    --inchiostro: #f5f5f5;
+    --grigio: #a6a6a6;
+    --filetto: #333333;
+    --velo: #1a1a1a;
+    --blu: #8fa3ff;
+    --su-blu: #101010;
+    --errore: #ff7b6e;
+    --foglio: #1a1a1a;
+    --tavolo: #101010;
+  }
+}
+
+@media print {
+  :root,
+  [data-theme] {
+    color-scheme: light;
+    --carta: #ffffff;
+    --inchiostro: #000000;
+    --grigio: #3d3d3d;
+    --filetto: #9a9a9a;
+    --velo: #ffffff;
+    --blu: #000000;
+    --su-blu: #ffffff;
+    --errore: #000000;
+    --foglio: #ffffff;
+    --tavolo: #ffffff;
+  }
+}

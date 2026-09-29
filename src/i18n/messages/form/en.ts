@@ -1,0 +1,125 @@
+import type { MessageKey } from "./it.ts";
+
+export const en: Record<MessageKey, string> = {
+  "field.error.prefix": "Error:",
+  "field.unit.euro": "in euros",
+  "field.unit.percent": "as a percentage",
+  "result.change": "Change",
+  "result.assumptions.title": "What the calculation assumes",
+  "result.estimate.term": "Estimate:",
+  "ledger.explain": "Show what each line means",
+  "ledger.deducted": ", deducted",
+  "ledger.credited": ", credit",
+  "netbar.link": "See the breakdown",
+  "region.name":
+    "{region, select, piemonte {Piedmont} valle_daosta {Aosta Valley} lombardia {Lombardy} bolzano {Autonomous Province of Bolzano} trento {Autonomous Province of Trento} veneto {Veneto} friuli_venezia_giulia {Friuli-Venezia Giulia} liguria {Liguria} emilia_romagna {Emilia-Romagna} toscana {Tuscany} umbria {Umbria} marche {Marche} lazio {Lazio} abruzzo {Abruzzo} molise {Molise} campania {Campania} puglia {Apulia} basilicata {Basilicata} calabria {Calabria} sicilia {Sicily} sardegna {Sardinia} other {}}",
+  "region.option":
+    "{region, select, bolzano {Bolzano (Autonomous Province)} trento {Trento (Autonomous Province)} other {{name}}}",
+  "region.in":
+    "{region, select, bolzano {in the Autonomous Province of Bolzano} trento {in the Autonomous Province of Trento} piemonte {in Piedmont} valle_daosta {in the Aosta Valley} lombardia {in Lombardy} veneto {in Veneto} friuli_venezia_giulia {in Friuli-Venezia Giulia} liguria {in Liguria} emilia_romagna {in Emilia-Romagna} toscana {in Tuscany} umbria {in Umbria} marche {in Marche} lazio {in Lazio} abruzzo {in Abruzzo} molise {in Molise} campania {in Campania} puglia {in Apulia} basilicata {in Basilicata} calabria {in Calabria} sicilia {in Sicily} sardegna {in Sardinia} other {}}",
+  "region.of":
+    "{region, select, bolzano {in the Autonomous Province of Bolzano} trento {in the Autonomous Province of Trento} piemonte {in Piedmont} valle_daosta {in the Aosta Valley} lombardia {in Lombardy} veneto {in Veneto} friuli_venezia_giulia {in Friuli-Venezia Giulia} liguria {in Liguria} emilia_romagna {in Emilia-Romagna} toscana {in Tuscany} umbria {in Umbria} marche {in Marche} lazio {in Lazio} abruzzo {in Abruzzo} molise {in Molise} campania {in Campania} puglia {in Apulia} basilicata {in Basilicata} calabria {in Calabria} sicilia {in Sicily} sardegna {in Sardinia} other {}}",
+  "comune.label": "Municipality of residence",
+  "comune.hint": "Type at least 2 letters: we search the municipalities {regionOf}.",
+  "comune.listLabel": "Municipalities {regionOf}",
+  "comune.status":
+    "{count, plural, =0 {No municipality found} one {# municipality} other {# municipalities}} {regionIn}",
+  "comune.more":
+    "{count, plural, one {One more municipality} other {# more municipalities}}: keep typing to find yours.",
+  "comune.option.none": "none",
+  "comune.option.range": "{min}–{max}",
+  "comune.range":
+    "{fromArticle, select, other {}}from {min} {toArticle, select, other {}}to {max}, in brackets",
+  "comune.loading": "Loading the municipalities {regionOf}.",
+  "comune.loadError":
+    "We cannot load the municipalities. Check your connection and try again, or enter the rate yourself.",
+  "comune.retry": "Try again",
+  "comune.after.rule":
+    "{name}: {rule}{exempt, select, yes {, exempt up to {amount} of taxable income} other {}}.",
+  "comune.after.zero": "{name}: this municipality does not charge the surcharge.",
+  "comune.after.source":
+    "{ruleYear} data from the Department of Finance{carried, select, yes {: there is no new resolution for {year} yet} other {}}.",
+  "comune.after.note":
+    "The municipality also grants special exemptions the calculation leaves out.",
+  "comune.note.summary": "Read the municipality’s note (in Italian)",
+  "comune.after.none":
+    "No municipality chosen: for now we use {article, select, other {}}{rate}. Choose your municipality for the right rate and exemption.",
+  "comune.after.pick": "Choose a municipality from the list to use its rate.",
+  "comune.after.searching":
+    "No municipality found {currentIn}: looking for “{query}” in the other regions.",
+  "comune.after.elsewhere": "{name} is {otherIn}, not {currentIn}.",
+  "comune.after.maybe": "No municipality with this name {currentIn}. Did you mean:",
+  "comune.switch": "Choose {name} ({province}), {otherIn}",
+  "comune.after.notFound":
+    "No municipality found for “{query}”. Check the spelling, or enter the rate yourself.",
+  "comune.after.loadingRule": "Loading the municipality’s rate.",
+  "comune.after.missing":
+    "The municipality in the link is not {currentIn}: choose yours or enter the rate yourself.",
+  "comune.manual.question": "Cannot find your municipality?",
+  "comune.manual.open": "Enter the rate yourself",
+  "comune.rate.label": "Municipal surcharge rate",
+  "comune.rate.hint": "It is in your municipality’s resolution, for example {example}.",
+  "comune.rate.pending": "{name} stays in use for now: type a rate to use it instead.",
+  "comune.rate.readAs": "Read as {rate}, with no exemption threshold.",
+  "comune.rate.lookup": "Look up the rate on the Department of Finance website",
+  "comune.rate.back": "Search for the municipality again",
+  "employee.form.salary": "Annual gross salary",
+  "employee.form.year": "Tax year",
+  "employee.form.contractType": "Contract type",
+  "employee.form.contractType.indeterminato": "Permanent",
+  "employee.form.contractType.determinato": "Fixed-term",
+  "employee.form.contractType.apprendistato": "Apprenticeship",
+  "employee.form.paymentFrequency": "Monthly instalments",
+  "employee.form.paymentFrequency.option12": "12 instalments, salary spread over 12 months",
+  "employee.form.paymentFrequency.option13": "13 instalments, includes 13th-month bonus",
+  "employee.form.paymentFrequency.option14": "14 instalments, includes 13th and 14th-month bonuses",
+  "employee.form.paymentFrequency.option15":
+    "15 instalments, includes 13th, 14th and 15th-month bonuses",
+  "employee.form.paymentFrequency.option16": "16 instalments, additional contractual bonuses",
+  "employee.form.region": "Region of residence",
+  "employee.form.municipal": "Municipal surcharge rate",
+  "employee.breakdown.gross": "Gross annual",
+  "inverse.form.municipal.percent": "%",
+  "employee.extras.toggle.enable": "Apply to the calculation",
+  "share.button.idle": "Copy the link",
+  "share.button.copied": "Link copied",
+  "share.button.failed": "Copy failed",
+  "schedule.showAllYears": "Show every year",
+  "schedule.showAllMonths": "Show every month",
+  "employee.employer.section": "What the employer pays",
+  "employee.employer.insight": "Every net euro you receive costs the company {ratio}.",
+  "employee.employer.inps": "Employer INPS contributions",
+  "employee.employer.tfr": "TFR accrual",
+  "employee.employer.otherCosts": "Other employer costs",
+  "employee.employer.inail": "INAIL",
+  "employee.employer.maternity": "Maternity fund",
+  "employee.employer.naspi": "NASpI",
+  "employee.employer.naspiAdditional": "NASpI additional contribution",
+  "employee.employer.cig": "CIG",
+  "employee.employer.other": "Other contributions",
+  "employee.employer.totalOtherCosts": "Total other costs",
+  "employee.employer.total": "Total company cost",
+  "employee.employer.disclaimer":
+    "Does not include non-contractual costs (training, equipment, benefits, etc.)",
+  "field.error.money": "Enter an amount in euros, like 1,200",
+  "field.error.moneyRange": "Enter an amount from €{min, number} to €{max, number}",
+  "field.error.integer": "Enter a whole number, like 2",
+  "field.error.integerRange": "Enter a whole number from {min, number} to {max, number}",
+  "field.error.number": "Enter a number, like 42.5",
+  "field.error.numberRange": "Enter a number from {min, number} to {max, number}",
+  "field.error.percent": "Enter a percentage, like 0.8",
+  "field.error.percentRange": "Enter a percentage from {min, number}% to {max, number}%",
+  "field.error.ral.required": "Enter your gross annual salary in euros, like 35,000",
+  "field.error.ral.invalid": "Enter your gross annual salary in figures, like 35,000",
+  "field.error.ral.range": "Enter a gross annual salary between €{min, number} and €{max, number}",
+  "field.error.netMonthly.required": "Enter the monthly net pay you want, like 1,800",
+  "field.error.netMonthly.invalid": "Enter the monthly net pay as an amount in euros, like 1,800",
+  "field.error.netMonthly.range":
+    "The monthly net pay must be between €{min, number} and €{max, number}",
+  "field.error.netAnnual.required": "Enter the annual net pay you want, like 24,000",
+  "field.error.netAnnual.invalid":
+    "Enter the annual net pay as an amount in euros, like 24,000 or 24k",
+  "field.error.netAnnual.range":
+    "The annual net pay must be between €{min, number} and €{max, number}",
+  "field.error.unsupportedYear": "Choose a supported year.",
+};

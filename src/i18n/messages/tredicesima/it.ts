@@ -1,0 +1,45 @@
+export const it = {
+  "tredicesima.title": "Quanto netto vale la tredicesima",
+  "tredicesima.lede": "Quanto resta in tasca della mensilità aggiuntiva, al netto di INPS e IRPEF.",
+  "tredicesima.form.ral": "Stipendio lordo annuo (RAL)",
+  "tredicesima.form.ral.hint": "La RAL su cui si calcola la mensilità aggiuntiva.",
+  "tredicesima.form.mensilita": "Mensilità",
+  "tredicesima.form.mensilita.hint": "13 per la sola tredicesima, 14 anche con la quattordicesima.",
+  "tredicesima.form.mensilita.option13": "13",
+  "tredicesima.form.mensilita.option14": "14",
+  "tredicesima.form.mensilita.error": "Scegli 13 o 14 mensilità.",
+  "tredicesima.form.taxYear": "Anno fiscale",
+  "tredicesima.result.net": "Netto della tredicesima",
+  "tredicesima.result.net.sub": "Prelievo effettivo {rate} tra INPS e IRPEF",
+  "tredicesima.result.netTotal": "Con la quattordicesima il netto totale è {amount}.",
+  "tredicesima.result.empty": "Inserisci la RAL per vedere il netto della tredicesima.",
+  "tredicesima.result.stale":
+    "Non aggiornato: è il risultato per {ral} lordi. Correggi la RAL per ricalcolare.",
+  "tredicesima.result.announce": "Netto della tredicesima {amount}.",
+  "tredicesima.result.estimate": "la busta paga resta il riferimento.",
+  "tredicesima.result.verified": "Dati controllati il {date}",
+  "tredicesima.result.trust":
+    "{checked}{pending, select, yes {: {count, plural, one {un valore usato in questo calcolo è ancora da verificare} other {# valori usati in questo calcolo sono ancora da verificare}}} other {}}.",
+  "tredicesima.breakdown.gross": "Lordo tredicesima",
+  "tredicesima.breakdown.inps": "Contributi INPS",
+  "tredicesima.breakdown.irpef": "IRPEF",
+  "tredicesima.breakdown.net": "Netto della tredicesima",
+  "tredicesima.result.note":
+    "Sulla tredicesima non si applicano le detrazioni da lavoro dipendente né le addizionali regionale e comunale: per questo è tassata più di una mensilità ordinaria.",
+  "tredicesima.ledger.title": "Come si arriva al netto",
+  "tredicesima.ledger.caption": "Calcolo della tredicesima, anno {year}",
+  "tredicesima.ledger.column.term": "Voce",
+  "tredicesima.ledger.column.amount": "Importo",
+  "tredicesima.ledger.gross.rule": "RAL divisa per {mensilita} mensilità",
+  "tredicesima.ledger.inps.rule": "{rate} del lordo",
+  "tredicesima.ledger.taxable": "Reddito imponibile",
+  "tredicesima.ledger.taxable.rule": "lordo meno contributi",
+  "tredicesima.ledger.irpef.rule": "aliquota marginale {rate}",
+  "tredicesima.assumption.year": "Anno fiscale {year}",
+  "tredicesima.assumption.mensilita":
+    "{mensilita, select, 14 {Tredicesima e quattordicesima} other {Solo la tredicesima}}",
+  "tredicesima.change.year": "anno fiscale",
+  "tredicesima.change.mensilita": "mensilità",
+} as const;
+
+export type MessageKey = keyof typeof it;

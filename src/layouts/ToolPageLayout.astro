@@ -1,0 +1,19 @@
+---
+import type { PageKind } from "@/routes.ts";
+
+interface Props {
+  readonly kind: Exclude<PageKind, "text">;
+}
+
+const { kind } = Astro.props;
+---
+
+{kind === "print" ? (
+  <div class="qg-print-frame">
+    <slot />
+  </div>
+) : (
+  <div class="qg-wrap">
+    <slot />
+  </div>
+)}

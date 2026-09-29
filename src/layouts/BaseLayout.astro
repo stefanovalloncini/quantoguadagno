@@ -1,0 +1,164 @@
+---
+import { createHash } from "node:crypto";
+import LocaleHint from "@/components/chrome/LocaleHint.astro";
+import SiteFooter from "@/components/chrome/SiteFooter.astro";
+import SiteHeader from "@/components/chrome/SiteHeader.astro";
+import { localeLinksFor, navGroupsFor } from "@/components/chrome/navigation.ts";
+import { BCP47_TAG, DEFAULT_LOCALE, LOCALES, dirOf, type Locale } from "@/i18n/locales.ts";
+import { getT } from "@/i18n/messages/index.ts";
+import {
+  disclosureScript,
+  localeHintScript,
+  netModeForwardScript,
+  restoreScript,
+  themeScript,
+} from "@/layouts/inlineScripts.ts";
+import {
+  NOT_FOUND_META,
+  absoluteUrl,
+  alternatesFor,
+  breadcrumbsFor,
+  isIndexable,
+  pathFor,
+  restoreNamesFor,
+  type PageKind,
+  type Route,
+} from "@/routes.ts";
+import { serializeJsonLd, structuredDataFor } from "@/seo/structuredData.ts";
+import "@/styles/global.css";
+
+interface StandalonePage {
+  readonly title: string;
+  readonly description: string;
+}
+
+interface Props {
+  readonly locale: Locale;
+  readonly route?: Route | undefined;
+  readonly standalone?: StandalonePage | undefined;
+  readonly kind?: PageKind | undefined;
+}
+
+const { locale, route, standalone } = Astro.props;
+const layout = getT(locale, "layout");
+const meta = getT(locale, "meta");
+
+const pageMeta = route?.meta ?? NOT_FOUND_META;
+const pageTitle = standalone?.title ?? meta(pageMeta.title);
+const description = standalone?.description ?? meta(pageMeta.description);
+const siteName = layout("brand.name");
+const title = layout(route?.id === "home" ? "title.home" : "title.page", {
+  site: siteName,
+  page: pageTitle,
+});
+const kind = route?.kind ?? Astro.props.kind ?? "text";
+const jsBudgetKb = route?.jsBudgetKb;
+const indexable = route !== undefined && isIndexable(route);
+const canonical = indexable ? absoluteUrl(route.path[locale]) : undefined;
+const alternates = indexable ? alternatesFor(route) : [];
+const restoreNames = route === undefined ? "" : restoreNamesFor(route).join(" ");
+const openGraphLocale = (value: Locale) => BCP47_TAG[value].replace("-", "_");
+const otherLocales = LOCALES.filter((other) => other !== locale);
+
+const navGroups = navGroupsFor(locale, route?.id);
+const localeLinks = localeLinksFor(locale, route?.id);
+const offeredLocale =
+  locale === DEFAULT_LOCALE ? localeLinks.find((link) => !link.current) : undefined;
+
+const crumbs = route === undefined ? [] : breadcrumbsFor(route, locale);
+const jsonLd = serializeJsonLd(
+  structuredDataFor({
+    locale,
+    kind,
+    siteName,
+    homeUrl: absoluteUrl(pathFor("home", locale)),
+    title: pageTitle,
+    description,
+    canonical,
+    breadcrumbs: crumbs.map((crumb) => ({ name: layout(crumb.label), url: crumb.href })),
+  }),
+);
+
+const forwardScript =
+  route?.id === "home" ? netModeForwardScript(pathFor("inverse", locale)) : undefined;
+const headScripts = [
+  themeScript,
+  disclosureScript,
+  restoreScript,
+  localeHintScript,
+  forwardScript,
+].filter((script): script is string => script !== undefined);
+
+for (const script of headScripts) {
+  Astro.csp?.insertScriptHash(`sha256-${createHash("sha256").update(script).digest("base64")}`);
+}
+---
+
+<!doctype html>
+<html
+  lang={locale}
+  dir={dirOf(locale)}
+  data-page-kind={kind}
+  data-page-budget={jsBudgetKb}
+  data-restore-keys={restoreNames === "" ? undefined : restoreNames}
+  data-locale-offer={offeredLocale?.locale}
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {canonical && <link rel="canonical" href={canonical} />}
+    {alternates.map((alternate) => (
+      <link rel="alternate" hreflang={alternate.hreflang} href={alternate.href} />
+    ))}
+    {!indexable && <meta name="robots" content="noindex" />}
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {canonical && <meta property="og:url" content={canonical} />}
+    <meta property="og:locale" content={openGraphLocale(locale)} />
+    {otherLocales.map((other) => (
+      <meta property="og:locale:alternate" content={openGraphLocale(other)} />
+    ))}
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#101010" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href="/fonts/Archivo-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link
+      rel="preload"
+      href="/fonts/ArchivoExpanded-600-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    {forwardScript && <script is:inline set:html={forwardScript} />}
+    <script is:inline set:html={themeScript} />
+    <script is:inline set:html={disclosureScript} />
+    <script is:inline set:html={restoreScript} />
+    <script is:inline set:html={localeHintScript} />
+    <script is:inline type="application/ld+json" set:html={jsonLd} />
+  </head>
+  <body>
+    <div class="qg-page">
+      <a class="qg-skip-link" href="#main">
+        {layout("a11y.skipToMain")}
+      </a>
+      <SiteHeader locale={locale} groups={navGroups} localeLinks={localeLinks} />
+      {offeredLocale && <LocaleHint offer={offeredLocale} />}
+      <main class="qg-main" id="main" tabindex="-1">
+        <slot />
+      </main>
+      <SiteFooter
+        locale={locale}
+        groups={navGroups}
+        localeLinks={localeLinks}
+        currentId={route?.id}
+      />
+    </div>
+  </body>
+</html>

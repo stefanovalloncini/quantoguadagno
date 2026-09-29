@@ -1,0 +1,82 @@
+---
+import Icon from "@/components/icons/Icon.astro";
+import Section from "./Section.astro";
+import Specimen from "./Specimen.astro";
+---
+
+<Section id="pulsanti">
+  <p class="qg-lede" slot="intro">
+    Un solo pulsante pieno per schermata, per l’azione principale. Le azioni secondarie sono link o
+    pulsanti che sembrano link. Il testo dice cosa succede, con un verbo.
+  </p>
+  <Specimen
+    label="Pulsante principale"
+    note="Inchiostro pieno; al passaggio del mouse diventa blu. Normale, mouse sopra, focus da tastiera."
+  >
+    <button class="qg-button" type="button">
+      Calcola il netto
+    </button>
+    <button class="qg-button is-hover" type="button">
+      Calcola il netto
+    </button>
+    <button class="qg-button is-focus" type="button">
+      Calcola il netto
+    </button>
+  </Specimen>
+  <Specimen label="Pulsante secondario" note="qg-button--quiet, per una seconda azione vicina.">
+    <button class="qg-button qg-button--quiet" type="button">
+      Ricomincia
+    </button>
+    <button class="qg-button qg-button--quiet is-hover" type="button">
+      Ricomincia
+    </button>
+    <button class="qg-button qg-button--quiet is-focus" type="button">
+      Ricomincia
+    </button>
+  </Specimen>
+  <Specimen label="Pulsante a tutta larghezza" note="qg-button--block, sui telefoni.">
+    <div class="sg-narrow">
+      <button class="qg-button qg-button--block" type="button">
+        <Icon name="print" />
+        Stampa la busta paga
+      </button>
+    </div>
+  </Specimen>
+  <Specimen
+    label="Azioni"
+    note="qg-action, sotto un risultato: link e pulsanti con icona, a 17 px e 44 px di altezza."
+  >
+    <div class="qg-actions">
+      <button class="qg-action" type="button">
+        <Icon name="link" />
+        Copia il link
+      </button>
+      <a class="qg-action" href="#pulsanti">
+        <Icon name="print" />
+        Stampa
+      </a>
+      <a class="qg-action is-hover" href="#pulsanti">
+        <Icon name="building" />
+        Costo per l’azienda
+      </a>
+    </div>
+  </Specimen>
+  <Specimen
+    label="Link, pulsante come link, ritorno"
+    note="I link nel testo sono blu e sottolineati; al passaggio del mouse la sottolineatura si ispessisce."
+  >
+    <p>
+      Nel testo: <a href="#pulsanti">link</a>,{" "}
+      <a class="is-hover" href="#pulsanti">
+        sotto il mouse
+      </a>
+    </p>
+    <button class="qg-link-button" type="button">
+      Inserisci l’aliquota a mano
+    </button>
+    <a class="qg-back" href="#pulsanti">
+      <Icon name="chevronBack" />
+      Torna al calcolo
+    </a>
+  </Specimen>
+</Section>

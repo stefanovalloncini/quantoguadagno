@@ -1,0 +1,141 @@
+---
+import Icon from "@/components/icons/Icon.astro";
+import Section from "./Section.astro";
+import Specimen from "./Specimen.astro";
+---
+
+<Section id="avvisi">
+  <p class="qg-lede" slot="intro">
+    Nessun riquadro colorato: un avviso è un blocco aperto da un filetto di 2 px, con un titolo e
+    poche righe. Il rosso compare solo per gli errori, sempre con il testo.
+  </p>
+  <Specimen label="Avviso" column>
+    <div class="qg-notice" role="note" aria-labelledby="sg-avviso">
+      <div class="qg-notice__head">
+        <Icon name="alert" size="lg" />
+        <p class="qg-notice__title" id="sg-avviso">
+          Uno dei valori usati è da verificare
+        </p>
+      </div>
+      <div class="qg-notice__body">
+        <p>Lo usiamo com’è e lo segnaliamo finché non è confermato dalla fonte ufficiale.</p>
+        <p>
+          <a class="qg-notice__link" href="#stati">
+            Vedi quale valore
+          </a>
+        </p>
+      </div>
+    </div>
+  </Specimen>
+  <Specimen label="Avviso di errore" column>
+    <div class="qg-notice qg-notice--error" role="note" aria-labelledby="sg-errore">
+      <div class="qg-notice__head">
+        <Icon name="alert" size="lg" />
+        <p class="qg-notice__title" id="sg-errore">
+          I dati dei comuni non si sono caricati
+        </p>
+      </div>
+      <div class="qg-notice__body">
+        <p>Controlla la connessione e ricarica la pagina, oppure inserisci l’aliquota a mano.</p>
+      </div>
+    </div>
+  </Specimen>
+  <Specimen
+    label="Riepilogo degli errori"
+    note="Solo nei moduli che si inviano davvero, mai nei calcolatori: i link portano al campo."
+    column
+  >
+    <div class="qg-error-summary" role="group" aria-labelledby="sg-riepilogo">
+      <h3 class="qg-error-summary__title" id="sg-riepilogo">
+        C’è un problema
+      </h3>
+      <ul class="qg-error-summary__list" role="list">
+        <li>
+          <a class="qg-error-summary__link" href="#sg-anno-2026">
+            Scegli l’anno fiscale
+          </a>
+        </li>
+        <li>
+          <a class="qg-error-summary__link" href="#sg-tema-sistema">
+            Scegli un tema
+          </a>
+        </li>
+      </ul>
+    </div>
+  </Specimen>
+  <Specimen label="Elenco da verificare" column>
+    <section class="qg-todo" aria-labelledby="sg-todo">
+      <div class="qg-todo__head">
+        <Icon name="alert" size="lg" />
+        <h3 class="qg-heading" id="sg-todo">
+          Da verificare
+        </h3>
+      </div>
+      <p class="qg-todo__text">
+        Un valore non è ancora confermato dalla fonte ufficiale: lo usiamo com’è e lo segnaliamo
+        qui.
+      </p>
+      <ul class="qg-todo__list" role="list">
+        <li class="qg-todo__item">
+          <p class="qg-todo__name">Settimane per mese nella NASpI</p>
+          <p class="qg-todo__text">
+            Il calcolo usa 52 settimane diviso 12 mesi; la legge dice «moltiplicata per il numero
+            4,33».
+          </p>
+          <p class="qg-todo__text qg-todo__source">
+            <a href="https://www.normattiva.it">Art. 4 c. 1 del D.Lgs. 22/2015</a>
+          </p>
+        </li>
+        <li class="qg-todo__item">
+          <p class="qg-todo__name">Altri 2 valori</p>
+          <p class="qg-todo__text">
+            Non sono ancora stati ricontrollati sul documento ufficiale: sono segnati «Da
+            verificare» nelle tabelle.
+          </p>
+          <details class="qg-disclosure">
+            <summary class="qg-disclosure__summary">
+              <span class="qg-disclosure__show">Mostra l’elenco</span>
+              <span class="qg-disclosure__hide">Nascondi l’elenco</span>
+              <Icon name="chevronDown" class="qg-disclosure__icon" />
+            </summary>
+            <div class="qg-disclosure__body">
+              <ul class="qg-todo__list" role="list">
+                <li class="qg-todo__item qg-todo__item--compact">
+                  <p class="qg-todo__name">Scaglioni IRPEF</p>
+                  <p class="qg-todo__text qg-todo__source">
+                    <span class="qg-todo__years">2025:</span>
+                    <a href="#avvisi">L. 207/2024 (Legge di Bilancio 2025)</a>
+                  </p>
+                  <p class="qg-todo__text qg-todo__source">
+                    <span class="qg-todo__years">2026:</span>
+                    <a href="#avvisi">L. 199/2025 (Legge di Bilancio 2026), art. 1 c. 2</a>
+                  </p>
+                </li>
+                <li class="qg-todo__item qg-todo__item--compact">
+                  <p class="qg-todo__name">Altri contributi a carico del datore di lavoro</p>
+                  <p class="qg-todo__text qg-todo__source">Nessuna fonte indicata</p>
+                </li>
+              </ul>
+            </div>
+          </details>
+        </li>
+      </ul>
+    </section>
+  </Specimen>
+  <Specimen
+    label="Elenco che si apre"
+    note="qg-disclosure: un details nativo, si apre senza JavaScript. Il testo del comando cambia da «Mostra» a «Nascondi» e la freccia si gira; in stampa il comando sparisce."
+    column
+  >
+    <details class="qg-disclosure" open>
+      <summary class="qg-disclosure__summary">
+        <span class="qg-disclosure__show">Mostra i valori del 2025 (12 parametri)</span>
+        <span class="qg-disclosure__hide">Nascondi i valori del 2025</span>
+        <Icon name="chevronDown" class="qg-disclosure__icon" />
+      </summary>
+      <div class="qg-disclosure__body">
+        <p class="qg-section__hint">Il contenuto resta nel documento anche quando è chiuso.</p>
+      </div>
+    </details>
+  </Specimen>
+</Section>

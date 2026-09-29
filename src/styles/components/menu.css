@@ -1,0 +1,107 @@
+.qg-menu {
+  grid-row: 1;
+  grid-column: 1 / -1;
+  min-inline-size: 0;
+}
+
+.qg-menu__button {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  inline-size: fit-content;
+  min-block-size: var(--header-block);
+  margin-inline: auto calc(var(--s-3) * -1);
+  padding-inline: var(--s-3);
+  font-size: var(--t-17);
+  font-weight: var(--weight-medium);
+  color: var(--inchiostro);
+}
+
+.qg-menu__button:hover {
+  color: var(--blu);
+}
+
+.qg-menu__button:focus-visible,
+.qg-menu__button.is-focus {
+  outline-offset: -3px;
+}
+
+.qg-menu[open] .qg-menu__when-closed,
+.qg-menu:not([open]) .qg-menu__when-open {
+  display: none;
+}
+
+.qg-menu__panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-6);
+  padding-block: var(--s-2) var(--s-6);
+  border-block-start: 1px solid var(--filetto);
+}
+
+.qg-menu__group {
+  display: flex;
+  flex-direction: column;
+  min-inline-size: 0;
+}
+
+.qg-menu__heading {
+  padding-block: var(--s-3) var(--s-2);
+  font-size: var(--t-15);
+  font-weight: var(--weight-strong);
+  letter-spacing: 0;
+  color: var(--grigio);
+}
+
+.qg-menu__list {
+  display: flex;
+  flex-direction: column;
+  border-block-end: 1px solid var(--filetto);
+}
+
+.qg-menu__close {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: var(--s-2);
+  min-block-size: var(--target);
+  padding: 0;
+  border: 0;
+  background: none;
+  font-size: var(--t-17);
+  font-weight: var(--weight-medium);
+  color: var(--inchiostro);
+  cursor: pointer;
+}
+
+.qg-menu__close:hover {
+  color: var(--blu);
+}
+
+@container qg-page (width >= 45rem) {
+  .qg-menu__panel {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--s-6);
+    padding-block: var(--s-5) var(--s-6);
+  }
+
+  .qg-menu__panel > .qg-prefs,
+  .qg-menu__panel > .qg-menu__close {
+    grid-column: 1 / -1;
+  }
+
+  .qg-menu__panel > .qg-prefs {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--s-4) var(--s-7);
+    padding-block-start: var(--s-5);
+    border-block-start: 1px solid var(--filetto);
+  }
+}
+
+@container qg-page (width >= 77.5rem) {
+  .qg-menu {
+    display: none;
+  }
+}

@@ -1,0 +1,26 @@
+---
+import { ICONS, iconClassName, type IconName, type IconShape, type IconSize } from "./icons.ts";
+
+interface Props {
+  readonly name: IconName;
+  readonly size?: IconSize;
+  readonly class?: string;
+}
+
+const { name, size = "md", class: extra } = Astro.props;
+const shape: IconShape = ICONS[name];
+---
+
+<svg
+  class={iconClassName(name, size, extra)}
+  viewBox="0 0 16 16"
+  aria-hidden="true"
+  focusable="false"
+>
+  {shape.circles?.map((circle) => (
+    <circle cx={circle.cx} cy={circle.cy} r={circle.r} />
+  ))}
+  {shape.paths.map((path) => (
+    <path d={path} />
+  ))}
+</svg>
