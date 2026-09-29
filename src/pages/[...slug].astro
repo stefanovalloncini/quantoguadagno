@@ -46,7 +46,7 @@ const messages = getMessages(locale, route.namespaces);
 const home = getT(locale, "home");
 ---
 
-<BaseLayout locale={locale} route={route}>
+<BaseLayout locale={locale} route={route} footerMap={route.id !== "home"}>
   {route.kind === "text" ? (
     <TextPageLayout locale={locale} route={route}>
       {island === "MethodPage" && <MethodPage locale={locale} messages={messages} />}

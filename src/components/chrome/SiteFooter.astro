@@ -13,9 +13,10 @@ interface Props {
   readonly groups: readonly NavGroup[];
   readonly localeLinks: readonly LocaleLink[];
   readonly currentId: RouteId | undefined;
+  readonly map: boolean;
 }
 
-const { locale, groups, localeLinks, currentId } = Astro.props;
+const { locale, groups, localeLinks, currentId, map } = Astro.props;
 const t = getT(locale, "layout");
 const toolGroups = groups.filter((group) => group.id !== "sources");
 const siteLinks = (["sources", "about"] as const).map((id) => ({
@@ -34,28 +35,30 @@ const repositoryLinks =
 
 <footer class="qg-footer">
   <div class="qg-wrap">
-    <nav class="qg-footer__map" aria-label={t("nav.footer.label")}>
-      {toolGroups.map((group) => (
-        <div>
-          <h2 class="qg-footer__heading" id={navIdFor("footer", group.id)}>
-            {group.label}
-          </h2>
-          <ul class="qg-footer__list" role="list" aria-labelledby={navIdFor("footer", group.id)}>
-            {group.entries.map((entry) => (
-              <li>
-                <a
-                  class="qg-footer__link"
-                  href={entry.href}
-                  aria-current={entry.current ? "page" : undefined}
-                >
-                  {entry.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
-    </nav>
+    {map && (
+      <nav class="qg-footer__map" aria-label={t("nav.footer.label")}>
+        {toolGroups.map((group) => (
+          <div>
+            <h2 class="qg-footer__heading" id={navIdFor("footer", group.id)}>
+              {group.label}
+            </h2>
+            <ul class="qg-footer__list" role="list" aria-labelledby={navIdFor("footer", group.id)}>
+              {group.entries.map((entry) => (
+                <li>
+                  <a
+                    class="qg-footer__link"
+                    href={entry.href}
+                    aria-current={entry.current ? "page" : undefined}
+                  >
+                    {entry.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </nav>
+    )}
     <div class="qg-footer__base">
       <div class="qg-footer__about">
         <p class="qg-footer__brand">{t("brand.name")}</p>

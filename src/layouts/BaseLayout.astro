@@ -37,9 +37,10 @@ interface Props {
   readonly route?: Route | undefined;
   readonly standalone?: StandalonePage | undefined;
   readonly kind?: PageKind | undefined;
+  readonly footerMap?: boolean;
 }
 
-const { locale, route, standalone } = Astro.props;
+const { locale, route, standalone, footerMap = true } = Astro.props;
 const layout = getT(locale, "layout");
 const meta = getT(locale, "meta");
 
@@ -158,6 +159,7 @@ for (const script of headScripts) {
         groups={navGroups}
         localeLinks={localeLinks}
         currentId={route?.id}
+        map={footerMap}
       />
     </div>
   </body>

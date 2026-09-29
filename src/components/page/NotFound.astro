@@ -13,7 +13,7 @@ const { locale } = Astro.props;
 const t = getT(locale, "layout");
 ---
 
-<BaseLayout locale={locale}>
+<BaseLayout locale={locale} footerMap={false}>
   <div class="qg-wrap">
     <div class="qg-intro">
       <h1 class="qg-title">{t("notFound.title")}</h1>
