@@ -252,14 +252,12 @@ export function ApprenticeshipView() {
             )}
           </div>
         }
-        rest={
-          <ScheduleTable
-            headingId={IDS.scheduleHeading}
-            rows={derived.schedule}
-            region={region}
-            f={f}
-          />
-        }
+      />
+      <ScheduleTable
+        headingId={IDS.scheduleHeading}
+        rows={derived.schedule}
+        region={region}
+        f={f}
       />
       {derived.firstYear !== null && (
         <BottomBar

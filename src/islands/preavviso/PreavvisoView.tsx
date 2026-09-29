@@ -244,79 +244,73 @@ export function PreavvisoView() {
             </NoteLine>
           </div>
         }
-        rest={
-          <>
-            <section aria-labelledby={IDS.tableHeading}>
-              <h2 className="qg-heading" id={IDS.tableHeading}>
-                {t("preavviso.table.title")}
-              </h2>
-              <table
-                className="qg-table qg-table--compact qg-table--stack qg-table--cell-current"
-                role="table"
-              >
-                <caption className="qg-visually-hidden">{t("preavviso.table.caption")}</caption>
-                <thead role="rowgroup">
-                  <tr role="row">
-                    <th scope="col" role="columnheader">
-                      {t("preavviso.table.livello")}
-                    </th>
-                    {ccnl.bands.map((band) => (
-                      <th scope="col" role="columnheader" className="qg-table__num" key={band}>
-                        {t(`preavviso.result.band.${band}`)}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody role="rowgroup">
-                  {derived.noticeTable.map((row) => {
-                    const current = row.livelloId === state.livelloId;
+      />
+      <section className="qg-section qg-band qg-band--narrow" aria-labelledby={IDS.tableHeading}>
+        <h2 className="qg-heading" id={IDS.tableHeading}>
+          {t("preavviso.table.title")}
+        </h2>
+        <table
+          className="qg-table qg-table--compact qg-table--stack qg-table--cell-current"
+          role="table"
+        >
+          <caption className="qg-visually-hidden">{t("preavviso.table.caption")}</caption>
+          <thead role="rowgroup">
+            <tr role="row">
+              <th scope="col" role="columnheader">
+                {t("preavviso.table.livello")}
+              </th>
+              {ccnl.bands.map((band) => (
+                <th scope="col" role="columnheader" className="qg-table__num" key={band}>
+                  {t(`preavviso.result.band.${band}`)}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody role="rowgroup">
+            {derived.noticeTable.map((row) => {
+              const current = row.livelloId === state.livelloId;
+              return (
+                <tr role="row" key={row.livelloId} aria-current={current ? true : undefined}>
+                  <th scope="row" role="rowheader" className="qg-table__primary">
+                    {row.livelloLabel}
+                    {row.workingDays && (
+                      <span className="qg-visually-hidden">
+                        {t("preavviso.table.workingDaysSuffix")}
+                      </span>
+                    )}
+                  </th>
+                  {ccnl.bands.map((band) => {
+                    const entry = row.notice.find((candidate) => candidate.band === band);
+                    const mine = current && result?.band === band;
                     return (
-                      <tr role="row" key={row.livelloId} aria-current={current ? true : undefined}>
-                        <th scope="row" role="rowheader" className="qg-table__primary">
-                          {row.livelloLabel}
-                          {row.workingDays && (
-                            <span className="qg-visually-hidden">
-                              {t("preavviso.table.workingDaysSuffix")}
-                            </span>
-                          )}
-                        </th>
-                        {ccnl.bands.map((band) => {
-                          const entry = row.notice.find((candidate) => candidate.band === band);
-                          const mine = current && result?.band === band;
-                          return (
-                            <td
-                              role="cell"
-                              className={
-                                mine
-                                  ? "qg-table__num qg-table__pair qg-table__mine"
-                                  : "qg-table__num qg-table__pair"
-                              }
-                              data-label={t(`preavviso.result.band.${band}`)}
-                              key={band}
-                            >
-                              {entry === undefined
-                                ? null
-                                : t("preavviso.days", { count: entry.days })}
-                            </td>
-                          );
-                        })}
-                      </tr>
+                      <td
+                        role="cell"
+                        className={
+                          mine
+                            ? "qg-table__num qg-table__pair qg-table__mine"
+                            : "qg-table__num qg-table__pair"
+                        }
+                        data-label={t(`preavviso.result.band.${band}`)}
+                        key={band}
+                      >
+                        {entry === undefined ? null : t("preavviso.days", { count: entry.days })}
+                      </td>
                     );
                   })}
-                </tbody>
-              </table>
-            </section>
-            <Topics
-              headingId={IDS.faqHeading}
-              title={t("preavviso.faq.title")}
-              topics={FAQ_TOPICS.map((id) => ({
-                id: `preavviso-faq-${id}`,
-                summary: t(`preavviso.faq.${id}.q`),
-                body: t(`preavviso.faq.${id}.a`),
-              }))}
-            />
-          </>
-        }
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </section>
+      <Topics
+        headingId={IDS.faqHeading}
+        title={t("preavviso.faq.title")}
+        topics={FAQ_TOPICS.map((id) => ({
+          id: `preavviso-faq-${id}`,
+          summary: t(`preavviso.faq.${id}.q`),
+          body: t(`preavviso.faq.${id}.a`),
+        }))}
       />
       {result !== null && (
         <BottomBar

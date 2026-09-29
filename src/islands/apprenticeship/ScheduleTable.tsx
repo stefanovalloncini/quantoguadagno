@@ -60,7 +60,7 @@ function ScheduleRow({
 export function ScheduleTable({ headingId, rows, region, f }: ScheduleTableProps) {
   const t = useT();
   return (
-    <section className="qg-ledger-block" aria-labelledby={headingId}>
+    <section className="qg-ledger-block qg-band qg-band--narrow" aria-labelledby={headingId}>
       <h2 className="qg-heading" id={headingId}>
         {t("apprenticeship.schedule.title")}
       </h2>
