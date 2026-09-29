@@ -1,12 +1,13 @@
 .qg-assumptions {
   display: flex;
   flex-direction: column;
-  gap: var(--s-1);
+  gap: var(--s-3);
 }
 
 .qg-assumptions__title {
-  font-size: var(--t-15);
+  font-size: var(--t-17);
   font-weight: var(--weight-strong);
+  line-height: var(--lh-snug);
   letter-spacing: 0;
   color: var(--inchiostro);
 }

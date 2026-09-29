@@ -5,7 +5,11 @@
   min-inline-size: 0;
 }
 
-.qg-ledger-block > .qg-subheading {
+.qg-ledger-block.qg-band {
+  gap: var(--s-4);
+}
+
+.qg-ledger-block > * + .qg-subheading {
   margin-block-start: var(--s-4);
 }
 

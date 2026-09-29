@@ -185,9 +185,9 @@ export function NaspiLedgerBlock({ parts, explained, onExplainedChange }: NaspiL
   const t = useT();
   return (
     <section className="qg-ledger-block" aria-labelledby={IDS.ledgerHeading}>
-      <h2 className="qg-heading" id={IDS.ledgerHeading}>
+      <h3 className="qg-subheading" id={IDS.ledgerHeading}>
         {t("naspi.ledger.title")}
-      </h2>
+      </h3>
       <Checkbox
         id={IDS.ledgerToggle}
         label={t("ledger.explain")}

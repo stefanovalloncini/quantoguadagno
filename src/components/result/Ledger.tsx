@@ -131,9 +131,9 @@ export function Ledger({
   const t = useT();
   return (
     <section className="qg-ledger-block" aria-labelledby={headingId}>
-      <h2 className="qg-heading" id={headingId}>
+      <h3 className="qg-subheading" id={headingId}>
         {title}
-      </h2>
+      </h3>
       <div className="qg-check">
         <input
           className="qg-check__input"

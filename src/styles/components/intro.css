@@ -35,6 +35,7 @@
 
 .qg-subheading {
   font-size: var(--t-17);
+  line-height: var(--lh-snug);
   letter-spacing: 0;
 }
 

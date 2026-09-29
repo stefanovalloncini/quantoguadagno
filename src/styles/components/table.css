@@ -16,18 +16,21 @@
 }
 
 .qg-table caption {
-  padding-block-end: var(--s-2);
-  font-size: var(--t-15);
+  padding-block-end: var(--s-3);
+  font-size: var(--t-17);
   font-weight: var(--weight-strong);
-  line-height: var(--lh-small);
+  line-height: var(--lh-snug);
   text-align: start;
-  color: var(--grigio);
+  color: var(--inchiostro);
 }
 
 .qg-table__caption-note {
   display: block;
   margin-block-start: var(--s-1);
+  font-size: var(--t-15);
   font-weight: var(--weight-regular);
+  line-height: var(--lh-small);
+  color: var(--grigio);
 }
 
 .qg-table th,

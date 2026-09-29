@@ -72,8 +72,8 @@
 
 .qg-actions {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0 var(--s-6);
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .qg-action {

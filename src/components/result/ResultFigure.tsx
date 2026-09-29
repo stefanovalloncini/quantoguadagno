@@ -87,14 +87,7 @@ function FigureFoot({ state, subs, children: staleNote }: FigureFootProps) {
           ))}
         </div>
       )}
-      {hasStaleNote && (
-        <p
-          className={staleShown ? "qg-figure__stale" : "qg-figure__stale qg-figure__reserved"}
-          aria-hidden={staleShown ? undefined : true}
-        >
-          {staleNote}
-        </p>
-      )}
+      {staleShown && <p className="qg-figure__stale">{staleNote}</p>}
     </div>
   );
 }

@@ -1,7 +1,18 @@
 .qg-result {
   display: flex;
   flex-direction: column;
-  gap: var(--s-5);
+}
+
+.qg-result > * + * {
+  margin-block-start: var(--s-6);
+}
+
+.qg-result > .qg-figure__aside {
+  margin-block-start: var(--s-4);
+}
+
+.qg-result > .qg-assumptions + :is(.qg-notes, .qg-notes__line) {
+  margin-block-start: var(--s-3);
 }
 
 .qg-result__summary {
@@ -44,9 +55,9 @@
 
 .qg-figure__main {
   display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: var(--s-1) var(--s-3);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--s-1);
   padding-block-end: var(--s-3);
   border-block-end: 2px solid var(--blu);
 }
