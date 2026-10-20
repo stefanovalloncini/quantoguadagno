@@ -1,8 +1,9 @@
 # quantoguadagno
 
 quantoguadagno.com is an Italian salary calculator: gross-to-net pay, INPS contributions,
-regional and municipal surcharges, and related tools (apprenticeship pay, forfettario flat tax,
-the ordinary regime for the self-employed, TFR, NASpI, and more).
+regional and municipal surcharges, a gross-to-net table with a page for each common salary, and
+related tools (apprenticeship pay, forfettario flat tax, the ordinary regime for the
+self-employed, TFR, NASpI, and more).
 
 ## Stack
 
@@ -35,9 +36,11 @@ Node 22.14.0 (via nvm) and pnpm 11.0.4.
   legacy redirects
 - `src/queryParams.ts` - query parameters each tool reads from shared links, with their legacy names
 - `src/seo` - sitemap, `_redirects` and structured data builders
-- `src/integrations` - Astro integration that writes `dist/_redirects`
+- `src/integrations` - Astro integrations: `dist/_redirects`, module preloads for the islands, and
+  data snapshots that keep the parameter registry out of client bundles
 - `src/layouts` - page layouts
-- `src/pages` - Astro pages (one catch-all for every route, plus the 404 pages)
+- `src/pages` - Astro pages: one catch-all for every route in the table, the per-salary net pages,
+  the style guide and the 404 pages
 - `src/islands` - React islands; `src/islands/runtime` holds the URL and storage hooks
 - `src/components` - shared components
 - `src/styles` - stylesheets
