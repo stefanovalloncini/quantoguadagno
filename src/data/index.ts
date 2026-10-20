@@ -71,6 +71,8 @@ export type {
 } from "./params/regions.ts";
 export { REGION_CODES, REGIONS, REGIONS_LIST, regionRules, type Region } from "./regions.ts";
 
+export { CAPOLUOGHI, type Capoluogo } from "./capoluoghi.ts";
+
 export {
   COMUNI_SOURCE,
   COMUNI_YEARS,
