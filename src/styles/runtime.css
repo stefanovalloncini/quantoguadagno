@@ -1,4 +1,4 @@
-:root[data-restoring] [data-restore-target] {
+:root[data-restoring] [data-restore-target] .qg-intro ~ * {
   visibility: hidden;
   animation: restore-reveal 0s linear 2s forwards;
 }

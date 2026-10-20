@@ -13,9 +13,9 @@ import {
 const runtimeCss = readFileSync(new URL("../styles/runtime.css", import.meta.url), "utf8");
 
 describe("runtime styles", () => {
-  it("hide only the restore target while a shared link is pending", () => {
+  it("keep the title in view and hide only the calculator while a shared link is pending", () => {
     expect(runtimeCss).toContain(
-      `:root[${RESTORE_PENDING_ATTRIBUTE}] [${RESTORE_TARGET_ATTRIBUTE}] {\n  visibility: hidden;`,
+      `:root[${RESTORE_PENDING_ATTRIBUTE}] [${RESTORE_TARGET_ATTRIBUTE}] .qg-intro ~ * {\n  visibility: hidden;`,
     );
   });
 
