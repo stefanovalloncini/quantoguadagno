@@ -1,6 +1,8 @@
 import type { IrpefBracket } from "./irpef.ts";
-import { getMarginalRate } from "./irpef.ts";
+import { applyProgressiveBrackets } from "./irpef.ts";
 import { round } from "./_math.ts";
+
+const MONTHS_PER_YEAR = 12;
 
 export interface TredicesimaInput {
   readonly ral: number;
@@ -13,9 +15,9 @@ export interface TredicesimaResult {
   readonly gross: number;
   readonly inps: number;
   readonly taxable: number;
+  readonly monthlyBrackets: readonly IrpefBracket[];
   readonly irpef: number;
   readonly net: number;
-  readonly marginalRate: number;
   readonly effectiveRate: number;
   readonly extraMonths: number;
   readonly grossTotal: number;
@@ -26,42 +28,49 @@ const EMPTY: TredicesimaResult = {
   gross: 0,
   inps: 0,
   taxable: 0,
+  monthlyBrackets: [],
   irpef: 0,
   net: 0,
-  marginalRate: 0,
   effectiveRate: 0,
   extraMonths: 0,
   grossTotal: 0,
   netTotal: 0,
 };
 
-// The tredicesima is one month's gross, taxed with INPS and IRPEF at the
-// taxpayer's marginal rate. Unlike an ordinary month it carries no detrazioni
-// (lavoro dipendente, carichi di famiglia) and no addizionali regionali/comunali
-// — that is why it nets less than a normal month.
+export function monthlyBrackets(brackets: readonly IrpefBracket[]): readonly IrpefBracket[] {
+  return brackets.map((bracket) => ({
+    min: bracket.min / MONTHS_PER_YEAR,
+    max: bracket.max === null ? null : bracket.max / MONTHS_PER_YEAR,
+    rate: bracket.rate,
+  }));
+}
+
+// Each extra month (tredicesima, quattordicesima) is one month's gross. Payroll
+// withholds IRPEF on it alone, with the annual brackets divided by 12 and no
+// detrazioni (art. 23 c. 2 lett. b DPR 600/1973), and withholds no addizionali.
+// The year-end conguaglio then settles the annual IRPEF.
 export function calculateTredicesima(input: TredicesimaInput): TredicesimaResult {
   const { ral, mensilita, inpsRate, brackets } = input;
-  if (ral <= 0 || mensilita <= 12) return EMPTY;
+  if (ral <= 0 || mensilita <= MONTHS_PER_YEAR) return EMPTY;
 
   const gross = round(ral / mensilita);
   const inps = round(gross * inpsRate);
   const taxable = round(gross - inps);
 
-  const annualTaxable = ral - round(ral * inpsRate);
-  const marginalRate = getMarginalRate(annualTaxable, brackets);
-  const irpef = round(taxable * marginalRate);
+  const perMonth = monthlyBrackets(brackets);
+  const irpef = round(applyProgressiveBrackets(taxable, perMonth));
 
   const net = round(gross - inps - irpef);
   const effectiveRate = round((inps + irpef) / gross, 4);
-  const extraMonths = mensilita - 12;
+  const extraMonths = mensilita - MONTHS_PER_YEAR;
 
   return {
     gross,
     inps,
     taxable,
+    monthlyBrackets: perMonth,
     irpef,
     net,
-    marginalRate,
     effectiveRate,
     extraMonths,
     grossTotal: round(gross * extraMonths),

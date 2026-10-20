@@ -38,7 +38,8 @@ describe("useTredicesimaController", () => {
     act(() => {
       result.current.updateRal("60000");
     });
-    expect(result.current.result.marginalRate).toBe(0.43);
+    expect(result.current.result.irpef).toBe(1152.23);
+    expect(result.current.result.net).toBe(3039);
   });
 
   it("surfaces a field error for an invalid RAL", () => {

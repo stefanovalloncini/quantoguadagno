@@ -27,16 +27,27 @@ export const en: Record<MessageKey, string> = {
   "tredicesima.breakdown.irpef": "IRPEF",
   "tredicesima.breakdown.net": "Net 13th salary",
   "tredicesima.result.note":
-    "The 13th carries no employee work deduction and no regional or municipal surcharge, so it is taxed more than an ordinary month.",
+    "On the extra month IRPEF is worked out on its own, with the year’s brackets divided by 12 and no tax credits, and no regional or municipal surcharge is withheld. The year-end tax adjustment then recalculates IRPEF on the whole year’s income.",
   "tredicesima.ledger.title": "Breakdown",
   "tredicesima.ledger.caption": "13th salary calculation, {year}",
   "tredicesima.ledger.column.term": "Item",
   "tredicesima.ledger.column.amount": "Amount",
   "tredicesima.ledger.gross.rule": "RAL divided by {mensilita} instalments",
+  "tredicesima.ledger.gross.explain":
+    "The extra month is worth the same as an ordinary month: the RAL divided by {mensilita}.",
   "tredicesima.ledger.inps.rule": "{rate} of gross",
+  "tredicesima.ledger.inps.explain":
+    "Your contributions are the same as on any other month, at the same rate.{exemption, select, yes { The 2024 contribution cut did not apply to the extra months.} other {}}",
   "tredicesima.ledger.taxable": "Taxable income",
   "tredicesima.ledger.taxable.rule": "gross minus contributions",
-  "tredicesima.ledger.irpef.rule": "marginal rate {rate}",
+  "tredicesima.ledger.taxable.explain":
+    "This is the amount IRPEF on the extra month is worked out on.",
+  "tredicesima.ledger.irpef.rule": "brackets divided by 12, no tax credits",
+  "tredicesima.ledger.irpef.explain":
+    "IRPEF on the extra month is worked out on its own, with the year’s brackets divided by 12: {bands}. No tax credits come off: they apply to the ordinary months.",
+  "tredicesima.ledger.irpef.bandUpTo": "{rate} up to {max}",
+  "tredicesima.ledger.irpef.bandAbove": "{rate} above",
+  "tredicesima.ledger.net.rule": "gross minus contributions and IRPEF",
   "tredicesima.assumption.year": "Tax year {year}",
   "tredicesima.assumption.mensilita":
     "{mensilita, select, 14 {13th and 14th month} other {13th month only}}",

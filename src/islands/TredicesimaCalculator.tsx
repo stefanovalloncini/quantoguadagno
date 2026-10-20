@@ -7,7 +7,7 @@ import { CalculatorLayout } from "@/components/page/CalculatorLayout.tsx";
 import { PageIntro } from "@/components/page/PageIntro.tsx";
 import { Assumptions, NoteLine, type AssumptionItem } from "@/components/result/Assumptions.tsx";
 import { BottomBar, useBottomBarVisible } from "@/components/result/BottomBar.tsx";
-import { Ledger, type LedgerRow } from "@/components/result/Ledger.tsx";
+import { Ledger } from "@/components/result/Ledger.tsx";
 import { LiveStatus, useSettledAnnouncement } from "@/components/result/LiveStatus.tsx";
 import { ResultFigure, type FigureState } from "@/components/result/ResultFigure.tsx";
 import { countUnverified, latestVerification, SUPPORTED_YEARS } from "@/data/index.ts";
@@ -22,6 +22,8 @@ import {
   type TredicesimaErrorValue,
   type TredicesimaState,
 } from "./tredicesima/state.ts";
+import { computedTaxYear } from "./tredicesima/compute.ts";
+import { buildTredicesimaLedger } from "./tredicesima/ledger.tsx";
 import { useTredicesimaController } from "./tredicesima/useTredicesimaController.ts";
 
 const IDS = {
@@ -117,47 +119,13 @@ function TredicesimaView() {
     },
   ];
 
-  const rows: LedgerRow[] = [
-    {
-      id: "gross",
-      name: t("tredicesima.breakdown.gross"),
-      kind: "plain",
-      rule: t("tredicesima.ledger.gross.rule", { mensilita: state.mensilita }),
-      annual: formatMoney(shown.gross, locale),
-    },
-    {
-      id: "inps",
-      name: t("tredicesima.breakdown.inps"),
-      kind: "deducted",
-      rule: t("tredicesima.ledger.inps.rule", {
-        rate: formatPercent(shown.gross > 0 ? shown.inps / shown.gross : 0, locale, 2),
-      }),
-      annual: formatMoney(-shown.inps, locale),
-    },
-    {
-      id: "taxable",
-      name: t("tredicesima.ledger.taxable"),
-      kind: "subtotal",
-      rule: t("tredicesima.ledger.taxable.rule"),
-      annual: formatMoney(shown.taxable, locale),
-    },
-    {
-      id: "irpef",
-      name: t("tredicesima.breakdown.irpef"),
-      kind: "deducted",
-      rule: t("tredicesima.ledger.irpef.rule", {
-        rate: formatPercent(shown.marginalRate, locale, 0),
-      }),
-      annual: formatMoney(-shown.irpef, locale),
-    },
-  ];
-
-  const total: LedgerRow = {
-    id: "net",
-    name: t("tredicesima.breakdown.net"),
-    kind: "total",
-    annual: formatMoney(shown.net, locale),
-  };
+  const { rows, total } = buildTredicesimaLedger({
+    result: shown,
+    mensilita: state.mensilita,
+    taxYear: computedTaxYear(state),
+    t,
+    locale,
+  });
 
   const [explained, setExplained] = useState(false);
   const barVisible = useBottomBarVisible(figureValue, figureState !== "empty");

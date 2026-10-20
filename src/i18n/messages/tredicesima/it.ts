@@ -25,16 +25,27 @@ export const it = {
   "tredicesima.breakdown.irpef": "IRPEF",
   "tredicesima.breakdown.net": "Netto della tredicesima",
   "tredicesima.result.note":
-    "Sulla tredicesima non si applicano le detrazioni da lavoro dipendente né le addizionali regionale e comunale: per questo è tassata più di una mensilità ordinaria.",
+    "Sulla mensilità aggiuntiva l’IRPEF si calcola a parte, con gli scaglioni dell’anno divisi per 12 e senza detrazioni, e non si trattengono le addizionali regionale e comunale. Il conguaglio di fine anno ricalcola poi l’IRPEF su tutto il reddito dell’anno.",
   "tredicesima.ledger.title": "Dettaglio del calcolo",
   "tredicesima.ledger.caption": "Calcolo della tredicesima, anno {year}",
   "tredicesima.ledger.column.term": "Voce",
   "tredicesima.ledger.column.amount": "Importo",
   "tredicesima.ledger.gross.rule": "RAL divisa per {mensilita} mensilità",
+  "tredicesima.ledger.gross.explain":
+    "La mensilità aggiuntiva vale quanto un mese normale: la RAL divisa per {mensilita}.",
   "tredicesima.ledger.inps.rule": "{rate} del lordo",
+  "tredicesima.ledger.inps.explain":
+    "I contributi a tuo carico si pagano come su ogni altro mese, con la stessa aliquota.{exemption, select, yes { Lo sconto sui contributi del 2024 non valeva sulle mensilità aggiuntive.} other {}}",
   "tredicesima.ledger.taxable": "Reddito imponibile",
   "tredicesima.ledger.taxable.rule": "lordo meno contributi",
-  "tredicesima.ledger.irpef.rule": "aliquota marginale {rate}",
+  "tredicesima.ledger.taxable.explain":
+    "È la base su cui si calcola l’IRPEF della mensilità aggiuntiva.",
+  "tredicesima.ledger.irpef.rule": "scaglioni divisi per 12, senza detrazioni",
+  "tredicesima.ledger.irpef.explain":
+    "L’IRPEF della mensilità aggiuntiva si calcola a parte, con gli scaglioni dell’anno divisi per 12: {bands}. Non si tolgono detrazioni, che spettano sulle mensilità ordinarie.",
+  "tredicesima.ledger.irpef.bandUpTo": "{rate} fino a {max}",
+  "tredicesima.ledger.irpef.bandAbove": "{rate} oltre",
+  "tredicesima.ledger.net.rule": "lordo meno contributi e IRPEF",
   "tredicesima.assumption.year": "Anno fiscale {year}",
   "tredicesima.assumption.mensilita":
     "{mensilita, select, 14 {Tredicesima e quattordicesima} other {Solo la tredicesima}}",
