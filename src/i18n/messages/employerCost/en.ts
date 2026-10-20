@@ -43,7 +43,7 @@ export const en: Record<MessageKey, string> = {
   "employerCost.result.announce": "Annual cost to the company {amount}, for a RAL of {gross}.",
   "employerCost.result.estimate":
     "costs outside the contract, such as training, equipment and benefits, are not included.",
-  "employerCost.result.verified": "Data checked on {date}",
+  "employerCost.result.verified": "Data checked on {dateArticle, select, other {}}{date}",
   "employerCost.result.trust":
     "{checked}{pending, select, yes {: {count, plural, one {one value used in this calculation is still to be verified} other {# values used in this calculation are still to be verified}}} other {}}.",
 

@@ -32,7 +32,7 @@ export const en: Record<MessageKey, string> = {
     "Apprenticeship contract, {rate} municipal surcharge, {count} monthly payments",
   "apprenticeship.result.estimate":
     "your payslip is what counts. The municipal surcharge and the number of payments can be changed in the calculator: open a year from the table.",
-  "apprenticeship.result.verified": "Data checked on {date}",
+  "apprenticeship.result.verified": "Data checked on {dateArticle, select, other {}}{date}",
   "apprenticeship.result.trust":
     "{checked}{pending, select, yes {: {count, plural, one {one value used in this calculation is still to be verified} other {# values used in this calculation are still to be verified}}} other {}}.",
 };

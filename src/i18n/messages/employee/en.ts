@@ -20,9 +20,10 @@ export const en: Record<MessageKey, string> = {
   "employee.result.annual": "Annual net pay {amount}",
   "employee.result.split":
     "Normal month {ordinary}, {count, plural, =1 {thirteenth month {extra}} =2 {thirteenth and fourteenth months {extra} each} other {extra months {extra} each}}",
-  "employee.result.withheld": "Deductions: {amount} a year, {share} of gross.",
+  "employee.result.withheld":
+    "Deductions: {amount} a year, {article, select, other {}}{share} of gross.",
   "employee.result.withheldCredits":
-    "Deductions: {amount} a year, {share} of gross. Payroll credits: {credits}, already in the net pay.",
+    "Deductions: {amount} a year, {article, select, other {}}{share} of gross. Payroll credits: {credits}, already in the net pay.",
   "employee.result.empty": "Enter your gross annual salary to see your net pay.",
   "employee.result.fix": "Correct the marked values to see your net pay.",
   "employee.result.staleGross":
@@ -31,7 +32,7 @@ export const en: Record<MessageKey, string> = {
     "Out of date: this is the previous result. Correct the marked values to recalculate.",
   "employee.result.announce": "Monthly net pay {amount}, average over {count} payslips.",
   "employee.result.estimate": "your payslip is what counts.",
-  "employee.result.verified": "Data checked on {date}",
+  "employee.result.verified": "Data checked on {dateArticle, select, other {}}{date}",
 
   "employee.result.trust":
     "{checked}{pending, select, yes {: {count, plural, one {one value used in this calculation is still to be verified} other {# values used in this calculation are still to be verified}}} other {}}.",

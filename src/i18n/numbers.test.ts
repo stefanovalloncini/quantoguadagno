@@ -93,8 +93,8 @@ describe("formatPercent", () => {
 describe("formatDate", () => {
   it("formats in UTC regardless of the day boundary", () => {
     const date = new Date(Date.UTC(2026, 0, 1, 0, 0));
-    expect(formatDate(date, "it", "long")).toBe("01 gennaio 2026");
-    expect(formatDate(date, "en", "long")).toBe("01 January 2026");
+    expect(formatDate(date, "it", "long")).toBe("1 gennaio 2026");
+    expect(formatDate(date, "en", "long")).toBe("1 January 2026");
   });
 
   it("formats the long style with a full month name", () => {

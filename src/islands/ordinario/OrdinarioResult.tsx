@@ -1,3 +1,4 @@
+import { verifiedLine } from "@/components/result/verifiedLine.ts";
 import { useMemo, useState, type Ref } from "react";
 import type { RegionText } from "@/components/form/regionText.ts";
 import { NoteLine } from "@/components/result/Assumptions.tsx";
@@ -5,12 +6,9 @@ import { Actions } from "@/components/result/Actions.tsx";
 import { Ledger } from "@/components/result/Ledger.tsx";
 import { LiveStatus } from "@/components/result/LiveStatus.tsx";
 import { ResultFigure, type FigureState } from "@/components/result/ResultFigure.tsx";
-import { latestVerification } from "@/data/index.ts";
-import { formatDate } from "@/i18n/numbers.ts";
 import { useRichT, useT } from "@/i18n/react.tsx";
 import type { MunicipalMode } from "@/islands/home/ledgerRows.tsx";
 import type { ViewFormat } from "@/islands/home/viewFormat.tsx";
-import { hrefFor } from "@/routePaths.ts";
 import { ordinarioValuesToVerify, type OrdinarioResult as Result } from "./compute.ts";
 import { buildOrdinarioLedger } from "./ledger.tsx";
 import { IDS } from "./viewIds.ts";
@@ -35,17 +33,20 @@ function TrustLine({ result, f }: { readonly result: Result; readonly f: ViewFor
     () => ordinarioValuesToVerify({ taxYear, gestion, regionCode, withComune: comune !== null }),
     [taxYear, gestion, regionCode, comune],
   );
-  const date = latestVerification();
+  const checked = verifiedLine(f.locale);
   return (
     <NoteLine term={t("result.estimate.term")}>
       {t("ordinario.result.estimate")}
-      {date !== null && (
+      {checked !== null && (
         <>
           {" "}
           {rt("ordinario.result.trust", {
             checked: (
-              <a href={hrefFor("sources", f.locale)}>
-                {t("ordinario.result.verified", { date: formatDate(new Date(date), f.locale) })}
+              <a href={checked.href}>
+                {t("ordinario.result.verified", {
+                  date: checked.date,
+                  dateArticle: checked.dateArticle,
+                })}
               </a>
             ),
             pending: pending > 0 ? "yes" : "no",

@@ -10,13 +10,13 @@ import { BottomBar, useBottomBarVisible } from "@/components/result/BottomBar.ts
 import { Ledger } from "@/components/result/Ledger.tsx";
 import { LiveStatus, useSettledAnnouncement } from "@/components/result/LiveStatus.tsx";
 import { ResultFigure, type FigureState } from "@/components/result/ResultFigure.tsx";
-import { countUnverified, latestVerification, SUPPORTED_YEARS } from "@/data/index.ts";
+import { verifiedLine } from "@/components/result/verifiedLine.ts";
+import { countUnverified, SUPPORTED_YEARS } from "@/data/index.ts";
 import type { TredicesimaResult } from "@/domain/index.ts";
-import { formatDate, formatMoney, formatPercent, parseMoneyInput } from "@/i18n/numbers.ts";
+import { formatMoney, formatPercent, parseMoneyInput } from "@/i18n/numbers.ts";
 import { I18nProvider, useLocale, useRichT, useT, type TranslateFn } from "@/i18n/react.tsx";
 import { useHydratedFormValues } from "@/islands/runtime/useHydratedFormValues.ts";
 import type { IslandProps } from "@/islands/runtime/props.ts";
-import { hrefFor } from "@/routePaths.ts";
 import {
   MENSILITA_OPTIONS,
   type TredicesimaErrorValue,
@@ -44,12 +44,6 @@ function errorText(t: TranslateFn, error: TredicesimaErrorValue | undefined): st
   if (error === undefined) return undefined;
   if (typeof error === "string") return t(error);
   return t(error.key, { ...error.values });
-}
-
-function verifiedLine(locale: "it" | "en") {
-  const date = latestVerification();
-  if (date === null) return null;
-  return { date: formatDate(new Date(date), locale), href: hrefFor("sources", locale) };
 }
 
 interface LastGood {
@@ -217,7 +211,10 @@ function TredicesimaView() {
                       {rt("tredicesima.result.trust", {
                         checked: (
                           <a href={checked.href}>
-                            {t("tredicesima.result.verified", { date: checked.date })}
+                            {t("tredicesima.result.verified", {
+                              date: checked.date,
+                              dateArticle: checked.dateArticle,
+                            })}
                           </a>
                         ),
                         pending: pending > 0 ? "yes" : "no",

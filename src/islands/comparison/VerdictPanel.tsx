@@ -9,10 +9,9 @@ import type { ComparedOffers } from "./compute.ts";
 import { otherOffer, type ComparisonRow, type ComparisonVerdict } from "./derive.ts";
 import { rowLabel, type SummaryContext } from "./summaries.ts";
 import { IDS, offerLetter } from "./viewIds.ts";
+import type { VerifiedLine } from "@/components/result/verifiedLine.ts";
 
-export interface VerifiedLine {
-  readonly date: string;
-  readonly href: string;
+export interface PendingCheck extends VerifiedLine {
   readonly pending: number;
 }
 
@@ -23,7 +22,7 @@ export interface VerdictPanelProps {
   readonly figureState: FigureState;
   readonly prompt: string;
   readonly announcement: string;
-  readonly verified: VerifiedLine | null;
+  readonly verified: PendingCheck | null;
   readonly context: SummaryContext;
 }
 
@@ -289,7 +288,12 @@ export function VerdictPanel({
                 {" "}
                 {rt("comparison.trust", {
                   checked: (
-                    <a href={verified.href}>{t("comparison.verified", { date: verified.date })}</a>
+                    <a href={verified.href}>
+                      {t("comparison.verified", {
+                        date: verified.date,
+                        dateArticle: verified.dateArticle,
+                      })}
+                    </a>
                   ),
                   pending: verified.pending > 0 ? "yes" : "no",
                   count: verified.pending,

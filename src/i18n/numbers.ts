@@ -70,7 +70,7 @@ function dateFormatter(locale: Locale, style: DateStyle): Intl.DateTimeFormat {
   if (!formatter) {
     const options: Intl.DateTimeFormatOptions =
       style === "long"
-        ? { day: "2-digit", month: "long", year: "numeric", timeZone: "UTC" }
+        ? { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }
         : { day: "2-digit", month: "2-digit", year: "numeric", timeZone: "UTC" };
     formatter = new Intl.DateTimeFormat(BCP47_TAG[locale], options);
     dateFormatterCache.set(cacheKey, formatter);

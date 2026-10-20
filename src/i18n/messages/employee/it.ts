@@ -18,9 +18,10 @@ export const it = {
   "employee.result.annual": "Netto annuo {amount}",
   "employee.result.split":
     "Mese normale {ordinary}, {count, plural, =1 {tredicesima {extra}} =2 {tredicesima e quattordicesima {extra} ciascuna} other {mensilità aggiuntive {extra} ciascuna}}",
-  "employee.result.withheld": "Trattenute: {amount} all’anno, il {share} del lordo.",
+  "employee.result.withheld":
+    "Trattenute: {amount} all’anno, {article, select, lo {lo } l {l’} other {il }}{share} del lordo.",
   "employee.result.withheldCredits":
-    "Trattenute: {amount} all’anno, il {share} del lordo. Crediti in busta paga: {credits}, già compresi nel netto.",
+    "Trattenute: {amount} all’anno, {article, select, lo {lo } l {l’} other {il }}{share} del lordo. Crediti in busta paga: {credits}, già compresi nel netto.",
   "employee.result.empty": "Inserisci la RAL per vedere il netto.",
   "employee.result.fix": "Correggi i valori segnati per vedere il netto.",
   "employee.result.staleGross":
@@ -29,7 +30,7 @@ export const it = {
     "Non aggiornato: è il risultato di prima. Correggi i valori segnati per ricalcolare.",
   "employee.result.announce": "Netto mensile {amount}, media su {count} mensilità.",
   "employee.result.estimate": "la busta paga resta il riferimento.",
-  "employee.result.verified": "Dati controllati il {date}",
+  "employee.result.verified": "Dati controllati {dateArticle, select, l {l’} other {il }}{date}",
 
   "employee.result.trust":
     "{checked}{pending, select, yes {: {count, plural, one {un valore usato in questo calcolo è ancora da verificare} other {# valori usati in questo calcolo sono ancora da verificare}}} other {}}.",

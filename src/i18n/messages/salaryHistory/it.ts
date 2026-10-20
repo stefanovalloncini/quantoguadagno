@@ -58,7 +58,7 @@ export const it = {
 
   "history.note.estimate":
     "rivalutiamo la RAL con l’indice dei prezzi FOI dell’ISTAT, media dell’anno; il dato del {target} è provvisorio. Il netto usa le regole fiscali di ogni anno e c’è solo dal {firstTax}.",
-  "history.note.verified": "Dati controllati il {date}",
+  "history.note.verified": "Dati controllati {dateArticle, select, l {l’} other {il }}{date}",
 
   "history.note.trust": "{checked}.",
 

@@ -57,7 +57,7 @@ export const en: Record<MessageKey, string> = {
 
   "history.note.estimate":
     "we revalue the salary with the ISTAT FOI consumer price index, yearly average; the {target} figure is provisional. The net pay uses each year’s tax rules and is available from {firstTax} only.",
-  "history.note.verified": "Data checked on {date}",
+  "history.note.verified": "Data checked on {dateArticle, select, other {}}{date}",
 
   "history.note.trust": "{checked}.",
 

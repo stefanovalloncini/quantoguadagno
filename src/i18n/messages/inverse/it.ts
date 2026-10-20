@@ -54,7 +54,7 @@ export const it = {
     "Non aggiornato: è il risultato di prima. Correggi i valori segnati per ricalcolare.",
   "inverse.result.announce": "RAL necessaria {amount}, per {target} netti all’anno.",
   "inverse.result.estimate": "la busta paga resta il riferimento.",
-  "inverse.result.verified": "Dati controllati il {date}",
+  "inverse.result.verified": "Dati controllati {dateArticle, select, l {l’} other {il }}{date}",
   "inverse.result.trust":
     "{checked}{pending, select, yes {: {count, plural, one {un valore usato in questo calcolo è ancora da verificare} other {# valori usati in questo calcolo sono ancora da verificare}}} other {}}.",
 

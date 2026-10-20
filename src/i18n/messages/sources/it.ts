@@ -57,7 +57,7 @@ export const it = {
   "sources.column.checked": "Controllato il",
   "sources.check.inline": "controllato il",
   "sources.check.missing": "non ancora",
-  "sources.check.retrieved": "scaricato il {date}",
+  "sources.check.retrieved": "scaricato {dateArticle, select, l {l’} other {il }}{date}",
   "sources.status.todo": "Da verificare",
   "sources.status.provisional": "Provvisorio",
   "sources.source.none": "Nessuna fonte indicata",

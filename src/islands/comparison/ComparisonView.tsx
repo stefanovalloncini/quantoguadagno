@@ -6,8 +6,9 @@ import { useBlurErrors } from "@/components/form/useBlurErrors.ts";
 import { PageIntro } from "@/components/page/PageIntro.tsx";
 import { useSettledAnnouncement } from "@/components/result/LiveStatus.tsx";
 import type { FigureState } from "@/components/result/ResultFigure.tsx";
-import { comunaleRuleFor, latestVerification } from "@/data/index.ts";
-import { formatDate, parseDecimal } from "@/i18n/numbers.ts";
+import { verifiedLine } from "@/components/result/verifiedLine.ts";
+import { comunaleRuleFor } from "@/data/index.ts";
+import { parseDecimal } from "@/i18n/numbers.ts";
 import { useT } from "@/i18n/react.tsx";
 import { percentText, type FieldError } from "@/islands/home/fields.ts";
 import type { MunicipalMode } from "@/islands/home/ledgerRows.tsx";
@@ -16,7 +17,6 @@ import type { ComuneLookup } from "@/islands/home/useComune.ts";
 import { useViewFormat } from "@/islands/home/viewFormat.tsx";
 import { preloadable } from "@/islands/runtime/preloadable.tsx";
 import { useHydratedFormValues } from "@/islands/runtime/useHydratedFormValues.ts";
-import { hrefFor } from "@/routePaths.ts";
 import type { ComuneControls } from "./ConditionFields.tsx";
 import type { OfferResult } from "./compute.ts";
 import { OfferSection, type OfferResultState } from "./OfferSection.tsx";
@@ -78,12 +78,6 @@ function flatRateOf(lookup: ComuneLookup, year: number): number | null {
   const found = comunaleRuleFor(lookup.comune, year);
   if (found?.rule.rate === undefined) return null;
   return found.rule.rate / 100;
-}
-
-function verifiedDate(locale: "it" | "en") {
-  const date = latestVerification();
-  if (date === null) return null;
-  return { date: formatDate(new Date(date), locale), href: hrefFor("sources", locale) };
 }
 
 export function ComparisonView() {
@@ -180,7 +174,7 @@ export function ComparisonView() {
           : readyMessage,
   );
 
-  const checked = useMemo(() => verifiedDate(f.locale), [f.locale]);
+  const checked = useMemo(() => verifiedLine(f.locale), [f.locale]);
   const recapSource: OfferResult | null = controller.offers.a ?? controller.offers.b;
   const pending = useMemo(
     () => (recapSource === null ? 0 : valuesToVerify(recapSource.values)),

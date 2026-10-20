@@ -99,7 +99,7 @@ export const it = {
 
   "comparison.estimate":
     "la busta paga resta il riferimento. Confrontiamo lordo e mensilità, senza benefit per nessuna delle due.",
-  "comparison.verified": "Dati controllati il {date}",
+  "comparison.verified": "Dati controllati {dateArticle, select, l {l’} other {il }}{date}",
   "comparison.trust":
     "{checked}{pending, select, yes {: {count, plural, one {un valore usato in questo calcolo è ancora da verificare} other {# valori usati in questo calcolo sono ancora da verificare}}} other {}}.",
 

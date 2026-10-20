@@ -1,3 +1,4 @@
+import { dateArticle, type DateArticle } from "@/i18n/articles.ts";
 import { BCP47_TAG, type Locale } from "@/i18n/locales.ts";
 import { formatDate, formatMoney, formatNumber, formatPercent } from "@/i18n/numbers.ts";
 import type { IsoDate } from "@/data/index.ts";
@@ -45,6 +46,13 @@ export function numberText(value: number, locale: Locale, fractionDigits?: numbe
 
 export function dateText(date: IsoDate, locale: Locale): string {
   return formatDate(new Date(`${date}T00:00:00Z`), locale);
+}
+
+export function dateValues(
+  date: IsoDate,
+  locale: Locale,
+): { readonly date: string; readonly dateArticle: DateArticle } {
+  return { date: dateText(date, locale), dateArticle: dateArticle(new Date(`${date}T00:00:00Z`)) };
 }
 
 export function yearSpanText(years: readonly number[]): string {

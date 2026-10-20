@@ -41,7 +41,8 @@ export const it = {
   "employerCost.result.announce": "Costo annuo per l’azienda {amount}, per una RAL di {gross}.",
   "employerCost.result.estimate":
     "non comprende i costi fuori dal contratto, come formazione, attrezzatura e benefit.",
-  "employerCost.result.verified": "Dati controllati il {date}",
+  "employerCost.result.verified":
+    "Dati controllati {dateArticle, select, l {l’} other {il }}{date}",
   "employerCost.result.trust":
     "{checked}{pending, select, yes {: {count, plural, one {un valore usato in questo calcolo è ancora da verificare} other {# valori usati in questo calcolo sono ancora da verificare}}} other {}}.",
 

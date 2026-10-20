@@ -16,7 +16,7 @@ export const it = {
     "TFR accumulato {amount} dopo {years, plural, one {un anno} other {# anni}}.",
   "tfr.result.stale":
     "Non aggiornato: è il risultato di prima. Correggi i valori segnati per ricalcolare.",
-  "tfr.result.verified": "Dati controllati il {date}",
+  "tfr.result.verified": "Dati controllati {dateArticle, select, l {l’} other {il }}{date}",
   "tfr.breakdown.quote": "Quote versate",
   "tfr.breakdown.quote.explain":
     "RAL diviso 13,5, al netto dello 0,50% trattenuto come contributo IVS (art. 3 L. 297/1982).",

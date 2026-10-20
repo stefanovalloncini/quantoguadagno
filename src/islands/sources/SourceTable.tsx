@@ -1,6 +1,6 @@
 import { Icon } from "@/components/icons/Icon.tsx";
 import { useLocale, useT } from "@/i18n/react.tsx";
-import { compactReference, dateText } from "@/islands/prose/phrases.ts";
+import { compactReference, dateText, dateValues } from "@/islands/prose/phrases.ts";
 import type { CheckState, RowStatus, SourceGroup, SourceRow } from "./model.ts";
 import { SourceReference } from "./SourceReference.tsx";
 
@@ -24,7 +24,7 @@ function CheckCell({ check, status }: { readonly check: CheckState; readonly sta
     return (
       <td role="cell" className="qg-table__meta qg-table__status">
         {check.kind === "retrieved" && (
-          <>{t("sources.check.retrieved", { date: dateText(check.date, locale) })} </>
+          <>{t("sources.check.retrieved", dateValues(check.date, locale))} </>
         )}
         <StatusLabel status={status} />
       </td>

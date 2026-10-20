@@ -16,9 +16,10 @@ import { BottomBar, useBottomBarVisible } from "@/components/result/BottomBar.ts
 import { useSettledAnnouncement } from "@/components/result/LiveStatus.tsx";
 import type { FigureState } from "@/components/result/ResultFigure.tsx";
 import { Topics } from "@/components/result/Topics.tsx";
-import { latestVerification, SUPPORTED_YEARS, type RegionCode } from "@/data/index.ts";
+import { verifiedLine } from "@/components/result/verifiedLine.ts";
+import { SUPPORTED_YEARS, type RegionCode } from "@/data/index.ts";
 import { getNaspiConfig } from "@/domain/index.ts";
-import { formatDate, parseMoneyInput } from "@/i18n/numbers.ts";
+import { parseMoneyInput } from "@/i18n/numbers.ts";
 import { useT } from "@/i18n/react.tsx";
 import { percentText, type FieldError } from "@/islands/home/fields.ts";
 import { useComuni } from "@/islands/home/useComune.ts";
@@ -26,7 +27,6 @@ import { useViewFormat } from "@/islands/home/viewFormat.tsx";
 import { useHydratedFormValues } from "@/islands/runtime/useHydratedFormValues.ts";
 import type { FormControlValue } from "@/islands/runtime/formControls.ts";
 import { preloadable } from "@/islands/runtime/preloadable.tsx";
-import { hrefFor } from "@/routePaths.ts";
 import { VISIBLE_NASPI_MONTHS } from "./derive.ts";
 import NaspiChart from "./NaspiChart.tsx";
 import { loadNaspiExplanations } from "./NaspiLedgers.tsx";
@@ -274,11 +274,7 @@ export function NaspiView() {
   };
   const announcement = useSettledAnnouncement(announcementText());
 
-  const verified = useMemo(() => {
-    const date = latestVerification();
-    if (date === null) return null;
-    return { date: formatDate(new Date(date), f.locale), href: hrefFor("sources", f.locale) };
-  }, [f.locale]);
+  const verified = useMemo(() => verifiedLine(f.locale), [f.locale]);
   const pending = naspiValuesToVerify(
     outcome?.facts.year ?? state.year,
     eligible ? (outcome?.facts.residence.region ?? net.region) : null,

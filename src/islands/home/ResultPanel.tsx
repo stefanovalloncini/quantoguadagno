@@ -5,6 +5,7 @@ import { Actions } from "@/components/result/Actions.tsx";
 import { NoteLine } from "@/components/result/Assumptions.tsx";
 import { Ledger, type LedgerProps } from "@/components/result/Ledger.tsx";
 import { LiveStatus } from "@/components/result/LiveStatus.tsx";
+import type { VerifiedLine } from "@/components/result/verifiedLine.ts";
 import { FigureAside, ResultFigure, type FigureState } from "@/components/result/ResultFigure.tsx";
 import { splitSalaryYear } from "@/domain/tredicesima.ts";
 import { formatPercent } from "@/i18n/numbers.ts";
@@ -43,11 +44,7 @@ export interface ResultPanelProps {
   readonly municipalMode: MunicipalMode;
   readonly links: EmployeeLinks;
   readonly announcement: string;
-  readonly verified: {
-    readonly date: string;
-    readonly href: string;
-    readonly pending: number;
-  } | null;
+  readonly verified: (VerifiedLine & { readonly pending: number }) | null;
   readonly regions: RegionText;
   readonly f: ViewFormat;
   readonly valueRef: Ref<HTMLParagraphElement>;
@@ -117,6 +114,7 @@ export function ResultPanel({
           {b.grossAnnual > 0 && (
             <FigureAside shown={figureState === "ready"}>
               {rt(credited > 0 ? "employee.result.withheldCredits" : "employee.result.withheld", {
+                article: f.article(b.totalTaxes / b.grossAnnual),
                 share: <Amount>{formatPercent(b.totalTaxes / b.grossAnnual, f.locale, 2)}</Amount>,
                 amount: <Amount>{f.money(b.totalTaxes)}</Amount>,
                 credits: <Amount>{f.money(credited)}</Amount>,
@@ -131,7 +129,10 @@ export function ResultPanel({
                 {rt("employee.result.trust", {
                   checked: (
                     <a href={verified.href}>
-                      {t("employee.result.verified", { date: verified.date })}
+                      {t("employee.result.verified", {
+                        date: verified.date,
+                        dateArticle: verified.dateArticle,
+                      })}
                     </a>
                   ),
                   pending: verified.pending > 0 ? "yes" : "no",

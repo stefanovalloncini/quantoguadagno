@@ -71,7 +71,7 @@ export const en: Record<MessageKey, string> = {
   "naspi.note.estimate":
     "INPS works out the exact amount and also withholds income tax. We do not account for new jobs while you receive NASpI.",
   "naspi.note.decision": "INPS decides when it assesses your application.",
-  "naspi.note.verified": "Data checked on {date}",
+  "naspi.note.verified": "Data checked on {dateArticle, select, other {}}{date}",
   "naspi.note.trust":
     "{checked}{pending, select, yes {: {count, plural, one {one value used in this calculation is still to be verified} other {# values used in this calculation are still to be verified}}} other {}}.",
 

@@ -13,10 +13,9 @@ import { NaspiLedgers } from "./NaspiLedgers.tsx";
 import { roundedToTen } from "./netEstimate.ts";
 import { fullAmountMonths, type NaspiOutcome } from "./outcome.ts";
 import { IDS } from "./viewIds.ts";
+import type { VerifiedLine } from "@/components/result/verifiedLine.ts";
 
-export interface VerifiedLine {
-  readonly date: string;
-  readonly href: string;
+export interface PendingCheck extends VerifiedLine {
   readonly pending: number;
 }
 
@@ -26,7 +25,7 @@ export interface NaspiResultProps {
   readonly prompt: string;
   readonly staleNote: string;
   readonly announcement: string;
-  readonly verified: VerifiedLine | null;
+  readonly verified: PendingCheck | null;
   readonly f: ViewFormat;
   readonly regions: RegionText;
   readonly explained: boolean;
@@ -60,7 +59,7 @@ function TrustNote({
   verified,
   withPending,
 }: {
-  readonly verified: VerifiedLine | null;
+  readonly verified: PendingCheck | null;
   readonly withPending: boolean;
 }) {
   const t = useT();
@@ -70,7 +69,11 @@ function TrustNote({
     <>
       {" "}
       {rt("naspi.note.trust", {
-        checked: <a href={verified.href}>{t("naspi.note.verified", { date: verified.date })}</a>,
+        checked: (
+          <a href={verified.href}>
+            {t("naspi.note.verified", { date: verified.date, dateArticle: verified.dateArticle })}
+          </a>
+        ),
         pending: withPending && verified.pending > 0 ? "yes" : "no",
         count: verified.pending,
       })}

@@ -12,13 +12,12 @@ import { useSettledAnnouncement } from "@/components/result/LiveStatus.tsx";
 import { Ledger } from "@/components/result/Ledger.tsx";
 import { ResultFigure, type FigureState } from "@/components/result/ResultFigure.tsx";
 import { Icon } from "@/components/icons/Icon.tsx";
-import { latestVerification, SUPPORTED_YEARS } from "@/data/index.ts";
+import { verifiedLine } from "@/components/result/verifiedLine.ts";
+import { SUPPORTED_YEARS } from "@/data/index.ts";
 import { ACTIVITY_CATEGORIES, type ActivityCategory } from "@/data/forfettarioActivities.ts";
 import { getTaxConfig } from "@/domain/index.ts";
-import { formatDate } from "@/i18n/numbers.ts";
 import { useRichT, useT } from "@/i18n/react.tsx";
 import { useHydratedFormValues } from "@/islands/runtime/useHydratedFormValues.ts";
-import { hrefFor } from "@/routePaths.ts";
 import { ExtrasFields, loadGroupFields } from "./ExtrasFields.tsx";
 import { forfettarioGroupRecaps } from "./recaps.ts";
 import type { ForfettarioState } from "./state.ts";
@@ -42,12 +41,6 @@ function whenIdle(task: () => void): () => void {
   return () => {
     window.clearTimeout(timer);
   };
-}
-
-function verifiedLine(locale: "it" | "en") {
-  const date = latestVerification();
-  if (date === null) return null;
-  return { date: formatDate(new Date(date), locale), href: hrefFor("sources", locale) };
 }
 
 export function ForfettarioView() {
@@ -305,7 +298,10 @@ export function ForfettarioView() {
             {rt("forfettario.result.trust", {
               checked: (
                 <a href={checked.href}>
-                  {t("forfettario.result.verified", { date: checked.date })}
+                  {t("forfettario.result.verified", {
+                    date: checked.date,
+                    dateArticle: checked.dateArticle,
+                  })}
                 </a>
               ),
             })}

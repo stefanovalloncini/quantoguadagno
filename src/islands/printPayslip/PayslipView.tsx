@@ -1,7 +1,8 @@
+import { verifiedLine } from "@/components/result/verifiedLine.ts";
+import { dateArticle } from "@/i18n/articles.ts";
 import { useMemo } from "react";
 import { Icon } from "@/components/icons/Icon.tsx";
 import { useRegionText } from "@/components/form/regionText.ts";
-import { latestVerification } from "@/data/index.ts";
 import { formatDate } from "@/i18n/numbers.ts";
 import { useT } from "@/i18n/react.tsx";
 import type { EmployeeErrors } from "@/islands/home/state.ts";
@@ -70,8 +71,11 @@ export function PayslipView() {
   const query = employeeToQuery(state, f.locale);
   const backHref = hrefFor("home", f.locale, query);
   const loading = state.comune !== null && comune.status === "loading";
-  const created = useMemo(() => formatDate(todayAsUtc(), f.locale), [f.locale]);
-  const checkedDate = latestVerification();
+  const created = useMemo(() => {
+    const today = todayAsUtc();
+    return { date: formatDate(today, f.locale), dateArticle: dateArticle(today) };
+  }, [f.locale]);
+  const checked = useMemo(() => verifiedLine(f.locale), [f.locale]);
   const pending = useMemo(() => (result === null ? 0 : valuesToVerify(result.values)), [result]);
   const ready = !loading && result !== null && derived !== null;
 
@@ -104,11 +108,7 @@ export function PayslipView() {
             summary={derived.summary}
             comune={comune}
             created={created}
-            checked={
-              checkedDate === null
-                ? null
-                : { date: formatDate(new Date(checkedDate), f.locale), pending }
-            }
+            checked={checked === null ? null : { ...checked, pending }}
             site={SITE_HOST}
             sourcesText={`${SITE_HOST}${pathFor("sources", f.locale)}`}
             recalculate={{

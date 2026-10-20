@@ -19,7 +19,7 @@ export const en: Record<MessageKey, string> = {
     "Not updated: this is still the result for {ral} gross. Fix the RAL to recalculate.",
   "tredicesima.result.announce": "Net 13th salary {amount}.",
   "tredicesima.result.estimate": "your payslip is what counts.",
-  "tredicesima.result.verified": "Data checked on {date}",
+  "tredicesima.result.verified": "Data checked on {dateArticle, select, other {}}{date}",
   "tredicesima.result.trust":
     "{checked}{pending, select, yes {: {count, plural, one {one value used in this calculation is still to be verified} other {# values used in this calculation are still to be verified}}} other {}}.",
   "tredicesima.breakdown.gross": "Gross 13th",

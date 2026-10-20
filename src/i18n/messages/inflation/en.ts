@@ -16,7 +16,7 @@ export const en: Record<MessageKey, string> = {
   "inflation.result.announce": "{amount} from {fromYear} is equivalent to {adjusted} in {toYear}.",
   "inflation.result.note":
     "Based on the ISTAT FOI index (consumer prices for blue- and white-collar households), 2015 base. It is the same index used to revalue TFR.",
-  "inflation.result.verified": "Data checked on {date}",
+  "inflation.result.verified": "Data checked on {dateArticle, select, other {}}{date}",
   "inflation.result.provisionalBadge": "Provisional",
   "inflation.result.provisional": "The {year} figure is still provisional.",
   "inflation.keepPace.title": "The raise it takes to match inflation",

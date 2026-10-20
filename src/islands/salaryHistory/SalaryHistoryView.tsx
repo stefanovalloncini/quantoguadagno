@@ -9,15 +9,15 @@ import { useBlurErrors } from "@/components/form/useBlurErrors.ts";
 import { CalculatorLayout } from "@/components/page/CalculatorLayout.tsx";
 import { PageIntro } from "@/components/page/PageIntro.tsx";
 import { useSettledAnnouncement } from "@/components/result/LiveStatus.tsx";
-import { LATEST_SUPPORTED_YEAR, latestVerification, SUPPORTED_YEARS } from "@/data/index.ts";
-import { formatDate, formatNumber, parseMoneyInput } from "@/i18n/numbers.ts";
+import { verifiedLine } from "@/components/result/verifiedLine.ts";
+import { LATEST_SUPPORTED_YEAR, SUPPORTED_YEARS } from "@/data/index.ts";
+import { formatNumber, parseMoneyInput } from "@/i18n/numbers.ts";
 import { useT } from "@/i18n/react.tsx";
 import { percentText } from "@/islands/home/fields.ts";
 import { useViewFormat } from "@/islands/home/viewFormat.tsx";
 import type { FormControlValue } from "@/islands/runtime/formControls.ts";
 import { preloadable } from "@/islands/runtime/preloadable.tsx";
 import { useHydratedFormValues } from "@/islands/runtime/useHydratedFormValues.ts";
-import { hrefFor } from "@/routePaths.ts";
 import {
   checkDraft,
   countOf,
@@ -275,11 +275,7 @@ export function SalaryHistoryView() {
   };
   const announcement = useSettledAnnouncement(announcementText());
 
-  const verified = useMemo(() => {
-    const date = latestVerification();
-    if (date === null) return null;
-    return { date: formatDate(new Date(date), f.locale), href: hrefFor("sources", f.locale) };
-  }, [f.locale]);
+  const verified = useMemo(() => verifiedLine(f.locale), [f.locale]);
 
   const summary: readonly ErrorSummaryItem[] =
     attempt === 0

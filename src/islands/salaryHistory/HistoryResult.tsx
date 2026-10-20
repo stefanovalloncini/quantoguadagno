@@ -10,6 +10,7 @@ import type { EntriesTableProps } from "./EntriesTable.tsx";
 import { signedPercent } from "./historyFormat.ts";
 import type { PurchasingPower } from "./purchasingPower.ts";
 import { IDS } from "./viewIds.ts";
+import type { VerifiedLine } from "@/components/result/verifiedLine.ts";
 
 const entriesTable = preloadable(() => import("./EntriesTable.tsx"));
 const EntriesTable = entriesTable.Component;
@@ -19,7 +20,7 @@ export const loadEntriesTable = entriesTable.load;
 export interface HistoryResultProps extends Omit<EntriesTableProps, "f"> {
   readonly power: PurchasingPower;
   readonly announcement: string;
-  readonly verified: { readonly date: string; readonly href: string } | null;
+  readonly verified: VerifiedLine | null;
   readonly targetYear: number;
   readonly firstTaxYear: number;
   readonly f: ViewFormat;
@@ -116,7 +117,10 @@ export function HistoryResult({
                 {rt("history.note.trust", {
                   checked: (
                     <a href={verified.href}>
-                      {t("history.note.verified", { date: verified.date })}
+                      {t("history.note.verified", {
+                        date: verified.date,
+                        dateArticle: verified.dateArticle,
+                      })}
                     </a>
                   ),
                 })}

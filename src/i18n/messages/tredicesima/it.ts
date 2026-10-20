@@ -17,7 +17,7 @@ export const it = {
     "Non aggiornato: è il risultato per {ral} lordi. Correggi la RAL per ricalcolare.",
   "tredicesima.result.announce": "Netto della tredicesima {amount}.",
   "tredicesima.result.estimate": "la busta paga resta il riferimento.",
-  "tredicesima.result.verified": "Dati controllati il {date}",
+  "tredicesima.result.verified": "Dati controllati {dateArticle, select, l {l’} other {il }}{date}",
   "tredicesima.result.trust":
     "{checked}{pending, select, yes {: {count, plural, one {un valore usato in questo calcolo è ancora da verificare} other {# valori usati in questo calcolo sono ancora da verificare}}} other {}}.",
   "tredicesima.breakdown.gross": "Lordo tredicesima",

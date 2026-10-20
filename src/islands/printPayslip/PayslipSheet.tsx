@@ -1,3 +1,5 @@
+import type { VerifiedLine } from "@/components/result/verifiedLine.ts";
+import type { DateArticle } from "@/i18n/articles.ts";
 import type { ReactNode } from "react";
 import type { RegionText } from "@/components/form/regionText.ts";
 import type { SalaryBreakdown } from "@/domain/composer.ts";
@@ -13,8 +15,8 @@ export interface PayslipSheetProps {
   readonly result: EmployeeResult;
   readonly summary: PayslipSummary;
   readonly comune: ComuneLookup;
-  readonly created: string;
-  readonly checked: { readonly date: string; readonly pending: number } | null;
+  readonly created: { readonly date: string; readonly dateArticle: DateArticle };
+  readonly checked: (VerifiedLine & { readonly pending: number }) | null;
   readonly site: string;
   readonly sourcesText: string;
   readonly recalculate: { readonly href: string; readonly text: string };
@@ -285,7 +287,7 @@ export function PayslipSheet({
             {t("print.sheet.title")}
           </h2>
           <p className="qg-payslip__doc-meta">{t("print.sheet.year", { year: values.taxYear })}</p>
-          <p className="qg-payslip__doc-meta">{t("print.sheet.created", { date: created })}</p>
+          <p className="qg-payslip__doc-meta">{t("print.sheet.created", created)}</p>
         </div>
       </div>
 
@@ -417,6 +419,7 @@ export function PayslipSheet({
           <p>
             {t("print.foot.checked", {
               date: checked.date,
+              dateArticle: checked.dateArticle,
               pending: checked.pending > 0 ? "yes" : "no",
               count: checked.pending,
               sources: sourcesText,

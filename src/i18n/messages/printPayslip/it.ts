@@ -14,7 +14,7 @@ export const it = {
   "print.sheet.brand": "Quanto guadagno",
   "print.sheet.title": "Riepilogo annuo dello stipendio",
   "print.sheet.year": "Anno fiscale {year}",
-  "print.sheet.created": "Creato il {date}",
+  "print.sheet.created": "Creato {dateArticle, select, l {l’} other {il }}{date}",
 
   "print.inputs.title": "Dati del calcolo",
   "print.inputs.gross": "Retribuzione annua lorda",
@@ -81,7 +81,7 @@ export const it = {
   "print.foot.estimate":
     "Simulazione a scopo informativo, non è un documento ufficiale: la busta paga del datore di lavoro resta il riferimento.",
   "print.foot.checked":
-    "Dati controllati il {date}{pending, select, yes {, {count, plural, one {tranne un valore ancora da verificare} other {tranne # valori ancora da verificare}}} other {}}; le fonti sono su {sources}.",
+    "Dati controllati {dateArticle, select, l {l’} other {il }}{date}{pending, select, yes {, {count, plural, one {tranne un valore ancora da verificare} other {tranne # valori ancora da verificare}}} other {}}; le fonti sono su {sources}.",
   "print.foot.recalculate": "Ricalcola con gli stessi dati: {link}",
 } as const;
 

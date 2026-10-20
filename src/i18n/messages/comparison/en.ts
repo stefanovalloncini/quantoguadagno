@@ -101,7 +101,7 @@ export const en: Record<MessageKey, string> = {
 
   "comparison.estimate":
     "your payslip is what counts. We compare gross pay and payslips a year, with no benefits for either offer.",
-  "comparison.verified": "Data checked on {date}",
+  "comparison.verified": "Data checked on {dateArticle, select, other {}}{date}",
   "comparison.trust":
     "{checked}{pending, select, yes {: {count, plural, one {one value used in this calculation is still to be verified} other {# values used in this calculation are still to be verified}}} other {}}.",
 

@@ -67,7 +67,7 @@ export const en: Record<MessageKey, string> = {
   "ordinario.result.announce": "Estimated net per year {amount}, on average {monthly} a month.",
   "ordinario.result.estimate":
     "it assumes the VAT number is your only income and that you pay the year’s contributions within the year.",
-  "ordinario.result.verified": "Data checked on {date}",
+  "ordinario.result.verified": "Data checked on {dateArticle, select, other {}}{date}",
   "ordinario.result.trust":
     "{checked}{pending, select, yes {: {count, plural, one {one value used in this calculation is still to be checked} other {# values used in this calculation are still to be checked}}} other {}}.",
   "ordinario.result.vatTerm": "IRAP and VAT:",

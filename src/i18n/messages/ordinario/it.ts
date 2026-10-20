@@ -66,7 +66,7 @@ export const it = {
   "ordinario.result.announce": "Netto annuo stimato {amount}, in media {monthly} al mese.",
   "ordinario.result.estimate":
     "vale se la partita IVA è il tuo unico reddito e se versi nell’anno i contributi dell’anno.",
-  "ordinario.result.verified": "Dati controllati il {date}",
+  "ordinario.result.verified": "Dati controllati {dateArticle, select, l {l’} other {il }}{date}",
   "ordinario.result.trust":
     "{checked}{pending, select, yes {: {count, plural, one {un valore usato in questo calcolo è ancora da verificare} other {# valori usati in questo calcolo sono ancora da verificare}}} other {}}.",
   "ordinario.result.vatTerm": "IRAP e IVA:",

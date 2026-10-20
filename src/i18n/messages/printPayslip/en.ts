@@ -16,7 +16,7 @@ export const en: Record<MessageKey, string> = {
   "print.sheet.brand": "Quanto guadagno",
   "print.sheet.title": "Annual salary summary",
   "print.sheet.year": "Tax year {year}",
-  "print.sheet.created": "Created on {date}",
+  "print.sheet.created": "Created on {dateArticle, select, other {}}{date}",
 
   "print.inputs.title": "Calculation inputs",
   "print.inputs.gross": "Gross annual salary",
@@ -83,6 +83,6 @@ export const en: Record<MessageKey, string> = {
   "print.foot.estimate":
     "An estimate for information only, not an official document: your employer’s payslip is what counts.",
   "print.foot.checked":
-    "Data checked on {date}{pending, select, yes {, {count, plural, one {except one value still to be verified} other {except # values still to be verified}}} other {}}; sources at {sources}.",
+    "Data checked on {dateArticle, select, other {}}{date}{pending, select, yes {, {count, plural, one {except one value still to be verified} other {except # values still to be verified}}} other {}}; sources at {sources}.",
   "print.foot.recalculate": "Recalculate with the same inputs: {link}",
 };

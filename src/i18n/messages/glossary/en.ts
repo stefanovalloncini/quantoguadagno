@@ -130,7 +130,7 @@ export const en: Record<MessageKey, string> = {
   "method.title": "How we calculate net pay",
   "method.lede":
     "The calculator follows the same steps as your payslip. Here is each step with its legal reference and an example: {gross} gross in {year}, in {comune}.",
-  "method.meta": "Updated on {date} · rules for {years}",
+  "method.meta": "Updated on {dateArticle, select, other {}}{date}. Rules for {years}.",
   "method.toc": "On this page",
   "method.example": "Example, {year}",
   "method.cite": "({reference})",

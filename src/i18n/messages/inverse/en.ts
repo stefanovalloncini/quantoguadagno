@@ -56,7 +56,7 @@ export const en: Record<MessageKey, string> = {
     "Out of date: this is the previous result. Correct the marked values to recalculate.",
   "inverse.result.announce": "Gross salary needed {amount}, for {target} net a year.",
   "inverse.result.estimate": "your payslip is what counts.",
-  "inverse.result.verified": "Data checked on {date}",
+  "inverse.result.verified": "Data checked on {dateArticle, select, other {}}{date}",
   "inverse.result.trust":
     "{checked}{pending, select, yes {: {count, plural, one {one value used in this calculation is still to be verified} other {# values used in this calculation are still to be verified}}} other {}}.",
 

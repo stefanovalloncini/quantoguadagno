@@ -122,7 +122,7 @@ export const it = {
   "forfettario.result.announce": "Netto mensile stimato {amount}.",
   "forfettario.result.estimate":
     "i contributi effettivi possono variare in base alla tua posizione.",
-  "forfettario.result.verified": "Dati controllati il {date}",
+  "forfettario.result.verified": "Dati controllati {dateArticle, select, l {l’} other {il }}{date}",
   "forfettario.result.trust": "{checked}.",
   "forfettario.ledger.title": "Dettaglio del calcolo",
   "forfettario.ledger.caption": "Dettaglio del calcolo forfettario {year}, importi in euro",

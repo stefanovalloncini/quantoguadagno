@@ -17,7 +17,7 @@ export const en: Record<MessageKey, string> = {
     "Accumulated TFR {amount} after {years, plural, one {one year} other {# years}}.",
   "tfr.result.stale":
     "Not up to date: this is the previous result. Correct the marked values to recalculate.",
-  "tfr.result.verified": "Data checked on {date}",
+  "tfr.result.verified": "Data checked on {dateArticle, select, other {}}{date}",
   "tfr.breakdown.quote": "Quotas set aside",
   "tfr.breakdown.quote.explain":
     "Gross annual salary divided by 13.5, net of the 0.50% withheld as an IVS contribution (art. 3, Law 297/1982).",

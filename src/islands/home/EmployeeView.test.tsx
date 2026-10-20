@@ -57,6 +57,13 @@ afterEach(() => {
 });
 
 describe("EmployeeCalculator", () => {
+  it("elides the article before a share read with undici: l’11,77% del lordo", () => {
+    setup("/?l=9700");
+    expect(document.querySelector(".qg-figure__aside")?.textContent).toMatch(
+      /, l’11,\d\d% del lordo/,
+    );
+  });
+
   it("renders the default result on the server, so the figure is in the HTML", () => {
     const html = renderToString(<EmployeeCalculator locale="it" messages={MESSAGES.it} />);
     expect(html).toContain("1.801,96 €");

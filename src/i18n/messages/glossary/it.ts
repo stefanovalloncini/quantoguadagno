@@ -128,7 +128,7 @@ export const it = {
   "method.title": "Come calcoliamo il netto",
   "method.lede":
     "Il calcolatore segue la stessa sequenza della busta paga. Qui trovi ogni passaggio con il suo riferimento di legge e un esempio: {gross} lordi nel {year}, a {comune}.",
-  "method.meta": "Aggiornato il {date} · regole per {years}",
+  "method.meta": "Aggiornato {dateArticle, select, l {l’} other {il }}{date}. Regole per {years}.",
   "method.toc": "In questa pagina",
   "method.example": "Esempio {year}",
   "method.cite": "({reference})",

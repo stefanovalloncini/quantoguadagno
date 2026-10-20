@@ -12,13 +12,9 @@ import { PageIntro } from "@/components/page/PageIntro.tsx";
 import { BottomBar, useBottomBarVisible } from "@/components/result/BottomBar.tsx";
 import { useSettledAnnouncement } from "@/components/result/LiveStatus.tsx";
 import type { FigureState } from "@/components/result/ResultFigure.tsx";
-import {
-  comunaleRuleFor,
-  latestVerification,
-  SUPPORTED_YEARS,
-  type RegionCode,
-} from "@/data/index.ts";
-import { formatDate, parseDecimal } from "@/i18n/numbers.ts";
+import { verifiedLine } from "@/components/result/verifiedLine.ts";
+import { comunaleRuleFor, SUPPORTED_YEARS, type RegionCode } from "@/data/index.ts";
+import { parseDecimal } from "@/i18n/numbers.ts";
 import { useT } from "@/i18n/react.tsx";
 import { useHydratedFormValues } from "@/islands/runtime/useHydratedFormValues.ts";
 import { INVERSE_PARAMS } from "@/queryParams.ts";
@@ -82,12 +78,6 @@ function whenIdle(task: () => void): () => void {
 function prefetchOnDemandParts(): void {
   void loadGroupFields();
   void loadExplainedLedger();
-}
-
-function verifiedLine(locale: "it" | "en") {
-  const date = latestVerification();
-  if (date === null) return null;
-  return { date: formatDate(new Date(date), locale), href: hrefFor("sources", locale) };
 }
 
 export function EmployeeView() {

@@ -11,23 +11,17 @@ import { BottomBar, useBottomBarVisible } from "@/components/result/BottomBar.ts
 import { useSettledAnnouncement, LiveStatus } from "@/components/result/LiveStatus.tsx";
 import { ResultFigure, type FigureState } from "@/components/result/ResultFigure.tsx";
 import { WorkedSum, type WorkedSumRow } from "@/components/result/Ledger.tsx";
-import { FOI_INDEX, latestVerification } from "@/data/index.ts";
-import { formatAmountInput, formatDate, parseMoneyInput } from "@/i18n/numbers.ts";
+import { verifiedLine } from "@/components/result/verifiedLine.ts";
+import { FOI_INDEX } from "@/data/index.ts";
+import { formatAmountInput, parseMoneyInput } from "@/i18n/numbers.ts";
 import { useT } from "@/i18n/react.tsx";
 import { useHydratedFormValues } from "@/islands/runtime/useHydratedFormValues.ts";
 import { useViewFormat } from "@/islands/home/viewFormat.tsx";
-import { hrefFor } from "@/routePaths.ts";
 import { InflationChart } from "./InflationChart.tsx";
 import { useNumberField } from "./numberField.ts";
 import type { InflationErrorValue, InflationField } from "./state.ts";
 import { useInflationController } from "./useInflationController.ts";
 import { IDS } from "./viewIds.ts";
-
-function verifiedLine(locale: "it" | "en") {
-  const date = latestVerification();
-  if (date === null) return null;
-  return { date: formatDate(new Date(date), locale), href: hrefFor("sources", locale) };
-}
 
 export function InflationView() {
   const t = useT();
@@ -215,7 +209,10 @@ export function InflationView() {
                 <>
                   {" "}
                   <a href={verified.href}>
-                    {t("inflation.result.verified", { date: verified.date })}
+                    {t("inflation.result.verified", {
+                      date: verified.date,
+                      dateArticle: verified.dateArticle,
+                    })}
                   </a>
                   .
                 </>

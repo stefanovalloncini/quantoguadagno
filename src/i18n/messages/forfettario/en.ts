@@ -117,7 +117,7 @@ export const en: Record<MessageKey, string> = {
   "forfettario.result.staleNote": "Not up to date: fix the flagged field to recalculate.",
   "forfettario.result.announce": "Estimated monthly net {amount}.",
   "forfettario.result.estimate": "actual contributions may vary based on your position.",
-  "forfettario.result.verified": "Data checked on {date}",
+  "forfettario.result.verified": "Data checked on {dateArticle, select, other {}}{date}",
   "forfettario.result.trust": "{checked}.",
   "forfettario.ledger.title": "Breakdown",
   "forfettario.ledger.caption": "Forfettario calculation detail {year}, amounts in euro",

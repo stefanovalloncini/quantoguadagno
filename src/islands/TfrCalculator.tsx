@@ -10,12 +10,11 @@ import { BottomBar, useBottomBarVisible } from "@/components/result/BottomBar.ts
 import { Ledger, type LedgerRow } from "@/components/result/Ledger.tsx";
 import { useSettledAnnouncement, LiveStatus } from "@/components/result/LiveStatus.tsx";
 import { ResultFigure, type FigureState } from "@/components/result/ResultFigure.tsx";
-import { latestVerification } from "@/data/index.ts";
-import { formatDate, parseDecimal } from "@/i18n/numbers.ts";
+import { verifiedLine } from "@/components/result/verifiedLine.ts";
+import { parseDecimal } from "@/i18n/numbers.ts";
 import { I18nProvider, useFormat, useLocale, useRichT, useT } from "@/i18n/react.tsx";
 import type { IslandProps } from "@/islands/runtime/props.ts";
 import { useHydratedFormValues } from "@/islands/runtime/useHydratedFormValues.ts";
-import { hrefFor } from "@/routePaths.ts";
 import { formatInflationPoints, formatYearsText, useNumberField } from "./tfr/numberField.ts";
 import { ScheduleTable } from "./tfr/ScheduleTable.tsx";
 import type { TfrErrorValue, TfrFieldErrors } from "./tfr/state.ts";
@@ -33,12 +32,6 @@ const IDS = {
 } as const;
 
 type TfrField = keyof TfrFieldErrors;
-
-function verifiedLine(locale: "it" | "en") {
-  const date = latestVerification();
-  if (date === null) return null;
-  return { date: formatDate(new Date(date), locale), href: hrefFor("sources", locale) };
-}
 
 function TfrCalculatorContent() {
   const t = useT();
@@ -247,7 +240,10 @@ function TfrCalculatorContent() {
                     <>
                       {" "}
                       <a href={verified.href}>
-                        {t("tfr.result.verified", { date: verified.date })}
+                        {t("tfr.result.verified", {
+                          date: verified.date,
+                          dateArticle: verified.dateArticle,
+                        })}
                       </a>
                       .
                     </>

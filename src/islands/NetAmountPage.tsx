@@ -1,11 +1,10 @@
+import { verifiedLine } from "@/components/result/verifiedLine.ts";
 import { PageIntro } from "@/components/page/PageIntro.tsx";
 import { Pager, type PagerLink } from "@/components/page/Pager.tsx";
 import { NoteLine } from "@/components/result/Assumptions.tsx";
 import { ResultFigure } from "@/components/result/ResultFigure.tsx";
-import { latestVerification } from "@/data/index.ts";
 import { splitSalaryYear } from "@/domain/tredicesima.ts";
 import type { Namespace } from "@/i18n/messages/index.ts";
-import { formatDate } from "@/i18n/numbers.ts";
 import { I18nProvider, useLocale, useRichT, useT } from "@/i18n/react.tsx";
 import { valuesToVerify } from "@/islands/home/trust.ts";
 import { Amount, useViewFormat } from "@/islands/home/viewFormat.tsx";
@@ -58,7 +57,7 @@ function NetAmountContent({ page }: ContentProps) {
   const city = placeName(residence.comuneName);
   const gross = f.whole(page.gross);
   const money = (value: number) => <Amount>{f.money(value)}</Amount>;
-  const checked = latestVerification();
+  const checked = verifiedLine(locale);
   const pending = valuesToVerify(result.values);
   const amountLink = (amount: number | null): PagerLink | null =>
     amount === null
@@ -112,9 +111,10 @@ function NetAmountContent({ page }: ContentProps) {
                 {" "}
                 {rt("employee.result.trust", {
                   checked: (
-                    <a href={hrefFor("sources", locale)}>
+                    <a href={checked.href}>
                       {t("employee.result.verified", {
-                        date: formatDate(new Date(checked), locale),
+                        date: checked.date,
+                        dateArticle: checked.dateArticle,
                       })}
                     </a>
                   ),

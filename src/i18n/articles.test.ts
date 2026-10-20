@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { percentArticle } from "./articles.ts";
+import { dateArticle, percentArticle } from "./articles.ts";
 
 describe("percentArticle", () => {
   it("uses lo before zero: lo 0,80%", () => {
@@ -18,5 +18,18 @@ describe("percentArticle", () => {
     expect(percentArticle(10.19)).toBe("il");
     expect(percentArticle(23)).toBe("il");
     expect(percentArticle(18)).toBe("il");
+  });
+});
+
+describe("dateArticle", () => {
+  it("elides before otto and undici: l’8 maggio, l’11 maggio", () => {
+    expect(dateArticle(new Date("2026-05-08"))).toBe("l");
+    expect(dateArticle(new Date("2026-05-11"))).toBe("l");
+  });
+
+  it("uses il everywhere else: il 1° maggio, il 18 maggio, il 28 maggio", () => {
+    expect(dateArticle(new Date("2026-05-01"))).toBe("il");
+    expect(dateArticle(new Date("2026-05-18"))).toBe("il");
+    expect(dateArticle(new Date("2026-05-28"))).toBe("il");
   });
 });

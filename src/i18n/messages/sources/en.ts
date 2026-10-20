@@ -59,7 +59,7 @@ export const en: Record<MessageKey, string> = {
   "sources.column.checked": "Checked on",
   "sources.check.inline": "checked on",
   "sources.check.missing": "not yet",
-  "sources.check.retrieved": "downloaded on {date}",
+  "sources.check.retrieved": "downloaded on {dateArticle, select, other {}}{date}",
   "sources.status.todo": "To verify",
   "sources.status.provisional": "Provisional",
   "sources.source.none": "No source cited",

@@ -31,7 +31,8 @@ export const it = {
     "Contratto di apprendistato, addizionale comunale {rate}, {count} mensilità",
   "apprenticeship.result.estimate":
     "la busta paga resta il riferimento. Addizionale comunale e mensilità si cambiano nel calcolatore: apri un anno dalla tabella.",
-  "apprenticeship.result.verified": "Dati controllati il {date}",
+  "apprenticeship.result.verified":
+    "Dati controllati {dateArticle, select, l {l’} other {il }}{date}",
   "apprenticeship.result.trust":
     "{checked}{pending, select, yes {: {count, plural, one {un valore usato in questo calcolo è ancora da verificare} other {# valori usati in questo calcolo sono ancora da verificare}}} other {}}.",
 } as const;

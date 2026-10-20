@@ -70,7 +70,7 @@ export const it = {
   "naspi.note.estimate":
     "l’importo esatto lo calcola l’INPS, che trattiene anche l’IRPEF. Non consideriamo nuovi lavori mentre ricevi la NASpI.",
   "naspi.note.decision": "la decisione spetta all’INPS, che valuta la domanda.",
-  "naspi.note.verified": "Dati controllati il {date}",
+  "naspi.note.verified": "Dati controllati {dateArticle, select, l {l’} other {il }}{date}",
   "naspi.note.trust":
     "{checked}{pending, select, yes {: {count, plural, one {un valore usato in questo calcolo è ancora da verificare} other {# valori usati in questo calcolo sono ancora da verificare}}} other {}}.",
 

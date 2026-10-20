@@ -13,7 +13,7 @@ import {
 import { listParameters } from "@/data/fonti.ts";
 import type { Locale } from "@/i18n/locales.ts";
 import {
-  dateText,
+  dateValues,
   listText,
   moneyText,
   numberText,
@@ -472,7 +472,7 @@ export function methodContent(example: MethodExample, f: Formatting): MethodCont
       comune: example.comune.name,
     }),
     meta: f.t("method.meta", {
-      date: checked === null ? "" : dateText(checked, f.locale),
+      ...(checked === null ? { date: "", dateArticle: "il" } : dateValues(checked, f.locale)),
       years: yearsInProse(SUPPORTED_YEARS, f.locale),
     }),
     citations: citations(example, f),

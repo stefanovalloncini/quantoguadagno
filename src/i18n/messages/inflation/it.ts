@@ -13,7 +13,7 @@ export const it = {
   "inflation.result.announce": "{amount} del {fromYear} equivalgono a {adjusted} nel {toYear}.",
   "inflation.result.note":
     "Calcolo basato sull’indice ISTAT FOI (prezzi al consumo per famiglie di operai e impiegati), base 2015. È lo stesso indice usato per rivalutare il TFR.",
-  "inflation.result.verified": "Dati controllati il {date}",
+  "inflation.result.verified": "Dati controllati {dateArticle, select, l {l’} other {il }}{date}",
   "inflation.result.provisionalBadge": "Provvisorio",
   "inflation.result.provisional": "Il dato del {year} è ancora provvisorio.",
   "inflation.keepPace.title": "Quanto aumento serve per pareggiare l’inflazione",
