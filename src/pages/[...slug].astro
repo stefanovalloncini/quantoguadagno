@@ -10,6 +10,7 @@ import EmployeeCalculator from "@/islands/EmployeeCalculator.tsx";
 import EmployerCostCalculator from "@/islands/EmployerCostCalculator.tsx";
 import ForfettarioCalculator from "@/islands/ForfettarioCalculator.tsx";
 import GlossaryPage from "@/islands/GlossaryPage.tsx";
+import HomeBands, { HOME_BANDS_NAMESPACES } from "@/islands/HomeBands.tsx";
 import InflationCalculator from "@/islands/InflationCalculator.tsx";
 import InverseCalculator from "@/islands/InverseCalculator.tsx";
 import MethodPage from "@/islands/MethodPage.tsx";
@@ -107,6 +108,9 @@ const home = getT(locale, "home");
         )}
       </div>
     </ToolPageLayout>
+  )}
+  {route.id === "home" && (
+    <HomeBands locale={locale} messages={getMessages(locale, HOME_BANDS_NAMESPACES)} />
   )}
   {route.id === "home" && (
     <ToolList locale={locale} heading={home("home.tools.title")} exclude="home" />

@@ -37,4 +37,14 @@ describe("catch-all page", () => {
     );
     expect(textBranch).not.toContain("client:");
   });
+
+  it("renders the home bands on the server, between the calculator and the tool list", () => {
+    const island = catchAll.indexOf("<EmployeeCalculator client:load");
+    const bands = catchAll.indexOf("<HomeBands locale={locale}");
+    const tools = catchAll.indexOf("<ToolList");
+    expect(island).toBeGreaterThan(-1);
+    expect(bands).toBeGreaterThan(island);
+    expect(tools).toBeGreaterThan(bands);
+    expect(catchAll).not.toMatch(/<HomeBands client:/);
+  });
 });

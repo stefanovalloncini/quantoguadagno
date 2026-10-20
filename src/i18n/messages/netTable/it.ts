@@ -18,6 +18,10 @@ export const it = {
   "netTable.hub.withheld":
     "Trattenute: la parte della RAL che non arriva netta, cioè contributi INPS, IRPEF e addizionali meno i crediti in busta paga.",
 
+  "netTable.home.title": "Netto per le RAL più cercate",
+  "netTable.home.caption": "Netto {year} delle RAL più cercate, con residenza a {city}",
+  "netTable.home.all": "Tutti gli importi nella tabella lordo netto",
+
   "netTable.page.title": "{gross} lordi: quanto resta netto nel {year}",
   "netTable.page.metaTitle": "{gross} lordi, netto {year}: {monthly} al mese",
   "netTable.page.metaDescription":

@@ -20,6 +20,10 @@ export const en: Record<MessageKey, string> = {
   "netTable.hub.withheld":
     "Deductions: the part of the gross salary that does not reach the net, that is INPS contributions, IRPEF and surcharges less the payroll credits.",
 
+  "netTable.home.title": "Net pay for the most searched salaries",
+  "netTable.home.caption": "Net pay in {year} for the most searched salaries, living in {city}",
+  "netTable.home.all": "All amounts in the gross to net table",
+
   "netTable.page.title": "{gross} gross: net pay in {year}",
   "netTable.page.metaTitle": "{gross} gross: {monthly} net a month in {year}",
   "netTable.page.metaDescription":
