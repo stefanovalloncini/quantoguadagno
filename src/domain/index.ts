@@ -15,6 +15,8 @@ export * from "./specialConditionsCalculations.ts";
 export * from "./fringeBenefitsCalculations.ts";
 export * from "./employerCostCalculations.ts";
 export * from "./forfettario.ts";
+export * from "./selfEmployedDeduction.ts";
+export * from "./ordinario.ts";
 export * from "./compoundInterest.ts";
 export * from "./naspi.ts";
 export * from "./preavviso.ts";

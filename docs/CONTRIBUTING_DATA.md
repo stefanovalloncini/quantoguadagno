@@ -158,8 +158,9 @@ soglia, detrazioni per fascia di reddito) hanno campi propri, descritti in
 
 I vettori sono i casi di test con attese calcolate fuori dal codice:
 
-- `tests/golden/employee.golden.test.ts` e `tests/golden/forfettario.golden.test.ts`: casi completi
-  (tutte le righe del cedolino, al centesimo), ognuno con la fonte scritta nel campo `source`;
+- `tests/golden/employee.golden.test.ts`, `tests/golden/forfettario.golden.test.ts` e
+  `tests/golden/ordinario.golden.test.ts`: casi completi (tutte le righe del cedolino, al
+  centesimo), ognuno con la fonte scritta nel campo `source`;
 - `src/domain/taxConfig.test.ts` e `src/domain/taxConfig.autonomi.test.ts`: i valori pubblicati
   nelle circolari, anno per anno;
 - `src/domain/composer.properties.test.ts`: regole che valgono per qualsiasi input (nessuna
