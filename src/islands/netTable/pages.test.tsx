@@ -202,6 +202,14 @@ describe.each(LOCALES)("amount pages in %s", (locale) => {
     }
   });
 
+  // The same split as the calculator: see tredicesima.test.ts for the payroll rule.
+  it("shows the ordinary month and the tredicesima under the figure: 1.817,66 and 1.613,62", () => {
+    const { container } = renderPage(30_000);
+    const figure = container.querySelector(".qg-figure")?.textContent ?? "";
+    expect(figure).toContain(money(1_817.66));
+    expect(figure).toContain(money(1_613.62));
+  });
+
   it.each(SAMPLES)("ships no script and leaves no placeholder on the page of %i", (gross) => {
     const { container } = renderPage(gross);
     expect(container.querySelectorAll("script")).toHaveLength(0);

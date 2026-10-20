@@ -3,6 +3,7 @@ import { Pager, type PagerLink } from "@/components/page/Pager.tsx";
 import { NoteLine } from "@/components/result/Assumptions.tsx";
 import { ResultFigure } from "@/components/result/ResultFigure.tsx";
 import { latestVerification } from "@/data/index.ts";
+import { splitSalaryYear } from "@/domain/tredicesima.ts";
 import type { Namespace } from "@/i18n/messages/index.ts";
 import { formatDate } from "@/i18n/numbers.ts";
 import { I18nProvider, useLocale, useRichT, useT } from "@/i18n/react.tsx";
@@ -52,6 +53,7 @@ function NetAmountContent({ page }: ContentProps) {
   const f = useViewFormat();
   const locale = useLocale();
   const result = calculatorResult(page, locale);
+  const split = splitSalaryYear(result.input, result.breakdown);
   const { breakdown: b, residence, year, raise } = page;
   const city = placeName(residence.comuneName);
   const gross = f.whole(page.gross);
@@ -84,7 +86,18 @@ function NetAmountContent({ page }: ContentProps) {
           state="ready"
           value={f.money(b.netMonthly)}
           basis={t("employee.result.basis", { count: REFERENCE_FREQUENCY })}
-          sub={rt("employee.result.annual", { amount: <strong>{f.money(b.netAnnual)}</strong> })}
+          subLines={[
+            ...(split === null
+              ? []
+              : [
+                  rt("employee.result.split", {
+                    ordinary: <strong>{f.money(split.ordinaryMonth)}</strong>,
+                    extra: <strong>{f.money(split.extraMonth)}</strong>,
+                    count: split.extraMonths,
+                  }),
+                ]),
+            rt("employee.result.annual", { amount: <strong>{f.money(b.netAnnual)}</strong> }),
+          ]}
         />
         <p className="qg-netpage__action">
           <a className="qg-button" href={calculatorHref(locale, year, residence, page.gross)}>
