@@ -21,7 +21,7 @@
 
 .qg-disclosure__summary:hover,
 .qg-disclosure__summary.is-hover {
-  text-decoration-thickness: 2px;
+  text-decoration-thickness: 3px;
 }
 
 .qg-disclosure__hide,

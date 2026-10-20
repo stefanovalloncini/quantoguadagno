@@ -22,7 +22,7 @@
   color: var(--grigio);
 }
 
-.qg-navlink:hover .qg-navlink__name,
+.qg-navlink:hover:not(:focus-visible) .qg-navlink__name,
 .qg-navlink.is-hover .qg-navlink__name {
   color: var(--blu);
   text-decoration-line: underline;

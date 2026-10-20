@@ -39,7 +39,7 @@
   color: var(--inchiostro);
 }
 
-.qg-breadcrumbs__link:hover {
+.qg-breadcrumbs__link:hover:not(:focus-visible) {
   color: var(--blu);
 }
 

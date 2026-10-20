@@ -40,7 +40,8 @@
 .qg-select__control:focus-visible,
 .qg-select__control.is-focus {
   outline: var(--focus) solid var(--blu);
-  outline-offset: var(--focus-offset);
+  outline-offset: 0;
+  box-shadow: inset 0 0 0 2px var(--inchiostro);
 }
 
 .qg-input--unit-end .qg-input__control {
@@ -79,6 +80,10 @@
 .qg-field--error .qg-input__control,
 .qg-field--error .qg-select__control {
   border-color: var(--errore);
+}
+
+.qg-field--error :is(.qg-input__control, .qg-select__control):is(:focus-visible, .is-focus) {
+  border-color: var(--inchiostro);
 }
 
 .qg-input__suffix {

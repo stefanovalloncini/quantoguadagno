@@ -32,7 +32,7 @@
   text-decoration: none;
 }
 
-.qg-footer__link:hover {
+.qg-footer__link:hover:not(:focus-visible) {
   color: var(--blu);
   text-decoration-line: underline;
 }

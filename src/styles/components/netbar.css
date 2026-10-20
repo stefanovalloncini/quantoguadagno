@@ -21,6 +21,9 @@
 .qg-netbar.is-focus {
   outline: var(--focus) solid var(--blu);
   outline-offset: -5px;
+  background: var(--carta);
+  color: var(--inchiostro);
+  box-shadow: none;
 }
 
 .qg-netbar__text {
@@ -59,7 +62,7 @@
 }
 
 .qg-netbar:hover .qg-netbar__link {
-  text-decoration-thickness: 2px;
+  text-decoration-thickness: 3px;
 }
 
 body:has(> .qg-netbar:not([hidden])) .qg-footer {

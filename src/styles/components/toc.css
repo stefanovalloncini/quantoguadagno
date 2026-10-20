@@ -30,7 +30,7 @@
   text-decoration: none;
 }
 
-.qg-toc__link:hover {
+.qg-toc__link:hover:not(:focus-visible) {
   color: var(--blu);
   text-decoration-line: underline;
 }

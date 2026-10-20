@@ -119,13 +119,29 @@ body {
 }
 
 :where(a:hover, a.is-hover) {
-  text-decoration-thickness: 2px;
+  text-decoration-thickness: 3px;
 }
 
 :where(:focus-visible),
 :where(.is-focus) {
   outline: var(--focus) solid var(--blu);
   outline-offset: var(--focus-offset);
+}
+
+:is(a, .qg-link-button, .qg-action):is(:focus-visible, .is-focus) {
+  outline: var(--focus) solid transparent;
+  background: var(--blu);
+  color: var(--su-blu);
+  box-shadow:
+    0 -2px var(--blu),
+    0 4px var(--inchiostro);
+  text-decoration: none;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+:is(a, .qg-link-button, .qg-action):is(:focus-visible, .is-focus) * {
+  color: inherit;
 }
 
 :where(main[tabindex="-1"]:focus) {

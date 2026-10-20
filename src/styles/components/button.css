@@ -67,7 +67,7 @@
 
 .qg-link-button:hover,
 .qg-link-button.is-hover {
-  text-decoration-thickness: 2px;
+  text-decoration-thickness: 3px;
 }
 
 .qg-actions {
@@ -95,7 +95,7 @@
 
 .qg-action:hover,
 .qg-action.is-hover {
-  text-decoration-thickness: 2px;
+  text-decoration-thickness: 3px;
 }
 
 .qg-back {
@@ -107,7 +107,7 @@
   color: var(--inchiostro);
 }
 
-.qg-back:hover,
+.qg-back:hover:not(:focus-visible),
 .qg-back.is-hover {
   color: var(--blu);
 }
