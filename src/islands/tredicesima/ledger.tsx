@@ -52,8 +52,11 @@ export function buildTredicesimaLedger({
   t,
   locale,
 }: TredicesimaLedgerContext): TredicesimaLedger {
+  const cfg = getTaxConfig(taxYear);
   const inpsRate = result.gross > 0 ? result.inps / result.gross : 0;
-  const exemption2024 = getTaxConfig(taxYear).inpsExemption2024 !== null;
+  const exemption2024 = cfg.inpsExemption2024 !== null;
+  const sommaLimit = cfg.taxWedgeCut?.sommaAggiuntiva.at(-1)?.maxIncome ?? 0;
+  const withSomma = result.somma > 0;
   const rows: LedgerRow[] = [
     {
       id: "gross",
@@ -93,13 +96,31 @@ export function buildTredicesimaLedger({
         }),
       ),
     },
+    ...(withSomma
+      ? [
+          {
+            id: "somma",
+            name: t("tredicesima.ledger.somma"),
+            kind: "credited" as const,
+            rule: t("tredicesima.ledger.somma.rule", {
+              rate: formatPercent(result.sommaRate, locale, 1),
+            }),
+            annual: formatMoney(result.somma, locale, { sign: "always" }),
+            explanation: paragraph(
+              t("tredicesima.ledger.somma.explain", {
+                max: formatMoney(sommaLimit, locale, { integer: true }),
+              }),
+            ),
+          },
+        ]
+      : []),
   ];
 
   const total: LedgerRow = {
     id: "net",
     name: t("tredicesima.breakdown.net"),
     kind: "total",
-    rule: t("tredicesima.ledger.net.rule"),
+    rule: t("tredicesima.ledger.net.rule", { somma: withSomma ? "yes" : "no" }),
     annual: formatMoney(result.net, locale),
   };
   return { rows, total };

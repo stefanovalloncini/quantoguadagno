@@ -45,7 +45,12 @@ export const it = {
     "L’IRPEF della mensilità aggiuntiva si calcola a parte, con gli scaglioni dell’anno divisi per 12: {bands}. Non si tolgono detrazioni, che spettano sulle mensilità ordinarie.",
   "tredicesima.ledger.irpef.bandUpTo": "{rate} fino a {max}",
   "tredicesima.ledger.irpef.bandAbove": "{rate} oltre",
-  "tredicesima.ledger.net.rule": "lordo meno contributi e IRPEF",
+  "tredicesima.ledger.somma": "Somma aggiuntiva",
+  "tredicesima.ledger.somma.rule": "taglio del cuneo fiscale, {rate} dell’imponibile",
+  "tredicesima.ledger.somma.explain":
+    "Fino a {max} di reddito da lavoro il taglio del cuneo fiscale aggiunge una somma a ogni busta paga, tredicesima compresa: una percentuale del reddito imponibile del mese. Non è tassata.",
+  "tredicesima.ledger.net.rule":
+    "lordo meno contributi e IRPEF{somma, select, yes {, più la somma aggiuntiva} other {}}",
   "tredicesima.assumption.year": "Anno fiscale {year}",
   "tredicesima.assumption.mensilita":
     "{mensilita, select, 14 {Tredicesima e quattordicesima} other {Solo la tredicesima}}",

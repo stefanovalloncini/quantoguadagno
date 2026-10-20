@@ -3,6 +3,7 @@ import {
   calculateSommaAggiuntiva,
   calculateDetrazioneAggiuntiva,
   calculateTaxWedgeCut,
+  sommaAggiuntivaRate,
 } from "./taxWedgeCut.ts";
 import { getTaxConfig } from "./taxConfig.ts";
 
@@ -30,6 +31,19 @@ describe("calculateSommaAggiuntiva", () => {
 
   it("0 per reddito non positivo", () => {
     expect(calculateSommaAggiuntiva(0, CFG)).toBe(0);
+  });
+});
+
+describe("sommaAggiuntivaRate", () => {
+  it("returns the percentage of the bracket the income falls in", () => {
+    expect(sommaAggiuntivaRate(8500, CFG)).toBe(0.071);
+    expect(sommaAggiuntivaRate(13_621.5, CFG)).toBe(0.053);
+    expect(sommaAggiuntivaRate(20_000, CFG)).toBe(0.048);
+  });
+
+  it("returns 0 above 20.000 € and for a non-positive income", () => {
+    expect(sommaAggiuntivaRate(20_000.01, CFG)).toBe(0);
+    expect(sommaAggiuntivaRate(0, CFG)).toBe(0);
   });
 });
 

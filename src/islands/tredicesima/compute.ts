@@ -17,5 +17,6 @@ export function computeTredicesima(state: TredicesimaState, locale: Locale): Tre
     mensilita: state.mensilita,
     inpsRate: cfg.inps.standardRate,
     brackets: cfg.irpefBrackets,
+    taxWedgeCut: cfg.taxWedgeCut,
   });
 }

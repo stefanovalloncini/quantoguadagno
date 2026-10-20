@@ -67,4 +67,23 @@ describe("buildTredicesimaLedger", () => {
     expect(total.annual).toMatch(/^1\.613,62\s€$/);
     expect(total.rule).toBe("lordo meno contributi e IRPEF");
   });
+
+  it("adds the wedge cut sum as a credit for a low RAL", () => {
+    const state = updateRal(TREDICESIMA_DEFAULTS, "15.000");
+    const { rows, total } = ledgerOf(state);
+    const somma = rows.find((row) => row.id === "somma");
+    expect(somma?.kind).toBe("credited");
+    expect(somma?.rule).toBe("taglio del cuneo fiscale, 5,3% dell’imponibile");
+    expect(somma?.annual).toMatch(/^\+55,53\s€$/);
+    expect(total.annual).toMatch(/^862,34\s€$/);
+    expect(total.rule).toBe("lordo meno contributi e IRPEF, più la somma aggiuntiva");
+    render(<>{somma?.explanation}</>);
+    expect(screen.getByText(/^Fino a 20\.000\s€ di reddito da lavoro/)).toBeInTheDocument();
+  });
+
+  it("has no wedge cut row in 2024 or above 20.000 € of taxable income", () => {
+    const low2024 = updateTaxYear(updateRal(TREDICESIMA_DEFAULTS, "15.000"), 2024);
+    expect(ledgerOf(low2024).rows.map((row) => row.id)).not.toContain("somma");
+    expect(ledgerOf(TREDICESIMA_DEFAULTS).rows.map((row) => row.id)).not.toContain("somma");
+  });
 });

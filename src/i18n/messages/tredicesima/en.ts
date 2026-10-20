@@ -47,7 +47,12 @@ export const en: Record<MessageKey, string> = {
     "IRPEF on the extra month is worked out on its own, with the year’s brackets divided by 12: {bands}. No tax credits come off: they apply to the ordinary months.",
   "tredicesima.ledger.irpef.bandUpTo": "{rate} up to {max}",
   "tredicesima.ledger.irpef.bandAbove": "{rate} above",
-  "tredicesima.ledger.net.rule": "gross minus contributions and IRPEF",
+  "tredicesima.ledger.somma": "Extra payment",
+  "tredicesima.ledger.somma.rule": "tax wedge cut, {rate} of taxable income",
+  "tredicesima.ledger.somma.explain":
+    "Up to {max} of employment income the tax wedge cut adds an amount to every payslip, the 13th included: a percentage of the month’s taxable income. It is not taxed.",
+  "tredicesima.ledger.net.rule":
+    "gross minus contributions and IRPEF{somma, select, yes {, plus the extra payment} other {}}",
   "tredicesima.assumption.year": "Tax year {year}",
   "tredicesima.assumption.mensilita":
     "{mensilita, select, 14 {13th and 14th month} other {13th month only}}",

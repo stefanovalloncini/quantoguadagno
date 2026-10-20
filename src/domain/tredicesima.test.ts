@@ -5,6 +5,7 @@ import { round } from "./_math.ts";
 
 const B2025 = getTaxConfig(2025).irpefBrackets;
 const B2026 = getTaxConfig(2026).irpefBrackets;
+const WEDGE_2026 = getTaxConfig(2026).taxWedgeCut;
 const INPS = 0.0919;
 
 // Art. 23 c. 2 lett. b) DPR 600/1973: the extra month is taxed on its own, with the
@@ -83,6 +84,56 @@ describe("calculateTredicesima", () => {
     expect(r2025.net).toBe(2096.2);
     expect(r2026.irpef).toBe(688.74);
     expect(r2026.net).toBe(2105.41);
+  });
+
+  it("RAL 15.000, 13 mensilità, 2026: aggiunge la somma del cuneo al 5,3%, netto 862,34 €", () => {
+    const r = calculateTredicesima({
+      ral: 15_000,
+      mensilita: 13,
+      inpsRate: INPS,
+      brackets: B2026,
+      taxWedgeCut: WEDGE_2026,
+    });
+    expect(r.gross).toBe(1153.85);
+    expect(r.inps).toBe(106.04);
+    expect(r.taxable).toBe(1047.81);
+    expect(r.irpef).toBe(241);
+    expect(r.sommaRate).toBe(0.053);
+    expect(r.somma).toBe(55.53);
+    expect(r.net).toBe(862.34);
+  });
+
+  it("uses the annual taxable income it is given to pick the percentage", () => {
+    const r = calculateTredicesima({
+      ral: 15_000,
+      mensilita: 13,
+      inpsRate: INPS,
+      brackets: B2026,
+      taxWedgeCut: WEDGE_2026,
+      annualTaxableIncome: 8_000,
+    });
+    expect(r.sommaRate).toBe(0.071);
+    expect(r.somma).toBe(74.39);
+  });
+
+  it("adds no sum without the wedge cut or above 20.000 € of taxable income", () => {
+    const without = calculateTredicesima({
+      ral: 15_000,
+      mensilita: 13,
+      inpsRate: INPS,
+      brackets: B2026,
+    });
+    expect(without.somma).toBe(0);
+    expect(without.net).toBe(806.81);
+    const above = calculateTredicesima({
+      ral: 30_000,
+      mensilita: 13,
+      inpsRate: INPS,
+      brackets: B2026,
+      taxWedgeCut: WEDGE_2026,
+    });
+    expect(above.somma).toBe(0);
+    expect(above.net).toBe(1613.62);
   });
 
   it("returns the monthly brackets it used", () => {

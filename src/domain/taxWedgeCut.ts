@@ -13,12 +13,17 @@ export interface TaxWedgeCutResult {
   readonly total: number;
 }
 
-export function calculateSommaAggiuntiva(taxableIncome: number, cfg: TaxWedgeCutConfig): number {
+export function sommaAggiuntivaRate(taxableIncome: number, cfg: TaxWedgeCutConfig): number {
   if (taxableIncome <= 0) return 0;
   for (const bracket of cfg.sommaAggiuntiva) {
-    if (taxableIncome <= bracket.maxIncome) return taxableIncome * bracket.rate;
+    if (taxableIncome <= bracket.maxIncome) return bracket.rate;
   }
   return 0;
+}
+
+export function calculateSommaAggiuntiva(taxableIncome: number, cfg: TaxWedgeCutConfig): number {
+  if (taxableIncome <= 0) return 0;
+  return taxableIncome * sommaAggiuntivaRate(taxableIncome, cfg);
 }
 
 export function calculateDetrazioneAggiuntiva(

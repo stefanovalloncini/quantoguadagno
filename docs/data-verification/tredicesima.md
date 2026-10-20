@@ -41,6 +41,15 @@ la regola nel testo unico e citarne l'articolo.
   D.Lgs. 446/1997 per la regionale; art. 1, comma 5, D.Lgs. 360/1998 per la comunale, il cui acconto
   si trattiene in nove rate da marzo).
 
+- **Somma del taglio del cuneo fiscale** (dal 2025, con un reddito fino a 20.000 €): la legge la
+  determina "applicando al reddito di lavoro dipendente del contribuente la percentuale
+  corrispondente" (art. 1, comma 4, L. 207/2024), cioè il 7,1%, il 5,3% o il 4,8% secondo il reddito
+  dell'anno. A differenza della detrazione aggiuntiva del comma 6 non è "rapportata al periodo di
+  lavoro", e la Circolare dell'Agenzia delle Entrate n. 4/E del 16 maggio 2025 precisa che il
+  sostituto d'imposta "riconosce la somma spettante applicando tale percentuale al reddito
+  effettivamente corrisposto mensilmente" (frase ripresa nella Risposta n. 7/2026). La mensilità
+  aggiuntiva è reddito corrisposto nel suo mese: la somma si aggiunge anche lì.
+
 Con 14 mensilità la tredicesima e la quattordicesima si pagano in mesi diversi e ognuna si tassa da
 sola con gli stessi scaglioni mensili.
 
@@ -51,8 +60,13 @@ lordo        = RAL / mensilità
 INPS         = lordo × aliquota INPS
 imponibile   = lordo − INPS
 IRPEF        = imposta a scaglioni sull'imponibile, con ogni limite annuo diviso per 12
-netto        = lordo − INPS − IRPEF
+somma        = imponibile × percentuale del taglio del cuneo (0 nel 2024 e oltre 20.000 €)
+netto        = lordo − INPS − IRPEF + somma
 ```
+
+La percentuale della somma si sceglie sul reddito imponibile dell'anno: nel calcolatore della
+tredicesima è la RAL meno i contributi al 9,19%, nello stipendio netto è il reddito imponibile del
+calcolo dell'anno.
 
 Ogni voce si arrotonda al centesimo; l'IRPEF si arrotonda sul totale, non scaglione per scaglione.
 Il calcolo è in `src/domain/tredicesima.ts`, i casi qui sotto in `src/domain/tredicesima.test.ts`.
@@ -108,6 +122,25 @@ netto **3.002,33 €**.
   **2.105,41 €**
 - Il secondo scaglione al 33% lascia sulla tredicesima 9,21 € in più.
 
+### RAL 15.000 €, 13 mensilità, 2026
+
+- Lordo = 15.000 / 13 = 1.153,85 €
+- INPS = 1.153,85 × 9,19% = 106,04 €
+- Imponibile = 1.047,81 €
+- IRPEF = 1.047,81 × 23% = 241,00 €
+- Reddito imponibile dell'anno = 15.000 − 1.378,50 = 13.621,50 €, tra 8.500 e 15.000 €: somma al 5,3%
+- Somma = 1.047,81 × 5,3% = 55,53 €
+- Netto = 1.153,85 − 106,04 − 241,00 + 55,53 = **862,34 €**
+
+Nel 2024 la somma non c'era: netto 806,81 €.
+
+## Da verificare
+
+La Circolare 4/E/2025 e la Risposta 7/2026 non nominano la tredicesima: dicono che la percentuale si
+applica al reddito corrisposto ogni mese. Il calcolatore la applica anche alla mensilità aggiuntiva.
+Se una fonte ufficiale dicesse il contrario, quella parte della somma arriverebbe con il conguaglio:
+il netto dell'anno non cambierebbe, cambierebbe solo il mese in cui la ricevi.
+
 ## Correzione di ottobre 2026
 
 Fino a questa verifica il calcolatore tassava tutto l'imponibile della mensilità aggiuntiva
@@ -128,6 +161,13 @@ invece di 3.039,00 € (650,00 € in meno). Con 40.000 € la differenza era di
   https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:2023-12-30;213~art1-com15!vig=2024-06-30
 - Circolare INPS n. 11 del 16 gennaio 2024:
   https://www.inps.it/it/it/inps-comunica/atti/circolari-messaggi-e-normativa/dettaglio.circolari-e-messaggi.2024.01.circolare-numero-11-del-16-01-2024_14436.html
+- Art. 1, commi 4-6, L. 207/2024, Normattiva:
+  https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:2024-12-30;207~art1-com4!vig=2026-10-20
+- Agenzia delle Entrate, Circolare n. 4/E del 16 maggio 2025, paragrafo sugli adempimenti dei
+  sostituti d'imposta:
+  https://www.agenziaentrate.gov.it/portale/documents/20143/8410823/Circolare+lavoro+dipendente+LB2025+DD+IRPEF+n.+4+del+16+maggio+2025.pdf/36979eaa-9fc5-a4ec-a7aa-136497c53f91
+- Agenzia delle Entrate, Risposta n. 7/2026:
+  https://www.agenziaentrate.gov.it/portale/documents/20143/9570465/Risposta+n.+7_2026/6039a428-3237-b76b-9661-7549b9e798ec
 - Art. 51 TUIR (DPR 917/1986).
 
 ## Ultima verifica

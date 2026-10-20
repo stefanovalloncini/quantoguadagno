@@ -1,5 +1,6 @@
 import type { IrpefBracket } from "./irpef.ts";
 import { applyProgressiveBrackets } from "./irpef.ts";
+import { sommaAggiuntivaRate, type TaxWedgeCutConfig } from "./taxWedgeCut.ts";
 import { round } from "./_math.ts";
 
 const MONTHS_PER_YEAR = 12;
@@ -9,6 +10,8 @@ export interface TredicesimaInput {
   readonly mensilita: number;
   readonly inpsRate: number;
   readonly brackets: readonly IrpefBracket[];
+  readonly taxWedgeCut?: TaxWedgeCutConfig | null;
+  readonly annualTaxableIncome?: number;
 }
 
 export interface TredicesimaResult {
@@ -17,6 +20,8 @@ export interface TredicesimaResult {
   readonly taxable: number;
   readonly monthlyBrackets: readonly IrpefBracket[];
   readonly irpef: number;
+  readonly sommaRate: number;
+  readonly somma: number;
   readonly net: number;
   readonly effectiveRate: number;
   readonly extraMonths: number;
@@ -30,6 +35,8 @@ const EMPTY: TredicesimaResult = {
   taxable: 0,
   monthlyBrackets: [],
   irpef: 0,
+  sommaRate: 0,
+  somma: 0,
   net: 0,
   effectiveRate: 0,
   extraMonths: 0,
@@ -48,9 +55,10 @@ export function monthlyBrackets(brackets: readonly IrpefBracket[]): readonly Irp
 // Each extra month (tredicesima, quattordicesima) is one month's gross. Payroll
 // withholds IRPEF on it alone, with the annual brackets divided by 12 and no
 // detrazioni (art. 23 c. 2 lett. b DPR 600/1973), and withholds no addizionali.
-// The year-end conguaglio then settles the annual IRPEF.
+// From 2025 the wedge cut adds its percentage of the income paid in the month
+// (Circ. AdE 4/E/2025). The year-end conguaglio then settles the annual IRPEF.
 export function calculateTredicesima(input: TredicesimaInput): TredicesimaResult {
-  const { ral, mensilita, inpsRate, brackets } = input;
+  const { ral, mensilita, inpsRate, brackets, taxWedgeCut } = input;
   if (ral <= 0 || mensilita <= MONTHS_PER_YEAR) return EMPTY;
 
   const gross = round(ral / mensilita);
@@ -60,7 +68,11 @@ export function calculateTredicesima(input: TredicesimaInput): TredicesimaResult
   const perMonth = monthlyBrackets(brackets);
   const irpef = round(applyProgressiveBrackets(taxable, perMonth));
 
-  const net = round(gross - inps - irpef);
+  const annualTaxable = input.annualTaxableIncome ?? round(ral - round(ral * inpsRate));
+  const sommaRate = taxWedgeCut ? sommaAggiuntivaRate(annualTaxable, taxWedgeCut) : 0;
+  const somma = round(taxable * sommaRate);
+
+  const net = round(gross - inps - irpef + somma);
   const effectiveRate = round((inps + irpef) / gross, 4);
   const extraMonths = mensilita - MONTHS_PER_YEAR;
 
@@ -70,6 +82,8 @@ export function calculateTredicesima(input: TredicesimaInput): TredicesimaResult
     taxable,
     monthlyBrackets: perMonth,
     irpef,
+    sommaRate,
+    somma,
     net,
     effectiveRate,
     extraMonths,

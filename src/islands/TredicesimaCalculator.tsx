@@ -37,7 +37,7 @@ const IDS = {
   taxYear: "tredicesima-anno",
 } as const;
 
-const PARAMETERS_USED = ["irpef.brackets", "inps.employee.rate"] as const;
+const PARAMETERS_USED = ["irpef.brackets", "inps.employee.rate", "irpef.taxWedgeCut"] as const;
 
 type TredicesimaField = keyof TredicesimaState;
 

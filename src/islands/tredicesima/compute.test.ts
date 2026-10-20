@@ -13,6 +13,7 @@ describe("computeTredicesima", () => {
         mensilita: 13,
         inpsRate: INPS_2026,
         brackets: getTaxConfig(2026).irpefBrackets,
+        taxWedgeCut: getTaxConfig(2026).taxWedgeCut,
       }),
     );
   });
@@ -25,8 +26,15 @@ describe("computeTredicesima", () => {
         mensilita: 13,
         inpsRate: getTaxConfig(2025).inps.standardRate,
         brackets: getTaxConfig(2025).irpefBrackets,
+        taxWedgeCut: getTaxConfig(2025).taxWedgeCut,
       }),
     );
+  });
+
+  it("adds the wedge cut sum for a low RAL from 2025, not in 2024", () => {
+    const low = updateRal(TREDICESIMA_DEFAULTS, "15.000");
+    expect(computeTredicesima(low, "it").somma).toBe(55.53);
+    expect(computeTredicesima(updateTaxYear(low, 2024), "it").somma).toBe(0);
   });
 
   it("parses a shorthand RAL before calling the engine", () => {
