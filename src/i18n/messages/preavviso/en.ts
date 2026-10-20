@@ -13,7 +13,7 @@ export const en: Record<MessageKey, string> = {
     "By default they are calendar days: Saturdays, Sundays and public holidays count. Some CCNLs prescribe working days for specific levels (the calculator flags this case when it applies).",
   "preavviso.faq.ferie.q": "Do unused holidays count toward notice?",
   "preavviso.faq.ferie.a":
-    "No. Holidays taken during notice do not stop the period from running. Unused holidays are paid out in the final payslip and do not shorten the notice days.",
+    "No. The Civil Code does not allow the notice period to be counted as holiday (art. 2109): holiday days taken during the notice do not count as notice, so it ends later. Unused holidays are paid out in the final payslip and do not shorten the notice.",
   "preavviso.faq.malattia.q": "Can I resign while on sick leave?",
   "preavviso.faq.malattia.a":
     "Yes, illness does not prevent you from resigning. Most CCNLs suspend the notice period while the illness lasts and resume it on recovery, so check your contract: the calculator does not account for absences.",

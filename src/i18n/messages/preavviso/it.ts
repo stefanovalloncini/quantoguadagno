@@ -11,7 +11,7 @@ export const it = {
     "Di default sono calendariali: si contano sabato, domenica e festivi. Alcuni CCNL prevedono giorni lavorativi per specifici livelli (il calcolatore segnala questo caso quando è applicabile).",
   "preavviso.faq.ferie.q": "Le ferie residue contano nel preavviso?",
   "preavviso.faq.ferie.a":
-    "No. Le ferie godute durante il preavviso non ne sospendono il decorso. Le ferie residue non godute vengono liquidate nella busta paga finale e non accorciano i giorni di preavviso.",
+    "No. Il codice civile non permette di contare il preavviso come ferie (art. 2109): i giorni di ferie presi durante il preavviso non valgono come preavviso, che quindi finisce più tardi. Le ferie residue non godute vengono pagate nella busta paga finale e non accorciano il preavviso.",
   "preavviso.faq.malattia.q": "Posso dimettermi durante la malattia?",
   "preavviso.faq.malattia.a":
     "Sì, la malattia non impedisce di dimettersi. Quasi tutti i CCNL sospendono il decorso del preavviso finché dura la malattia e lo fanno riprendere alla guarigione: controlla il tuo contratto, perché il calcolatore non tiene conto delle assenze.",
