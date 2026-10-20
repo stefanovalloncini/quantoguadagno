@@ -1,5 +1,11 @@
 import { describe, it, expect } from "vitest";
-import { calculateTredicesima, monthlyBrackets } from "./tredicesima.ts";
+import {
+  calculateTredicesima,
+  monthlyBrackets,
+  splitSalaryYear,
+  splitYearNet,
+} from "./tredicesima.ts";
+import { calculateSalaryBreakdown, type SalaryInput } from "./composer.ts";
 import { getTaxConfig } from "./taxConfig.ts";
 import { round } from "./_math.ts";
 
@@ -155,5 +161,140 @@ describe("calculateTredicesima", () => {
   it("RAL non positiva → tutto a zero", () => {
     const r = calculateTredicesima({ ral: 0, mensilita: 13, inpsRate: INPS, brackets: B2025 });
     expect(r.net).toBe(0);
+  });
+});
+
+// The twelve ordinary payslips share what the extra months leave of the year's net.
+// Annual nets: tests/golden/employee.golden.test.ts and the hand-worked cases in
+// docs/data-verification/tredicesima.md.
+describe("splitYearNet", () => {
+  it("12 mensilità: no extra month, the year split in twelve", () => {
+    expect(splitYearNet({ netAnnual: 23_425.52, mensilita: 12, extraMonthNet: 1613.62 })).toEqual({
+      ordinaryMonth: 1952.13,
+      extraMonth: 0,
+      extraMonths: 0,
+    });
+  });
+
+  it("13 mensilità: the year minus the tredicesima, over twelve", () => {
+    expect(splitYearNet({ netAnnual: 23_425.52, mensilita: 13, extraMonthNet: 1613.62 })).toEqual({
+      ordinaryMonth: 1817.66,
+      extraMonth: 1613.62,
+      extraMonths: 1,
+    });
+  });
+
+  it("14 mensilità: two extra months of the same net", () => {
+    expect(splitYearNet({ netAnnual: 26_032.21, mensilita: 14, extraMonthNet: 1748.09 })).toEqual({
+      ordinaryMonth: 1878,
+      extraMonth: 1748.09,
+      extraMonths: 2,
+    });
+  });
+
+  it("a low income: the ordinary month is above the average of the year", () => {
+    const split = splitYearNet({ netAnnual: 14_088.98, mensilita: 13, extraMonthNet: 862.34 });
+    expect(split.ordinaryMonth).toBe(1102.22);
+    expect(split.ordinaryMonth).toBeGreaterThan(round(14_088.98 / 13));
+  });
+});
+
+const LOMBARDIA_2026: SalaryInput = {
+  taxYear: 2026,
+  grossAnnual: 30_000,
+  regionCode: "lombardia",
+  municipalTaxRate: 0.008,
+  paymentFrequency: 13,
+};
+
+function splitOf(input: SalaryInput) {
+  return splitSalaryYear(input, calculateSalaryBreakdown(input));
+}
+
+describe("splitSalaryYear", () => {
+  it("2026, RAL 30.000, 13 mensilità: mese normale 1.817,66 €, tredicesima 1.613,62 €", () => {
+    expect(splitOf(LOMBARDIA_2026)).toEqual({
+      ordinaryMonth: 1817.66,
+      extraMonth: 1613.62,
+      extraMonths: 1,
+    });
+  });
+
+  it("2024: the extra month pays the contributions the 2024 cut left out", () => {
+    expect(splitOf({ ...LOMBARDIA_2026, taxYear: 2024 })).toEqual({
+      ordinaryMonth: 1816.18,
+      extraMonth: 1613.62,
+      extraMonths: 1,
+    });
+  });
+
+  it("2026, RAL 60.000: the INPS rate of the year, the ordinary month below the average", () => {
+    const split = splitOf({ ...LOMBARDIA_2026, grossAnnual: 60_000 });
+    expect(split).toEqual({ ordinaryMonth: 2876.44, extraMonth: 3037.34, extraMonths: 1 });
+  });
+
+  it("2026, RAL 15.000: the wedge cut sum on the tredicesima too", () => {
+    expect(splitOf({ ...LOMBARDIA_2026, grossAnnual: 15_000 })).toEqual({
+      ordinaryMonth: 1102.22,
+      extraMonth: 862.34,
+      extraMonths: 1,
+    });
+  });
+
+  it("14 and 15 mensilità", () => {
+    expect(splitOf({ ...LOMBARDIA_2026, grossAnnual: 35_000, paymentFrequency: 14 })).toEqual({
+      ordinaryMonth: 1878,
+      extraMonth: 1748.09,
+      extraMonths: 2,
+    });
+    expect(splitOf({ ...LOMBARDIA_2026, paymentFrequency: 15 })).toEqual({
+      ordinaryMonth: 1602.51,
+      extraMonth: 1398.47,
+      extraMonths: 3,
+    });
+  });
+
+  it("12 mensilità: nothing to split", () => {
+    expect(splitOf({ ...LOMBARDIA_2026, paymentFrequency: 12 })).toBeNull();
+  });
+
+  it("keeps the split with benefits that stay untaxed", () => {
+    const vouchers: SalaryInput = {
+      ...LOMBARDIA_2026,
+      fringeBenefits: {
+        mealVouchers: { dailyValue: 8, workingDaysPerMonth: 22, type: "electronic" },
+      },
+    };
+    expect(splitOf(vouchers)).toEqual(splitOf(LOMBARDIA_2026));
+  });
+
+  it("drops the split when part of the year follows its own schedule", () => {
+    const notPlain: readonly SalaryInput[] = [
+      { ...LOMBARDIA_2026, premioRisultato: { amount: 1000 } },
+      {
+        ...LOMBARDIA_2026,
+        fringeBenefits: { companyCar: { mode: "simple", annualBenefitValue: 3000 } },
+      },
+      {
+        ...LOMBARDIA_2026,
+        specialConditions: { regimeImpatriati: { enabled: true, hasMinorChildren: false } },
+      },
+      {
+        ...LOMBARDIA_2026,
+        specialConditions: {
+          madreLavoratrice: { enabled: true, numberOfChildren: 3, youngestChildAge: 5 },
+        },
+      },
+      {
+        ...LOMBARDIA_2026,
+        expenseDeductions: {
+          mortgageInterest: 0,
+          medicalExpenses: 0,
+          otherDeductions: 0,
+          pensionFund: 1000,
+        },
+      },
+    ];
+    for (const input of notPlain) expect(splitOf(input)).toBeNull();
   });
 });

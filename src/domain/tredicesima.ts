@@ -1,5 +1,7 @@
+import type { SalaryBreakdown, SalaryInput } from "./composerTypes.ts";
 import type { IrpefBracket } from "./irpef.ts";
 import { applyProgressiveBrackets } from "./irpef.ts";
+import { getTaxConfig } from "./taxConfig.ts";
 import { sommaAggiuntivaRate, type TaxWedgeCutConfig } from "./taxWedgeCut.ts";
 import { round } from "./_math.ts";
 
@@ -90,4 +92,60 @@ export function calculateTredicesima(input: TredicesimaInput): TredicesimaResult
     grossTotal: round(gross * extraMonths),
     netTotal: round(net * extraMonths),
   };
+}
+
+export interface YearSplitInput {
+  readonly netAnnual: number;
+  readonly mensilita: number;
+  readonly extraMonthNet: number;
+}
+
+export interface YearSplit {
+  readonly ordinaryMonth: number;
+  readonly extraMonth: number;
+  readonly extraMonths: number;
+}
+
+// The twelve ordinary payslips share what the extra months leave of the year's
+// net, year-end conguaglio included.
+export function splitYearNet({ netAnnual, mensilita, extraMonthNet }: YearSplitInput): YearSplit {
+  const extraMonths = Math.max(0, mensilita - MONTHS_PER_YEAR);
+  const extraMonth = extraMonths > 0 ? extraMonthNet : 0;
+  return {
+    ordinaryMonth: round((netAnnual - extraMonth * extraMonths) / MONTHS_PER_YEAR),
+    extraMonth,
+    extraMonths,
+  };
+}
+
+// The extra month follows the plain payroll rule only when nothing in the year is
+// paid, taxed or exempted on a schedule of its own: no premio di risultato, no
+// taxed benefits, no impatriati or madri lavoratrici exemption, no pension fund
+// deduction.
+export function isPlainSalary(breakdown: SalaryBreakdown): boolean {
+  return (
+    breakdown.pdrGross === 0 &&
+    (breakdown.fringeBenefits?.taxableAmount ?? 0) === 0 &&
+    breakdown.regimeImpatriatiExemptionRate === 0 &&
+    breakdown.madreLavoratriceExemption === 0 &&
+    breakdown.pensionFundDeduction === 0
+  );
+}
+
+// The extra month pays the INPS rate the year applied before the 2024 cut, which
+// left the extra months out (art. 1 c. 15 L. 213/2023).
+export function splitSalaryYear(input: SalaryInput, breakdown: SalaryBreakdown): YearSplit | null {
+  const mensilita = input.paymentFrequency ?? MONTHS_PER_YEAR;
+  if (mensilita <= MONTHS_PER_YEAR || breakdown.grossAnnual <= 0) return null;
+  if (!isPlainSalary(breakdown)) return null;
+  const cfg = getTaxConfig(input.taxYear);
+  const extra = calculateTredicesima({
+    ral: breakdown.grossAnnual,
+    mensilita,
+    inpsRate: (breakdown.inpsContribution + breakdown.inpsExemption) / breakdown.grossAnnual,
+    brackets: cfg.irpefBrackets,
+    taxWedgeCut: cfg.taxWedgeCut,
+    annualTaxableIncome: breakdown.taxableIncome,
+  });
+  return splitYearNet({ netAnnual: breakdown.netAnnual, mensilita, extraMonthNet: extra.net });
 }

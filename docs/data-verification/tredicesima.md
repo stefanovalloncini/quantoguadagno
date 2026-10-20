@@ -134,6 +134,66 @@ netto **3.002,33 €**.
 
 Nel 2024 la somma non c'era: netto 806,81 €.
 
+## Mese normale e mensilità aggiuntive nello stipendio netto
+
+Lo stipendio netto mostra la media dell'anno su tutte le mensilità. Con più di 12 mensilità la
+divide in mese normale e mensilità aggiuntiva (`splitSalaryYear` in `src/domain/tredicesima.ts`):
+
+```
+mensilità aggiuntiva = netto con la formula qui sopra, sul lordo dell'anno
+mese normale         = (netto annuo − mensilità aggiuntive × il loro netto) / 12
+```
+
+Per la mensilità aggiuntiva il calcolo usa:
+
+- l'aliquota INPS che il calcolo dell'anno ha applicato davvero, prima dello sconto del 2024:
+  contributi più sconto, diviso il lordo. Comprende apprendistato, settore pubblico, aziende con più
+  di 15 dipendenti, l'1% oltre la prima fascia di retribuzione e il massimale. Sopra la prima fascia
+  (56.224 € nel 2026) è più alta del 9,19% del calcolatore della tredicesima: con 60.000 € la
+  tredicesima dello stipendio netto è 3.037,34 €, quella del calcolatore della tredicesima 3.039,00 €;
+- gli scaglioni IRPEF dell'anno, divisi per 12;
+- la percentuale della somma del cuneo scelta sul reddito imponibile del calcolo dell'anno.
+
+Il mese normale è la media delle dodici buste paga ordinarie dopo il conguaglio: contiene le
+detrazioni, le addizionali, il trattamento integrativo e la differenza che il conguaglio trattiene o
+restituisce. Con redditi alti le ritenute dei mesi restano sotto l'imposta dell'anno (con 60.000 €
+circa 650 € in tutto) e il conguaglio trattiene la differenza: le buste paga ordinarie prima del
+conguaglio sono più alte del mese normale, circa 54 € al mese. Quando l'IRPEF dell'anno è zero, il
+conguaglio restituisce quella trattenuta sulla tredicesima, e il mese normale la comprende.
+
+### Esempi (Lombardia, addizionale comunale 0,80%)
+
+| Anno | RAL      | Mensilità | Netto annuo | Media      | Mese normale | Mensilità aggiuntiva |
+| ---- | -------- | --------- | ----------- | ---------- | ------------ | -------------------- |
+| 2026 | 30.000 € | 13        | 23.425,52 € | 1.801,96 € | 1.817,66 €   | 1.613,62 €           |
+| 2024 | 30.000 € | 13        | 23.407,72 € | 1.800,59 € | 1.816,18 €   | 1.613,62 €           |
+| 2026 | 60.000 € | 13        | 37.554,66 € | 2.888,82 € | 2.876,44 €   | 3.037,34 €           |
+| 2026 | 15.000 € | 13        | 14.088,98 € | 1.083,77 € | 1.102,22 €   | 862,34 €             |
+| 2026 | 35.000 € | 14        | 26.032,21 € | 1.859,44 € | 1.878,00 €   | 1.748,09 € ciascuna  |
+| 2026 | 30.000 € | 15        | 23.425,52 € | 1.561,70 € | 1.602,51 €   | 1.398,47 € ciascuna  |
+
+Nel 2024 la tredicesima paga i contributi pieni (9,19%) mentre i mesi normali hanno lo sconto. Con
+60.000 € la tredicesima netta supera il mese normale: non paga addizionali, sopra 50.000 € non perde
+detrazioni, e il conguaglio pesa sui mesi normali.
+
+### Quando la divisione non si mostra
+
+La mensilità aggiuntiva segue la regola qui sopra solo se nell'anno non c'è niente che si paga, si
+tassa o si esonera con un calendario suo. Se il calcolo ha una di queste voci, lo stipendio netto
+mostra solo la media:
+
+- premio di risultato: arriva una volta l'anno, con la sua imposta sostitutiva;
+- benefit tassati (auto aziendale, buoni pasto o welfare oltre le soglie): entrano nel reddito dei
+  mesi in cui li ricevi, e il calcolo non sa quali;
+- regime impatriati: l'esenzione vale anche sulla tredicesima, che la regola qui sopra tasserebbe
+  per intero;
+- esonero contributivo delle madri lavoratrici: ha un tetto annuo e non sappiamo come si distribuisce
+  tra i mesi;
+- previdenza complementare: il contributo riduce l'imponibile dei mesi in cui lo versi.
+
+Familiari a carico e spese detraibili non cambiano la mensilità aggiuntiva, perché sono detrazioni:
+restano nel mese normale. I benefit che restano sotto le soglie di esenzione non cambiano niente.
+
 ## Da verificare
 
 La Circolare 4/E/2025 e la Risposta 7/2026 non nominano la tredicesima: dicono che la percentuale si
