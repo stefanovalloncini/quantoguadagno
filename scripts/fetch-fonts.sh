@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Fetch self-hosted WOFF2 fonts into public/fonts/.
+# Fetch self-hosted WOFF2 fonts into src/assets/fonts/ (the build fingerprints them).
 # Idempotent: re-running is safe; files with non-zero size are kept as-is.
 #
 # Archivo (Omnibus-Type, SIL OFL), one family in two widths:
@@ -16,7 +16,7 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-DEST="$ROOT/public/fonts"
+DEST="$ROOT/src/assets/fonts"
 UA='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
 
 mkdir -p "$DEST"

@@ -25,6 +25,8 @@ import {
   type Route,
 } from "@/routes.ts";
 import { serializeJsonLd, structuredDataFor } from "@/seo/structuredData.ts";
+import archivoLatin from "@/assets/fonts/Archivo-latin.woff2?url";
+import archivoExpandedLatin from "@/assets/fonts/ArchivoExpanded-600-latin.woff2?url";
 import "@/styles/global.css";
 
 interface StandalonePage {
@@ -129,14 +131,8 @@ for (const script of headScripts) {
     <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#101010" media="(prefers-color-scheme: dark)" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="preload" href="/fonts/Archivo-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link
-      rel="preload"
-      href="/fonts/ArchivoExpanded-600-latin.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
+    <link rel="preload" href={archivoLatin} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={archivoExpandedLatin} as="font" type="font/woff2" crossorigin />
     {forwardScript && <script is:inline set:html={forwardScript} />}
     <script is:inline set:html={themeScript} />
     <script is:inline set:html={disclosureScript} />

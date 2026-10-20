@@ -1,6 +1,6 @@
 @font-face {
   font-family: "Archivo";
-  src: url("/fonts/Archivo-latin.woff2") format("woff2");
+  src: url("../assets/fonts/Archivo-latin.woff2") format("woff2");
   font-weight: 400 600;
   font-stretch: 100%;
   font-style: normal;
@@ -12,7 +12,7 @@
 
 @font-face {
   font-family: "Archivo";
-  src: url("/fonts/Archivo-latinExt.woff2") format("woff2");
+  src: url("../assets/fonts/Archivo-latinExt.woff2") format("woff2");
   font-weight: 400 600;
   font-stretch: 100%;
   font-style: normal;
@@ -25,7 +25,7 @@
 
 @font-face {
   font-family: "Archivo";
-  src: url("/fonts/ArchivoExpanded-600-latin.woff2") format("woff2");
+  src: url("../assets/fonts/ArchivoExpanded-600-latin.woff2") format("woff2");
   font-weight: 600;
   font-stretch: 125%;
   font-style: normal;
@@ -37,7 +37,7 @@
 
 @font-face {
   font-family: "Archivo";
-  src: url("/fonts/ArchivoExpanded-600-latinExt.woff2") format("woff2");
+  src: url("../assets/fonts/ArchivoExpanded-600-latinExt.woff2") format("woff2");
   font-weight: 600;
   font-stretch: 125%;
   font-style: normal;
@@ -50,7 +50,7 @@
 
 @font-face {
   font-family: "Archivo";
-  src: url("/fonts/ArchivoSemiCondensed-latin.woff2") format("woff2");
+  src: url("../assets/fonts/ArchivoSemiCondensed-latin.woff2") format("woff2");
   font-weight: 400 600;
   font-stretch: 87.5%;
   font-style: normal;
@@ -62,7 +62,7 @@
 
 @font-face {
   font-family: "Archivo";
-  src: url("/fonts/ArchivoSemiCondensed-latinExt.woff2") format("woff2");
+  src: url("../assets/fonts/ArchivoSemiCondensed-latinExt.woff2") format("woff2");
   font-weight: 400 600;
   font-stretch: 87.5%;
   font-style: normal;
