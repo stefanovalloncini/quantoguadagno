@@ -258,6 +258,22 @@ describe("splitSalaryYear", () => {
     expect(splitOf({ ...LOMBARDIA_2026, paymentFrequency: 12 })).toBeNull();
   });
 
+  it("keeps the extra month as it is with detrazioni, which stay in the ordinary months", () => {
+    const withSpouse = splitOf({
+      ...LOMBARDIA_2026,
+      dependents: { hasSpouse: true, spouseIncome: 0, childrenOver21: 0, otherDependents: 0 },
+    });
+    expect(withSpouse?.extraMonth).toBe(1613.62);
+    expect(withSpouse?.ordinaryMonth).toBeGreaterThan(1817.66);
+  });
+
+  it("drops the split above the INPS massimale, unless the whole pay carries contributions", () => {
+    const above: SalaryInput = { ...LOMBARDIA_2026, grossAnnual: 150_000 };
+    expect(splitOf(above)).toBeNull();
+    expect(splitOf({ ...LOMBARDIA_2026, grossAnnual: 122_295 })).not.toBeNull();
+    expect(splitOf({ ...above, insuredBefore1996: true })?.extraMonth).toBe(6581.39);
+  });
+
   it("keeps the split with benefits that stay untaxed", () => {
     const vouchers: SalaryInput = {
       ...LOMBARDIA_2026,

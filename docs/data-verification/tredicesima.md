@@ -40,15 +40,16 @@ la regola nel testo unico e citarne l'articolo.
   relativamente al quale le ritenute sono versate nel mese di dicembre" (art. 50, comma 4,
   D.Lgs. 446/1997 per la regionale; art. 1, comma 5, D.Lgs. 360/1998 per la comunale, il cui acconto
   si trattiene in nove rate da marzo).
-
 - **Somma del taglio del cuneo fiscale** (dal 2025, con un reddito fino a 20.000 €): la legge la
   determina "applicando al reddito di lavoro dipendente del contribuente la percentuale
   corrispondente" (art. 1, comma 4, L. 207/2024), cioè il 7,1%, il 5,3% o il 4,8% secondo il reddito
-  dell'anno. A differenza della detrazione aggiuntiva del comma 6 non è "rapportata al periodo di
-  lavoro", e la Circolare dell'Agenzia delle Entrate n. 4/E del 16 maggio 2025 precisa che il
-  sostituto d'imposta "riconosce la somma spettante applicando tale percentuale al reddito
-  effettivamente corrisposto mensilmente" (frase ripresa nella Risposta n. 7/2026). La mensilità
-  aggiuntiva è reddito corrisposto nel suo mese: la somma si aggiunge anche lì.
+  dell'anno. Non è una detrazione dall'imposta e, a differenza della detrazione aggiuntiva del
+  comma 6, non è "rapportata al periodo di lavoro": la lettera b) qui sopra non la riguarda. Il
+  sostituto d'imposta la riconosce "all'atto dell'erogazione delle retribuzioni" (comma 7) e, precisa
+  la Circolare dell'Agenzia delle Entrate n. 4/E del 16 maggio 2025 (pagine 14 e 15), "applicando
+  tale percentuale al reddito effettivamente corrisposto mensilmente" (frase ripresa nella Risposta
+  n. 7/2026). La mensilità aggiuntiva è retribuzione corrisposta nel suo mese: la somma si aggiunge
+  anche lì.
 
 Con 14 mensilità la tredicesima e la quattordicesima si pagano in mesi diversi e ognuna si tassa da
 sola con gli stessi scaglioni mensili.
@@ -148,9 +149,10 @@ Per la mensilità aggiuntiva il calcolo usa:
 
 - l'aliquota INPS che il calcolo dell'anno ha applicato davvero, prima dello sconto del 2024:
   contributi più sconto, diviso il lordo. Comprende apprendistato, settore pubblico, aziende con più
-  di 15 dipendenti, l'1% oltre la prima fascia di retribuzione e il massimale. Sopra la prima fascia
-  (56.224 € nel 2026) è più alta del 9,19% del calcolatore della tredicesima: con 60.000 € la
-  tredicesima dello stipendio netto è 3.037,34 €, quella del calcolatore della tredicesima 3.039,00 €;
+  di 15 dipendenti e l'1% oltre la prima fascia di retribuzione. Sopra la prima fascia (56.224 € nel 2026) è più alta del 9,19% del calcolatore della tredicesima: con 60.000 € la tredicesima dello
+  stipendio netto è 3.037,34 €, quella del calcolatore della tredicesima 3.039,00 €. L'1% in più
+  entra come media dell'anno; se la busta paga lo fa cadere tutto sulla mensilità aggiuntiva, la
+  differenza è al massimo l'1% di 56.224 / 13 = 43,25 € di contributi, meno di 30 € di netto;
 - gli scaglioni IRPEF dell'anno, divisi per 12;
 - la percentuale della somma del cuneo scelta sul reddito imponibile del calcolo dell'anno.
 
@@ -178,9 +180,10 @@ detrazioni, e il conguaglio pesa sui mesi normali.
 
 ### Quando la divisione non si mostra
 
-La mensilità aggiuntiva segue la regola qui sopra solo se nell'anno non c'è niente che si paga, si
-tassa o si esonera con un calendario suo. Se il calcolo ha una di queste voci, lo stipendio netto
-mostra solo la media:
+La divisione è fedele solo quando la mensilità aggiuntiva segue la regola qui sopra: nell'anno non
+c'è niente che si paga, si tassa, si esonera o si ferma in mesi suoi. Se il calcolo ha una di queste
+voci, lo stipendio netto mostra solo la media (`isPlainSalary` e il controllo del massimale in
+`splitSalaryYear`):
 
 - premio di risultato: arriva una volta l'anno, con la sua imposta sostitutiva;
 - benefit tassati (auto aziendale, buoni pasto o welfare oltre le soglie): entrano nel reddito dei
@@ -189,17 +192,37 @@ mostra solo la media:
   per intero;
 - esonero contributivo delle madri lavoratrici: ha un tetto annuo e non sappiamo come si distribuisce
   tra i mesi;
-- previdenza complementare: il contributo riduce l'imponibile dei mesi in cui lo versi.
+- previdenza complementare: il contributo riduce l'imponibile dei mesi in cui lo versi;
+- una RAL oltre il massimale contributivo, per chi non ha contributi prima del 1996 (122.295 € nel
+  2026, vedi `inps.md`). La legge stabilisce "un massimale annuo della base contributiva e
+  pensionabile" (art. 2, comma 18, L. 335/1995): i contributi si fermano quando il lordo dell'anno lo
+  raggiunge, e la mensilità aggiuntiva ne paga meno della media, o nessuno, secondo il mese in cui
+  arriva. Con 150.000 € su 13 mensilità il lordo dell'anno passa il massimale a novembre
+  (10 × 11.538,46 = 115.384,60 €, 11 × 11.538,46 = 126.923,06 €): la tredicesima di dicembre non paga
+  contributi e netta 11.538,46 − 4.311,54 di IRPEF = 7.226,92 €, mentre l'aliquota media
+  (11.899,62 / 150.000) le darebbe 6.705,17 €.
 
 Familiari a carico e spese detraibili non cambiano la mensilità aggiuntiva, perché sono detrazioni:
-restano nel mese normale. I benefit che restano sotto le soglie di esenzione non cambiano niente.
+nel calcolo restano nel mese normale. I benefit che restano sotto le soglie di esenzione non cambiano
+niente.
+Chi ha contributi prima del 1996 paga su tutta la retribuzione e la divisione resta:
+
+- 150.000 €, 13 mensilità, 2026: contributi dell'anno 56.224 × 9,19% + 93.776 × 10,19% = 5.166,99 +
+  9.555,77 = 14.722,76 €, cioè il 9,8152% del lordo
+- lordo 11.538,46 €, INPS 11.538,46 × 9,8152% = 1.132,52 €, imponibile 10.405,94 €
+- IRPEF = 536,667 + 605,000 + (10.405,94 − 4.166,667) × 43% = 1.141,667 + 2.682,887 = 3.824,554 →
+  3.824,55 €
+- mensilità aggiuntiva **6.581,39 €**
 
 ## Da verificare
 
-La Circolare 4/E/2025 e la Risposta 7/2026 non nominano la tredicesima: dicono che la percentuale si
-applica al reddito corrisposto ogni mese. Il calcolatore la applica anche alla mensilità aggiuntiva.
-Se una fonte ufficiale dicesse il contrario, quella parte della somma arriverebbe con il conguaglio:
-il netto dell'anno non cambierebbe, cambierebbe solo il mese in cui la ricevi.
+Nessun testo ufficiale nomina la tredicesima a proposito della somma del cuneo. La legge la fa
+riconoscere "all'atto dell'erogazione delle retribuzioni" (art. 1, comma 7, L. 207/2024), la
+Circolare 4/E/2025 e la Risposta 7/2026 dicono che la percentuale si applica al reddito corrisposto
+ogni mese, e la mensilità aggiuntiva è retribuzione corrisposta nel suo mese: il calcolatore la
+applica anche lì. Se un datore di lavoro la riconoscesse solo sulle mensilità ordinarie, quella parte
+della somma arriverebbe con il conguaglio: il netto dell'anno non cambierebbe, cambierebbe solo il
+mese in cui la ricevi.
 
 ## Correzione di ottobre 2026
 
@@ -228,6 +251,10 @@ invece di 3.039,00 € (650,00 € in meno). Con 40.000 € la differenza era di
   https://www.agenziaentrate.gov.it/portale/documents/20143/8410823/Circolare+lavoro+dipendente+LB2025+DD+IRPEF+n.+4+del+16+maggio+2025.pdf/36979eaa-9fc5-a4ec-a7aa-136497c53f91
 - Agenzia delle Entrate, Risposta n. 7/2026:
   https://www.agenziaentrate.gov.it/portale/documents/20143/9570465/Risposta+n.+7_2026/6039a428-3237-b76b-9661-7549b9e798ec
+- Art. 2, comma 18, L. 335/1995 (massimale annuo), Normattiva:
+  https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:legge:1995-08-08;335~art2-com18!vig=2026-10-20
+- Circolare INPS n. 6 del 30 gennaio 2026, massimale e prima fascia del 2026 (come in `inps.md`):
+  https://www.inps.it/it/it/inps-comunica/atti/circolari-messaggi-e-normativa/dettaglio.circolari-e-messaggi.2026.01.circolare-numero-6-del-30-01-2026_15151.html
 - Art. 51 TUIR (DPR 917/1986).
 
 ## Ultima verifica

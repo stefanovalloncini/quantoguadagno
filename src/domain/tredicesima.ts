@@ -132,6 +132,17 @@ export function isPlainSalary(breakdown: SalaryBreakdown): boolean {
   );
 }
 
+// The INPS massimale is annual (art. 2 c. 18 L. 335/1995): once the year's pay
+// reaches it no more contributions are due, so an extra month paid after that
+// point pays fewer than the year's average rate, or none.
+function passesMassimale(
+  input: SalaryInput,
+  breakdown: SalaryBreakdown,
+  massimale: number,
+): boolean {
+  return input.insuredBefore1996 !== true && breakdown.grossAnnual > massimale;
+}
+
 // The extra month pays the INPS rate the year applied before the 2024 cut, which
 // left the extra months out (art. 1 c. 15 L. 213/2023).
 export function splitSalaryYear(input: SalaryInput, breakdown: SalaryBreakdown): YearSplit | null {
@@ -139,6 +150,7 @@ export function splitSalaryYear(input: SalaryInput, breakdown: SalaryBreakdown):
   if (mensilita <= MONTHS_PER_YEAR || breakdown.grossAnnual <= 0) return null;
   if (!isPlainSalary(breakdown)) return null;
   const cfg = getTaxConfig(input.taxYear);
+  if (passesMassimale(input, breakdown, cfg.inps.massimale)) return null;
   const extra = calculateTredicesima({
     ral: breakdown.grossAnnual,
     mensilita,
