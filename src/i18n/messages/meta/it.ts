@@ -14,6 +14,9 @@ export const it = {
   "meta.forfettario.title": "Partita IVA forfettario",
   "meta.forfettario.description":
     "Calcola il reddito netto da fatturato nel regime forfettario, con coefficiente di redditività, imposta sostitutiva e contributi previdenziali.",
+  "meta.ordinario.title": "Partita IVA in regime ordinario",
+  "meta.ordinario.description":
+    "Calcola il netto di una partita IVA in regime ordinario, con contributi, IRPEF, detrazione per lavoro autonomo e addizionali, e confrontalo con il forfettario.",
   "meta.compoundInterest.title": "Interesse composto",
   "meta.compoundInterest.description":
     "Calcola quanto cresce un capitale nel tempo con versamenti periodici, rendimento annuo e inflazione attesa.",

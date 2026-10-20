@@ -9,6 +9,7 @@ export const ROUTE_PATHS = {
   comparison: { it: "/confronto-stipendi", en: "/en/compare-job-offers" },
   employerCost: { it: "/costo-azienda", en: "/en/employer-cost" },
   forfettario: { it: "/partita-iva-forfettario", en: "/en/forfettario-flat-tax" },
+  ordinario: { it: "/partita-iva-ordinario", en: "/en/ordinary-tax-regime" },
   apprenticeship: { it: "/progressione-apprendistato", en: "/en/apprenticeship-pay" },
   tfr: { it: "/tfr", en: "/en/tfr-severance-pay" },
   preavviso: { it: "/preavviso-dimissioni", en: "/en/resignation-notice" },

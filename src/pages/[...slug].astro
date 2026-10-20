@@ -14,6 +14,7 @@ import InflationCalculator from "@/islands/InflationCalculator.tsx";
 import InverseCalculator from "@/islands/InverseCalculator.tsx";
 import MethodPage from "@/islands/MethodPage.tsx";
 import NaspiCalculator from "@/islands/NaspiCalculator.tsx";
+import OrdinarioCalculator from "@/islands/OrdinarioCalculator.tsx";
 import PreavvisoCalculator from "@/islands/PreavvisoCalculator.tsx";
 import PrintPayslip from "@/islands/PrintPayslip.tsx";
 import SalaryHistory from "@/islands/SalaryHistory.tsx";
@@ -74,6 +75,9 @@ const home = getT(locale, "home");
         )}
         {island === "ForfettarioCalculator" && (
           <ForfettarioCalculator client:load locale={locale} messages={messages} />
+        )}
+        {island === "OrdinarioCalculator" && (
+          <OrdinarioCalculator client:load locale={locale} messages={messages} />
         )}
         {island === "ApprenticeshipCalculator" && (
           <ApprenticeshipCalculator client:load locale={locale} messages={messages} />

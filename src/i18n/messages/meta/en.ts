@@ -16,6 +16,9 @@ export const en: Record<MessageKey, string> = {
   "meta.forfettario.title": "Self-employed (forfettario)",
   "meta.forfettario.description":
     "Work out net income from invoiced revenue under the forfettario regime, with the profitability coefficient, substitute tax and pension contributions.",
+  "meta.ordinario.title": "Self-employed under the ordinary regime",
+  "meta.ordinario.description":
+    "Work out the net income of a self-employed worker under the ordinary regime, with contributions, IRPEF, the self-employment deduction and surcharges, and compare it with the forfettario.",
   "meta.compoundInterest.title": "Compound interest",
   "meta.compoundInterest.description":
     "Work out how a sum grows over time with periodic contributions, an annual return and expected inflation.",

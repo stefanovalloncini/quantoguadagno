@@ -39,9 +39,9 @@ const OLD_ROUTER_PATHS = [
   "/informazioni",
 ];
 
-const NEW_ITALIAN_PATHS = ["/come-calcoliamo-il-netto"];
+const NEW_ITALIAN_PATHS = ["/come-calcoliamo-il-netto", "/partita-iva-ordinario"];
 
-const NEW_ENGLISH_PATHS = ["/en/how-we-calculate-net-pay"];
+const NEW_ENGLISH_PATHS = ["/en/how-we-calculate-net-pay", "/en/ordinary-tax-regime"];
 
 const HANDOFF_ENGLISH_PATHS = [
   "/en",
@@ -180,6 +180,8 @@ describe("route table", () => {
       "comparison",
       "employerCost",
     ]);
+    const vat = groupedRoutes(isInNav).find((entry) => entry.group.id === "vat");
+    expect(vat?.routes.map((route) => route.id)).toEqual(["forfettario", "ordinario"]);
     const work = groupedRoutes(isInNav).find((entry) => entry.group.id === "work");
     expect(work?.routes.map((route) => route.id)).toEqual([
       "naspi",
@@ -249,6 +251,23 @@ describe("shared-link restore keys", () => {
       "p",
     ]);
     expect(restoreNamesFor(routeById("employerCost"))).toEqual(["l", "y", "t", "r", "k", "c", "m"]);
+  });
+
+  it("reads the ordinary regime parameters", () => {
+    expect(restoreNamesFor(routeById("ordinario"))).toEqual([
+      "f",
+      "s",
+      "y",
+      "r",
+      "k",
+      "c",
+      "g",
+      "o",
+      "m",
+      "q",
+      "a",
+      "n",
+    ]);
   });
 
   it("never lists a name twice within a route", () => {

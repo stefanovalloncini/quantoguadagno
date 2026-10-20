@@ -25,6 +25,9 @@ export const it = {
   "nav.employerCost.description": "Quanto costi all’azienda",
   "nav.forfettario": "Forfettario",
   "nav.forfettario.description": "Quanto resta del fatturato annuo nel regime forfettario",
+  "nav.ordinario": "Ordinario",
+  "nav.ordinario.description":
+    "Quanto resta dopo IRPEF e contributi, e il confronto con il forfettario",
   "nav.apprenticeship": "Apprendistato",
   "nav.apprenticeship.description": "La paga anno per anno durante l’apprendistato",
   "nav.tfr": "TFR",

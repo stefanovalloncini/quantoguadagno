@@ -17,6 +17,8 @@ import { it as salaryHistoryIt } from "./salaryHistory/it.ts";
 import { en as salaryHistoryEn } from "./salaryHistory/en.ts";
 import { it as forfettarioIt } from "./forfettario/it.ts";
 import { en as forfettarioEn } from "./forfettario/en.ts";
+import { it as ordinarioIt } from "./ordinario/it.ts";
+import { en as ordinarioEn } from "./ordinario/en.ts";
 import { it as compoundInterestIt } from "./compoundInterest/it.ts";
 import { en as compoundInterestEn } from "./compoundInterest/en.ts";
 import { it as naspiIt } from "./naspi/it.ts";
@@ -53,6 +55,7 @@ const CATALOGS = {
   apprenticeship: { it: apprenticeshipIt, en: apprenticeshipEn },
   salaryHistory: { it: salaryHistoryIt, en: salaryHistoryEn },
   forfettario: { it: forfettarioIt, en: forfettarioEn },
+  ordinario: { it: ordinarioIt, en: ordinarioEn },
   compoundInterest: { it: compoundInterestIt, en: compoundInterestEn },
   naspi: { it: naspiIt, en: naspiEn },
   preavviso: { it: preavvisoIt, en: preavvisoEn },

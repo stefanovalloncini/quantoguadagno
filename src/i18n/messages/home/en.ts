@@ -25,6 +25,9 @@ export const en: Record<MessageKey, string> = {
   "home.available.forfettario.title": "Forfettario",
   "home.available.forfettario.body":
     "What is left of your invoices after the flat tax and contributions.",
+  "home.available.ordinario.title": "Ordinary regime",
+  "home.available.ordinario.body":
+    "What is left of your fees after IRPEF and contributions, and with the forfettario.",
   "home.available.naspi.title": "NASpI",
   "home.available.naspi.body": "Amount and duration of the unemployment benefit.",
   "home.available.preavviso.title": "Resignation notice",

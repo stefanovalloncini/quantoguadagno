@@ -27,6 +27,9 @@ export const en: Record<MessageKey, string> = {
   "nav.employerCost.description": "What you cost your employer",
   "nav.forfettario": "Forfettario",
   "nav.forfettario.description": "What is left of your annual turnover under the flat-rate scheme",
+  "nav.ordinario": "Ordinary regime",
+  "nav.ordinario.description":
+    "What is left after IRPEF and contributions, compared with the forfettario",
   "nav.apprenticeship": "Apprenticeship",
   "nav.apprenticeship.description": "Your pay year by year during an apprenticeship",
   "nav.tfr": "Severance pay (TFR)",

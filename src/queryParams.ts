@@ -38,6 +38,21 @@ export const EMPLOYER_COST_PARAMS = {
   m: [],
 } as const satisfies QuerySpec;
 
+export const ORDINARIO_PARAMS = {
+  f: [],
+  s: [],
+  y: [],
+  r: [],
+  k: [],
+  c: [],
+  g: [],
+  o: [],
+  m: [],
+  q: [],
+  a: [],
+  n: [],
+} as const satisfies QuerySpec;
+
 export const APPRENTICESHIP_PARAMS = {
   l: ["lordo"],
 } as const satisfies QuerySpec;

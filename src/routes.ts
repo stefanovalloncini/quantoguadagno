@@ -9,6 +9,7 @@ import {
   EMPLOYEE_PARAMS,
   EMPLOYER_COST_PARAMS,
   INVERSE_PARAMS,
+  ORDINARIO_PARAMS,
   queryNamesOf,
   type QuerySpec,
 } from "./queryParams.ts";
@@ -152,6 +153,20 @@ const ROUTE_TABLE = {
     meta: { title: "meta.forfettario.title", description: "meta.forfettario.description" },
     card: { title: "home.available.forfettario.title", body: "home.available.forfettario.body" },
     legacy: [{ from: "/calcolo-partita-iva", status: 301 }],
+  },
+  ordinario: {
+    path: ROUTE_PATHS.ordinario,
+    kind: "calculator",
+    island: "OrdinarioCalculator",
+    jsBudgetKb: 35,
+    namespaces: ["form", "ordinario"],
+    label: "nav.ordinario",
+    navDescription: "nav.ordinario.description",
+    group: "vat",
+    nav: 2,
+    meta: { title: "meta.ordinario.title", description: "meta.ordinario.description" },
+    card: { title: "home.available.ordinario.title", body: "home.available.ordinario.body" },
+    restore: ORDINARIO_PARAMS,
   },
   apprenticeship: {
     path: ROUTE_PATHS.apprenticeship,

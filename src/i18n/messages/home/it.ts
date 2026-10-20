@@ -26,6 +26,9 @@ export const it = {
   "home.available.forfettario.title": "Forfettario",
   "home.available.forfettario.body":
     "Quanto resta del fatturato con l’imposta sostitutiva e i contributi.",
+  "home.available.ordinario.title": "Regime ordinario",
+  "home.available.ordinario.body":
+    "Quanto resta di compensi e ricavi con IRPEF e contributi, e quanto con il forfettario.",
   "home.available.naspi.title": "NASpI",
   "home.available.naspi.body": "Importo e durata dell’indennità di disoccupazione.",
   "home.available.preavviso.title": "Preavviso di dimissioni",
