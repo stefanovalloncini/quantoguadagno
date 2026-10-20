@@ -173,6 +173,29 @@ export const it = {
   "ordinario.compare.overTitle": "Oltre il limite del forfettario",
   "ordinario.compare.over":
     "Con {revenue} di compensi o ricavi superi il limite di {limit} all’anno: il forfettario non si applica.",
+
+  "ordinario.topics.title": "Per capire il regime ordinario",
+  "ordinario.topic.payments": "Saldo e acconti: quando si paga",
+  "ordinario.topic.payments.when":
+    "Il calcolo mostra imposte e contributi di un anno, non le date in cui li paghi. Le imposte di un anno si versano l’anno dopo, con la dichiarazione dei redditi: il saldo entro il 30 giugno, insieme al primo acconto per l’anno in corso, e il secondo acconto entro il 30 novembre.",
+  "ordinario.topic.payments.advance":
+    "L’acconto IRPEF è pari all’imposta dell’anno prima, tolte le ritenute, e non è dovuto se l’importo è inferiore a 52 €. Si versa il 40% a giugno e il resto a novembre, oppure metà e metà se applichi gli indici sintetici di affidabilità (ISA). Se prevedi un’imposta più bassa, puoi calcolare gli acconti su quella.",
+  "ordinario.topic.payments.withholding":
+    "Se sei un professionista e fatturi ad aziende o ad altri professionisti, il cliente trattiene il 20% dei compensi come ritenuta d’acconto e lo versa per te: è IRPEF già pagata, che si toglie dal saldo e dagli acconti.",
+  "ordinario.topic.payments.firstYear":
+    "Nel primo anno di attività, se l’anno prima non avevi IRPEF da versare, non paghi acconti. L’anno dopo, entro il 30 giugno, versi il saldo di tutto il primo anno e il primo acconto del secondo.",
+  "ordinario.topic.payments.others":
+    "L’addizionale comunale ha un acconto del 30%, la regionale si paga tutta con il saldo. I contributi della Gestione Separata seguono le scadenze delle imposte, con saldo e due acconti. Artigiani e commercianti pagano il contributo minimo in quattro rate, a maggio, agosto, novembre e febbraio, e la parte oltre il minimale con le imposte.",
+  "ordinario.topic.deduction": "La detrazione per lavoro autonomo",
+  "ordinario.topic.deduction.amounts":
+    "Dall’IRPEF lorda si toglie una detrazione che dipende dal reddito prima dei contributi: {base} fino a {first}, poi scende fino a {fixed} a {second} e si azzera a {last}. Con un reddito oltre {above} e fino a {upTo} aumenta di {bonus} (art. 13, commi 5 e 5-ter, TUIR).",
+  "ordinario.topic.deduction.limits":
+    "La detrazione non diventa un rimborso: se supera l’imposta, la parte in più si perde. Non si somma alle detrazioni per lavoro dipendente o per pensione.",
+  "ordinario.topic.scope": "Cosa resta fuori dal calcolo",
+  "ordinario.topic.scope.income":
+    "Il calcolo vale se la partita IVA è il tuo unico reddito. Con uno stipendio o una pensione i redditi si sommano e l’IRPEF sale.",
+  "ordinario.topic.scope.missing":
+    "Non considera le perdite degli anni precedenti, gli altri oneri deducibili e detraibili, le riduzioni dei contributi di artigiani e commercianti e i minimi delle casse professionali. Per le imprese vale la contabilità semplificata: in contabilità ordinaria la detrazione per lavoro autonomo non spetta.",
 } as const;
 
 export type MessageKey = keyof typeof it;

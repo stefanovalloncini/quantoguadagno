@@ -105,15 +105,21 @@ reddito di lavoro dipendente (art. 1 c. 4 L. 207/2024).
 ### Saldo e acconti
 
 Il calcolatore dà le imposte e i contributi di competenza dell'anno, non le date in cui si pagano.
-La pagina lo spiega in un approfondimento, con questi fatti:
+La pagina lo spiega nell'approfondimento "Saldo e acconti: quando si paga", con questi fatti:
 
 - saldo dell'anno prima e primo acconto entro il 30 giugno, o entro il 30 luglio con lo 0,40% in
   più; secondo acconto entro il 30 novembre (art. 17 c. 1 e 2 D.P.R. 435/2001; istruzioni Redditi
   PF 2026, fascicolo 1, par. 7);
-- l'acconto IRPEF è pari all'imposta dell'anno prima (rigo RN34, "differenza") e non è dovuto se
-  questa è inferiore a 52 €; si versa il 40% con la prima rata e il resto con la seconda, il 50%
-  per i soggetti che applicano gli ISA (art. 17 c. 3 D.P.R. 435/2001); chi prevede un'imposta più
-  bassa può versare acconti più bassi (istruzioni Redditi PF 2026, rigo RN62);
+- l'acconto IRPEF è pari all'imposta dell'anno prima tolte le ritenute subite (rigo RN34,
+  "differenza") e non è dovuto se questa è inferiore a 52 €; si versa il 40% con la prima rata e
+  il resto con la seconda, il 50% per i soggetti che applicano gli ISA (art. 17 c. 3 D.P.R.
+  435/2001); chi prevede un'imposta più bassa può versare acconti più bassi (istruzioni Redditi
+  PF 2026, rigo RN62);
+- chi paga compensi di lavoro autonomo come sostituto d'imposta (aziende, altri professionisti)
+  trattiene una ritenuta d'acconto del 20% (art. 25 c. 1 D.P.R. 600/1973; l'aliquota è passata
+  dal 19% al 20% con l'art. 21 c. 11 L. 449/1997, riportato su Normattiva nelle note
+  all'articolo): è IRPEF versata in anticipo, che nel rigo RN34 si toglie dall'imposta e quindi
+  riduce saldo e acconti;
 - quindi nel primo anno di attività, se nella dichiarazione dell'anno prima non c'era IRPEF da
   versare, non ci sono acconti; l'anno dopo, entro il 30 giugno, si versano il saldo di tutta
   l'imposta del primo anno e il primo acconto del secondo;
@@ -240,6 +246,10 @@ Ricavi 20.000 €, costi 14.000 €, attività da luglio.
 - TUIR, art. 8 (reddito complessivo), art. 10 c. 1 lett. e) (contributi tra gli oneri deducibili),
   art. 11 c. 1 (imposta lorda sul reddito al netto degli oneri deducibili), art. 54 c. 1 (reddito
   di lavoro autonomo) e art. 66 c. 1 (imprese minori), su Normattiva.
+- D.P.R. 29 settembre 1973, n. 600, art. 25 c. 1 (ritenuta d'acconto sui compensi di lavoro
+  autonomo), su Normattiva con le note di aggiornamento (art. 21 c. 11 L. 27 dicembre 1997, n.
+  449, che porta l'aliquota al 20%):
+  https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.del.presidente.della.repubblica:1973-09-29;600~art25
 - D.Lgs. 15 dicembre 1997, n. 446, art. 50 c. 2 e 5 (addizionale regionale):
   https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:1997-12-15;446~art50
 - D.Lgs. 28 settembre 1998, n. 360, art. 1 c. 4 (addizionale comunale):

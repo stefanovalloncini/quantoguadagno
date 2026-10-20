@@ -60,7 +60,7 @@ afterEach(() => {
 });
 
 describe("OrdinarioCalculator", () => {
-  it("renders the default result and the comparison on the server", () => {
+  it("renders the default result, the comparison and the topics on the server", () => {
     const html = renderToString(<OrdinarioCalculator locale="it" messages={MESSAGES.it} />);
     expect(html).toContain("Netto annuo");
     expect(html).toMatch(/22\.186,97\s€/);
@@ -68,6 +68,8 @@ describe("OrdinarioCalculator", () => {
     expect(html).toMatch(/6\.958,76\s€ di IRPEF lorda meno 227,25\s€ di detrazione/);
     expect(html).toContain("Con il forfettario");
     expect(html).toMatch(/25\.507,79\s€/);
+    expect(html).toContain("Per capire il regime ordinario");
+    expect(html).toMatch(/1\.265\s€ fino a 5\.500\s€, poi scende fino a 500\s€ a 28\.000\s€/);
     expect(html).not.toContain("Ipotesi del calcolo");
   });
 

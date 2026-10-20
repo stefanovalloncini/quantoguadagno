@@ -21,6 +21,7 @@ import { useHydratedFormValues } from "@/islands/runtime/useHydratedFormValues.t
 import { ComparisonBand } from "./ComparisonBand.tsx";
 import { ExtrasFields, loadGroupFields } from "./ExtrasFields.tsx";
 import { OrdinarioResult } from "./OrdinarioResult.tsx";
+import { OrdinarioTopics } from "./OrdinarioTopics.tsx";
 import { ordinarioRecaps } from "./recaps.ts";
 import { isRevenueEmpty, type OrdinarioField } from "./state.ts";
 import { useOrdinarioController, type OrdinarioUpdate } from "./useOrdinarioController.ts";
@@ -260,6 +261,7 @@ export function OrdinarioView() {
         }
       />
       {result !== null && figureState !== "empty" && <ComparisonBand result={result} f={f} />}
+      <OrdinarioTopics year={state.year} f={f} />
       {result !== null && (
         <BottomBar
           label={t("ordinario.result.label")}

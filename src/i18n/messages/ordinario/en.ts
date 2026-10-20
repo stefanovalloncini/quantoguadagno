@@ -175,4 +175,27 @@ export const en: Record<MessageKey, string> = {
   "ordinario.compare.overTitle": "Above the forfettario limit",
   "ordinario.compare.over":
     "With {revenue} of fees or revenue you are above the limit of {limit} a year: the forfettario does not apply.",
+
+  "ordinario.topics.title": "Understanding the ordinary regime",
+  "ordinario.topic.payments": "Balance and advance payments: when you pay",
+  "ordinario.topic.payments.when":
+    "The calculation shows a year’s taxes and contributions, not the dates you pay them. A year’s taxes are paid the following year, with the tax return: the balance by 30 June, together with the first advance for the current year, and the second advance by 30 November.",
+  "ordinario.topic.payments.advance":
+    "The IRPEF advance equals the previous year’s tax minus withholdings, and is not due if the amount is below €52. You pay 40% in June and the rest in November, or half and half if you apply the synthetic reliability indices (ISA). If you expect lower tax, you can base the advances on it.",
+  "ordinario.topic.payments.withholding":
+    "If you are a professional and invoice businesses or other professionals, the client withholds 20% of your fees as ritenuta d’acconto and pays it for you: it is IRPEF already paid, which comes off the balance and the advances.",
+  "ordinario.topic.payments.firstYear":
+    "In your first year of activity, if you had no IRPEF to pay the year before, you pay no advances. The following year, by 30 June, you pay the balance for the whole first year and the first advance for the second.",
+  "ordinario.topic.payments.others":
+    "The municipal surcharge has a 30% advance, the regional one is paid in full with the balance. Gestione Separata contributions follow the tax deadlines, with a balance and two advances. Artigiani and Commercianti pay the minimum contribution in four instalments, in May, August, November and February, and the part above the minimum with the taxes.",
+  "ordinario.topic.deduction": "The self-employment deduction",
+  "ordinario.topic.deduction.amounts":
+    "A deduction comes off gross IRPEF, based on income before contributions: {base} up to {first}, then it falls to {fixed} at {second} and reaches zero at {last}. With income above {above} and up to {upTo} it goes up by {bonus} (art. 13, paragraphs 5 and 5-ter, TUIR).",
+  "ordinario.topic.deduction.limits":
+    "The deduction never becomes a refund: if it is larger than the tax, the excess is lost. It does not add to the deductions for employment or pension income.",
+  "ordinario.topic.scope": "What the calculation leaves out",
+  "ordinario.topic.scope.income":
+    "The calculation holds if the VAT number is your only income. With a salary or a pension the incomes add up and IRPEF rises.",
+  "ordinario.topic.scope.missing":
+    "It leaves out losses from previous years, other deductible expenses and tax credits, the contribution reductions for Artigiani and Commercianti and the minimums of professional funds. Businesses are assumed to keep simplified accounts: with ordinary accounts the self-employment deduction does not apply.",
 };
