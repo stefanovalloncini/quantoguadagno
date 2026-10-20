@@ -4,7 +4,11 @@
 /sw.js
   Cache-Control: no-cache
 
+/speculation-rules.json
+  Content-Type: application/speculationrules+json
+
 /*
+  Speculation-Rules: "/speculation-rules.json"
   Content-Security-Policy: frame-ancestors 'none'
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
