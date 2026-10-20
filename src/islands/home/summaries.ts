@@ -1,30 +1,14 @@
-import type { RegionText } from "@/components/form/regionText.ts";
-import { regionSelectKey } from "@/components/form/regionText.ts";
-import type { AssumptionItem } from "@/components/result/Assumptions.tsx";
-import type { ComunaleRule } from "@/data/index.ts";
 import type { TranslateFn } from "@/i18n/react.tsx";
-import type { EmployeeResult } from "./compute.ts";
 import { isMadreLavoratriceEligible } from "@/domain/specialConditionsCalculations.ts";
 import { getTaxConfig } from "@/domain/taxConfig.ts";
 import { contractAssumption } from "./derive.ts";
-import type { MunicipalMode } from "./ledgerRows.tsx";
 import type { EmployeeValues } from "./state.ts";
 import type { ViewFormat } from "./viewFormat.tsx";
-import { IDS, type ViewGroup } from "./viewIds.ts";
+import type { ViewGroup } from "./viewIds.ts";
 
 export interface SummaryContext {
   readonly t: TranslateFn;
   readonly f: ViewFormat;
-  readonly regions: RegionText;
-  readonly municipalMode: MunicipalMode;
-}
-
-export interface Assumption extends AssumptionItem {
-  readonly group?: ViewGroup;
-}
-
-function ratesOfRule(rule: ComunaleRule): readonly number[] {
-  return rule.brackets === undefined ? [rule.rate] : rule.brackets.map((bracket) => bracket.rate);
 }
 
 export function contractText(
@@ -59,7 +43,7 @@ export function dependentsText(values: EmployeeValues, { t, f }: SummaryContext)
       ? [t("employee.part.others", { count: dependents.otherDependents })]
       : []),
   ];
-  return f.capitalize(t("employee.assumption.dependents", { list: f.list(parts) }));
+  return f.capitalize(t("employee.recap.dependents", { list: f.list(parts) }));
 }
 
 export function expensesText(values: EmployeeValues, { t, f }: SummaryContext): string | null {
@@ -130,114 +114,6 @@ export function benefitsText(values: EmployeeValues, { t, f }: SummaryContext): 
     ...(premio === null ? [] : [t("employee.part.premio", { amount: f.money(premio.amount) })]),
   ];
   return f.capitalize(f.list(parts));
-}
-
-function localItem(result: EmployeeResult, context: SummaryContext): Assumption {
-  const { t, f, municipalMode } = context;
-  const { municipal } = result;
-  const base = { id: "comune", changeLabel: t("employee.change.comune") };
-  if (municipal.kind === "manual") {
-    const manual = municipalMode === "manual";
-    return {
-      ...base,
-      targetId: manual ? IDS.municipalRate : IDS.comune,
-      text: t(manual ? "employee.assumption.rateManual" : "employee.assumption.rateDefault", {
-        rate: f.percent(municipal.rate),
-      }),
-    };
-  }
-  const rates = ratesOfRule(municipal.rule).map((rate) => rate / 100);
-  const min = Math.min(...rates);
-  const max = Math.max(...rates);
-  const name = municipal.comune.name;
-  const rate =
-    min === max
-      ? f.percent(max)
-      : t("comune.option.range", { min: f.percent(min).replace("%", ""), max: f.percent(max) });
-  return {
-    ...base,
-    targetId: IDS.comune,
-    text:
-      max === 0
-        ? t("employee.assumption.comuneZero", { name })
-        : t("employee.assumption.comune", { name, rate }),
-  };
-}
-
-export function assumptionItems(
-  result: EmployeeResult,
-  context: SummaryContext,
-): readonly Assumption[] {
-  const { t, regions } = context;
-  const { values } = result;
-  const special = specialText(values, context);
-  const benefits = benefitsText(values, context);
-  return [
-    {
-      id: "year",
-      text: t("employee.assumption.year", { year: values.taxYear }),
-      changeLabel: t("employee.change.year"),
-      targetId: `${IDS.year}-${String(values.taxYear)}`,
-    },
-    {
-      id: "region",
-      text: t("employee.assumption.region", {
-        region: regionSelectKey(values.regionCode),
-        name: regions.name(values.regionCode),
-      }),
-      changeLabel: t("employee.change.region"),
-      targetId: IDS.region,
-    },
-    localItem(result, context),
-    {
-      id: "frequency",
-      text: t("employee.assumption.frequency", { count: values.paymentFrequency }),
-      changeLabel: t("employee.change.frequency"),
-      targetId: `${IDS.frequency}-${String(values.paymentFrequency)}`,
-    },
-    {
-      id: "contract",
-      text: contractText(values, context, false),
-      changeLabel: t("employee.change.contract"),
-      targetId: `${IDS.contract}-${values.contractType}`,
-      group: "contract",
-    },
-    {
-      id: "dependents",
-      text: dependentsText(values, context) ?? t("employee.assumption.noDependents"),
-      changeLabel: t("employee.change.dependents"),
-      targetId: IDS.hasSpouse,
-      group: "dependents",
-    },
-    {
-      id: "expenses",
-      text: expensesText(values, context) ?? t("employee.assumption.noExpenses"),
-      changeLabel: t("employee.change.expenses"),
-      targetId: IDS.mortgageInterest,
-      group: "expenses",
-    },
-    ...(special === null
-      ? []
-      : [
-          {
-            id: "special",
-            text: special,
-            changeLabel: t("employee.change.special"),
-            targetId: IDS.impatriati,
-            group: "special" as const,
-          },
-        ]),
-    {
-      id: "benefits",
-      text: benefits ?? t("employee.assumption.noBenefits"),
-      changeLabel: t("employee.change.benefits"),
-      targetId:
-        values.fringeBenefits === null && values.premioRisultato !== null
-          ? IDS.premio
-          : IDS.mealVoucherValue,
-      group: "benefits",
-    },
-  ];
 }
 
 export interface GroupRecap {

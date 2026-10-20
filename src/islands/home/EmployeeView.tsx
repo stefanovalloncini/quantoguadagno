@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { flushSync } from "react-dom";
 import { ComuneField } from "@/components/form/ComuneField.tsx";
 import { afterMessages, amountAfter, useTyping } from "@/components/form/amountAfter.ts";
 import { Field, FieldAlt } from "@/components/form/Field.tsx";
@@ -35,7 +34,7 @@ import {
   type EmployeeState,
   type EmployeeTextField,
 } from "./state.ts";
-import { groupRecaps, type Assumption } from "./summaries.ts";
+import { groupRecaps } from "./summaries.ts";
 import { valuesToVerify } from "./trust.ts";
 import { percentText } from "./fields.ts";
 import { employeeToQuery } from "./url.ts";
@@ -60,26 +59,11 @@ function rateDiffersFromDefault(text: string, state: EmployeeState, locale: "it"
   );
 }
 
-const FOCUS_ATTEMPTS = 30;
-
 function flatRateOf(lookup: ComuneLookup, year: number): number | null {
   if (lookup.status !== "ready") return null;
   const found = comunaleRuleFor(lookup.comune, year);
   if (found?.rule.rate === undefined) return null;
   return found.rule.rate / 100;
-}
-
-function focusWhenPresent(id: string, attempt = 0): void {
-  const element = document.getElementById(id);
-  if (element !== null) {
-    element.focus();
-    return;
-  }
-  if (attempt < FOCUS_ATTEMPTS) {
-    window.requestAnimationFrame(() => {
-      focusWhenPresent(id, attempt + 1);
-    });
-  }
 }
 
 function whenIdle(task: () => void): () => void {
@@ -185,19 +169,6 @@ export function EmployeeView() {
     return error === undefined ? undefined : t(error.key, { ...error.values });
   };
 
-  const goTo = useCallback((targetId: string, group: ViewGroup | undefined) => {
-    if (group !== undefined) {
-      flushSync(() => {
-        setOpenGroups((previous) => ({ ...previous, [group]: true }));
-      });
-    }
-    focusWhenPresent(targetId);
-  }, []);
-
-  const onAssumptionChange = (item: Assumption) => {
-    goTo(item.targetId, item.group);
-  };
-
   const grossAfter =
     shown.gross === undefined
       ? amountAfter({
@@ -240,12 +211,7 @@ export function EmployeeView() {
   const recaps =
     result === null
       ? null
-      : groupRecaps(result.values, derived?.groups ?? activeFallback, {
-          t,
-          f,
-          regions,
-          municipalMode,
-        });
+      : groupRecaps(result.values, derived?.groups ?? activeFallback, { t, f });
 
   const onFieldBlur = (field: EmployeeTextField) => {
     blurErrors.onBlur(field);
@@ -381,7 +347,6 @@ export function EmployeeView() {
             regions={regions}
             f={f}
             valueRef={setFigureValue}
-            onChange={onAssumptionChange}
           />
         }
         rest={

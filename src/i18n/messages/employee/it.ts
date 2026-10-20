@@ -18,9 +18,9 @@ export const it = {
   "employee.result.annual": "Netto annuo {amount}",
   "employee.result.split":
     "Mese normale {ordinary}, {count, plural, =1 {tredicesima {extra}} =2 {tredicesima e quattordicesima {extra} ciascuna} other {mensilità aggiuntive {extra} ciascuna}}",
-  "employee.result.withheld": "Trattenute: {share} del lordo ({amount} su {gross}).",
+  "employee.result.withheld": "Trattenute: {amount} all’anno, il {share} del lordo.",
   "employee.result.withheldCredits":
-    "Trattenute: {share} del lordo ({amount} su {gross}). Crediti in busta paga: {credits}, già compresi nel netto.",
+    "Trattenute: {amount} all’anno, il {share} del lordo. Crediti in busta paga: {credits}, già compresi nel netto.",
   "employee.result.empty": "Inserisci la RAL per vedere il netto.",
   "employee.result.fix": "Correggi i valori segnati per vedere il netto.",
   "employee.result.staleGross":
@@ -33,28 +33,6 @@ export const it = {
 
   "employee.result.trust":
     "{checked}{pending, select, yes {: {count, plural, one {un valore usato in questo calcolo è ancora da verificare} other {# valori usati in questo calcolo sono ancora da verificare}}} other {}}.",
-
-  "employee.assumption.year": "Anno fiscale {year}",
-  "employee.assumption.region":
-    "{region, select, bolzano {Provincia autonoma di Bolzano} trento {Provincia autonoma di Trento} other {Regione {name}}}",
-  "employee.assumption.comune": "Comune di {name}, addizionale {rate}",
-  "employee.assumption.comuneZero": "Comune di {name}, senza addizionale",
-  "employee.assumption.rateDefault": "Addizionale comunale {rate}, comune non scelto",
-  "employee.assumption.rateManual": "Addizionale comunale {rate}, inserita a mano",
-  "employee.assumption.frequency": "{count} mensilità",
-  "employee.assumption.noDependents": "Nessun familiare a carico",
-  "employee.assumption.dependents": "{list} a carico",
-  "employee.assumption.noExpenses": "Nessuna spesa detraibile",
-  "employee.assumption.noBenefits": "Nessun benefit o welfare",
-  "employee.change.year": "anno fiscale",
-  "employee.change.region": "regione",
-  "employee.change.comune": "comune",
-  "employee.change.frequency": "mensilità",
-  "employee.change.contract": "contratto",
-  "employee.change.dependents": "familiari a carico",
-  "employee.change.expenses": "spese detraibili",
-  "employee.change.special": "condizioni particolari",
-  "employee.change.benefits": "benefit e welfare",
 
   "employee.part.spouse": "coniuge",
   "employee.part.children": "{count, plural, one {# figlio} other {# figli}}",
@@ -203,6 +181,7 @@ export const it = {
   "employee.group.expenses": "Spese detraibili",
   "employee.group.special": "Condizioni particolari",
   "employee.group.benefits": "Benefit e welfare",
+  "employee.recap.dependents": "{list} a carico",
   "employee.recap.none.masculine": "Nessuno",
   "employee.recap.none.feminine": "Nessuna",
 

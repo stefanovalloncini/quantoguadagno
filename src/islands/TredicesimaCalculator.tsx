@@ -5,7 +5,7 @@ import { RadioGroup } from "@/components/form/RadioGroup.tsx";
 import { useBlurErrors } from "@/components/form/useBlurErrors.ts";
 import { CalculatorLayout } from "@/components/page/CalculatorLayout.tsx";
 import { PageIntro } from "@/components/page/PageIntro.tsx";
-import { Assumptions, NoteLine, type AssumptionItem } from "@/components/result/Assumptions.tsx";
+import { NoteLine } from "@/components/result/Assumptions.tsx";
 import { BottomBar, useBottomBarVisible } from "@/components/result/BottomBar.tsx";
 import { Ledger } from "@/components/result/Ledger.tsx";
 import { LiveStatus, useSettledAnnouncement } from "@/components/result/LiveStatus.tsx";
@@ -29,7 +29,6 @@ import { useTredicesimaController } from "./tredicesima/useTredicesimaController
 const IDS = {
   result: "risultato-tredicesima",
   resultHeading: "tredicesima-titolo",
-  assumptionsHeading: "tredicesima-ipotesi-titolo",
   ledgerHeading: "tredicesima-dettaglio-titolo",
   ledgerToggle: "tredicesima-spiega",
   ral: "tredicesima-ral",
@@ -45,10 +44,6 @@ function errorText(t: TranslateFn, error: TredicesimaErrorValue | undefined): st
   if (error === undefined) return undefined;
   if (typeof error === "string") return t(error);
   return t(error.key, { ...error.values });
-}
-
-function focusWhenPresent(id: string): void {
-  document.getElementById(id)?.focus();
 }
 
 function verifiedLine(locale: "it" | "en") {
@@ -103,21 +98,6 @@ function TredicesimaView() {
 
   const checked = verifiedLine(locale);
   const pending = countUnverified(state.taxYear, PARAMETERS_USED);
-
-  const items: readonly AssumptionItem[] = [
-    {
-      id: "year",
-      text: t("tredicesima.assumption.year", { year: state.taxYear }),
-      changeLabel: t("tredicesima.change.year"),
-      targetId: `${IDS.taxYear}-${String(state.taxYear)}`,
-    },
-    {
-      id: "mensilita",
-      text: t("tredicesima.assumption.mensilita", { mensilita: String(state.mensilita) }),
-      changeLabel: t("tredicesima.change.mensilita"),
-      targetId: `${IDS.mensilita}-${String(state.mensilita)}`,
-    },
-  ];
 
   const { rows, total } = buildTredicesimaLedger({
     result: shown,
@@ -229,13 +209,6 @@ function TredicesimaView() {
                     })}
                   </p>
                 )}
-                <Assumptions
-                  headingId={IDS.assumptionsHeading}
-                  items={items}
-                  onChange={(item) => {
-                    focusWhenPresent(item.targetId);
-                  }}
-                />
                 <NoteLine term={t("result.estimate.term")}>
                   {t("tredicesima.result.estimate")} {t("tredicesima.result.note")}
                   {checked !== null && (

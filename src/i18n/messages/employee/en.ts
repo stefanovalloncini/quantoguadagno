@@ -20,9 +20,9 @@ export const en: Record<MessageKey, string> = {
   "employee.result.annual": "Annual net pay {amount}",
   "employee.result.split":
     "Normal month {ordinary}, {count, plural, =1 {thirteenth month {extra}} =2 {thirteenth and fourteenth months {extra} each} other {extra months {extra} each}}",
-  "employee.result.withheld": "Deductions: {share} of gross ({amount} of {gross}).",
+  "employee.result.withheld": "Deductions: {amount} a year, {share} of gross.",
   "employee.result.withheldCredits":
-    "Deductions: {share} of gross ({amount} of {gross}). Payroll credits: {credits}, already in the net pay.",
+    "Deductions: {amount} a year, {share} of gross. Payroll credits: {credits}, already in the net pay.",
   "employee.result.empty": "Enter your gross annual salary to see your net pay.",
   "employee.result.fix": "Correct the marked values to see your net pay.",
   "employee.result.staleGross":
@@ -35,28 +35,6 @@ export const en: Record<MessageKey, string> = {
 
   "employee.result.trust":
     "{checked}{pending, select, yes {: {count, plural, one {one value used in this calculation is still to be verified} other {# values used in this calculation are still to be verified}}} other {}}.",
-
-  "employee.assumption.year": "Tax year {year}",
-  "employee.assumption.region":
-    "{region, select, bolzano {Autonomous Province of Bolzano} trento {Autonomous Province of Trento} other {Region: {name}}}",
-  "employee.assumption.comune": "Municipality: {name}, surcharge {rate}",
-  "employee.assumption.comuneZero": "Municipality: {name}, no surcharge",
-  "employee.assumption.rateDefault": "Municipal surcharge {rate}, municipality not chosen",
-  "employee.assumption.rateManual": "Municipal surcharge {rate}, entered by you",
-  "employee.assumption.frequency": "{count} payslips a year",
-  "employee.assumption.noDependents": "No dependants",
-  "employee.assumption.dependents": "Dependants: {list}",
-  "employee.assumption.noExpenses": "No deductible expenses",
-  "employee.assumption.noBenefits": "No benefits or welfare",
-  "employee.change.year": "tax year",
-  "employee.change.region": "region",
-  "employee.change.comune": "municipality",
-  "employee.change.frequency": "payslips a year",
-  "employee.change.contract": "contract",
-  "employee.change.dependents": "dependants",
-  "employee.change.expenses": "deductible expenses",
-  "employee.change.special": "special conditions",
-  "employee.change.benefits": "benefits and welfare",
 
   "employee.part.spouse": "spouse",
   "employee.part.children": "{count, plural, one {# child} other {# children}}",
@@ -202,6 +180,7 @@ export const en: Record<MessageKey, string> = {
   "employee.group.expenses": "Deductible expenses",
   "employee.group.special": "Special conditions",
   "employee.group.benefits": "Benefits and welfare",
+  "employee.recap.dependents": "Dependants: {list}",
   "employee.recap.none.masculine": "None",
   "employee.recap.none.feminine": "None",
 

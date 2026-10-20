@@ -61,7 +61,7 @@ describe("EmployeeCalculator", () => {
     const html = renderToString(<EmployeeCalculator locale="it" messages={MESSAGES.it} />);
     expect(html).toContain("1.801,96 €");
     expect(html).toContain("Netto mensile");
-    expect(html).toContain("Addizionale comunale 0,80%, comune non scelto");
+    expect(html).toContain("comune non scelto, 0,80%");
   });
 
   it("reads 35k while typing and shows the monthly gross after leaving the field", async () => {
@@ -130,10 +130,10 @@ describe("EmployeeCalculator", () => {
     const rate = screen.getByRole("textbox", { name: /Aliquota dell’addizionale comunale/ });
     expect(rate).toHaveValue("0,8");
     expect(rate).toHaveAccessibleDescription(/Per ora resta Milano/);
-    expect(screen.getByText("Comune di Milano, addizionale 0,80%")).toBeInTheDocument();
+    expect(screen.getByText("Milano, 0,80%")).toBeInTheDocument();
     await user.clear(rate);
     await user.type(rate, "0,5");
-    expect(screen.getByText("Addizionale comunale 0,50%, inserita a mano")).toBeInTheDocument();
+    expect(screen.getByText("aliquota inserita, 0,50%")).toBeInTheDocument();
     await user.click(screen.getByRole("button", { name: "Cerca di nuovo il comune" }));
     expect(screen.getByRole("combobox", { name: "Comune di residenza" })).toHaveValue(
       "Milano (MI)",
@@ -171,16 +171,6 @@ describe("EmployeeCalculator", () => {
       },
       { timeout: 1500 },
     );
-  });
-
-  it("opens the group and focuses the field from the Cambia link", async () => {
-    const { user } = setup();
-    await user.click(screen.getByRole("link", { name: "Cambia spese detraibili" }));
-    const mortgage = await screen.findByRole("textbox", { name: /Interessi sul mutuo/ });
-    await waitFor(() => {
-      expect(mortgage).toHaveFocus();
-    });
-    expect(document.getElementById("gruppo-spese")).toHaveAttribute("open");
   });
 
   it("keeps the ledger rule consistent with a zero amount and lists credits apart", async () => {

@@ -148,12 +148,12 @@ describe("useEmployeeController", () => {
     await waitFor(() => {
       expect(result.current.comune.status).toBe("ready");
     });
-    expect(result.current.result?.municipal).toMatchObject({ kind: "comune", ruleYear: 2025 });
-    expect(result.current.result?.breakdown.municipalTax).toBe(0);
-    expect(result.current.derived?.assumptions[2]).toMatchObject({
-      id: "comune",
-      value: { name: "Milano", carriedOver: true },
+    expect(result.current.result?.municipal).toMatchObject({
+      kind: "comune",
+      comune: { name: "Milano" },
+      ruleYear: 2025,
     });
+    expect(result.current.result?.breakdown.municipalTax).toBe(0);
   });
 
   it("drops the comune with the region and loads the new region for the picker", async () => {

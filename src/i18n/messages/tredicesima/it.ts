@@ -51,11 +51,6 @@ export const it = {
     "Fino a {max} di reddito da lavoro il taglio del cuneo fiscale aggiunge una somma a ogni busta paga, tredicesima compresa: una percentuale del reddito imponibile del mese. Non è tassata.",
   "tredicesima.ledger.net.rule":
     "lordo meno contributi e IRPEF{somma, select, yes {, più la somma aggiuntiva} other {}}",
-  "tredicesima.assumption.year": "Anno fiscale {year}",
-  "tredicesima.assumption.mensilita":
-    "{mensilita, select, 14 {Tredicesima e quattordicesima} other {Solo la tredicesima}}",
-  "tredicesima.change.year": "anno fiscale",
-  "tredicesima.change.mensilita": "mensilità",
 } as const;
 
 export type MessageKey = keyof typeof it;

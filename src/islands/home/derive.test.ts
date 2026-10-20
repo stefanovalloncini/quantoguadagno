@@ -5,9 +5,9 @@ import { calculateRaiseImpact } from "@/domain/raiseImpact.ts";
 import { computeEmployee } from "./compute.ts";
 import {
   activeGroups,
-  assumptions,
   bracketIndicator,
   comuneSearchKey,
+  contractAssumption,
   credits,
   deriveEmployee,
   employeeHints,
@@ -15,6 +15,7 @@ import {
   employeeLinks,
   employerCostBreakdown,
   ledgerLines,
+  localAssumption,
   notices,
   raiseImpact,
   regionSummary,
@@ -154,36 +155,17 @@ describe("raiseImpact", () => {
   });
 });
 
-describe("assumptions", () => {
-  it("lists what the result assumes, each with the field that changes it", () => {
-    expect(assumptions(resultOf({}))).toEqual([
-      { id: "year", value: 2026, fieldToEdit: "year" },
-      { id: "region", value: "lombardia", fieldToEdit: "region" },
-      { id: "municipalRate", value: 0.008, fieldToEdit: "municipalRate" },
-      { id: "paymentFrequency", value: 13, fieldToEdit: "paymentFrequency" },
-      {
-        id: "contract",
-        value: {
-          contractType: "indeterminato",
-          isPublicEmployee: false,
-          companySize: "small",
-          insuredBefore1996: false,
-          inpsOverride: null,
-          employeeInpsRate: 0.0919,
-        },
-        fieldToEdit: "contractType",
-      },
-      { id: "dependents", value: null, fieldToEdit: "hasSpouse" },
-      { id: "expenses", value: null, fieldToEdit: "mortgageInterest" },
-      { id: "specialConditions", value: null, fieldToEdit: "impatriati" },
-      { id: "premio", value: null, fieldToEdit: "premio" },
-      { id: "fringe", value: null, fieldToEdit: "mealVoucherValue" },
-    ]);
+describe("localAssumption", () => {
+  it("falls back to the default surcharge rate without a comune", () => {
+    expect(localAssumption(resultOf({}))).toEqual({
+      id: "municipalRate",
+      value: 0.008,
+      fieldToEdit: "municipalRate",
+    });
   });
 
   it("names the comune and says when its rule carries over from an earlier year", () => {
-    const [, , local] = assumptions(resultOf({ comune: "F205" }, MILANO));
-    expect(local).toEqual({
+    expect(localAssumption(resultOf({ comune: "F205" }, MILANO))).toEqual({
       id: "comune",
       value: {
         id: "F205",
@@ -195,38 +177,22 @@ describe("assumptions", () => {
       },
       fieldToEdit: "comune",
     });
-    const [, , own] = assumptions(resultOf({ comune: "F205", year: 2025 }, MILANO));
-    expect(own).toMatchObject({ id: "comune", value: { ruleYear: 2025, carriedOver: false } });
+    expect(localAssumption(resultOf({ comune: "F205", year: 2025 }, MILANO))).toMatchObject({
+      id: "comune",
+      value: { ruleYear: 2025, carriedOver: false },
+    });
   });
+});
 
+describe("contractAssumption", () => {
   it("states the employee INPS rate the contract implies", () => {
-    const rateOf = (patch: Partial<EmployeeState>) => {
-      const contract = assumptions(resultOf(patch)).find((item) => item.id === "contract");
-      return contract?.id === "contract" ? contract.value.employeeInpsRate : undefined;
-    };
+    const rateOf = (patch: Partial<EmployeeState>) =>
+      contractAssumption(resultOf(patch).values).employeeInpsRate;
+    expect(rateOf({})).toBe(0.0919);
     expect(rateOf({ companySize: "large" })).toBeCloseTo(0.0949, 10);
     expect(rateOf({ contractType: "apprendistato" })).toBe(0.0584);
     expect(rateOf({ isPublicEmployee: true })).toBe(0.088);
     expect(rateOf({ inpsOverride: true, inpsEmployeeRate: "10" })).toBe(0.1);
-  });
-
-  it("carries the extras that are in use", () => {
-    const items = assumptions(
-      resultOf({ hasSpouse: true, medicalExpenses: "1.200", premio: "500", welfare: "600" }),
-    );
-    expect(items.find((item) => item.id === "dependents")?.value).toEqual({
-      hasSpouse: true,
-      spouseIncome: 0,
-      childrenOver21: 0,
-      otherDependents: 0,
-    });
-    expect(items.find((item) => item.id === "expenses")?.value).toMatchObject({
-      medicalExpenses: 1_200,
-    });
-    expect(items.find((item) => item.id === "premio")?.value).toEqual({ amount: 500 });
-    expect(items.find((item) => item.id === "fringe")?.value).toEqual({
-      welfare: { annualAmount: 600, hasDependentChildren: false },
-    });
   });
 });
 
@@ -521,7 +487,6 @@ describe("deriveEmployee", () => {
     expect(derived.yearComparison).toEqual(yearComparison(REFERENCE));
     expect(derived.bracket).toEqual(bracketIndicator(31_783.5, 2026));
     expect(derived.raise).toEqual(raiseImpact(REFERENCE));
-    expect(derived.assumptions).toEqual(assumptions(REFERENCE));
     expect(derived.employerCost).toEqual(employerCostBreakdown(REFERENCE.breakdown));
     expect(derived.ledger).toEqual(ledgerLines(REFERENCE.breakdown));
     expect(derived.credits).toEqual([]);

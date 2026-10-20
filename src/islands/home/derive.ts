@@ -1,18 +1,11 @@
 import {
   SUPPORTED_YEARS,
   type Bracket,
-  type PaymentFrequency,
   type RegionCode,
   type SupportedYear,
 } from "@/data/index.ts";
-import type { PremioRisultatoInput } from "@/domain/bonusCalculations.ts";
 import { calculateSalaryBreakdown, type SalaryBreakdown } from "@/domain/composer.ts";
-import type { DependentsInput, ExpenseDeductionsInput } from "@/domain/deductionCalculations.ts";
-import type { FringeBenefitsInput } from "@/domain/fringeBenefitsTypes.ts";
-import {
-  isMadreLavoratriceEligible,
-  type SpecialConditionsInput,
-} from "@/domain/specialConditionsCalculations.ts";
+import { isMadreLavoratriceEligible } from "@/domain/specialConditionsCalculations.ts";
 import { getTaxConfig } from "@/domain/taxConfig.ts";
 import type { Locale } from "@/i18n/locales.ts";
 import { hrefFor } from "@/routePaths.ts";
@@ -137,62 +130,6 @@ export function raiseImpact(result: EmployeeResult, increment = RAISE_INCREMENT)
     withheldShare: 1 - keptShare,
     marginalTaxRate: raised.marginalTaxRate,
   };
-}
-
-export type Assumption =
-  | { readonly id: "year"; readonly value: SupportedYear; readonly fieldToEdit: "year" }
-  | { readonly id: "region"; readonly value: RegionCode; readonly fieldToEdit: "region" }
-  | LocalAssumption
-  | {
-      readonly id: "paymentFrequency";
-      readonly value: PaymentFrequency;
-      readonly fieldToEdit: "paymentFrequency";
-    }
-  | {
-      readonly id: "contract";
-      readonly value: ContractAssumption;
-      readonly fieldToEdit: "contractType";
-    }
-  | {
-      readonly id: "dependents";
-      readonly value: DependentsInput | null;
-      readonly fieldToEdit: "hasSpouse";
-    }
-  | {
-      readonly id: "expenses";
-      readonly value: ExpenseDeductionsInput | null;
-      readonly fieldToEdit: "mortgageInterest";
-    }
-  | {
-      readonly id: "specialConditions";
-      readonly value: SpecialConditionsInput | null;
-      readonly fieldToEdit: "impatriati";
-    }
-  | {
-      readonly id: "premio";
-      readonly value: PremioRisultatoInput | null;
-      readonly fieldToEdit: "premio";
-    }
-  | {
-      readonly id: "fringe";
-      readonly value: FringeBenefitsInput | null;
-      readonly fieldToEdit: "mealVoucherValue";
-    };
-
-export function assumptions(result: EmployeeResult): readonly Assumption[] {
-  const { values } = result;
-  return [
-    { id: "year", value: values.taxYear, fieldToEdit: "year" },
-    { id: "region", value: values.regionCode, fieldToEdit: "region" },
-    localAssumption(result),
-    { id: "paymentFrequency", value: values.paymentFrequency, fieldToEdit: "paymentFrequency" },
-    { id: "contract", value: contractAssumption(values), fieldToEdit: "contractType" },
-    { id: "dependents", value: values.dependents, fieldToEdit: "hasSpouse" },
-    { id: "expenses", value: values.expenseDeductions, fieldToEdit: "mortgageInterest" },
-    { id: "specialConditions", value: values.specialConditions, fieldToEdit: "impatriati" },
-    { id: "premio", value: values.premioRisultato, fieldToEdit: "premio" },
-    { id: "fringe", value: values.fringeBenefits, fieldToEdit: "mealVoucherValue" },
-  ];
 }
 
 export type LedgerSection = "gross" | "contributions" | "taxes" | "credits" | "pdr" | "net" | "tfr";
@@ -399,7 +336,6 @@ export interface EmployeeDerived {
   readonly yearComparison: readonly YearComparisonRow[];
   readonly bracket: BracketIndicator | null;
   readonly raise: RaiseImpact;
-  readonly assumptions: readonly Assumption[];
   readonly employerCost: EmployerCostBreakdown;
   readonly ledger: readonly LedgerLine[];
   readonly credits: readonly CreditId[];
@@ -412,7 +348,6 @@ export function deriveEmployee(result: EmployeeResult): EmployeeDerived {
     yearComparison: yearComparison(result),
     bracket: bracketIndicator(irpefBaseOf(result), result.values.taxYear),
     raise: raiseImpact(result),
-    assumptions: assumptions(result),
     employerCost: employerCostBreakdown(result.breakdown),
     ledger: ledgerLines(result.breakdown),
     credits: credits(result.breakdown),

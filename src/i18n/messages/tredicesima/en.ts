@@ -53,9 +53,4 @@ export const en: Record<MessageKey, string> = {
     "Up to {max} of employment income the tax wedge cut adds an amount to every payslip, the 13th included: a percentage of the month’s taxable income. It is not taxed.",
   "tredicesima.ledger.net.rule":
     "gross minus contributions and IRPEF{somma, select, yes {, plus the extra payment} other {}}",
-  "tredicesima.assumption.year": "Tax year {year}",
-  "tredicesima.assumption.mensilita":
-    "{mensilita, select, 14 {13th and 14th month} other {13th month only}}",
-  "tredicesima.change.year": "tax year",
-  "tredicesima.change.mensilita": "instalments",
 };

@@ -2,7 +2,7 @@ import { useState, type ReactNode, type Ref } from "react";
 import { ClientSuspense } from "@/islands/runtime/ClientSuspense.tsx";
 import type { RegionText } from "@/components/form/regionText.ts";
 import { Actions } from "@/components/result/Actions.tsx";
-import { Assumptions, NoteLine } from "@/components/result/Assumptions.tsx";
+import { NoteLine } from "@/components/result/Assumptions.tsx";
 import { Ledger, type LedgerProps } from "@/components/result/Ledger.tsx";
 import { LiveStatus } from "@/components/result/LiveStatus.tsx";
 import { FigureAside, ResultFigure, type FigureState } from "@/components/result/ResultFigure.tsx";
@@ -13,7 +13,6 @@ import { preloadable } from "@/islands/runtime/preloadable.tsx";
 import type { EmployeeResult } from "./compute.ts";
 import type { EmployeeLinks } from "./derive.ts";
 import { buildLedger, type LedgerContext, type MunicipalMode } from "./ledgerRows.tsx";
-import { assumptionItems, type Assumption } from "./summaries.ts";
 import { Amount, type ViewFormat } from "./viewFormat.tsx";
 import { IDS } from "./viewIds.ts";
 
@@ -52,7 +51,6 @@ export interface ResultPanelProps {
   readonly regions: RegionText;
   readonly f: ViewFormat;
   readonly valueRef: Ref<HTMLParagraphElement>;
-  readonly onChange: (item: Assumption) => void;
 }
 
 export function ResultPanel({
@@ -67,7 +65,6 @@ export function ResultPanel({
   regions,
   f,
   valueRef,
-  onChange,
 }: ResultPanelProps) {
   const t = useT();
   const rt = useRichT();
@@ -122,16 +119,10 @@ export function ResultPanel({
               {rt(credited > 0 ? "employee.result.withheldCredits" : "employee.result.withheld", {
                 share: <Amount>{formatPercent(b.totalTaxes / b.grossAnnual, f.locale, 2)}</Amount>,
                 amount: <Amount>{f.money(b.totalTaxes)}</Amount>,
-                gross: <Amount>{f.money(b.grossAnnual)}</Amount>,
                 credits: <Amount>{f.money(credited)}</Amount>,
               })}
             </FigureAside>
           )}
-          <Assumptions
-            headingId={IDS.assumptionsHeading}
-            items={assumptionItems(context.result, { t, f, regions, municipalMode })}
-            onChange={onChange}
-          />
           <NoteLine term={t("result.estimate.term")}>
             {t("employee.result.estimate")}
             {verified !== null && (
