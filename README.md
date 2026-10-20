@@ -2,7 +2,7 @@
 
 quantoguadagno.com is an Italian salary calculator: gross-to-net pay, INPS contributions,
 regional and municipal surcharges, and related tools (apprenticeship pay, forfettario flat tax,
-TFR, NASpI, and more).
+the ordinary regime for the self-employed, TFR, NASpI, and more).
 
 ## Stack
 
