@@ -54,8 +54,17 @@ describe("structured data", () => {
     );
   });
 
-  it("keeps text pages to the site and the breadcrumb", () => {
-    expect(typesOf({ ...calculator, kind: "text" })).toEqual(["WebSite", "BreadcrumbList"]);
+  it("describes a text page as a web page of the site, with its breadcrumb trail", () => {
+    const page: StructuredPage = { ...calculator, kind: "text" };
+    expect(typesOf(page)).toEqual(["WebSite", "WebPage", "BreadcrumbList"]);
+    expect(structuredDataFor(page)["@graph"]).toContainEqual({
+      "@type": "WebPage",
+      name: "Calcolo TFR",
+      description: "Calcola il TFR.",
+      url: "https://quantoguadagno.com/tfr",
+      inLanguage: "it-IT",
+      isPartOf: { "@type": "WebSite", name: "Quanto guadagno", url: "https://quantoguadagno.com/" },
+    });
   });
 
   it("only describes the site on noindex pages", () => {

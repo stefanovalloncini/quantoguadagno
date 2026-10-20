@@ -1,0 +1,6 @@
+.qg-links {
+  display: flex;
+  flex-direction: column;
+  max-inline-size: var(--measure);
+  border-block-end: 1px solid var(--filetto);
+}

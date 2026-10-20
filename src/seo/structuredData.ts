@@ -37,6 +37,16 @@ export function structuredDataFor(page: StructuredPage): JsonLdNode {
       offers: { "@type": "Offer", price: "0", priceCurrency: "EUR" },
     });
   }
+  if (page.kind === "text" && page.canonical !== undefined) {
+    graph.push({
+      "@type": "WebPage",
+      name: page.title,
+      description: page.description,
+      url: page.canonical,
+      inLanguage,
+      isPartOf: { "@type": "WebSite", name: page.siteName, url: page.homeUrl },
+    });
+  }
   if (page.canonical !== undefined && page.breadcrumbs.length > 1) {
     graph.push({
       "@type": "BreadcrumbList",

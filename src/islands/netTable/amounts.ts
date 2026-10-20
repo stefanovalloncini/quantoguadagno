@@ -1,4 +1,5 @@
-import type { Locale } from "@/i18n/locales.ts";
+import { LOCALES, type Locale } from "@/i18n/locales.ts";
+import { pathFor } from "@/routePaths.ts";
 
 function steps(from: number, to: number, step: number): number[] {
   const values: number[] = [];
@@ -28,6 +29,17 @@ const SLUG_AMOUNT = /^[1-9]\d*$/;
 
 export function netTableSlug(amount: number, locale: Locale): string {
   return `${String(amount)}${SLUG_SUFFIX[locale]}`;
+}
+
+/** The page of an amount, under the hub: /stipendio-netto/30000-euro-lordi. */
+export function netTablePath(amount: number, locale: Locale): string {
+  return `${pathFor("netTable", locale)}/${netTableSlug(amount, locale)}`;
+}
+
+export function netTablePaths(amount: number): Readonly<Record<Locale, string>> {
+  return Object.fromEntries(
+    LOCALES.map((locale) => [locale, netTablePath(amount, locale)]),
+  ) as Record<Locale, string>;
 }
 
 export function amountOfSlug(slug: string, locale: Locale): number | null {

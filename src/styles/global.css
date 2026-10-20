@@ -7,6 +7,7 @@
 @import "./components/header.css";
 @import "./components/menu.css";
 @import "./components/navlink.css";
+@import "./components/links.css";
 @import "./components/preferences.css";
 @import "./components/segmented.css";
 @import "./components/field.css";
@@ -34,6 +35,7 @@
 @import "./components/disclosure.css";
 @import "./components/status.css";
 @import "./components/tool-list.css";
+@import "./components/netpage.css";
 @import "./components/netbar.css";
 @import "./components/compare.css";
 @import "./components/payslip.css";

@@ -5,6 +5,8 @@ import {
   NET_TABLE_AMOUNTS,
   amountOfSlug,
   neighboursOf,
+  netTablePath,
+  netTablePaths,
   netTableSlug,
 } from "./amounts.ts";
 
@@ -38,6 +40,14 @@ describe("slugs", () => {
     for (const amount of NET_TABLE_AMOUNTS) {
       expect(amountOfSlug(netTableSlug(amount, locale), locale)).toBe(amount);
     }
+  });
+
+  it("sit under the hub of each language", () => {
+    expect(netTablePaths(30_000)).toEqual({
+      it: "/stipendio-netto/30000-euro-lordi",
+      en: "/en/net-salary/30000-euro-gross",
+    });
+    expect(netTablePath(150_000, "en")).toBe("/en/net-salary/150000-euro-gross");
   });
 
   it("refuse amounts without a page and slugs of the other language", () => {

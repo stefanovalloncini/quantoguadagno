@@ -116,15 +116,15 @@
   white-space: nowrap;
 }
 
-.qg-table :where(tr:has(> .qg-table__meta a)) > :is(th, td) {
+.qg-table :where(tr:has(> :is(.qg-table__meta, .qg-table__primary) a)) > :is(th, td) {
   padding-block: calc((var(--target) - 1lh) / 2);
 }
 
-.qg-table__meta a {
+:is(.qg-table__meta, .qg-table__primary) a {
   position: relative;
 }
 
-.qg-table__meta a::after {
+:is(.qg-table__meta, .qg-table__primary) a::after {
   content: "";
   position: absolute;
   inset-block: min(0px, calc((100% - var(--target)) / 2));

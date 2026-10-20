@@ -141,6 +141,17 @@ const ROUTE_TABLE = {
     },
     restore: EMPLOYER_COST_PARAMS,
   },
+  netTable: {
+    path: ROUTE_PATHS.netTable,
+    kind: "text",
+    island: "NetTableHub",
+    namespaces: ["layout", "netTable"],
+    label: "nav.netTable",
+    navDescription: "nav.netTable.description",
+    group: "salary",
+    nav: 6,
+    meta: { title: "meta.netTable.title", description: "meta.netTable.description" },
+  },
   forfettario: {
     path: ROUTE_PATHS.forfettario,
     kind: "calculator",

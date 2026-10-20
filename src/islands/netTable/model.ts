@@ -92,9 +92,9 @@ export interface NetRow {
   readonly gross: number;
   readonly netAnnual: number;
   readonly monthly: readonly MonthlyNet[];
+  /** The part of the gross that does not reach the net: contributions and taxes, less credits. */
   readonly withheld: number;
   readonly withheldShare: number;
-  readonly credits: number;
 }
 
 export function monthlyNet(netAnnual: number, count: number): number {
@@ -108,14 +108,14 @@ export function monthlyOf(row: NetRow, count: PaymentFrequency): number {
 }
 
 function rowOf(breakdown: SalaryBreakdown): NetRow {
-  const { grossAnnual, netAnnual, totalTaxes } = breakdown;
+  const { grossAnnual, netAnnual } = breakdown;
+  const withheld = round(grossAnnual - netAnnual);
   return {
     gross: grossAnnual,
     netAnnual,
     monthly: MONTH_COUNTS.map((count) => ({ count, net: monthlyNet(netAnnual, count) })),
-    withheld: totalTaxes,
-    withheldShare: grossAnnual > 0 ? totalTaxes / grossAnnual : 0,
-    credits: round(breakdown.sommaAggiuntiva + breakdown.trattamentoIntegrativo),
+    withheld,
+    withheldShare: grossAnnual > 0 ? withheld / grossAnnual : 0,
   };
 }
 

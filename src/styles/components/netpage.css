@@ -1,0 +1,17 @@
+/* Pages of the gross to net table: one column at the width of a band. The column is a
+   result container, as in the calculator, so the figure is sized on it and the ledger
+   drops its monthly column below 34rem. */
+.qg-netpage {
+  container: qg-result / inline-size;
+  max-inline-size: 45rem;
+}
+
+.qg-netpage__action {
+  display: flex;
+}
+
+@container qg-page (width < 45rem) {
+  .qg-netpage__action .qg-button {
+    inline-size: 100%;
+  }
+}

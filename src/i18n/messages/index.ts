@@ -45,6 +45,8 @@ import { it as aboutIt } from "./about/it.ts";
 import { en as aboutEn } from "./about/en.ts";
 import { it as homeIt } from "./home/it.ts";
 import { en as homeEn } from "./home/en.ts";
+import { it as netTableIt } from "./netTable/it.ts";
+import { en as netTableEn } from "./netTable/en.ts";
 
 const CATALOGS = {
   layout: { it: layoutIt, en: layoutEn },
@@ -69,6 +71,7 @@ const CATALOGS = {
   sources: { it: sourcesIt, en: sourcesEn },
   about: { it: aboutIt, en: aboutEn },
   home: { it: homeIt, en: homeEn },
+  netTable: { it: netTableIt, en: netTableEn },
 } as const;
 
 export type Namespace = keyof typeof CATALOGS;

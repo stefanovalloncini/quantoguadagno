@@ -25,6 +25,8 @@ export const en: Record<MessageKey, string> = {
   "nav.comparison.description": "Two job offers side by side",
   "nav.employerCost": "Employer cost",
   "nav.employerCost.description": "What you cost your employer",
+  "nav.netTable": "Gross to net table",
+  "nav.netTable.description": "Annual and monthly net pay, salary by salary",
   "nav.forfettario": "Forfettario",
   "nav.forfettario.description": "What is left of your annual turnover under the flat-rate scheme",
   "nav.ordinario": "Ordinary regime",

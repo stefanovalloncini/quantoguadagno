@@ -17,6 +17,7 @@ export const SECTIONS = [
   { id: "grafici", title: "Grafici" },
   { id: "confronto", title: "Confronto tra offerte" },
   { id: "cedolino", title: "Busta paga da stampare" },
+  { id: "lordo-netto", title: "Tabella lordo netto" },
   { id: "icone", title: "Icone" },
 ] as const;
 

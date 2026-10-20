@@ -23,6 +23,8 @@ export const it = {
   "nav.comparison.description": "Due offerte di lavoro a confronto",
   "nav.employerCost": "Costo del lavoro",
   "nav.employerCost.description": "Quanto costi all’azienda",
+  "nav.netTable": "Tabella lordo netto",
+  "nav.netTable.description": "Il netto annuo e al mese, RAL per RAL",
   "nav.forfettario": "Forfettario",
   "nav.forfettario.description": "Quanto resta del fatturato annuo nel regime forfettario",
   "nav.ordinario": "Ordinario",

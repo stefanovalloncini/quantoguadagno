@@ -41,6 +41,9 @@ export const it = {
   "meta.employerCost.title": "Costo del lavoro",
   "meta.employerCost.description":
     "Calcola quanto costa un dipendente all’azienda, dal lordo ai contributi datoriali e all’accantonamento TFR.",
+  "meta.netTable.title": "Tabella lordo netto {year}",
+  "meta.netTable.description":
+    "Quanto resta della RAL nel {year}: netto annuo e al mese su 13 e 14 mensilità, per un dipendente che vive a Milano e non ha familiari a carico.",
   "meta.tfr.title": "Calcolo TFR",
   "meta.tfr.description":
     "Calcola il trattamento di fine rapporto accumulato anno per anno, con la quota annuale e la rivalutazione.",

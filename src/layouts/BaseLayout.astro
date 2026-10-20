@@ -4,6 +4,7 @@ import LocaleHint from "@/components/chrome/LocaleHint.astro";
 import SiteFooter from "@/components/chrome/SiteFooter.astro";
 import SiteHeader from "@/components/chrome/SiteHeader.astro";
 import { localeLinksFor, navGroupsFor } from "@/components/chrome/navigation.ts";
+import { LATEST_SUPPORTED_YEAR } from "@/data/index.ts";
 import { BCP47_TAG, DEFAULT_LOCALE, LOCALES, dirOf, type Locale } from "@/i18n/locales.ts";
 import { getT } from "@/i18n/messages/index.ts";
 import {
@@ -47,8 +48,9 @@ const layout = getT(locale, "layout");
 const meta = getT(locale, "meta");
 
 const pageMeta = route?.meta ?? NOT_FOUND_META;
-const pageTitle = standalone?.title ?? meta(pageMeta.title);
-const description = standalone?.description ?? meta(pageMeta.description);
+const metaValues = { year: LATEST_SUPPORTED_YEAR };
+const pageTitle = standalone?.title ?? meta(pageMeta.title, metaValues);
+const description = standalone?.description ?? meta(pageMeta.description, metaValues);
 const siteName = layout("brand.name");
 const title = layout(route?.id === "home" ? "title.home" : "title.page", {
   site: siteName,

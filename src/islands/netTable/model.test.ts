@@ -224,13 +224,18 @@ describe("hub and home rows", () => {
     }
   });
 
-  it("count as withheld the contributions and taxes, not the credits", () => {
-    const row = netRow(12_000, YEAR, milano);
-    const b = pageOf(12_000).breakdown;
-    expect(row.withheld).toBe(b.totalTaxes);
-    expect(row.credits).toBe(
-      Math.round((b.sommaAggiuntiva + b.trattamentoIntegrativo) * 100) / 100,
-    );
-    expect(row.withheldShare).toBeCloseTo(b.totalTaxes / 12_000, 10);
+  it("count as withheld the part of the gross that does not reach the net", () => {
+    for (const gross of [12_000, 30_000, 150_000]) {
+      const row = netRow(gross, YEAR, milano);
+      expect(cents(row.withheld)).toBe(cents(gross) - cents(row.netAnnual));
+      expect(row.withheldShare).toBeCloseTo(row.withheld / gross, 10);
+    }
+  });
+
+  it("withhold a larger share as the gross grows, credits included", () => {
+    const rows = netRows(NET_TABLE_AMOUNTS, YEAR, milano);
+    for (let index = 1; index < rows.length; index++) {
+      expect(rows[index]?.withheldShare).toBeGreaterThan(rows[index - 1]?.withheldShare ?? 1);
+    }
   });
 });

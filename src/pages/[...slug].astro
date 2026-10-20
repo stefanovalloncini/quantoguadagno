@@ -14,6 +14,7 @@ import InflationCalculator from "@/islands/InflationCalculator.tsx";
 import InverseCalculator from "@/islands/InverseCalculator.tsx";
 import MethodPage from "@/islands/MethodPage.tsx";
 import NaspiCalculator from "@/islands/NaspiCalculator.tsx";
+import NetTableHub from "@/islands/NetTableHub.tsx";
 import OrdinarioCalculator from "@/islands/OrdinarioCalculator.tsx";
 import PreavvisoCalculator from "@/islands/PreavvisoCalculator.tsx";
 import PrintPayslip from "@/islands/PrintPayslip.tsx";
@@ -54,6 +55,7 @@ const home = getT(locale, "home");
       {island === "GlossaryPage" && <GlossaryPage locale={locale} messages={messages} />}
       {island === "SourcesPage" && <SourcesPage locale={locale} messages={messages} />}
       {island === "AboutPage" && <AboutPage locale={locale} messages={messages} />}
+      {island === "NetTableHub" && <NetTableHub locale={locale} messages={messages} />}
     </TextPageLayout>
   ) : (
     <ToolPageLayout kind={route.kind}>

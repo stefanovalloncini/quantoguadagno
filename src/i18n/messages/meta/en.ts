@@ -43,6 +43,9 @@ export const en: Record<MessageKey, string> = {
   "meta.employerCost.title": "Cost of an employee",
   "meta.employerCost.description":
     "Work out what an employee costs the company, from gross pay to employer contributions and severance accrual.",
+  "meta.netTable.title": "Gross to net table {year}",
+  "meta.netTable.description":
+    "How much of a gross salary is left in {year}: annual and monthly net pay over 13 and 14 payslips, for an employee who lives in Milano with no dependants.",
   "meta.tfr.title": "TFR calculator",
   "meta.tfr.description":
     "Work out the severance pay built up year by year, with the annual quota and its revaluation.",

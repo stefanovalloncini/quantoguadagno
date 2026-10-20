@@ -39,9 +39,17 @@ const OLD_ROUTER_PATHS = [
   "/informazioni",
 ];
 
-const NEW_ITALIAN_PATHS = ["/come-calcoliamo-il-netto", "/partita-iva-ordinario"];
+const NEW_ITALIAN_PATHS = [
+  "/come-calcoliamo-il-netto",
+  "/partita-iva-ordinario",
+  "/stipendio-netto",
+];
 
-const NEW_ENGLISH_PATHS = ["/en/how-we-calculate-net-pay", "/en/ordinary-tax-regime"];
+const NEW_ENGLISH_PATHS = [
+  "/en/how-we-calculate-net-pay",
+  "/en/ordinary-tax-regime",
+  "/en/net-salary",
+];
 
 const HANDOFF_ENGLISH_PATHS = [
   "/en",
@@ -179,6 +187,7 @@ describe("route table", () => {
       "tredicesima",
       "comparison",
       "employerCost",
+      "netTable",
     ]);
     const vat = groupedRoutes(isInNav).find((entry) => entry.group.id === "vat");
     expect(vat?.routes.map((route) => route.id)).toEqual(["forfettario", "ordinario"]);

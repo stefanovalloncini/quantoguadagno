@@ -8,6 +8,7 @@ export const ROUTE_PATHS = {
   tredicesima: { it: "/calcolo-tredicesima", en: "/en/tredicesima-13th-month-pay" },
   comparison: { it: "/confronto-stipendi", en: "/en/compare-job-offers" },
   employerCost: { it: "/costo-azienda", en: "/en/employer-cost" },
+  netTable: { it: "/stipendio-netto", en: "/en/net-salary" },
   forfettario: { it: "/partita-iva-forfettario", en: "/en/forfettario-flat-tax" },
   ordinario: { it: "/partita-iva-ordinario", en: "/en/ordinary-tax-regime" },
   apprenticeship: { it: "/progressione-apprendistato", en: "/en/apprenticeship-pay" },
