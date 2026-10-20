@@ -23,41 +23,50 @@ export function ScheduleTable({
       <h2 className="qg-heading" id={headingId}>
         {t("tfr.schedule.title")}
       </h2>
-      <table className="qg-table qg-table--compact qg-table--stack">
+      <table className="qg-table qg-table--compact qg-table--stack" role="table">
         <caption className="qg-visually-hidden">{t("tfr.schedule.caption")}</caption>
-        <thead>
-          <tr>
-            <th scope="col">{t("tfr.schedule.year")}</th>
-            <th scope="col" className="qg-table__num">
+        <thead role="rowgroup">
+          <tr role="row">
+            <th scope="col" role="columnheader">
+              {t("tfr.schedule.year")}
+            </th>
+            <th scope="col" role="columnheader" className="qg-table__num">
               {t("tfr.schedule.quota")}
             </th>
-            <th scope="col" className="qg-table__num">
+            <th scope="col" role="columnheader" className="qg-table__num">
               {t("tfr.schedule.revaluation")}
             </th>
-            <th scope="col" className="qg-table__num">
+            <th scope="col" role="columnheader" className="qg-table__num">
               {t("tfr.schedule.stock")}
             </th>
           </tr>
         </thead>
-        <tbody>
+        <tbody role="rowgroup">
           {rows.map((row) => (
-            <tr key={row.year}>
-              <th scope="row" className="qg-table__primary">
+            <tr key={row.year} role="row">
+              <th scope="row" role="rowheader" className="qg-table__primary">
                 <span className="qg-table__inline-label" aria-hidden="true">
                   {t("tfr.schedule.year")}{" "}
                 </span>
                 {row.year}
               </th>
-              <td className="qg-table__num qg-table__pair" data-label={t("tfr.schedule.quota")}>
+              <td
+                role="cell"
+                className="qg-table__num qg-table__pair"
+                data-label={t("tfr.schedule.quota")}
+              >
                 {f.money(row.quota)}
               </td>
               <td
+                role="cell"
                 className="qg-table__num qg-table__pair"
                 data-label={t("tfr.schedule.revaluation")}
               >
                 {f.money(row.revaluation)}
               </td>
-              <td className="qg-table__num qg-table__value">{f.money(row.stock)}</td>
+              <td role="cell" className="qg-table__num qg-table__value">
+                {f.money(row.stock)}
+              </td>
             </tr>
           ))}
         </tbody>

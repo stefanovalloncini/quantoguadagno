@@ -26,6 +26,7 @@ const IDS = {
   ral: "ral",
   years: "anni",
   inflationRate: "inflazione",
+  result: "risultato",
   resultHeading: "tfr-titolo",
   assumptionsHeading: "tfr-ipotesi-titolo",
   ledgerHeading: "tfr-dettaglio-titolo",
@@ -242,7 +243,7 @@ function TfrCalculatorContent() {
     <div ref={containerRef}>
       <PageIntro title={t("tfr.title")} lede={t("tfr.lede")} />
       <CalculatorLayout
-        resultId={IDS.resultHeading}
+        resultId={IDS.result}
         resultLabelledBy={IDS.resultHeading}
         primary={primary}
         result={
