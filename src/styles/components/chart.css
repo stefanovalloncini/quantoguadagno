@@ -18,7 +18,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: var(--s-1) var(--s-5);
-  font-size: var(--t-15);
+  font-size: var(--t-small);
   line-height: var(--lh-snug);
   color: var(--inchiostro);
 }
@@ -162,7 +162,7 @@
 }
 
 .qg-chart__caption {
-  font-size: var(--t-15);
+  font-size: var(--t-small);
   line-height: var(--lh-small);
   color: var(--grigio);
   max-inline-size: var(--measure);

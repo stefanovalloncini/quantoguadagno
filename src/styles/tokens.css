@@ -10,11 +10,23 @@
   --t-13: 0.8125rem;
   --t-15: 0.9375rem;
   --t-17: 1.0625rem;
+  --t-19: 1.1875rem;
   --t-21: 1.3125rem;
+  --t-24: 1.5rem;
   --t-27: 1.6875rem;
+  --t-32: 2rem;
   --t-33: 2.0625rem;
+  --t-48: 3rem;
   --t-cifra: clamp(2.25rem, 11vw, 5rem);
   --t-cifra-sm: clamp(2.25rem, 8vw, 3.5rem);
+
+  --t-body: var(--t-17);
+  --t-small: var(--t-15);
+  --t-lead: var(--t-19);
+  --t-h1: var(--t-32);
+  --t-h2: var(--t-24);
+  --t-h3: var(--t-19);
+  --t-h4: var(--t-17);
 
   --lh-body: 1.55;
   --lh-small: 1.45;
@@ -49,6 +61,18 @@
   :root {
     --t-cifra: clamp(2.25rem, 13cqi, 5rem);
     --t-cifra-sm: clamp(2.25rem, 9cqi, 3.5rem);
+  }
+}
+
+@media screen and (min-width: 45rem) {
+  :root {
+    --t-body: var(--t-19);
+    --t-small: var(--t-17);
+    --t-lead: var(--t-24);
+    --t-h1: var(--t-48);
+    --t-h2: var(--t-32);
+    --t-h3: var(--t-24);
+    --t-h4: var(--t-19);
   }
 }
 

@@ -11,7 +11,7 @@
   gap: var(--s-2);
   min-block-size: var(--target);
   color: var(--blu);
-  font-size: var(--t-15);
+  font-size: var(--t-small);
   font-weight: var(--weight-medium);
   line-height: var(--lh-snug);
   text-decoration-line: underline;

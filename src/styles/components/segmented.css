@@ -2,7 +2,7 @@
   position: relative;
   display: inline-flex;
   max-inline-size: 100%;
-  border: 1px solid var(--inchiostro);
+  border: 2px solid var(--inchiostro);
   border-radius: var(--radius);
   background: var(--carta);
 }
@@ -28,8 +28,8 @@
   min-block-size: var(--target);
   min-inline-size: 3.25rem;
   padding-inline: var(--s-3);
-  border-inline-start: 1px solid var(--inchiostro);
-  font-size: var(--t-17);
+  border-inline-start: 2px solid var(--inchiostro);
+  font-size: var(--t-body);
   line-height: var(--lh-snug);
   text-align: center;
   font-variant-numeric: tabular-nums;

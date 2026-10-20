@@ -30,15 +30,15 @@
 }
 
 .qg-field__label {
-  font-size: var(--t-17);
-  font-weight: var(--weight-medium);
+  font-size: var(--t-body);
+  font-weight: var(--weight-strong);
   line-height: var(--lh-snug);
   color: var(--inchiostro);
 }
 
 .qg-field__hint,
 .qg-field__after {
-  font-size: var(--t-15);
+  font-size: var(--t-small);
   line-height: var(--lh-small);
   color: var(--grigio);
   max-inline-size: var(--measure);
@@ -60,8 +60,13 @@
   visibility: hidden;
 }
 
+.qg-field--error {
+  padding-inline-start: var(--s-4);
+  border-inline-start: 4px solid var(--errore);
+}
+
 .qg-field__error {
-  font-size: var(--t-15);
+  font-size: var(--t-body);
   font-weight: var(--weight-strong);
   line-height: var(--lh-small);
   color: var(--errore);
@@ -73,7 +78,7 @@
   flex-wrap: wrap;
   align-items: center;
   column-gap: var(--s-2);
-  font-size: var(--t-15);
+  font-size: var(--t-small);
   line-height: var(--lh-small);
   color: var(--grigio);
   max-inline-size: var(--measure);
@@ -102,7 +107,7 @@
   flex-direction: column;
   gap: var(--s-5);
   margin-block-start: var(--s-3);
-  padding-inline-start: calc(1.5rem + var(--s-3));
+  padding-inline-start: calc(1.75rem + var(--s-3));
 }
 
 .qg-field__choices {
@@ -110,13 +115,13 @@
   flex-direction: column;
   align-items: flex-start;
   margin-block-start: calc(var(--s-2) * -1);
-  font-size: var(--t-15);
+  font-size: var(--t-small);
   line-height: var(--lh-small);
 }
 
 .qg-field__more {
   margin-block-start: calc(var(--s-2) * -1);
-  font-size: var(--t-15);
+  font-size: var(--t-small);
   line-height: var(--lh-small);
   color: var(--grigio);
   max-inline-size: var(--measure);

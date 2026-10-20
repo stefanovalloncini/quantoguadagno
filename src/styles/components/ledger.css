@@ -35,7 +35,7 @@
   padding-block: var(--s-2);
   border-block-start: 0;
   border-block-end: 1px solid var(--inchiostro);
-  font-size: var(--t-15);
+  font-size: var(--t-small);
   font-weight: var(--weight-medium);
   color: var(--grigio);
   vertical-align: bottom;
@@ -72,7 +72,7 @@
 }
 
 .qg-ledger__rule {
-  font-size: var(--t-15);
+  font-size: var(--t-small);
   color: var(--grigio);
 }
 
@@ -85,7 +85,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--s-3);
-  font-size: var(--t-15);
+  font-size: var(--t-small);
   line-height: var(--lh-small);
   color: var(--inchiostro);
 }
@@ -112,7 +112,7 @@
 .qg-sum {
   display: flex;
   flex-direction: column;
-  font-size: var(--t-15);
+  font-size: var(--t-small);
   line-height: var(--lh-small);
   font-variant-numeric: tabular-nums;
 }

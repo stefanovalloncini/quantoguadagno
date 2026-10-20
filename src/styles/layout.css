@@ -79,6 +79,10 @@
     --gutter: var(--s-6);
   }
 
+  .qg-calc__primary {
+    gap: var(--s-6);
+  }
+
   .qg-main {
     padding-block: var(--s-6) var(--s-8);
   }

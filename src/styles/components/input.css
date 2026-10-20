@@ -20,11 +20,11 @@
   min-block-size: var(--control);
   padding-block: var(--s-2);
   padding-inline: var(--s-3);
-  border: 1px solid var(--inchiostro);
+  border: 2px solid var(--inchiostro);
   border-radius: var(--radius);
-  background: var(--velo);
+  background: var(--carta);
   color: var(--inchiostro);
-  font-size: var(--t-17);
+  font-size: var(--t-body);
   line-height: var(--lh-snug);
   font-variant-numeric: tabular-nums;
   appearance: none;
@@ -41,7 +41,6 @@
 .qg-select__control.is-focus {
   outline: var(--focus) solid var(--blu);
   outline-offset: var(--focus-offset);
-  background: var(--carta);
 }
 
 .qg-input--unit-end .qg-input__control {
@@ -79,21 +78,12 @@
 
 .qg-field--error .qg-input__control,
 .qg-field--error .qg-select__control {
-  border: 2px solid var(--errore);
-  padding-inline-start: calc(var(--s-3) - 1px);
-}
-
-.qg-field--error .qg-input--icon .qg-input__control {
-  padding-inline-start: calc(2.5rem - 1px);
-}
-
-.qg-field--error .qg-input--unit-start .qg-input__control {
-  padding-inline-start: calc(2.25rem - 1px);
+  border-color: var(--errore);
 }
 
 .qg-input__suffix {
   flex: none;
-  font-size: var(--t-17);
+  font-size: var(--t-body);
   line-height: var(--lh-snug);
   color: var(--inchiostro);
 }

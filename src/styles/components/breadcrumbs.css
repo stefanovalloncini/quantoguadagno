@@ -1,6 +1,6 @@
 .qg-breadcrumbs {
   margin-block: calc(var(--s-3) * -1) var(--s-2);
-  font-size: var(--t-15);
+  font-size: var(--t-small);
   line-height: var(--lh-snug);
 }
 

@@ -23,7 +23,7 @@ export function FormSpecimens() {
     <KitProvider>
       <KitSpecimen
         label="Campo di testo"
-        note="Field: etichetta, suggerimento, controllo, riga dopo il campo e domanda alternativa. Tutti i controlli sono alti 48 px, con testo a 17 px."
+        note="Field: etichetta, suggerimento, controllo, riga dopo il campo e domanda alternativa. Tutti i controlli sono alti 48 px, con un bordo di 2 px su fondo bianco e il testo alla misura del corpo."
         narrow
       >
         <Field

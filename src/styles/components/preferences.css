@@ -13,7 +13,7 @@
 
 .qg-pref__label {
   min-inline-size: 3.5rem;
-  font-size: var(--t-15);
+  font-size: var(--t-small);
   line-height: var(--lh-snug);
   color: var(--grigio);
 }
@@ -27,7 +27,7 @@
   display: flex;
   flex-wrap: wrap;
   column-gap: var(--s-5);
-  font-size: var(--t-15);
+  font-size: var(--t-small);
 }
 
 .qg-langs > li {

@@ -28,7 +28,7 @@
 }
 
 .qg-figure__label {
-  font-size: var(--t-15);
+  font-size: var(--t-small);
   font-weight: var(--weight-medium);
   line-height: var(--lh-snug);
   letter-spacing: 0;
@@ -46,7 +46,7 @@
 }
 
 .qg-figure__label--answer {
-  font-size: var(--t-21);
+  font-size: var(--t-h3);
   font-weight: var(--weight-strong);
   line-height: var(--lh-tight);
   letter-spacing: -0.01em;
@@ -79,13 +79,13 @@
 }
 
 .qg-figure__prompt {
-  font-size: var(--t-17);
+  font-size: var(--t-body);
   line-height: var(--lh-snug);
   color: var(--inchiostro);
 }
 
 .qg-figure__basis {
-  font-size: var(--t-15);
+  font-size: var(--t-small);
   line-height: var(--lh-snug);
   color: var(--grigio);
 }
@@ -109,7 +109,7 @@
 }
 
 .qg-figure__sub {
-  font-size: var(--t-17);
+  font-size: var(--t-body);
   line-height: var(--lh-snug);
 }
 
@@ -120,14 +120,14 @@
 }
 
 .qg-figure__aside {
-  font-size: var(--t-15);
+  font-size: var(--t-small);
   line-height: var(--lh-small);
   color: var(--grigio);
   max-inline-size: var(--measure);
 }
 
 .qg-figure__stale {
-  font-size: var(--t-15);
+  font-size: var(--t-small);
   font-weight: var(--weight-strong);
   line-height: var(--lh-small);
   color: var(--inchiostro);
@@ -149,7 +149,7 @@
 }
 
 .qg-figure__answer {
-  font-size: var(--t-27);
+  font-size: var(--t-h2);
   font-weight: var(--weight-strong);
   line-height: var(--lh-tight);
   letter-spacing: -0.01em;

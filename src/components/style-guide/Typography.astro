@@ -4,40 +4,46 @@ import Specimen from "./Specimen.astro";
 
 const SCALE = [
   {
-    token: "--t-13",
-    className: "sg-t-13",
-    size: "13 px",
-    use: "Intestazioni della busta paga, tacche dei grafici",
+    token: "--t-small",
+    className: "sg-t-small",
+    size: "15 px, 17 px da 720 px",
+    use: "Suggerimenti, note, regole nel dettaglio, intestazioni di tabella",
   },
   {
-    token: "--t-15",
-    className: "sg-t-15",
-    size: "15 px",
-    use: "Suggerimenti, note, regole nel dettaglio, etichette di struttura",
+    token: "--t-body",
+    className: "sg-t-body",
+    size: "17 px, 19 px da 720 px",
+    use: "Testo, etichette, campi e pulsanti",
   },
   {
-    token: "--t-17",
-    className: "sg-t-17",
-    size: "17 px",
-    use: "Testo, etichette, campi: ogni controllo ha almeno 16 px",
+    token: "--t-lead",
+    className: "sg-t-lead",
+    size: "19 px, 24 px da 720 px",
+    use: "Frase sotto il titolo della pagina",
   },
   {
-    token: "--t-21",
-    className: "sg-t-21",
-    size: "21 px",
-    use: "Titoli di sezione, marchio, valore della barra del netto",
+    token: "--t-h4",
+    className: "sg-t-h4",
+    size: "17 px, 19 px da 720 px",
+    use: "Titoli dei blocchi nel risultato",
   },
   {
-    token: "--t-27",
-    className: "sg-t-27",
-    size: "27 px",
-    use: "Titolo della pagina sui telefoni, verdetti",
+    token: "--t-h3",
+    className: "sg-t-h3",
+    size: "19 px, 24 px da 720 px",
+    use: "Titoli dentro una sezione: offerte, approfondimenti",
   },
   {
-    token: "--t-33",
-    className: "sg-t-33",
-    size: "33 px",
-    use: "Titolo della pagina da 720 px, netto della busta paga",
+    token: "--t-h2",
+    className: "sg-t-h2",
+    size: "24 px, 32 px da 720 px",
+    use: "Titoli di sezione",
+  },
+  {
+    token: "--t-h1",
+    className: "sg-t-h1",
+    size: "32 px, 48 px da 720 px",
+    use: "Titolo della pagina",
   },
 ] as const;
 
@@ -52,10 +58,14 @@ const LINE_HEIGHTS = [
 
 <Section id="tipografia">
   <p class="qg-lede" slot="intro">
-    Una sola famiglia, Archivo, in tre larghezze e tre pesi. Iniziale maiuscola solo a inizio frase,
-    niente maiuscoletto o spaziatura larga.
+    Una sola famiglia, Archivo, in tre larghezze e tre pesi. Testo a 19 px sullo schermo largo, 17
+    px sui telefoni. Iniziale maiuscola solo a inizio frase, niente maiuscoletto o spaziatura larga.
   </p>
-  <Specimen label="Scala" column>
+  <Specimen
+    label="Scala"
+    note="Ogni componente usa un ruolo, non una misura. Restano fissi 13 px (tacche dei grafici, busta paga) e 15 px (voci dell’intestazione)."
+    column
+  >
     {SCALE.map((step) => (
       <div class="sg-type">
         <p class:list={["sg-type__sample", step.className]}>Stipendio netto 2.002,48 €</p>

@@ -47,7 +47,7 @@
 
 .qg-menu__heading {
   padding-block: var(--s-3) var(--s-2);
-  font-size: var(--t-15);
+  font-size: var(--t-small);
   font-weight: var(--weight-strong);
   letter-spacing: 0;
   color: var(--grigio);
@@ -68,7 +68,7 @@
   padding: 0;
   border: 0;
   background: none;
-  font-size: var(--t-17);
+  font-size: var(--t-body);
   font-weight: var(--weight-medium);
   color: var(--inchiostro);
   cursor: pointer;
