@@ -147,10 +147,10 @@ export const en: Record<MessageKey, string> = {
 
   "ordinario.compare.title": "With the forfettario",
   "ordinario.compare.more":
-    "With the forfettario you would keep {net} a year: {difference} more than under the ordinary regime.",
+    "With the forfettario your annual net would be {net}: {difference} more than under the ordinary regime.",
   "ordinario.compare.less":
-    "With the forfettario you would keep {net} a year: {difference} less than under the ordinary regime.",
-  "ordinario.compare.same": "With the forfettario you would keep the same net: {net} a year.",
+    "With the forfettario your annual net would be {net}: {difference} less than under the ordinary regime.",
+  "ordinario.compare.same": "With the forfettario your annual net would be the same: {net}.",
   "ordinario.compare.caption": "Ordinary regime and forfettario in {year}",
   "ordinario.compare.captionNote":
     "Annual amounts in euro, with the same revenue, the same costs and the same pension scheme.",

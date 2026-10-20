@@ -145,10 +145,10 @@ export const it = {
 
   "ordinario.compare.title": "Con il forfettario",
   "ordinario.compare.more":
-    "Con il forfettario ti resterebbero {net} all’anno: {difference} in più che con l’ordinario.",
+    "Con il forfettario il netto annuo sarebbe {net}: {difference} in più che con l’ordinario.",
   "ordinario.compare.less":
-    "Con il forfettario ti resterebbero {net} all’anno: {difference} in meno che con l’ordinario.",
-  "ordinario.compare.same": "Con il forfettario ti resterebbe lo stesso netto: {net} all’anno.",
+    "Con il forfettario il netto annuo sarebbe {net}: {difference} in meno che con l’ordinario.",
+  "ordinario.compare.same": "Con il forfettario il netto annuo sarebbe lo stesso: {net}.",
   "ordinario.compare.caption": "Ordinario e forfettario nel {year}",
   "ordinario.compare.captionNote":
     "Importi annui in euro, con gli stessi ricavi, gli stessi costi e la stessa gestione previdenziale.",

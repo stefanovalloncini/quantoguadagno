@@ -135,7 +135,7 @@ describe("OrdinarioCalculator", () => {
     expect(document.documentElement.hasAttribute(RESTORE_PENDING_ATTRIBUTE)).toBe(false);
     expect(figure()).toMatch(/20\.151,39\s€/);
     const band = comparison();
-    expect(band).toHaveTextContent(/23\.535,12\s€ all’anno: 3\.383,73\s€ in più/);
+    expect(band).toHaveTextContent(/sarebbe 23\.535,12\s€: 3\.383,73\s€ in più/);
     expect(band).toHaveTextContent(/riduzione del 35%/);
   });
 
