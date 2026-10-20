@@ -165,7 +165,7 @@ export function ResultSpecimens() {
     <KitProvider>
       <KitSpecimen
         label="Cifra del risultato"
-        note="ResultFigure: etichetta, cifra dimensionata sulla colonna, base di calcolo e riga sotto. La cifra si assesta in 150 ms, niente movimento con riduzione del movimento."
+        note="ResultFigure: etichetta, cifra dimensionata sulla colonna, base di calcolo e righe sotto. Con più di 12 mensilità e un profilo semplice la prima riga divide la media in mese normale e mensilità aggiuntive. La cifra si assesta in 150 ms, niente movimento con riduzione del movimento."
         column
       >
         <div className="sg-figure-stage">
@@ -175,11 +175,14 @@ export function ResultSpecimens() {
             state="ready"
             value="2.002,48 €"
             basis="media su 13 mensilità"
-            sub={
+            subLines={[
+              <>
+                Mese normale <strong>2.013,40 €</strong>, tredicesima <strong>1.871,41 €</strong>
+              </>,
               <>
                 Netto annuo <strong>26.032,21 €</strong>
-              </>
-            }
+              </>,
+            ]}
           />
         </div>
       </KitSpecimen>

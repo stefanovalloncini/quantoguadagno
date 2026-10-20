@@ -171,8 +171,13 @@ conguaglio restituisce quella trattenuta sulla tredicesima, e il mese normale la
 | 2024 | 30.000 € | 13        | 23.407,72 € | 1.800,59 € | 1.816,18 €   | 1.613,62 €           |
 | 2026 | 60.000 € | 13        | 37.554,66 € | 2.888,82 € | 2.876,44 €   | 3.037,34 €           |
 | 2026 | 15.000 € | 13        | 14.088,98 € | 1.083,77 € | 1.102,22 €   | 862,34 €             |
+| 2026 | 35.000 € | 13        | 26.032,21 € | 2.002,48 € | 2.013,40 €   | 1.871,41 €           |
 | 2026 | 35.000 € | 14        | 26.032,21 € | 1.859,44 € | 1.878,00 €   | 1.748,09 € ciascuna  |
 | 2026 | 30.000 € | 15        | 23.425,52 € | 1.561,70 € | 1.602,51 €   | 1.398,47 € ciascuna  |
+
+Con 35.000 € su 13 mensilità, il caso di riferimento: lordo 2.692,31 €, INPS 247,42 €, imponibile
+2.444,89 €, IRPEF 536,667 + (2.444,89 − 2.333,333) × 33% = 573,48 €, tredicesima 1.871,41 €; mese
+normale (26.032,21 − 1.871,41) / 12 = 2.013,40 €.
 
 Nel 2024 la tredicesima paga i contributi pieni (9,19%) mentre i mesi normali hanno lo sconto. Con
 60.000 € la tredicesima netta supera il mese normale: non paga addizionali, sopra 50.000 € non perde

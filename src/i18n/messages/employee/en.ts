@@ -18,6 +18,8 @@ export const en: Record<MessageKey, string> = {
   "employee.result.label": "Monthly net pay",
   "employee.result.basis": "average over {count} payslips",
   "employee.result.annual": "Annual net pay {amount}",
+  "employee.result.split":
+    "Normal month {ordinary}, {count, plural, =1 {thirteenth month {extra}} =2 {thirteenth and fourteenth months {extra} each} other {extra months {extra} each}}",
   "employee.result.withheld": "Deductions: {share} of gross ({amount} of {gross}).",
   "employee.result.withheldCredits":
     "Deductions: {share} of gross ({amount} of {gross}). Payroll credits: {credits}, already in the net pay.",

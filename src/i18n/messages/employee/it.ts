@@ -16,6 +16,8 @@ export const it = {
   "employee.result.label": "Netto mensile",
   "employee.result.basis": "media su {count} mensilità",
   "employee.result.annual": "Netto annuo {amount}",
+  "employee.result.split":
+    "Mese normale {ordinary}, {count, plural, =1 {tredicesima {extra}} =2 {tredicesima e quattordicesima {extra} ciascuna} other {mensilità aggiuntive {extra} ciascuna}}",
   "employee.result.withheld": "Trattenute: {share} del lordo ({amount} su {gross}).",
   "employee.result.withheldCredits":
     "Trattenute: {share} del lordo ({amount} su {gross}). Crediti in busta paga: {credits}, già compresi nel netto.",

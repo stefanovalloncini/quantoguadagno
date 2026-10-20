@@ -6,6 +6,7 @@ import { Assumptions, NoteLine } from "@/components/result/Assumptions.tsx";
 import { Ledger, type LedgerProps } from "@/components/result/Ledger.tsx";
 import { LiveStatus } from "@/components/result/LiveStatus.tsx";
 import { FigureAside, ResultFigure, type FigureState } from "@/components/result/ResultFigure.tsx";
+import { splitSalaryYear } from "@/domain/tredicesima.ts";
 import { formatPercent } from "@/i18n/numbers.ts";
 import { useRichT, useT } from "@/i18n/react.tsx";
 import { preloadable } from "@/islands/runtime/preloadable.tsx";
@@ -79,6 +80,7 @@ export function ResultPanel({
       : null;
   const ledger = context === null ? null : buildLedger(context);
   const credited = b === undefined ? 0 : b.sommaAggiuntiva + b.trattamentoIntegrativo;
+  const split = result === null ? null : splitSalaryYear(result.input, result.breakdown);
 
   return (
     <div className="qg-result">
@@ -95,9 +97,20 @@ export function ResultPanel({
             : {
                 value: f.money(b.netMonthly),
                 basis: t("employee.result.basis", { count }),
-                sub: rt("employee.result.annual", {
-                  amount: <strong>{f.money(b.netAnnual)}</strong>,
-                }),
+                subLines: [
+                  ...(split === null
+                    ? []
+                    : [
+                        rt("employee.result.split", {
+                          ordinary: <strong>{f.money(split.ordinaryMonth)}</strong>,
+                          extra: <strong>{f.money(split.extraMonth)}</strong>,
+                          count: split.extraMonths,
+                        }),
+                      ]),
+                  rt("employee.result.annual", {
+                    amount: <strong>{f.money(b.netAnnual)}</strong>,
+                  }),
+                ],
               })}
         />
       </div>

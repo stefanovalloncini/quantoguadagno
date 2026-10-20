@@ -24,6 +24,10 @@ function figure(): string {
   return document.querySelector(".qg-figure__value")?.textContent ?? "";
 }
 
+function figureLines(): string[] {
+  return [...document.querySelectorAll(".qg-figure__sub")].map((line) => line.textContent);
+}
+
 const roots: Root[] = [];
 
 function setup(url = "/", locale: "it" | "en" = "it") {
@@ -219,6 +223,64 @@ describe("EmployeeCalculator", () => {
     expect(
       screen.getByText(/valori usati in questo calcolo sono ancora da verificare/),
     ).toBeInTheDocument();
+  });
+});
+
+// Splits from docs/data-verification/tredicesima.md (Lombardia, 0,80%, 2026).
+describe("EmployeeCalculator ordinary month and extra months", () => {
+  it("puts the ordinary month and the tredicesima under the average, server side too", () => {
+    const html = renderToString(<EmployeeCalculator locale="it" messages={MESSAGES.it} />);
+    expect(html).toMatch(/Mese normale <strong>1\.817,66\s€<\/strong>, tredicesima <strong>/);
+    setup();
+    expect(figure()).toMatch(/^1\.801,96\s€$/);
+    const [split, annual] = figureLines();
+    expect(split).toMatch(/^Mese normale 1\.817,66\s€, tredicesima 1\.613,62\s€$/);
+    expect(annual).toMatch(/^Netto annuo 23\.425,52\s€$/);
+  });
+
+  it("names the tredicesima and the quattordicesima with 14 mensilità", () => {
+    setup("/?l=35000&m=14");
+    expect(figure()).toMatch(/^1\.859,44\s€$/);
+    expect(figureLines()[0]).toMatch(
+      /^Mese normale 1\.878,00\s€, tredicesima e quattordicesima 1\.748,09\s€ ciascuna$/,
+    );
+  });
+
+  it("speaks of extra months from 15 mensilità", () => {
+    setup("/?m=15");
+    expect(figureLines()[0]).toMatch(
+      /^Mese normale 1\.602,51\s€, mensilità aggiuntive 1\.398,47\s€ ciascuna$/,
+    );
+  });
+
+  it("shows only the annual net with 12 mensilità", () => {
+    setup("/?m=12");
+    expect(figureLines()).toHaveLength(1);
+    expect(figureLines()[0]).toMatch(/^Netto annuo 23\.425,52\s€$/);
+  });
+
+  it("keeps only the average when a performance bonus joins the year", async () => {
+    const { user } = setup();
+    const benefits = document.querySelector<HTMLElement>("#gruppo-benefit > summary");
+    if (benefits === null) throw new Error("Missing benefits group");
+    await user.click(benefits);
+    const premio = await screen.findByRole("textbox", { name: /Premio di risultato/ });
+    await user.type(premio, "1000");
+    await waitFor(() => {
+      expect(figureLines()).toHaveLength(1);
+    });
+    expect(screen.queryByText(/Mese normale/)).toBeNull();
+  });
+
+  it("keeps only the average above the INPS contribution cap", () => {
+    setup("/?l=150000");
+    expect(screen.queryByText(/Mese normale/)).toBeNull();
+    expect(figureLines()).toHaveLength(1);
+  });
+
+  it("mirrors the line in English", () => {
+    setup("/", "en");
+    expect(figureLines()[0]).toMatch(/^Normal month €1,817\.66, thirteenth month €1,613\.62$/);
   });
 });
 

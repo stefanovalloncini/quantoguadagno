@@ -220,6 +220,14 @@ describe("splitSalaryYear", () => {
     });
   });
 
+  it("2026, RAL 35.000, 13 mensilità: mese normale 2.013,40 €, tredicesima 1.871,41 €", () => {
+    expect(splitOf({ ...LOMBARDIA_2026, grossAnnual: 35_000 })).toEqual({
+      ordinaryMonth: 2013.4,
+      extraMonth: 1871.41,
+      extraMonths: 1,
+    });
+  });
+
   it("2024: the extra month pays the contributions the 2024 cut left out", () => {
     expect(splitOf({ ...LOMBARDIA_2026, taxYear: 2024 })).toEqual({
       ordinaryMonth: 1816.18,

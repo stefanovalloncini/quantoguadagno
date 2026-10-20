@@ -129,7 +129,7 @@ export const en: Record<MessageKey, string> = {
   "method.limits.contract": "Allowances, extra pay and bonuses set by your collective agreement.",
   "method.limits.yearEnd": "The year-end tax adjustment and income other than employment.",
   "method.limits.thirteenth":
-    "The difference between a normal payslip and the thirteenth-month one: we show the average.",
+    "The difference between a normal payslip and the thirteenth-month one when there is a performance bonus, a taxable benefit, a pension fund, the impatriate regime, the working mothers’ exemption or pay above the INPS contribution cap: in those cases we show only the average.",
   "method.limits.regional":
     "The child deductions and reduced rates for disability that some regions apply to the regional surcharge.",
 

@@ -129,7 +129,7 @@ export const it = {
     "Indennità, maggiorazioni e premi previsti dal tuo contratto collettivo.",
   "method.limits.yearEnd": "Il conguaglio di fine anno e i redditi diversi dal lavoro dipendente.",
   "method.limits.thirteenth":
-    "La differenza tra una busta paga normale e quella della tredicesima: mostriamo la media.",
+    "La differenza tra una busta paga normale e quella della tredicesima quando c’è un premio di risultato, un benefit tassato, la previdenza complementare, il regime impatriati, l’esonero per madri lavoratrici o una RAL oltre il massimale INPS: in questi casi mostriamo solo la media.",
   "method.limits.regional":
     "Le detrazioni per i figli e le aliquote ridotte per disabilità che alcune regioni prevedono nell’addizionale regionale.",
 

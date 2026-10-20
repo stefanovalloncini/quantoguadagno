@@ -133,8 +133,8 @@ export function isPlainSalary(breakdown: SalaryBreakdown): boolean {
 }
 
 // The INPS massimale is annual (art. 2 c. 18 L. 335/1995): once the year's pay
-// reaches it no more contributions are due, so an extra month paid after that
-// point pays fewer than the year's average rate, or none.
+// reaches it no more contributions are due, so an extra month paid around that
+// point pays less than the year's average rate, or nothing.
 function passesMassimale(
   input: SalaryInput,
   breakdown: SalaryBreakdown,
