@@ -6,7 +6,7 @@ import { Select } from "@/components/form/Select.tsx";
 import { useBlurErrors } from "@/components/form/useBlurErrors.ts";
 import { CalculatorLayout } from "@/components/page/CalculatorLayout.tsx";
 import { PageIntro } from "@/components/page/PageIntro.tsx";
-import { Assumptions, NoteLine } from "@/components/result/Assumptions.tsx";
+import { NoteLine } from "@/components/result/Assumptions.tsx";
 import { BottomBar, useBottomBarVisible } from "@/components/result/BottomBar.tsx";
 import { useSettledAnnouncement } from "@/components/result/LiveStatus.tsx";
 import { Ledger } from "@/components/result/Ledger.tsx";
@@ -117,7 +117,7 @@ export function ForfettarioView() {
   };
 
   const discountText =
-    derived.discountNoteKey === null
+    derived.discountRecapKey === null
       ? t("forfettario.breakdown.contributi.explain", { rate: f.percent(result.aliquotaInps) })
       : t("forfettario.breakdown.contributi.explain.discounted", {
           rate: f.percent(result.aliquotaInps),
@@ -296,12 +296,6 @@ export function ForfettarioView() {
             )}
           </div>
         </div>
-      )}
-      {derived.discountNoteKey !== null && (
-        <Assumptions
-          headingId={IDS.assumptionsHeading}
-          fixed={[{ id: "discount", text: t(derived.discountNoteKey) }]}
-        />
       )}
       <NoteLine term={t("result.estimate.term")}>
         {t("forfettario.result.estimate")}

@@ -34,7 +34,7 @@ afterEach(() => {
 });
 
 describe("ForfettarioCalculator", () => {
-  it("lists a contribution reduction only when one applies, since no summary shows it", async () => {
+  it("shows a contribution reduction in the group summary, with no list of assumptions", async () => {
     const { user } = setup();
     expect(screen.queryByRole("heading", { name: "Ipotesi del calcolo" })).toBeNull();
     await user.click(screen.getByText("Cassa previdenziale e contributi"));
@@ -43,9 +43,9 @@ describe("ForfettarioCalculator", () => {
       "artigiani",
     );
     await user.click(await screen.findByRole("checkbox", { name: /riduzione 35%/ }));
-    const list = screen.getByRole("heading", { name: "Ipotesi del calcolo" }).closest("section");
-    expect(list?.querySelectorAll("li")).toHaveLength(1);
-    expect(list).toHaveTextContent("Applicata la riduzione 35% (L. 190/2014).");
-    expect(list?.querySelector("a")).toBeNull();
+    expect(
+      screen.getByText("INPS Gestione Artigiani, contributi ridotti del 35%"),
+    ).toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: "Ipotesi del calcolo" })).toBeNull();
   });
 });

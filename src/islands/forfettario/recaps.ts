@@ -17,10 +17,15 @@ export function forfettarioGroupRecaps(
 ): Readonly<Record<ViewGroup, GroupRecap>> {
   return {
     previdenza: {
-      text: t(`forfettario.form.gestion.${state.gestion}`),
+      text:
+        derived.discountRecapKey === null
+          ? t(`forfettario.form.gestion.${state.gestion}`)
+          : t(derived.discountRecapKey, {
+              gestion: t(`forfettario.form.gestion.${state.gestion}`),
+            }),
       set:
         state.gestion !== FORFETTARIO_DEFAULTS.gestion ||
-        derived.discountNoteKey !== null ||
+        derived.discountRecapKey !== null ||
         (derived.isArtigianiOrCommercianti && state.isAnte1996),
     },
     regime: {

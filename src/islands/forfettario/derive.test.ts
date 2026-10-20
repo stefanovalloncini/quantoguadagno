@@ -4,7 +4,7 @@ import { ACTIVITY_COEFFICIENTS } from "@/data/forfettarioActivities.ts";
 import { calculateForfettario, getAutonomiConfig, getTaxConfig } from "@/domain/index.ts";
 import {
   deriveForfettario,
-  discountNoteKey,
+  discountRecapKey,
   forfettarioIneligibilityMessageKey,
   forfettarioNotice,
   gestionMessageKey,
@@ -69,11 +69,11 @@ describe("forfettarioNotice", () => {
   });
 });
 
-describe("discountNoteKey", () => {
+describe("discountRecapKey", () => {
   it("maps 0.35 and 0.5 to their note keys and everything else to null", () => {
-    expect(discountNoteKey(0.35)).toBe("forfettario.breakdown.discount35");
-    expect(discountNoteKey(0.5)).toBe("forfettario.breakdown.discount50");
-    expect(discountNoteKey(0)).toBeNull();
+    expect(discountRecapKey(0.35)).toBe("forfettario.recap.previdenza.discount35");
+    expect(discountRecapKey(0.5)).toBe("forfettario.recap.previdenza.discount50");
+    expect(discountRecapKey(0)).toBeNull();
   });
 });
 

@@ -11,7 +11,6 @@ export const GROUP_IDS: Readonly<Record<ViewGroup, string>> = {
 export const IDS = {
   result: "risultato",
   resultHeading: "netto-titolo",
-  assumptionsHeading: "ipotesi-titolo",
   ledgerHeading: "dettaglio-titolo",
   ledgerToggle: "spiega",
   extrasHeading: "personalizza-titolo",

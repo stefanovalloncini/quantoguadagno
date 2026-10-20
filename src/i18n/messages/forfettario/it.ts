@@ -80,8 +80,6 @@ export const it = {
   "forfettario.breakdown.inps.artigiani": "Contributi INPS Artigiani",
   "forfettario.breakdown.inps.commercianti": "Contributi INPS Commercianti",
   "forfettario.breakdown.inps.cassa-professionale": "Contributi cassa professionale",
-  "forfettario.breakdown.discount35": "Applicata la riduzione 35% (L. 190/2014).",
-  "forfettario.breakdown.discount50": "Applicata la riduzione 50% nuovi iscritti (L. 207/2024).",
   "forfettario.breakdown.imponibileNetto": "Reddito imponibile netto",
   "forfettario.breakdown.impostaSostitutiva": "Imposta sostitutiva",
   "forfettario.breakdown.totalTaxes": "Totale imposte e contributi",
@@ -117,6 +115,9 @@ export const it = {
   "forfettario.recap.regime.standard": "a regime, aliquota 15%",
   "forfettario.recap.dipendente.yes": "sì, RAL {ral}",
   "forfettario.recap.dipendente.no": "no",
+  "forfettario.recap.previdenza.discount35": "{gestion}, contributi ridotti del 35%",
+  "forfettario.recap.previdenza.discount50":
+    "{gestion}, contributi ridotti del 50% per i nuovi iscritti",
   "forfettario.result.staleNote": "Non aggiornato: correggi il campo segnato per ricalcolare.",
   "forfettario.result.announce": "Netto mensile stimato {amount}.",
   "forfettario.result.estimate":

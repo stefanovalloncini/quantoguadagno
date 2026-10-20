@@ -56,16 +56,16 @@ export function forfettarioNotice(eligibility: ForfettarioEligibility): Forfetta
 const DISCOUNT_35 = 0.35;
 const DISCOUNT_50 = 0.5;
 
-export function discountNoteKey(discountApplied: number): MessageKey | null {
-  if (discountApplied === DISCOUNT_35) return "forfettario.breakdown.discount35";
-  if (discountApplied === DISCOUNT_50) return "forfettario.breakdown.discount50";
+export function discountRecapKey(discountApplied: number): MessageKey | null {
+  if (discountApplied === DISCOUNT_35) return "forfettario.recap.previdenza.discount35";
+  if (discountApplied === DISCOUNT_50) return "forfettario.recap.previdenza.discount50";
   return null;
 }
 
 export interface ForfettarioDerived {
   readonly notice: ForfettarioNotice;
   readonly gestionMessageKey: MessageKey;
-  readonly discountNoteKey: MessageKey | null;
+  readonly discountRecapKey: MessageKey | null;
   readonly isArtigianiOrCommercianti: boolean;
   readonly isCassaManual: boolean;
 }
@@ -77,7 +77,7 @@ export function deriveForfettario(
   return {
     notice: forfettarioNotice(result.eligibility),
     gestionMessageKey: gestionMessageKey(result.gestion),
-    discountNoteKey: discountNoteKey(result.discountApplied),
+    discountRecapKey: discountRecapKey(result.discountApplied),
     isArtigianiOrCommercianti: state.gestion === "artigiani" || state.gestion === "commercianti",
     isCassaManual: state.gestion === "cassa-professionale",
   };
