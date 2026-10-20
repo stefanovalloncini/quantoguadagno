@@ -4,7 +4,6 @@ export const IDS = {
   toYear: "anno-confronto",
   result: "risultato",
   resultHeading: "equivalente-titolo",
-  assumptionsHeading: "ipotesi-titolo",
   keepPaceHeading: "aumento-titolo",
   frozenHeading: "fermo-titolo",
   frozenTable: "tabella-fermo",

@@ -129,15 +129,14 @@ describe("ComparisonCalculator", () => {
     expect(screen.queryByRole("table")).toBeNull();
   });
 
-  it("opens the group and moves focus when an assumption is changed", async () => {
+  it("opens a condition group and sums up the choice in its summary", async () => {
     const { user } = setup();
-    await user.click(screen.getByRole("link", { name: "Cambia familiari a carico" }));
-    const spouse = await screen.findByRole("checkbox", { name: "Coniuge a carico" });
-    await waitFor(() => {
-      expect(spouse).toHaveFocus();
-    });
-    await user.click(spouse);
-    expect(screen.getAllByText("Coniuge a carico").length).toBeGreaterThan(1);
+    const group = document.getElementById("gruppo-familiari");
+    expect(group?.querySelector(".qg-group__recap")).toHaveTextContent(/^Nessuno$/);
+    await user.click(screen.getByText("Familiari a carico"));
+    expect(group).toHaveAttribute("open");
+    await user.click(await screen.findByRole("checkbox", { name: "Coniuge a carico" }));
+    expect(group?.querySelector(".qg-group__recap")).toHaveTextContent(/^Coniuge$/);
   });
 
   it("speaks English", () => {

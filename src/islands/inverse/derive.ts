@@ -1,6 +1,4 @@
-import type { PaymentFrequency, RegionCode, SupportedYear } from "@/data/index.ts";
 import { contractAssumption, type ContractAssumption } from "@/islands/home/contract.ts";
-import { localAssumption, type LocalAssumption } from "@/islands/home/localAssumption.ts";
 import { roundTo } from "@/islands/home/fields.ts";
 import type { InverseResult } from "./compute.ts";
 
@@ -75,46 +73,20 @@ export function inverseLines(result: InverseResult): readonly InverseLine[] {
   ];
 }
 
-export type InverseAssumption =
-  | { readonly id: "year"; readonly value: SupportedYear; readonly fieldToEdit: "year" }
-  | { readonly id: "region"; readonly value: RegionCode; readonly fieldToEdit: "region" }
-  | LocalAssumption
-  | {
-      readonly id: "paymentFrequency";
-      readonly value: PaymentFrequency;
-      readonly fieldToEdit: "paymentFrequency";
-    }
-  | {
-      readonly id: "contract";
-      readonly value: ContractAssumption;
-      readonly fieldToEdit: "contractType";
-    };
-
-export function inverseAssumptions(result: InverseResult): readonly InverseAssumption[] {
-  const { values } = result;
-  return [
-    { id: "year", value: values.taxYear, fieldToEdit: "year" },
-    { id: "region", value: values.regionCode, fieldToEdit: "region" },
-    localAssumption(result),
-    { id: "paymentFrequency", value: values.paymentFrequency, fieldToEdit: "paymentFrequency" },
-    {
-      id: "contract",
-      value: contractAssumption({ ...values, insuredBefore1996: false, inpsOverride: null }),
-      fieldToEdit: "contractType",
-    },
-  ];
-}
-
 export interface InverseDerived {
   readonly summary: InverseSummary;
   readonly lines: readonly InverseLine[];
-  readonly assumptions: readonly InverseAssumption[];
+  readonly contract: ContractAssumption;
 }
 
 export function deriveInverse(result: InverseResult): InverseDerived {
   return {
     summary: inverseSummary(result),
     lines: inverseLines(result),
-    assumptions: inverseAssumptions(result),
+    contract: contractAssumption({
+      ...result.values,
+      insuredBefore1996: false,
+      inpsOverride: null,
+    }),
   };
 }

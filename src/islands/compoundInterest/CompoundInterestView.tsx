@@ -6,7 +6,7 @@ import { RadioGroup } from "@/components/form/RadioGroup.tsx";
 import { useBlurErrors } from "@/components/form/useBlurErrors.ts";
 import { CalculatorLayout } from "@/components/page/CalculatorLayout.tsx";
 import { PageIntro } from "@/components/page/PageIntro.tsx";
-import { Assumptions, NoteLine, type AssumptionItem } from "@/components/result/Assumptions.tsx";
+import { NoteLine } from "@/components/result/Assumptions.tsx";
 import { BottomBar, useBottomBarVisible } from "@/components/result/BottomBar.tsx";
 import { useSettledAnnouncement, LiveStatus } from "@/components/result/LiveStatus.tsx";
 import { ResultFigure, type FigureState } from "@/components/result/ResultFigure.tsx";
@@ -104,62 +104,6 @@ export function CompoundInterestView() {
             real: f.money(result.finalReal),
           }),
   );
-
-  const contributionAssumption =
-    state.contributionFrequency === "none"
-      ? t("compoundInterest.assumptions.contribution.none")
-      : t(`compoundInterest.assumptions.contribution.${state.contributionFrequency}`, {
-          amount: f.money(state.contribution),
-        });
-
-  const assumptionItems: readonly AssumptionItem[] = [
-    {
-      id: "principal",
-      text: t("compoundInterest.assumptions.principal", { amount: f.money(state.principal) }),
-      changeLabel: t("compoundInterest.assumptions.principal.change"),
-      targetId: IDS.principal,
-    },
-    {
-      id: "annualRate",
-      text: t("compoundInterest.assumptions.annualRate", { rate: f.percent(state.annualRate) }),
-      changeLabel: t("compoundInterest.assumptions.annualRate.change"),
-      targetId: IDS.annualRate,
-    },
-    {
-      id: "years",
-      text: t("compoundInterest.assumptions.years", { years: state.years }),
-      changeLabel: t("compoundInterest.assumptions.years.change"),
-      targetId: IDS.years,
-    },
-    {
-      id: "contribution",
-      text: contributionAssumption,
-      changeLabel: t("compoundInterest.assumptions.contribution.change"),
-      targetId: IDS.contribution,
-    },
-    {
-      id: "compounding",
-      text: t("compoundInterest.assumptions.compounding", {
-        frequency: t(
-          `compoundInterest.form.compoundingFrequency.${state.compoundingFrequency}`,
-        ).toLocaleLowerCase(f.locale === "it" ? "it-IT" : "en-US"),
-      }),
-      changeLabel: t("compoundInterest.assumptions.compounding.change"),
-      targetId: IDS.compoundingFrequency,
-    },
-    {
-      id: "inflationRate",
-      text: t("compoundInterest.assumptions.inflationRate", {
-        rate: f.percent(state.inflationRate),
-      }),
-      changeLabel: t("compoundInterest.assumptions.inflationRate.change"),
-      targetId: IDS.inflationRate,
-    },
-  ];
-
-  const goTo = (item: AssumptionItem) => {
-    document.getElementById(item.targetId)?.focus();
-  };
 
   const primary = (
     <>
@@ -378,11 +322,6 @@ export function CompoundInterestView() {
               />
             </div>
             <LiveStatus message={announcement} />
-            <Assumptions
-              headingId={IDS.assumptionsHeading}
-              items={assumptionItems}
-              onChange={goTo}
-            />
             <NoteLine>{t("compoundInterest.chart.caption")}</NoteLine>
           </div>
         }

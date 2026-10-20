@@ -35,12 +35,6 @@ export const it = {
   "tfr.schedule.stock": "Accumulato",
   "tfr.result.note":
     "ogni anno accantoni circa un tredicesimo e mezzo dello stipendio, rivalutato all’1,5% più il 75% dell’inflazione ISTAT, con imposta sostitutiva del 17% sulla rivalutazione. Alla liquidazione si applica la tassazione separata, qui non calcolata.",
-  "tfr.assumption.ral": "RAL di {amount}",
-  "tfr.assumption.years": "{count, plural, one {un anno di lavoro} other {# anni di lavoro}}",
-  "tfr.assumption.inflation": "Inflazione attesa {rate}",
-  "tfr.change.ral": "RAL",
-  "tfr.change.years": "anni di lavoro",
-  "tfr.change.inflation": "inflazione attesa",
 } as const;
 
 export type MessageKey = keyof typeof it;

@@ -1,6 +1,5 @@
 import { useState, type ReactNode, type Ref } from "react";
 import { Actions } from "@/components/result/Actions.tsx";
-import { Assumptions, type AssumptionItem } from "@/components/result/Assumptions.tsx";
 import { Ledger } from "@/components/result/Ledger.tsx";
 import { LiveStatus } from "@/components/result/LiveStatus.tsx";
 import { FigureAside, ResultFigure, type FigureState } from "@/components/result/ResultFigure.tsx";
@@ -20,13 +19,10 @@ export interface EmployerCostResultProps {
   readonly figureState: FigureState;
   readonly staleNote: ReactNode;
   readonly prompt: string;
-  readonly costAssumptions: readonly AssumptionItem[];
-  readonly netAssumptions: readonly AssumptionItem[];
   readonly printHref: string;
   readonly announcement: string;
   readonly f: ViewFormat;
   readonly valueRef: Ref<HTMLParagraphElement>;
-  readonly onChange: (item: AssumptionItem) => void;
 }
 
 export function EmployerCostResult({
@@ -35,13 +31,10 @@ export function EmployerCostResult({
   figureState,
   staleNote,
   prompt,
-  costAssumptions,
-  netAssumptions,
   printHref,
   announcement,
   f,
   valueRef,
-  onChange,
 }: EmployerCostResultProps) {
   const t = useT();
   const rt = useRichT();
@@ -93,17 +86,6 @@ export function EmployerCostResult({
               })}
             </FigureAside>
           )}
-          <Assumptions
-            headingId={IDS.assumptionsHeading}
-            items={costAssumptions}
-            onChange={onChange}
-          />
-          <Assumptions
-            headingId={IDS.netAssumptionsHeading}
-            title={t("employerCost.assumptions.net")}
-            items={netAssumptions}
-            onChange={onChange}
-          />
           <TrustNote
             ns="employerCost"
             locale={f.locale}

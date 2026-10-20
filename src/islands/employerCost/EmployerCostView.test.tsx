@@ -53,14 +53,12 @@ afterEach(() => {
 });
 
 describe("EmployerCostCalculator", () => {
-  it("renders the default cost on the server and states what the net assumes", () => {
+  it("renders the default cost on the server and sums up what the net assumes", () => {
     const html = renderToString(<EmployerCostCalculator locale="it" messages={MESSAGES.it} />);
     expect(html).toContain("Costo annuo per l’azienda");
     expect(html).toMatch(/per una RAL di 30\.000,00\s€/);
-    expect(html).toContain("Ipotesi per il netto del dipendente");
-    expect(html).toContain("Regione Lombardia");
-    expect(html).toContain("Addizionale comunale 0,80%, comune non scelto");
-    expect(html).toContain("13 mensilità");
+    expect(html).toContain("Lombardia, comune non scelto, 13 mensilità");
+    expect(html).toContain("Nessun comune scelto: per ora usiamo lo 0,80%");
   });
 
   it.each(["l=20004", "l=31234&t=determinato"])(
@@ -96,15 +94,15 @@ describe("EmployerCostCalculator", () => {
     ).toBeInTheDocument();
   });
 
-  it("opens the net group and focuses the region from the assumptions", async () => {
+  it("opens the net group and sums up a new region in its summary and the link", async () => {
     const { user } = setup();
-    await user.click(screen.getByRole("link", { name: "Cambia regione" }));
-    const region = screen.getByRole("combobox", { name: "Regione di residenza" });
-    expect(region).toHaveFocus();
-    await user.selectOptions(region, "lazio");
-    expect(
-      screen.getByText("Regione Lazio", { selector: ".qg-assumptions__text" }),
-    ).toBeInTheDocument();
+    await user.click(screen.getByText("Netto del dipendente"));
+    expect(document.getElementById("gruppo-netto")).toHaveAttribute("open");
+    await user.selectOptions(
+      screen.getByRole("combobox", { name: "Regione di residenza" }),
+      "lazio",
+    );
+    expect(screen.getByText("Lazio, comune non scelto, 13 mensilità")).toBeVisible();
     await waitFor(() => {
       expect(window.location.search).toBe("?r=lazio");
     });
@@ -113,10 +111,10 @@ describe("EmployerCostCalculator", () => {
   it("keeps the company cost when only the employee's settings change", async () => {
     const { user } = setup();
     const before = figure();
-    await user.click(screen.getByRole("link", { name: "Cambia mensilità" }));
+    await user.click(screen.getByText("Netto del dipendente"));
     await user.click(screen.getByRole("radio", { name: "14" }));
     expect(figure()).toBe(before);
-    expect(screen.getByText("14 mensilità", { selector: ".qg-assumptions__text" })).toBeVisible();
+    expect(screen.getByText("Lombardia, comune non scelto, 14 mensilità")).toBeVisible();
   });
 
   it("restores a link from the employee calculator and ends the restore", () => {

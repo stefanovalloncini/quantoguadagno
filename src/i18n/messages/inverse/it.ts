@@ -58,20 +58,6 @@ export const it = {
   "inverse.result.trust":
     "{checked}{pending, select, yes {: {count, plural, one {un valore usato in questo calcolo è ancora da verificare} other {# valori usati in questo calcolo sono ancora da verificare}}} other {}}.",
 
-  "inverse.assumption.year": "Anno fiscale {year}",
-  "inverse.assumption.region":
-    "{region, select, bolzano {Provincia autonoma di Bolzano} trento {Provincia autonoma di Trento} other {Regione {name}}}",
-  "inverse.assumption.comune": "Comune di {name}, addizionale {rate}",
-  "inverse.assumption.comuneZero": "Comune di {name}, senza addizionale",
-  "inverse.assumption.rateDefault": "Addizionale comunale {rate}, comune non scelto",
-  "inverse.assumption.rateManual": "Addizionale comunale {rate}, inserita a mano",
-  "inverse.assumption.frequency": "{count} mensilità",
-  "inverse.change.year": "anno fiscale",
-  "inverse.change.region": "regione",
-  "inverse.change.comune": "comune",
-  "inverse.change.frequency": "mensilità",
-  "inverse.change.contract": "contratto",
-
   "inverse.ledger.title": "Dettaglio del calcolo",
   "inverse.ledger.caption": "Dettaglio del calcolo {year}, importi in euro",
   "inverse.ledger.column.term": "Voce",

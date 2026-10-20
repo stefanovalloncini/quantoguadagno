@@ -23,6 +23,7 @@ export const en: Record<MessageKey, string> = {
   "employerCost.group.net": "Employee’s net pay",
   "employerCost.recap.rateDefault": "no comune chosen",
   "employerCost.recap.rateManual": "municipal surcharge {rate}",
+  "employerCost.recap.frequency": "{count} payslips a year",
   "employerCost.region.label": "Region of residence",
   "employerCost.frequency.legend": "Payslips a year",
   "employerCost.frequency.hint":
@@ -45,23 +46,6 @@ export const en: Record<MessageKey, string> = {
   "employerCost.result.verified": "Data checked on {date}",
   "employerCost.result.trust":
     "{checked}{pending, select, yes {: {count, plural, one {one value used in this calculation is still to be verified} other {# values used in this calculation are still to be verified}}} other {}}.",
-
-  "employerCost.assumptions.net": "What the employee’s net pay assumes",
-  "employerCost.assumption.year": "Tax year {year}",
-  "employerCost.assumption.contract":
-    "{type, select, determinato {Fixed-term contract} apprendistato {Apprenticeship} other {Permanent contract}}",
-  "employerCost.assumption.region":
-    "{region, select, bolzano {Autonomous Province of Bolzano} trento {Autonomous Province of Trento} other {Region: {name}}}",
-  "employerCost.assumption.comune": "Comune of {name}, surcharge {rate}",
-  "employerCost.assumption.comuneZero": "Comune of {name}, no surcharge",
-  "employerCost.assumption.rateDefault": "Municipal surcharge {rate}, no comune chosen",
-  "employerCost.assumption.rateManual": "Municipal surcharge {rate}, entered by hand",
-  "employerCost.assumption.frequency": "{count} payslips a year",
-  "employerCost.change.year": "tax year",
-  "employerCost.change.contract": "contract",
-  "employerCost.change.region": "region",
-  "employerCost.change.comune": "comune",
-  "employerCost.change.frequency": "payslips a year",
 
   "employerCost.ledger.title": "Breakdown",
   "employerCost.ledger.caption": "How the {year} cost adds up, amounts in euros",

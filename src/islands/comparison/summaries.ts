@@ -1,5 +1,4 @@
-import { regionSelectKey, type RegionText } from "@/components/form/regionText.ts";
-import type { AssumptionItem } from "@/components/result/Assumptions.tsx";
+import type { RegionText } from "@/components/form/regionText.ts";
 import type { TranslateFn } from "@/i18n/react.tsx";
 import type { MunicipalSource } from "@/islands/home/compute.ts";
 import type { MunicipalMode } from "@/islands/home/ledgerRows.tsx";
@@ -14,17 +13,13 @@ import {
 import type { ComparedOffers, OfferResult } from "./compute.ts";
 import type { ComparisonRow } from "./derive.ts";
 import { DEFAULT_CONTRACT_TYPE, DEFAULT_REGION, DEFAULT_YEAR } from "./state.ts";
-import { IDS, type ConditionGroup } from "./viewIds.ts";
+import type { ConditionGroup } from "./viewIds.ts";
 
 export interface SummaryContext {
   readonly t: TranslateFn;
   readonly f: ViewFormat;
   readonly regions: RegionText;
   readonly municipalMode: MunicipalMode;
-}
-
-export interface ComparisonAssumption extends AssumptionItem {
-  readonly group: ConditionGroup;
 }
 
 export interface GroupRecap {
@@ -34,34 +29,19 @@ export interface GroupRecap {
 
 interface LocalTexts {
   readonly recap: string;
-  readonly assumption: string;
   readonly place: string;
 }
 
 export function localTexts(municipal: MunicipalSource, context: SummaryContext): LocalTexts {
-  const { t, f, municipalMode } = context;
+  const { t, f } = context;
   if (municipal.kind === "manual") {
     const rate = f.percent(municipal.rate);
-    return {
-      recap: t("comparison.recap.rate", { rate }),
-      assumption: t(
-        municipalMode === "manual"
-          ? "comparison.assumption.rateManual"
-          : "comparison.assumption.rateDefault",
-        { rate },
-      ),
-      place: rate,
-    };
+    return { recap: t("comparison.recap.rate", { rate }), place: rate };
   }
-  const rates = comuneRates(municipal.rule);
-  const rate = rangeText(rates, f);
+  const rate = rangeText(comuneRates(municipal.rule), f);
   const name = municipal.comune.name;
   return {
     recap: t("comparison.recap.comune", { name, rate }),
-    assumption:
-      Math.max(...rates) === 0
-        ? t("comparison.assumption.comuneZero", { name })
-        : t("comparison.assumption.comune", { name, rate }),
     place: t("comparison.row.municipalPlace", { name, rate }),
   };
 }
@@ -86,12 +66,6 @@ function dependentParts(values: EmployeeValues, t: TranslateFn): readonly string
       ? [t("comparison.part.others", { count: dependents.otherDependents })]
       : []),
   ];
-}
-
-export function dependentsText(values: EmployeeValues, { t, f }: SummaryContext): string | null {
-  const parts = dependentParts(values, t);
-  if (parts === null) return null;
-  return f.capitalize(t("comparison.assumption.dependents", { list: f.list(parts) }));
 }
 
 export function groupRecaps(
@@ -129,54 +103,6 @@ export function groupRecaps(
         ? { text: t("comparison.recap.none"), set: false }
         : { text: f.capitalize(f.list(dependents)), set: true },
   };
-}
-
-export function assumptionItems(
-  result: OfferResult,
-  context: SummaryContext,
-): readonly ComparisonAssumption[] {
-  const { t, regions, municipalMode } = context;
-  const { values } = result;
-  return [
-    {
-      id: "year",
-      text: t("comparison.assumption.year", { year: values.taxYear }),
-      changeLabel: t("comparison.change.year"),
-      targetId: `${IDS.year}-${String(values.taxYear)}`,
-      group: "residence",
-    },
-    {
-      id: "region",
-      text: t("comparison.assumption.region", {
-        region: regionSelectKey(values.regionCode),
-        name: regions.name(values.regionCode),
-      }),
-      changeLabel: t("comparison.change.region"),
-      targetId: IDS.region,
-      group: "residence",
-    },
-    {
-      id: "comune",
-      text: localTexts(result.municipal, context).assumption,
-      changeLabel: t("comparison.change.comune"),
-      targetId: municipalMode === "manual" ? IDS.municipalRate : IDS.comune,
-      group: "residence",
-    },
-    {
-      id: "contract",
-      text: t("comparison.assumption.contract", { contract: contractText(values, t) }),
-      changeLabel: t("comparison.change.contract"),
-      targetId: `${IDS.contract}-${values.contractType}`,
-      group: "contract",
-    },
-    {
-      id: "dependents",
-      text: dependentsText(values, context) ?? t("comparison.assumption.noDependents"),
-      changeLabel: t("comparison.change.dependents"),
-      targetId: IDS.hasSpouse,
-      group: "dependents",
-    },
-  ];
 }
 
 export function rowLabel(row: ComparisonRow, offers: ComparedOffers, context: SummaryContext) {

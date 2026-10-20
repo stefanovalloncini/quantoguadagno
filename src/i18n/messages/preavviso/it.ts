@@ -45,10 +45,6 @@ export const it = {
   "preavviso.result.calendarDays.note": "I giorni indicati sono giorni di calendario.",
   "preavviso.result.source": "Fonte: {ref}.",
   "preavviso.days": "{count, plural, one {# giorno} other {# giorni}}",
-  "preavviso.assumptions.ccnl": "{ccnl}, {livello}",
-  "preavviso.assumptions.dates": "Assunzione il {hire}, dimissioni comunicate il {resignation}",
-  "preavviso.assumptions.change.ccnl": "il CCNL e il livello",
-  "preavviso.assumptions.change.dates": "le date",
   "preavviso.table.title": "Giorni di preavviso per livello e anzianità",
   "preavviso.table.caption":
     "Giorni di preavviso previsti dal CCNL selezionato, per livello e fascia di anzianità",

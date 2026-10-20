@@ -1,6 +1,5 @@
 import { useMemo, useRef, useState } from "react";
-import type { AssumptionItem } from "@/components/result/Assumptions.tsx";
-import { Assumptions, NoteLine } from "@/components/result/Assumptions.tsx";
+import { NoteLine } from "@/components/result/Assumptions.tsx";
 import { Field } from "@/components/form/Field.tsx";
 import { MoneyInput } from "@/components/form/MoneyInput.tsx";
 import { NumberInput } from "@/components/form/NumberInput.tsx";
@@ -19,7 +18,7 @@ import { useHydratedFormValues } from "@/islands/runtime/useHydratedFormValues.t
 import { hrefFor } from "@/routePaths.ts";
 import { formatInflationPoints, formatYearsText, useNumberField } from "./tfr/numberField.ts";
 import { ScheduleTable } from "./tfr/ScheduleTable.tsx";
-import { MAX_RAL, parseRal, type TfrErrorValue, type TfrFieldErrors } from "./tfr/state.ts";
+import type { TfrErrorValue, TfrFieldErrors } from "./tfr/state.ts";
 import { useTfrController } from "./tfr/useTfrController.ts";
 
 const IDS = {
@@ -28,7 +27,6 @@ const IDS = {
   inflationRate: "inflazione",
   result: "risultato",
   resultHeading: "tfr-titolo",
-  assumptionsHeading: "tfr-ipotesi-titolo",
   ledgerHeading: "tfr-dettaglio-titolo",
   ledgerToggle: "tfr-spiega",
   scheduleHeading: "tfr-anni-titolo",
@@ -102,32 +100,6 @@ function TfrCalculatorContent() {
           ? t("tfr.result.stale")
           : t("tfr.result.announce", { amount: f.money(result.finalStock), years: state.years }),
   );
-
-  const goTo = (targetId: string) => {
-    document.getElementById(targetId)?.focus();
-  };
-
-  const ralValue = Math.min(Math.max(parseRal(state, locale) ?? 0, 0), MAX_RAL);
-  const assumptionItems: readonly AssumptionItem[] = [
-    {
-      id: "ral",
-      text: t("tfr.assumption.ral", { amount: f.money(ralValue) }),
-      changeLabel: t("tfr.change.ral"),
-      targetId: IDS.ral,
-    },
-    {
-      id: "years",
-      text: t("tfr.assumption.years", { count: state.years }),
-      changeLabel: t("tfr.change.years"),
-      targetId: IDS.years,
-    },
-    {
-      id: "inflation",
-      text: t("tfr.assumption.inflation", { rate: f.percent(state.inflationRate, 2) }),
-      changeLabel: t("tfr.change.inflation"),
-      targetId: IDS.inflationRate,
-    },
-  ];
 
   const ledgerRows: readonly LedgerRow[] = [
     {
@@ -269,13 +241,6 @@ function TfrCalculatorContent() {
             <LiveStatus message={announcement} />
             {figureState !== "empty" && (
               <>
-                <Assumptions
-                  headingId={IDS.assumptionsHeading}
-                  items={assumptionItems}
-                  onChange={(item) => {
-                    goTo(item.targetId);
-                  }}
-                />
                 <NoteLine term={t("result.estimate.term")}>
                   {t("tfr.result.note")}
                   {verified !== null && (

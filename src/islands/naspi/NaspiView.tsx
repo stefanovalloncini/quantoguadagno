@@ -30,7 +30,7 @@ import { hrefFor } from "@/routePaths.ts";
 import { VISIBLE_NASPI_MONTHS } from "./derive.ts";
 import NaspiChart from "./NaspiChart.tsx";
 import { loadNaspiExplanations } from "./NaspiLedgers.tsx";
-import { NaspiResult, reasonLines, type NaspiAssumption } from "./NaspiResult.tsx";
+import { NaspiResult, reasonLines } from "./NaspiResult.tsx";
 import { roundedToTen } from "./netEstimate.ts";
 import {
   checkNetInputs,
@@ -50,7 +50,6 @@ const netFields = preloadable(() => import("./NetEstimateFields.tsx"));
 const NetEstimateFields = netFields.Component;
 
 const TYPING_PAUSE_MS = 700;
-const FOCUS_ATTEMPTS = 30;
 
 type TextField = "gross" | "weeks" | "age" | "weeksAfter";
 type ErrorField = TextField | NetField;
@@ -70,19 +69,6 @@ const TEXT_BY_NAME: Readonly<Record<string, TextField>> = {
   age: "age",
   weeksAfterVoluntaryResignation: "weeksAfter",
 };
-
-function focusWhenPresent(id: string, attempt = 0): void {
-  const element = document.getElementById(id);
-  if (element !== null) {
-    element.focus();
-    return;
-  }
-  if (attempt < FOCUS_ATTEMPTS) {
-    window.requestAnimationFrame(() => {
-      focusWhenPresent(id, attempt + 1);
-    });
-  }
-}
 
 function whenIdle(task: () => void): () => void {
   if (typeof window.requestIdleCallback === "function") {
@@ -297,15 +283,6 @@ export function NaspiView() {
     outcome?.facts.year ?? state.year,
     eligible ? (outcome?.facts.residence.region ?? net.region) : null,
   );
-
-  const goTo = (item: NaspiAssumption) => {
-    if (item.inNetGroup) {
-      flushSync(() => {
-        setGroupOpen(true);
-      });
-    }
-    focusWhenPresent(item.targetId);
-  };
 
   const readAs = t("naspi.gross.readAs", { amount: f.money(grossValue ?? 0) });
   const weeksForAverage = parseWhole(texts.weeks);
@@ -606,7 +583,6 @@ export function NaspiView() {
             explained={explained}
             onExplainedChange={setExplained}
             valueRef={setFigureValue}
-            onChange={goTo}
           />
         }
         {...(rest === undefined ? {} : { rest })}

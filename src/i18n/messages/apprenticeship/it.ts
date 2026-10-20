@@ -27,14 +27,6 @@ export const it = {
   "apprenticeship.result.announce": "Circa {amount} netti al mese nel primo anno.",
   "apprenticeship.row.link": "Calcola il netto",
   "apprenticeship.row.openLink": "Calcola il netto dell’anno {year}",
-  "apprenticeship.assumptions.target": "Retribuzione di destinazione: {amount} lordi l’anno",
-  "apprenticeship.assumptions.target.change": "la retribuzione di destinazione",
-  "apprenticeship.assumptions.years":
-    "{years, plural, one {Durata: # anno} other {Durata: # anni}}",
-  "apprenticeship.assumptions.years.change": "la durata",
-  "apprenticeship.assumptions.region":
-    "{region, select, bolzano {Provincia autonoma di Bolzano} trento {Provincia autonoma di Trento} other {Regione {name}}}",
-  "apprenticeship.assumptions.region.change": "la regione",
   "apprenticeship.assumptions.fixed":
     "Contratto di apprendistato, addizionale comunale {rate}, {count} mensilità",
   "apprenticeship.result.estimate":

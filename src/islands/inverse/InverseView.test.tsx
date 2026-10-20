@@ -45,11 +45,11 @@ afterEach(() => {
 });
 
 describe("InverseCalculator", () => {
-  it("renders the default gross on the server, with its assumptions and a ledger that sums", () => {
+  it("renders the default gross on the server, with the rate it assumes and a ledger that sums", () => {
     const html = renderToString(<InverseCalculator locale="it" messages={MESSAGES.it} />);
     expect(html).toContain("RAL necessaria");
     expect(html).toMatch(/per 24\.000,00\s€ netti all’anno/);
-    expect(html).toContain("Addizionale comunale 0,80%, comune non scelto");
+    expect(html).toContain("Nessun comune scelto: per ora usiamo lo 0,80%");
     expect(html).toContain("Addizionale regionale");
     expect(html).toContain("Dettaglio del calcolo");
   });
@@ -117,14 +117,15 @@ describe("InverseCalculator", () => {
     expect(screen.getByText("Correggi i valori segnati per vedere la RAL.")).toBeInTheDocument();
   });
 
-  it("opens the contract group and focuses the choice from the assumptions", async () => {
+  it("opens the contract group and sums up the choice in its summary", async () => {
     const { user } = setup();
-    await user.click(screen.getByRole("link", { name: "Cambia contratto" }));
-    expect(screen.getByRole("radio", { name: "Tempo indeterminato" })).toHaveFocus();
+    const group = document.getElementById("gruppo-contratto");
+    await user.click(screen.getByText("Contratto e INPS"));
+    expect(group).toHaveAttribute("open");
     await user.click(screen.getByRole("radio", { name: "Apprendistato" }));
-    expect(
-      screen.getByText("Apprendistato, settore privato", { selector: ".qg-assumptions__text" }),
-    ).toBeInTheDocument();
+    expect(group?.querySelector(".qg-group__recap")).toHaveTextContent(
+      /^Apprendistato, settore privato, contributi 5,84%$/,
+    );
   });
 
   it("links the gross it found to the payslip and the employer cost", () => {

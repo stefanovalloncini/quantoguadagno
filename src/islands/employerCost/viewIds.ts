@@ -1,8 +1,6 @@
 export const IDS = {
   result: "risultato",
   resultHeading: "costo-titolo",
-  assumptionsHeading: "ipotesi-titolo",
-  netAssumptionsHeading: "ipotesi-netto-titolo",
   ledgerHeading: "dettaglio-titolo",
   ledgerToggle: "spiega",
   extrasHeading: "personalizza-titolo",

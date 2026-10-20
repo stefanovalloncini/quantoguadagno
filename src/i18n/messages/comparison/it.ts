@@ -89,16 +89,6 @@ export const it = {
   "comparison.announce.winner": "{verdict}: {amount} netti all’anno, in media {monthly} al mese.",
   "comparison.announce.tie": "{verdict}: {amount} netti all’anno.",
 
-  "comparison.assumption.year": "Anno fiscale {year}",
-  "comparison.assumption.region":
-    "{region, select, bolzano {Provincia autonoma di Bolzano} trento {Provincia autonoma di Trento} other {Regione {name}}}",
-  "comparison.assumption.comune": "Comune di {name}, addizionale {rate}",
-  "comparison.assumption.comuneZero": "Comune di {name}, senza addizionale",
-  "comparison.assumption.rateDefault": "Addizionale comunale {rate}, comune non scelto",
-  "comparison.assumption.rateManual": "Addizionale comunale {rate}, inserita a mano",
-  "comparison.assumption.contract": "Stesso contratto: {contract}",
-  "comparison.assumption.noDependents": "Nessun familiare a carico",
-  "comparison.assumption.dependents": "{list} a carico",
   "comparison.part.contractType":
     "{type, select, determinato {tempo determinato} apprendistato {apprendistato} other {tempo indeterminato}}",
   "comparison.part.sector": "{public, select, yes {settore pubblico} other {settore privato}}",
@@ -106,11 +96,6 @@ export const it = {
   "comparison.part.spouse": "coniuge",
   "comparison.part.children": "{count, plural, one {# figlio} other {# figli}}",
   "comparison.part.others": "{count, plural, one {# altro familiare} other {# altri familiari}}",
-  "comparison.change.year": "anno fiscale",
-  "comparison.change.region": "regione",
-  "comparison.change.comune": "comune",
-  "comparison.change.contract": "contratto",
-  "comparison.change.dependents": "familiari a carico",
 
   "comparison.estimate":
     "la busta paga resta il riferimento. Confrontiamo lordo e mensilità, senza benefit per nessuna delle due.",

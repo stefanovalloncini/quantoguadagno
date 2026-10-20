@@ -1,36 +1,9 @@
-import type { PaymentFrequency, RegionCode, SupportedYear } from "@/data/index.ts";
-import type { ContractType } from "@/domain/employerCostCalculations.ts";
 import {
   employerCostBreakdown,
   type EmployerCostBreakdown,
   type EmployerCostLine,
 } from "@/islands/home/employerCostBreakdown.ts";
-import { localAssumption, type LocalAssumption } from "@/islands/home/localAssumption.ts";
 import type { EmployerCostResult } from "./compute.ts";
-
-export type EmployerCostAssumption =
-  | { readonly id: "year"; readonly value: SupportedYear; readonly fieldToEdit: "year" }
-  | { readonly id: "contract"; readonly value: ContractType; readonly fieldToEdit: "contractType" }
-  | { readonly id: "region"; readonly value: RegionCode; readonly fieldToEdit: "region" }
-  | LocalAssumption
-  | {
-      readonly id: "paymentFrequency";
-      readonly value: PaymentFrequency;
-      readonly fieldToEdit: "paymentFrequency";
-    };
-
-export function employerCostAssumptions(
-  result: EmployerCostResult,
-): readonly EmployerCostAssumption[] {
-  const { values } = result;
-  return [
-    { id: "year", value: values.taxYear, fieldToEdit: "year" },
-    { id: "contract", value: values.contractType, fieldToEdit: "contractType" },
-    { id: "region", value: values.regionCode, fieldToEdit: "region" },
-    localAssumption(result),
-    { id: "paymentFrequency", value: values.paymentFrequency, fieldToEdit: "paymentFrequency" },
-  ];
-}
 
 export interface EmployerCostLedger {
   readonly gross: number;
@@ -67,7 +40,6 @@ export interface EmployerCostDerived {
   readonly grossAnnual: number;
   readonly netAnnual: number;
   readonly netMonthly: number;
-  readonly assumptions: readonly EmployerCostAssumption[];
 }
 
 export function deriveEmployerCost(result: EmployerCostResult): EmployerCostDerived {
@@ -78,6 +50,5 @@ export function deriveEmployerCost(result: EmployerCostResult): EmployerCostDeri
     grossAnnual: result.breakdown.grossAnnual,
     netAnnual: result.breakdown.netAnnual,
     netMonthly: result.breakdown.netMonthly,
-    assumptions: employerCostAssumptions(result),
   };
 }

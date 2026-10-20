@@ -14,7 +14,6 @@ export const IDS = {
   conditionsHeading: "condizioni-titolo",
   result: "risultato",
   verdictHeading: "verdetto-titolo",
-  assumptionsHeading: "ipotesi-titolo",
   year: "anno",
   region: "regione",
   comune: "comune",

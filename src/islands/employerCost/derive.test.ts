@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { employerCostBreakdown } from "@/islands/home/derive.ts";
 import { computeEmployerCost } from "./compute.ts";
-import { deriveEmployerCost, employerCostAssumptions, employerCostLedger } from "./derive.ts";
+import { deriveEmployerCost, employerCostLedger } from "./derive.ts";
 import type { EmployerCostValues } from "./state.ts";
 
 const VALUES: EmployerCostValues = {
@@ -28,7 +28,6 @@ describe("deriveEmployerCost", () => {
       grossAnnual: 30_000,
       netAnnual: result.breakdown.netAnnual,
       netMonthly: result.breakdown.netMonthly,
-      assumptions: employerCostAssumptions(result),
     });
     expect(derived.cost.total).toBe(result.breakdown.totalEmployerCost);
     expect(derived.cost.employerInps).toBeGreaterThan(0);
@@ -65,15 +64,5 @@ describe("deriveEmployerCost", () => {
     expect(ledger.othersTotal).toBe(810.17);
     expect(ledger.total).toBe(26_958.88);
     expect(ledger.totalMonthly).toBe(2_246.57);
-  });
-
-  it("lists what the estimate assumes, each with the field that changes it", () => {
-    expect(employerCostAssumptions(computeEmployerCost(VALUES, null))).toEqual([
-      { id: "year", value: 2026, fieldToEdit: "year" },
-      { id: "contract", value: "indeterminato", fieldToEdit: "contractType" },
-      { id: "region", value: "lombardia", fieldToEdit: "region" },
-      { id: "municipalRate", value: 0.008, fieldToEdit: "municipalRate" },
-      { id: "paymentFrequency", value: 13, fieldToEdit: "paymentFrequency" },
-    ]);
   });
 });

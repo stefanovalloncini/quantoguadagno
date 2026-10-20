@@ -1,16 +1,14 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { flushSync } from "react-dom";
 import { ComuneField } from "@/components/form/ComuneField.tsx";
 import { DetailsGroup, DetailsGroupList } from "@/components/form/DetailsGroup.tsx";
 import { Field } from "@/components/form/Field.tsx";
 import { MoneyInput } from "@/components/form/MoneyInput.tsx";
 import { RadioGroup } from "@/components/form/RadioGroup.tsx";
-import { regionSelectKey, useRegionText } from "@/components/form/regionText.ts";
+import { useRegionText } from "@/components/form/regionText.ts";
 import { Select } from "@/components/form/Select.tsx";
 import { useBlurErrors } from "@/components/form/useBlurErrors.ts";
 import { CalculatorLayout } from "@/components/page/CalculatorLayout.tsx";
 import { PageIntro } from "@/components/page/PageIntro.tsx";
-import type { AssumptionItem } from "@/components/result/Assumptions.tsx";
 import { BottomBar, useBottomBarVisible } from "@/components/result/BottomBar.tsx";
 import { useSettledAnnouncement } from "@/components/result/LiveStatus.tsx";
 import type { FigureState } from "@/components/result/ResultFigure.tsx";
@@ -26,8 +24,7 @@ import {
 import { useComuneRestoreHold } from "@/islands/home/useComuneRestoreHold.ts";
 import { useViewFormat } from "@/islands/home/viewFormat.tsx";
 import { afterMessages, amountAfter, useTyping } from "@/components/form/amountAfter.ts";
-import { focusWhenPresent } from "@/islands/inverse/focusWhenPresent.ts";
-import { localAssumptionItem, useLocalTax } from "@/islands/inverse/localTax.ts";
+import { useLocalTax } from "@/islands/inverse/localTax.ts";
 import { useHydratedFormValues } from "@/islands/runtime/useHydratedFormValues.ts";
 import { hrefFor } from "@/routePaths.ts";
 import { EmployerCostResult } from "./EmployerCostResult.tsx";
@@ -35,8 +32,6 @@ import type { EmployerCostErrors, EmployerCostField } from "./state.ts";
 import { employerCostToQuery } from "./url.ts";
 import { useEmployerCostController, type EmployerCostUpdate } from "./useEmployerCostController.ts";
 import { IDS } from "./viewIds.ts";
-
-const NET_ASSUMPTIONS: ReadonlySet<string> = new Set(["region", "comune", "frequency"]);
 
 export function EmployerCostView() {
   const t = useT();
@@ -160,54 +155,6 @@ export function EmployerCostView() {
     l: result === null ? query.l : Math.round(result.values.grossAnnual),
   });
 
-  const costAssumptions: readonly AssumptionItem[] =
-    result === null
-      ? []
-      : [
-          {
-            id: "year",
-            text: t("employerCost.assumption.year", { year: result.values.taxYear }),
-            changeLabel: t("employerCost.change.year"),
-            targetId: `${IDS.year}-${String(result.values.taxYear)}`,
-          },
-          {
-            id: "contract",
-            text: t("employerCost.assumption.contract", { type: result.values.contractType }),
-            changeLabel: t("employerCost.change.contract"),
-            targetId: IDS.contract,
-          },
-        ];
-  const netAssumptions: readonly AssumptionItem[] =
-    result === null
-      ? []
-      : [
-          {
-            id: "region",
-            text: t("employerCost.assumption.region", {
-              region: regionSelectKey(result.values.regionCode),
-              name: regions.name(result.values.regionCode),
-            }),
-            changeLabel: t("employerCost.change.region"),
-            targetId: IDS.region,
-          },
-          localAssumptionItem(
-            result.municipal,
-            local.mode,
-            { comune: IDS.comune, municipalRate: IDS.municipalRate },
-            "employerCost",
-            t,
-            f,
-          ),
-          {
-            id: "frequency",
-            text: t("employerCost.assumption.frequency", {
-              count: result.values.paymentFrequency,
-            }),
-            changeLabel: t("employerCost.change.frequency"),
-            targetId: `${IDS.frequency}-${String(result.values.paymentFrequency)}`,
-          },
-        ];
-
   const primary = (
     <>
       <Field
@@ -275,7 +222,7 @@ export function EmployerCostView() {
       : result?.municipal.kind === "manual" && local.mode === "manual"
         ? t("employerCost.recap.rateManual", { rate: f.percent(result.municipal.rate) })
         : t("employerCost.recap.rateDefault"),
-    t("employerCost.assumption.frequency", {
+    t("employerCost.recap.frequency", {
       count: result?.values.paymentFrequency ?? state.paymentFrequency,
     }),
   ].join(", ");
@@ -357,15 +304,6 @@ export function EmployerCostView() {
     </section>
   );
 
-  const onAssumptionChange = (item: AssumptionItem) => {
-    if (NET_ASSUMPTIONS.has(item.id)) {
-      flushSync(() => {
-        setNetOpen(true);
-      });
-    }
-    focusWhenPresent(item.targetId);
-  };
-
   return (
     <div ref={containerRef}>
       <PageIntro
@@ -386,13 +324,10 @@ export function EmployerCostView() {
             figureState={figureState}
             staleNote={staleNote}
             prompt={prompt}
-            costAssumptions={costAssumptions}
-            netAssumptions={netAssumptions}
             printHref={printHref}
             announcement={announcement}
             f={f}
             valueRef={setFigureValue}
-            onChange={onAssumptionChange}
           />
         }
         rest={rest}

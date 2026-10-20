@@ -1,7 +1,6 @@
 import { useState, type ReactNode, type Ref } from "react";
 import type { RegionText } from "@/components/form/regionText.ts";
 import { Actions } from "@/components/result/Actions.tsx";
-import { Assumptions, type AssumptionItem } from "@/components/result/Assumptions.tsx";
 import { Ledger } from "@/components/result/Ledger.tsx";
 import { LiveStatus } from "@/components/result/LiveStatus.tsx";
 import { FigureAside, ResultFigure, type FigureState } from "@/components/result/ResultFigure.tsx";
@@ -19,10 +18,6 @@ export interface InverseLinks {
   readonly employerCost: string;
 }
 
-export interface InverseAssumptionItem extends AssumptionItem {
-  readonly group?: "contract";
-}
-
 export interface InverseResultProps {
   readonly result: Result | null;
   readonly derived: InverseDerived | null;
@@ -30,13 +25,11 @@ export interface InverseResultProps {
   readonly staleNote: ReactNode;
   readonly prompt: string;
   readonly municipalMode: MunicipalMode;
-  readonly assumptions: readonly InverseAssumptionItem[];
   readonly links: InverseLinks;
   readonly announcement: string;
   readonly regions: RegionText;
   readonly f: ViewFormat;
   readonly valueRef: Ref<HTMLParagraphElement>;
-  readonly onChange: (item: InverseAssumptionItem) => void;
 }
 
 export function InverseResult({
@@ -46,34 +39,30 @@ export function InverseResult({
   staleNote,
   prompt,
   municipalMode,
-  assumptions,
   links,
   announcement,
   regions,
   f,
   valueRef,
-  onChange,
 }: InverseResultProps) {
   const t = useT();
   const rt = useRichT();
   const [explained, setExplained] = useState(false);
   const b = result?.breakdown;
   const count = result?.values.paymentFrequency ?? 13;
-  const contract = derived?.assumptions.find((item) => item.id === "contract");
   const showDetail = result !== null && derived !== null && figureState !== "empty";
-  const ledger =
-    showDetail && contract?.id === "contract"
-      ? buildInverseLedger({
-          result,
-          lines: derived.lines,
-          inpsRate: contract.value.employeeInpsRate,
-          municipalMode,
-          t,
-          rt,
-          f,
-          regions,
-        })
-      : null;
+  const ledger = showDetail
+    ? buildInverseLedger({
+        result,
+        lines: derived.lines,
+        inpsRate: derived.contract.employeeInpsRate,
+        municipalMode,
+        t,
+        rt,
+        f,
+        regions,
+      })
+    : null;
 
   return (
     <div className="qg-result">
@@ -114,7 +103,6 @@ export function InverseResult({
                   annual: <Amount>{f.money(b.netAnnual)}</Amount>,
                 })}
           </FigureAside>
-          <Assumptions headingId={IDS.assumptionsHeading} items={assumptions} onChange={onChange} />
           <TrustNote
             ns="inverse"
             locale={f.locale}

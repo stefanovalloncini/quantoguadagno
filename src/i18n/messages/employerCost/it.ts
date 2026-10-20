@@ -21,6 +21,7 @@ export const it = {
   "employerCost.group.net": "Netto del dipendente",
   "employerCost.recap.rateDefault": "comune non scelto",
   "employerCost.recap.rateManual": "addizionale comunale {rate}",
+  "employerCost.recap.frequency": "{count} mensilità",
   "employerCost.region.label": "Regione di residenza",
   "employerCost.frequency.legend": "Mensilità",
   "employerCost.frequency.hint":
@@ -43,23 +44,6 @@ export const it = {
   "employerCost.result.verified": "Dati controllati il {date}",
   "employerCost.result.trust":
     "{checked}{pending, select, yes {: {count, plural, one {un valore usato in questo calcolo è ancora da verificare} other {# valori usati in questo calcolo sono ancora da verificare}}} other {}}.",
-
-  "employerCost.assumptions.net": "Ipotesi per il netto del dipendente",
-  "employerCost.assumption.year": "Anno fiscale {year}",
-  "employerCost.assumption.contract":
-    "{type, select, determinato {Tempo determinato} apprendistato {Apprendistato} other {Tempo indeterminato}}",
-  "employerCost.assumption.region":
-    "{region, select, bolzano {Provincia autonoma di Bolzano} trento {Provincia autonoma di Trento} other {Regione {name}}}",
-  "employerCost.assumption.comune": "Comune di {name}, addizionale {rate}",
-  "employerCost.assumption.comuneZero": "Comune di {name}, senza addizionale",
-  "employerCost.assumption.rateDefault": "Addizionale comunale {rate}, comune non scelto",
-  "employerCost.assumption.rateManual": "Addizionale comunale {rate}, inserita a mano",
-  "employerCost.assumption.frequency": "{count} mensilità",
-  "employerCost.change.year": "anno fiscale",
-  "employerCost.change.contract": "contratto",
-  "employerCost.change.region": "regione",
-  "employerCost.change.comune": "comune",
-  "employerCost.change.frequency": "mensilità",
 
   "employerCost.ledger.title": "Dettaglio del calcolo",
   "employerCost.ledger.caption": "Dettaglio del costo {year}, importi in euro",

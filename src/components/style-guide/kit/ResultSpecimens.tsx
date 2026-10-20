@@ -211,7 +211,7 @@ export function ResultSpecimens() {
       </KitSpecimen>
       <KitSpecimen
         label="Ipotesi del calcolo e nota di stima"
-        note="Ogni riga ha un Cambia che apre il gruppo del campo e ci porta il fuoco."
+        note="Nomina solo ciò che il modulo della pagina non mostra. Cambia apre il gruppo del campo e ci porta il fuoco; un fatto fisso non ha Cambia."
         column
       >
         <div className="sg-figure-stage">

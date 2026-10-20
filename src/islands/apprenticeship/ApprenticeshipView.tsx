@@ -2,13 +2,13 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Field } from "@/components/form/Field.tsx";
 import { MoneyInput } from "@/components/form/MoneyInput.tsx";
 import { RadioGroup } from "@/components/form/RadioGroup.tsx";
-import { regionSelectKey, useRegionText } from "@/components/form/regionText.ts";
+import { useRegionText } from "@/components/form/regionText.ts";
 import { Select } from "@/components/form/Select.tsx";
 import { useBlurErrors } from "@/components/form/useBlurErrors.ts";
 import { CalculatorLayout } from "@/components/page/CalculatorLayout.tsx";
 import { PageIntro } from "@/components/page/PageIntro.tsx";
 import { BottomBar, useBottomBarVisible } from "@/components/result/BottomBar.tsx";
-import { Assumptions, type AssumptionItem } from "@/components/result/Assumptions.tsx";
+import { Assumptions } from "@/components/result/Assumptions.tsx";
 import { LiveStatus, useSettledAnnouncement } from "@/components/result/LiveStatus.tsx";
 import { ResultFigure, type FigureState } from "@/components/result/ResultFigure.tsx";
 import type { RegionCode } from "@/data/index.ts";
@@ -93,30 +93,6 @@ export function ApprenticeshipView() {
               }),
   );
 
-  const assumptionItems: readonly AssumptionItem[] = [
-    {
-      id: "target",
-      text: t("apprenticeship.assumptions.target", { amount: f.money(result.targetGrossAnnual) }),
-      changeLabel: t("apprenticeship.assumptions.target.change"),
-      targetId: IDS.target,
-    },
-    {
-      id: "years",
-      text: t("apprenticeship.assumptions.years", { years: result.years }),
-      changeLabel: t("apprenticeship.assumptions.years.change"),
-      targetId: IDS.years,
-    },
-    {
-      id: "region",
-      text: t("apprenticeship.assumptions.region", {
-        region: regionSelectKey(region),
-        name: regions.name(region),
-      }),
-      changeLabel: t("apprenticeship.assumptions.region.change"),
-      targetId: IDS.region,
-    },
-  ];
-
   const fixedAssumptions = [
     {
       id: "estimate",
@@ -126,10 +102,6 @@ export function ApprenticeshipView() {
       }),
     },
   ];
-
-  const focusTarget = (id: string) => {
-    document.getElementById(id)?.focus();
-  };
 
   return (
     <div ref={containerRef}>
@@ -230,14 +202,7 @@ export function ApprenticeshipView() {
             <LiveStatus message={announcement} />
             {figureState !== "empty" && (
               <>
-                <Assumptions
-                  headingId={IDS.assumptionsHeading}
-                  items={assumptionItems}
-                  fixed={fixedAssumptions}
-                  onChange={(item) => {
-                    focusTarget(item.targetId);
-                  }}
-                />
+                <Assumptions headingId={IDS.assumptionsHeading} fixed={fixedAssumptions} />
                 <TrustNote
                   ns="apprenticeship"
                   locale={f.locale}

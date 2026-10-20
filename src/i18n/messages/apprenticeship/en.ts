@@ -28,14 +28,6 @@ export const en: Record<MessageKey, string> = {
   "apprenticeship.result.announce": "About {amount} net a month in the first year.",
   "apprenticeship.row.link": "Work out the net",
   "apprenticeship.row.openLink": "Work out the net for year {year}",
-  "apprenticeship.assumptions.target": "Target gross salary: {amount} a year",
-  "apprenticeship.assumptions.target.change": "the target gross salary",
-  "apprenticeship.assumptions.years":
-    "{years, plural, one {Duration: # year} other {Duration: # years}}",
-  "apprenticeship.assumptions.years.change": "the duration",
-  "apprenticeship.assumptions.region":
-    "{region, select, bolzano {Autonomous Province of Bolzano} trento {Autonomous Province of Trento} other {Region: {name}}}",
-  "apprenticeship.assumptions.region.change": "the region",
   "apprenticeship.assumptions.fixed":
     "Apprenticeship contract, {rate} municipal surcharge, {count} monthly payments",
   "apprenticeship.result.estimate":

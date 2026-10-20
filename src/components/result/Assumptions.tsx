@@ -13,17 +13,28 @@ export interface FixedAssumption {
   readonly text: ReactNode;
 }
 
-export interface AssumptionsProps<T extends AssumptionItem> {
+interface AssumptionsBase {
   readonly headingId: string;
-  readonly items: readonly T[];
-  readonly onChange: (item: T) => void;
   readonly title?: ReactNode;
   readonly fixed?: readonly FixedAssumption[];
 }
 
+interface ChangeableAssumptions<T extends AssumptionItem> {
+  readonly items: readonly T[];
+  readonly onChange: (item: T) => void;
+}
+
+interface FixedOnlyAssumptions {
+  readonly items?: undefined;
+  readonly onChange?: undefined;
+}
+
+export type AssumptionsProps<T extends AssumptionItem> = AssumptionsBase &
+  (ChangeableAssumptions<T> | FixedOnlyAssumptions);
+
 export function Assumptions<T extends AssumptionItem>({
   headingId,
-  items,
+  items = [],
   onChange,
   title,
   fixed = [],
@@ -43,7 +54,7 @@ export function Assumptions<T extends AssumptionItem>({
               href={`#${item.targetId}`}
               onClick={(event) => {
                 event.preventDefault();
-                onChange(item);
+                onChange?.(item);
               }}
             >
               {t("result.change")} <span className="qg-visually-hidden">{item.changeLabel}</span>

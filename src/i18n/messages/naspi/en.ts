@@ -68,23 +68,6 @@ export const en: Record<MessageKey, string> = {
   "naspi.check.period": "The period: only the weeks in the 4 years before the job ended count.",
   "naspi.check.afterResignation": "Only the weeks of the job you started after resigning count.",
 
-  "naspi.assume.year": "Job ended in {year}",
-  "naspi.assume.year.change": "year the job ended",
-  "naspi.assume.gross": "{amount} gross over 4 years",
-  "naspi.assume.gross.change": "gross pay",
-  "naspi.assume.weeks": "{weeks, plural, one {# week} other {# weeks}} of contributions",
-  "naspi.assume.weeks.change": "weeks of contributions",
-  "naspi.assume.age": "{age, plural, one {# year} other {# years}} old when you apply",
-  "naspi.assume.age.change": "age",
-  "naspi.assume.noResignation": "No resignation in the last 12 months",
-  "naspi.assume.resignation":
-    "Resigned in the last 12 months, {weeks, plural, one {# week} other {# weeks}} after",
-  "naspi.assume.resignation.change": "resignation",
-  "naspi.assume.other.change": "other income",
-  "naspi.assume.comune": "Resident in {comune}, {regionIn}",
-  "naspi.assume.rate": "Resident {regionIn}, municipal surcharge {rate}",
-  "naspi.assume.residence.change": "residence",
-
   "naspi.note.estimate":
     "INPS works out the exact amount and also withholds income tax. We do not account for new jobs while you receive NASpI.",
   "naspi.note.decision": "INPS decides when it assesses your application.",

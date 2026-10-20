@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { computeInverse } from "./compute.ts";
-import { deriveInverse, inverseAssumptions, inverseLines, inverseSummary } from "./derive.ts";
+import { deriveInverse, inverseLines, inverseSummary } from "./derive.ts";
 import { checkInverse, inverseDefaults, type InverseState } from "./state.ts";
 
 function resultOf(patch: Partial<InverseState> = {}) {
@@ -63,33 +63,23 @@ describe("inverseLines", () => {
   });
 });
 
-describe("inverseAssumptions", () => {
-  it("lists what the solve assumes, each with the field that changes it", () => {
-    expect(inverseAssumptions(resultOf({ isPublicEmployee: true, municipalRate: "0,5" }))).toEqual([
-      { id: "year", value: 2026, fieldToEdit: "year" },
-      { id: "region", value: "lombardia", fieldToEdit: "region" },
-      { id: "municipalRate", value: 0.005, fieldToEdit: "municipalRate" },
-      { id: "paymentFrequency", value: 13, fieldToEdit: "paymentFrequency" },
-      {
-        id: "contract",
-        value: {
-          contractType: "indeterminato",
-          isPublicEmployee: true,
-          companySize: "small",
-          insuredBefore1996: false,
-          inpsOverride: null,
-          employeeInpsRate: 0.088,
-        },
-        fieldToEdit: "contractType",
-      },
-    ]);
+describe("deriveInverse", () => {
+  it("gives the contract the solve assumes, with its INPS rate for the ledger", () => {
+    expect(deriveInverse(resultOf({ isPublicEmployee: true })).contract).toEqual({
+      contractType: "indeterminato",
+      isPublicEmployee: true,
+      companySize: "small",
+      insuredBefore1996: false,
+      inpsOverride: null,
+      employeeInpsRate: 0.088,
+    });
   });
 
   it("bundles the three for the view", () => {
-    expect(deriveInverse(RESULT)).toEqual({
+    expect(deriveInverse(RESULT)).toMatchObject({
       summary: inverseSummary(RESULT),
       lines: inverseLines(RESULT),
-      assumptions: inverseAssumptions(RESULT),
+      contract: { contractType: "indeterminato", isPublicEmployee: false },
     });
   });
 });

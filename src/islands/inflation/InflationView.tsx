@@ -6,7 +6,7 @@ import { useBlurErrors } from "@/components/form/useBlurErrors.ts";
 import { Icon } from "@/components/icons/Icon.tsx";
 import { CalculatorLayout } from "@/components/page/CalculatorLayout.tsx";
 import { PageIntro } from "@/components/page/PageIntro.tsx";
-import { Assumptions, NoteLine, type AssumptionItem } from "@/components/result/Assumptions.tsx";
+import { NoteLine } from "@/components/result/Assumptions.tsx";
 import { BottomBar, useBottomBarVisible } from "@/components/result/BottomBar.tsx";
 import { useSettledAnnouncement, LiveStatus } from "@/components/result/LiveStatus.tsx";
 import { ResultFigure, type FigureState } from "@/components/result/ResultFigure.tsx";
@@ -80,31 +80,6 @@ export function InflationView() {
             toYear: result.toYear,
           }),
   );
-
-  const assumptionItems: readonly AssumptionItem[] = [
-    {
-      id: "amount",
-      text: t("inflation.assumptions.amount", { amount: f.money(result.nominal) }),
-      changeLabel: t("inflation.assumptions.amount.change"),
-      targetId: IDS.amount,
-    },
-    {
-      id: "fromYear",
-      text: t("inflation.assumptions.fromYear", { year: state.fromYear }),
-      changeLabel: t("inflation.assumptions.fromYear.change"),
-      targetId: IDS.fromYear,
-    },
-    {
-      id: "toYear",
-      text: t("inflation.assumptions.toYear", { year: state.toYear }),
-      changeLabel: t("inflation.assumptions.toYear.change"),
-      targetId: IDS.toYear,
-    },
-  ];
-
-  const goTo = (item: AssumptionItem) => {
-    document.getElementById(item.targetId)?.focus();
-  };
 
   const verified = useMemo(() => verifiedLine(f.locale), [f.locale]);
   const provisionalYear = useMemo(() => {
@@ -222,11 +197,6 @@ export function InflationView() {
               />
             </div>
             <LiveStatus message={announcement} />
-            <Assumptions
-              headingId={IDS.assumptionsHeading}
-              items={assumptionItems}
-              onChange={goTo}
-            />
             <NoteLine term={t("inflation.result.cumulative")}>
               {f.percent(result.cumulativeRate)}
             </NoteLine>

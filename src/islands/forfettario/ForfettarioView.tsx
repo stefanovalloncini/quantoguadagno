@@ -20,7 +20,7 @@ import { useRichT, useT } from "@/i18n/react.tsx";
 import { useHydratedFormValues } from "@/islands/runtime/useHydratedFormValues.ts";
 import { hrefFor } from "@/routePaths.ts";
 import { ExtrasFields, loadGroupFields } from "./ExtrasFields.tsx";
-import { forfettarioAssumptionItems, forfettarioGroupRecaps, type Assumption } from "./recaps.ts";
+import { forfettarioGroupRecaps } from "./recaps.ts";
 import type { ForfettarioState } from "./state.ts";
 import { useForfettarioController } from "./useForfettarioController.ts";
 import { useViewFormat } from "./viewFormat.tsx";
@@ -30,21 +30,6 @@ const CLOSED_GROUPS = Object.fromEntries(VIEW_GROUPS.map((group) => [group, fals
   ViewGroup,
   boolean
 >;
-
-const FOCUS_ATTEMPTS = 30;
-
-function focusWhenPresent(id: string, attempt = 0): void {
-  const element = document.getElementById(id);
-  if (element !== null) {
-    element.focus();
-    return;
-  }
-  if (attempt < FOCUS_ATTEMPTS) {
-    window.requestAnimationFrame(() => {
-      focusWhenPresent(id, attempt + 1);
-    });
-  }
-}
 
 function whenIdle(task: () => void): () => void {
   if (typeof window.requestIdleCallback === "function") {
@@ -111,21 +96,6 @@ export function ForfettarioView() {
     () => forfettarioGroupRecaps(state, derived, t, f),
     [state, derived, t, f],
   );
-  const assumptions = useMemo(
-    () => forfettarioAssumptionItems(state, result, derived, t),
-    [state, result, derived, t],
-  );
-
-  const goTo = useCallback((targetId: string, group: ViewGroup | undefined) => {
-    if (group !== undefined) {
-      setOpenGroups((previous) => ({ ...previous, [group]: true }));
-    }
-    focusWhenPresent(targetId);
-  }, []);
-
-  const onAssumptionChange = (item: Assumption) => {
-    goTo(item.targetId, item.group);
-  };
 
   const staleNote = t("forfettario.result.staleNote");
   const announcement = useSettledAnnouncement(
@@ -327,11 +297,12 @@ export function ForfettarioView() {
           </div>
         </div>
       )}
-      <Assumptions
-        headingId={IDS.assumptionsHeading}
-        items={assumptions}
-        onChange={onAssumptionChange}
-      />
+      {derived.discountNoteKey !== null && (
+        <Assumptions
+          headingId={IDS.assumptionsHeading}
+          fixed={[{ id: "discount", text: t(derived.discountNoteKey) }]}
+        />
+      )}
       <NoteLine term={t("result.estimate.term")}>
         {t("forfettario.result.estimate")}
         {checked !== null && (

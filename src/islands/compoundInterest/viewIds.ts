@@ -8,7 +8,6 @@ export const IDS = {
   inflationRate: "inflazione",
   result: "risultato",
   resultHeading: "valore-titolo",
-  assumptionsHeading: "ipotesi-titolo",
   chartHeading: "andamento-titolo",
   table: "tabella-anni",
 } as const;

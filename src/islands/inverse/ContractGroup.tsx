@@ -18,19 +18,14 @@ type ContractFields = Pick<
   "year" | "contractType" | "companySize" | "isPublicEmployee"
 >;
 
-export function contractText(
-  values: ContractFields,
-  t: TranslateFn,
-  f: ViewFormat,
-  withRate: boolean,
-): string {
+function contractText(values: ContractFields, t: TranslateFn, f: ViewFormat): string {
   const facts = { ...values, taxYear: values.year, insuredBefore1996: false, inpsOverride: null };
   const rate = contractAssumption(facts).employeeInpsRate;
   return [
     t("inverse.part.contractType", { type: values.contractType }),
     t("inverse.part.sector", { public: values.isPublicEmployee ? "yes" : "no" }),
     ...(values.companySize === "large" ? [t("inverse.part.largeCompany")] : []),
-    ...(withRate ? [t("inverse.part.inpsRate", { rate: f.percent(rate) })] : []),
+    t("inverse.part.inpsRate", { rate: f.percent(rate) }),
   ].join(", ");
 }
 
@@ -74,7 +69,7 @@ export function ContractGroup({ state, open, f, onOpenChange, update }: Contract
       <DetailsGroup
         id={IDS.contractGroup}
         title={t("inverse.group.contract")}
-        recap={contractText(state, t, f, true)}
+        recap={contractText(state, t, f)}
         recapSet={!contractIsDefault(state)}
         open={open}
         onOpenChange={onOpenChange}

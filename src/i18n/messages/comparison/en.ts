@@ -91,16 +91,6 @@ export const en: Record<MessageKey, string> = {
   "comparison.announce.winner": "{verdict}: {amount} net a year, on average {monthly} a month.",
   "comparison.announce.tie": "{verdict}: {amount} net a year.",
 
-  "comparison.assumption.year": "Tax year {year}",
-  "comparison.assumption.region":
-    "{region, select, bolzano {Autonomous Province of Bolzano} trento {Autonomous Province of Trento} other {Region: {name}}}",
-  "comparison.assumption.comune": "Municipality: {name}, surcharge {rate}",
-  "comparison.assumption.comuneZero": "Municipality: {name}, no surcharge",
-  "comparison.assumption.rateDefault": "Municipal surcharge {rate}, municipality not chosen",
-  "comparison.assumption.rateManual": "Municipal surcharge {rate}, entered by you",
-  "comparison.assumption.contract": "Same contract: {contract}",
-  "comparison.assumption.noDependents": "No dependants",
-  "comparison.assumption.dependents": "Dependants: {list}",
   "comparison.part.contractType":
     "{type, select, determinato {fixed-term} apprendistato {apprenticeship} other {permanent}}",
   "comparison.part.sector": "{public, select, yes {public sector} other {private sector}}",
@@ -108,11 +98,6 @@ export const en: Record<MessageKey, string> = {
   "comparison.part.spouse": "spouse",
   "comparison.part.children": "{count, plural, one {# child} other {# children}}",
   "comparison.part.others": "{count, plural, one {# other relative} other {# other relatives}}",
-  "comparison.change.year": "tax year",
-  "comparison.change.region": "region",
-  "comparison.change.comune": "municipality",
-  "comparison.change.contract": "contract",
-  "comparison.change.dependents": "dependants",
 
   "comparison.estimate":
     "your payslip is what counts. We compare gross pay and payslips a year, with no benefits for either offer.",

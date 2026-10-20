@@ -93,7 +93,6 @@ describe("useInverseController", () => {
       expect(result.current.comune.status).toBe("ready");
     });
     expect(result.current.result?.municipal).toMatchObject({ kind: "comune" });
-    expect(result.current.derived?.assumptions[2]).toMatchObject({ id: "comune" });
   });
 
   it("adopts fields by name and resets to the defaults", () => {

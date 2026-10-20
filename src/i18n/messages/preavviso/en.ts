@@ -45,10 +45,6 @@ export const en: Record<MessageKey, string> = {
   "preavviso.result.calendarDays.note": "These are calendar days.",
   "preavviso.result.source": "Source: {ref}.",
   "preavviso.days": "{count, plural, one {# day} other {# days}}",
-  "preavviso.assumptions.ccnl": "{ccnl}, {livello}",
-  "preavviso.assumptions.dates": "Hired on {hire}, resignation given on {resignation}",
-  "preavviso.assumptions.change.ccnl": "the CCNL and level",
-  "preavviso.assumptions.change.dates": "the dates",
   "preavviso.table.title": "Notice days by level and seniority",
   "preavviso.table.caption":
     "Notice days required by the selected CCNL, by level and seniority band",

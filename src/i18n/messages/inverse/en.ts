@@ -60,20 +60,6 @@ export const en: Record<MessageKey, string> = {
   "inverse.result.trust":
     "{checked}{pending, select, yes {: {count, plural, one {one value used in this calculation is still to be verified} other {# values used in this calculation are still to be verified}}} other {}}.",
 
-  "inverse.assumption.year": "Tax year {year}",
-  "inverse.assumption.region":
-    "{region, select, bolzano {Autonomous Province of Bolzano} trento {Autonomous Province of Trento} other {Region: {name}}}",
-  "inverse.assumption.comune": "Comune of {name}, surcharge {rate}",
-  "inverse.assumption.comuneZero": "Comune of {name}, no surcharge",
-  "inverse.assumption.rateDefault": "Municipal surcharge {rate}, no comune chosen",
-  "inverse.assumption.rateManual": "Municipal surcharge {rate}, entered by hand",
-  "inverse.assumption.frequency": "{count} payslips a year",
-  "inverse.change.year": "tax year",
-  "inverse.change.region": "region",
-  "inverse.change.comune": "comune",
-  "inverse.change.frequency": "payslips a year",
-  "inverse.change.contract": "contract",
-
   "inverse.ledger.title": "Breakdown",
   "inverse.ledger.caption": "How the {year} calculation adds up, amounts in euros",
   "inverse.ledger.column.term": "Item",

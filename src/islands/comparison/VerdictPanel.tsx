@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Assumptions, NoteLine } from "@/components/result/Assumptions.tsx";
+import { NoteLine } from "@/components/result/Assumptions.tsx";
 import { LiveStatus } from "@/components/result/LiveStatus.tsx";
 import { ResultFigure, type FigureState } from "@/components/result/ResultFigure.tsx";
 import { formatPercent } from "@/i18n/numbers.ts";
@@ -7,12 +7,7 @@ import { useRichT, useT, type RichTranslateFn, type TranslateFn } from "@/i18n/r
 import { Amount, type ViewFormat } from "@/islands/home/viewFormat.tsx";
 import type { ComparedOffers } from "./compute.ts";
 import { otherOffer, type ComparisonRow, type ComparisonVerdict } from "./derive.ts";
-import {
-  assumptionItems,
-  rowLabel,
-  type ComparisonAssumption,
-  type SummaryContext,
-} from "./summaries.ts";
+import { rowLabel, type SummaryContext } from "./summaries.ts";
 import { IDS, offerLetter } from "./viewIds.ts";
 
 export interface VerifiedLine {
@@ -30,7 +25,6 @@ export interface VerdictPanelProps {
   readonly announcement: string;
   readonly verified: VerifiedLine | null;
   readonly context: SummaryContext;
-  readonly onChange: (item: ComparisonAssumption) => void;
 }
 
 export function verdictLabel(verdict: ComparisonVerdict, t: TranslateFn): string {
@@ -256,7 +250,6 @@ export function VerdictPanel({
   announcement,
   verified,
   context,
-  onChange,
 }: VerdictPanelProps) {
   const t = useT();
   const rt = useRichT();
@@ -289,11 +282,6 @@ export function VerdictPanel({
               ))}
             </div>
           )}
-          <Assumptions
-            headingId={IDS.assumptionsHeading}
-            items={assumptionItems(shown.offers.a, context)}
-            onChange={onChange}
-          />
           <NoteLine term={t("result.estimate.term")}>
             {t("comparison.estimate")}
             {verified !== null && (

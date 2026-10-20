@@ -1,16 +1,11 @@
 import { useState } from "react";
-import type { AssumptionItem } from "@/components/result/Assumptions.tsx";
 import { comunaleRuleFor, type RegionCode } from "@/data/index.ts";
 import type { Locale } from "@/i18n/locales.ts";
 import { parseDecimal } from "@/i18n/numbers.ts";
-import type { TranslateFn } from "@/i18n/react.tsx";
-import type { MunicipalSource } from "@/islands/home/compute.ts";
 import { percentText } from "@/islands/home/fields.ts";
 import type { MunicipalMode } from "@/islands/home/ledgerRows.tsx";
 import { DEFAULT_MUNICIPAL_RATE } from "@/islands/home/choices.ts";
 import type { ComuneLookup } from "@/islands/home/useComune.ts";
-import type { ViewFormat } from "@/islands/home/viewFormat.tsx";
-import { ratesOfRule } from "./rateText.ts";
 
 export type ToolNamespace = "inverse" | "employerCost";
 
@@ -80,47 +75,5 @@ export function useLocalTax(
       set.municipalRate(text);
       if (state.comune !== null) set.comune(null);
     },
-  };
-}
-
-export interface LocalTargets {
-  readonly comune: string;
-  readonly municipalRate: string;
-}
-
-export function localAssumptionItem(
-  municipal: MunicipalSource,
-  mode: MunicipalMode,
-  targets: LocalTargets,
-  ns: ToolNamespace,
-  t: TranslateFn,
-  f: ViewFormat,
-): AssumptionItem {
-  const base = { id: "comune", changeLabel: t(`${ns}.change.comune`) };
-  if (municipal.kind === "manual") {
-    const typed = mode === "manual";
-    return {
-      ...base,
-      targetId: typed ? targets.municipalRate : targets.comune,
-      text: t(typed ? `${ns}.assumption.rateManual` : `${ns}.assumption.rateDefault`, {
-        rate: f.percent(municipal.rate),
-      }),
-    };
-  }
-  const rates = ratesOfRule(municipal.rule).map((rate) => rate / 100);
-  const min = Math.min(...rates);
-  const max = Math.max(...rates);
-  const name = municipal.comune.name;
-  const rate =
-    min === max
-      ? f.percent(max)
-      : t("comune.option.range", { min: f.percent(min).replace("%", ""), max: f.percent(max) });
-  return {
-    ...base,
-    targetId: targets.comune,
-    text:
-      max === 0
-        ? t(`${ns}.assumption.comuneZero`, { name })
-        : t(`${ns}.assumption.comune`, { name, rate }),
   };
 }

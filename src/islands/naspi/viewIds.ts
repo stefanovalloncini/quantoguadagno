@@ -3,7 +3,6 @@ export const IDS = {
   resultHeading: "importo-titolo",
   answerHeading: "esito-titolo",
   checkHeading: "controlla-titolo",
-  assumptionsHeading: "ipotesi-titolo",
   ledgerHeading: "calcolo-titolo",
   ledgerToggle: "spiega",
   estimateHeading: "netto-stima-titolo",

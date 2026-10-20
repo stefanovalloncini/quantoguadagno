@@ -67,23 +67,6 @@ export const it = {
   "naspi.check.afterResignation":
     "Contano solo le settimane del lavoro che hai iniziato dopo le dimissioni.",
 
-  "naspi.assume.year": "Cessazione nel {year}",
-  "naspi.assume.year.change": "anno della cessazione",
-  "naspi.assume.gross": "{amount} lordi in 4 anni",
-  "naspi.assume.gross.change": "retribuzione",
-  "naspi.assume.weeks": "{weeks, plural, one {# settimana} other {# settimane}} di contributi",
-  "naspi.assume.weeks.change": "settimane di contributi",
-  "naspi.assume.age": "{age, plural, one {# anno} other {# anni}} alla domanda",
-  "naspi.assume.age.change": "età",
-  "naspi.assume.noResignation": "Nessuna dimissione negli ultimi 12 mesi",
-  "naspi.assume.resignation":
-    "Dimissioni negli ultimi 12 mesi, {weeks, plural, one {# settimana} other {# settimane}} dopo",
-  "naspi.assume.resignation.change": "dimissioni",
-  "naspi.assume.other.change": "altri redditi",
-  "naspi.assume.comune": "Residenza a {comune}, {regionIn}",
-  "naspi.assume.rate": "Residenza {regionIn}, addizionale comunale {rate}",
-  "naspi.assume.residence.change": "residenza",
-
   "naspi.note.estimate":
     "l’importo esatto lo calcola l’INPS, che trattiene anche l’IRPEF. Non consideriamo nuovi lavori mentre ricevi la NASpI.",
   "naspi.note.decision": "la decisione spetta all’INPS, che valuta la domanda.",

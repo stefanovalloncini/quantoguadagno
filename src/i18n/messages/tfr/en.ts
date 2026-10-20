@@ -36,10 +36,4 @@ export const en: Record<MessageKey, string> = {
   "tfr.schedule.stock": "Accumulated",
   "tfr.result.note":
     "each year you set aside about 7.4% of your salary, revalued at 1.5% plus 75% of ISTAT inflation, with a 17% substitute tax on the revaluation. At payout, separate taxation applies and is not computed here.",
-  "tfr.assumption.ral": "RAL of {amount}",
-  "tfr.assumption.years": "{count, plural, one {one year of service} other {# years of service}}",
-  "tfr.assumption.inflation": "Expected inflation {rate}",
-  "tfr.change.ral": "RAL",
-  "tfr.change.years": "years of service",
-  "tfr.change.inflation": "expected inflation",
 };

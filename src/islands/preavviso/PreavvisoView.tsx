@@ -7,7 +7,7 @@ import { PageIntro } from "@/components/page/PageIntro.tsx";
 import { BottomBar, useBottomBarVisible } from "@/components/result/BottomBar.tsx";
 import { LiveStatus, useSettledAnnouncement } from "@/components/result/LiveStatus.tsx";
 import { ResultFigure, type FigureState } from "@/components/result/ResultFigure.tsx";
-import { Assumptions, NoteLine, type AssumptionItem } from "@/components/result/Assumptions.tsx";
+import { NoteLine } from "@/components/result/Assumptions.tsx";
 import { Topics } from "@/components/result/Topics.tsx";
 import { CCNL_IDS, CCNL_SOURCES, CCNL_TABLE, type CcnlId } from "@/data/index.ts";
 import { useFormat, useRichT, useT } from "@/i18n/react.tsx";
@@ -25,7 +25,6 @@ const IDS = {
   resignationDate: "preavviso-resignation-date",
   result: "preavviso-result",
   resultHeading: "preavviso-result-heading",
-  assumptionsHeading: "preavviso-assumptions-heading",
   tableHeading: "preavviso-table-heading",
   faqHeading: "preavviso-faq-heading",
 };
@@ -38,10 +37,6 @@ const FAQ_TOPICS = [
   "malattia",
   "prova",
 ] as const;
-
-function focusWhenPresent(id: string): void {
-  document.getElementById(id)?.focus();
-}
 
 export function PreavvisoView() {
   const t = useT();
@@ -70,7 +65,6 @@ export function PreavvisoView() {
   }, [state.resignationDate, updateResignationDate]);
 
   const ccnl = isCcnlId(state.ccnlId) ? CCNL_TABLE[state.ccnlId] : CCNL_TABLE.commercio;
-  const livello = ccnl.livelli.find((candidate) => candidate.id === state.livelloId);
   const bandKey = derived.bandMessageKey;
 
   const errorText = (field: keyof PreavvisoState): string | undefined => {
@@ -91,24 +85,6 @@ export function PreavvisoView() {
             t("preavviso.result.exitDate", { date: f.date(result.exitDate) }),
           ].join(" "),
   );
-
-  const assumptions: readonly AssumptionItem[] = [
-    {
-      id: "ccnl",
-      text: t("preavviso.assumptions.ccnl", { ccnl: ccnl.label, livello: livello?.label ?? "" }),
-      changeLabel: t("preavviso.assumptions.change.ccnl"),
-      targetId: IDS.ccnl,
-    },
-    {
-      id: "dates",
-      text: t("preavviso.assumptions.dates", {
-        hire: f.date(new Date(state.hireDate)),
-        resignation: f.date(new Date(state.resignationDate)),
-      }),
-      changeLabel: t("preavviso.assumptions.change.dates"),
-      targetId: IDS.hireDate,
-    },
-  ];
 
   const source = CCNL_SOURCES[ccnl.id].preavviso;
 
@@ -230,13 +206,6 @@ export function PreavvisoView() {
             {result !== null && derived.daysNoteKey !== null && (
               <p className="qg-figure__aside">{t(derived.daysNoteKey)}</p>
             )}
-            <Assumptions
-              headingId={IDS.assumptionsHeading}
-              items={assumptions}
-              onChange={(item) => {
-                focusWhenPresent(item.targetId);
-              }}
-            />
             <NoteLine>
               {rt("preavviso.result.source", {
                 ref: source.url === undefined ? source.ref : <a href={source.url}>{source.ref}</a>,

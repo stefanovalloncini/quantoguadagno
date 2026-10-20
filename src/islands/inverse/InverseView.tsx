@@ -1,10 +1,9 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { flushSync } from "react-dom";
 import { ComuneField } from "@/components/form/ComuneField.tsx";
 import { Field, FieldAlt } from "@/components/form/Field.tsx";
 import { MoneyInput } from "@/components/form/MoneyInput.tsx";
 import { RadioGroup } from "@/components/form/RadioGroup.tsx";
-import { regionSelectKey, useRegionText } from "@/components/form/regionText.ts";
+import { useRegionText } from "@/components/form/regionText.ts";
 import { Select } from "@/components/form/Select.tsx";
 import { useBlurErrors } from "@/components/form/useBlurErrors.ts";
 import { CalculatorLayout } from "@/components/page/CalculatorLayout.tsx";
@@ -21,10 +20,9 @@ import type { QueryValues } from "@/islands/runtime/query.ts";
 import { useHydratedFormValues } from "@/islands/runtime/useHydratedFormValues.ts";
 import { hrefFor } from "@/routePaths.ts";
 import { afterMessages, amountAfter, useTyping } from "@/components/form/amountAfter.ts";
-import { ContractGroup, contractText } from "./ContractGroup.tsx";
-import { focusWhenPresent } from "./focusWhenPresent.ts";
-import { InverseResult, type InverseAssumptionItem } from "./InverseResult.tsx";
-import { localAssumptionItem, useLocalTax } from "./localTax.ts";
+import { ContractGroup } from "./ContractGroup.tsx";
+import { InverseResult } from "./InverseResult.tsx";
+import { useLocalTax } from "./localTax.ts";
 import type { InverseErrors, InverseField } from "./state.ts";
 import { inverseToQuery } from "./url.ts";
 import { useInverseController, type InverseUpdate } from "./useInverseController.ts";
@@ -152,67 +150,6 @@ export function InverseView() {
       c: context.c,
       m: context.m,
     }),
-  };
-
-  const assumptions: readonly InverseAssumptionItem[] =
-    result === null
-      ? []
-      : [
-          {
-            id: "year",
-            text: t("inverse.assumption.year", { year: result.values.taxYear }),
-            changeLabel: t("inverse.change.year"),
-            targetId: `${IDS.year}-${String(result.values.taxYear)}`,
-          },
-          {
-            id: "region",
-            text: t("inverse.assumption.region", {
-              region: regionSelectKey(result.values.regionCode),
-              name: regions.name(result.values.regionCode),
-            }),
-            changeLabel: t("inverse.change.region"),
-            targetId: IDS.region,
-          },
-          localAssumptionItem(
-            result.municipal,
-            local.mode,
-            { comune: IDS.comune, municipalRate: IDS.municipalRate },
-            "inverse",
-            t,
-            f,
-          ),
-          {
-            id: "frequency",
-            text: t("inverse.assumption.frequency", { count: result.values.paymentFrequency }),
-            changeLabel: t("inverse.change.frequency"),
-            targetId: `${IDS.frequency}-${String(result.values.paymentFrequency)}`,
-          },
-          {
-            id: "contract",
-            text: contractText(
-              {
-                year: result.values.taxYear,
-                contractType: result.values.contractType,
-                companySize: result.values.companySize,
-                isPublicEmployee: result.values.isPublicEmployee,
-              },
-              t,
-              f,
-              false,
-            ),
-            changeLabel: t("inverse.change.contract"),
-            targetId: `${IDS.contract}-${result.values.contractType}`,
-            group: "contract",
-          },
-        ];
-
-  const onAssumptionChange = (item: InverseAssumptionItem) => {
-    if (item.group === "contract") {
-      flushSync(() => {
-        setContractOpen(true);
-      });
-    }
-    focusWhenPresent(item.targetId);
   };
 
   const primary = (
@@ -356,13 +293,11 @@ export function InverseView() {
             staleNote={staleNote}
             prompt={prompt}
             municipalMode={local.mode}
-            assumptions={assumptions}
             links={links}
             announcement={announcement}
             regions={regions}
             f={f}
             valueRef={setFigureValue}
-            onChange={onAssumptionChange}
           />
         }
         rest={rest}

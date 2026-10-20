@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ClientSuspense } from "@/islands/runtime/ClientSuspense.tsx";
-import { flushSync } from "react-dom";
 import { DetailsGroup } from "@/components/form/DetailsGroup.tsx";
 import { useRegionText } from "@/components/form/regionText.ts";
 import { useBlurErrors } from "@/components/form/useBlurErrors.ts";
@@ -30,7 +29,7 @@ import {
   type ConditionUpdate,
   type OfferId,
 } from "./state.ts";
-import { groupRecaps, type ComparisonAssumption, type SummaryContext } from "./summaries.ts";
+import { groupRecaps, type SummaryContext } from "./summaries.ts";
 import { useComparisonController } from "./useComparisonController.ts";
 import { verdictLabel, verdictValue, VerdictPanel } from "./VerdictPanel.tsx";
 import { CONDITION_GROUPS, GROUP_IDS, IDS, type ConditionGroup } from "./viewIds.ts";
@@ -39,7 +38,6 @@ const conditionFields = preloadable(() => import("./ConditionFields.tsx"));
 const ConditionFields = conditionFields.Component;
 
 const TYPING_PAUSE_MS = 700;
-const FOCUS_ATTEMPTS = 30;
 
 const GROUP_TITLES: Readonly<Record<ConditionGroup, string>> = {
   residence: "comparison.group.residence",
@@ -52,19 +50,6 @@ const CLOSED_GROUPS: Readonly<Record<ConditionGroup, boolean>> = {
   contract: false,
   dependents: false,
 };
-
-function focusWhenPresent(id: string, attempt = 0): void {
-  const element = document.getElementById(id);
-  if (element !== null) {
-    element.focus();
-    return;
-  }
-  if (attempt < FOCUS_ATTEMPTS) {
-    window.requestAnimationFrame(() => {
-      focusWhenPresent(id, attempt + 1);
-    });
-  }
-}
 
 function whenIdle(task: () => void): () => void {
   if (typeof window.requestIdleCallback === "function") {
@@ -212,17 +197,6 @@ export function ComparisonView() {
     [updateCondition],
   );
 
-  const goTo = useCallback((targetId: string, group: ConditionGroup) => {
-    flushSync(() => {
-      setOpenGroups((previous) => ({ ...previous, [group]: true }));
-    });
-    focusWhenPresent(targetId);
-  }, []);
-
-  const onAssumptionChange = (item: ComparisonAssumption) => {
-    goTo(item.targetId, item.group);
-  };
-
   const comuneControls: ComuneControls = {
     list: controller.comuni,
     selection: controller.comune,
@@ -350,7 +324,6 @@ export function ComparisonView() {
           announcement={announcement}
           verified={checked === null ? null : { ...checked, pending }}
           context={context}
-          onChange={onAssumptionChange}
         />
       </div>
     </div>

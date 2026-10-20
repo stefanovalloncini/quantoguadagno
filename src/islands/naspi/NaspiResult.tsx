@@ -1,7 +1,6 @@
 import type { ReactNode, Ref } from "react";
-import { radioId } from "@/components/form/RadioGroup.tsx";
 import type { RegionText } from "@/components/form/regionText.ts";
-import { Assumptions, NoteLine, type AssumptionItem } from "@/components/result/Assumptions.tsx";
+import { NoteLine } from "@/components/result/Assumptions.tsx";
 import { LiveStatus } from "@/components/result/LiveStatus.tsx";
 import { NextSteps, type NextStep } from "@/components/result/NextSteps.tsx";
 import { ResultAnswer } from "@/components/result/ResultAnswer.tsx";
@@ -14,10 +13,6 @@ import { NaspiLedgers } from "./NaspiLedgers.tsx";
 import { roundedToTen } from "./netEstimate.ts";
 import { fullAmountMonths, type NaspiOutcome } from "./outcome.ts";
 import { IDS } from "./viewIds.ts";
-
-export interface NaspiAssumption extends AssumptionItem {
-  readonly inNetGroup: boolean;
-}
 
 export interface VerifiedLine {
   readonly date: string;
@@ -37,7 +32,6 @@ export interface NaspiResultProps {
   readonly explained: boolean;
   readonly onExplainedChange: (explained: boolean) => void;
   readonly valueRef: Ref<HTMLParagraphElement>;
-  readonly onChange: (item: NaspiAssumption) => void;
 }
 
 const STEPS_BY_REASON: Readonly<Record<NaspiIneligibilityReason, readonly string[]>> = {
@@ -60,85 +54,6 @@ export function reasonLines(
       weeks: reason === "insufficient-weeks" ? outcome.facts.weeks : outcome.facts.weeksAfter,
     }),
   );
-}
-
-export function naspiAssumptions(
-  outcome: NaspiOutcome,
-  t: TranslateFn,
-  f: ViewFormat,
-  regions: RegionText,
-): readonly NaspiAssumption[] {
-  const { facts, breakdown } = outcome;
-  const residence = facts.residence;
-  const items: NaspiAssumption[] = [
-    {
-      id: "year",
-      text: t("naspi.assume.year", { year: facts.year }),
-      changeLabel: t("naspi.assume.year.change"),
-      targetId: radioId(IDS.year, String(facts.year)),
-      inNetGroup: false,
-    },
-    {
-      id: "gross",
-      text: t("naspi.assume.gross", { amount: f.money(facts.gross) }),
-      changeLabel: t("naspi.assume.gross.change"),
-      targetId: IDS.gross,
-      inNetGroup: false,
-    },
-    {
-      id: "weeks",
-      text: t("naspi.assume.weeks", { weeks: facts.weeks }),
-      changeLabel: t("naspi.assume.weeks.change"),
-      targetId: IDS.weeks,
-      inNetGroup: false,
-    },
-    {
-      id: "age",
-      text: t("naspi.assume.age", { age: facts.age }),
-      changeLabel: t("naspi.assume.age.change"),
-      targetId: IDS.age,
-      inNetGroup: false,
-    },
-    {
-      id: "resignation",
-      text: facts.resigned
-        ? t("naspi.assume.resignation", { weeks: facts.weeksAfter })
-        : t("naspi.assume.noResignation"),
-      changeLabel: t("naspi.assume.resignation.change"),
-      targetId: facts.resigned ? IDS.weeksAfter : IDS.resigned,
-      inNetGroup: false,
-    },
-  ];
-  if (!breakdown.eligible) return items;
-  return [
-    ...items,
-    {
-      id: "other",
-      text:
-        facts.otherIncome > 0
-          ? t("naspi.net.recap.other", { amount: f.money(facts.otherIncome), year: facts.year })
-          : t("naspi.net.recap.noOther", { year: facts.year }),
-      changeLabel: t("naspi.assume.other.change"),
-      targetId: IDS.otherIncome,
-      inNetGroup: true,
-    },
-    {
-      id: "residence",
-      text:
-        residence.comune === null
-          ? t("naspi.assume.rate", {
-              regionIn: regions.within(residence.region),
-              rate: f.percent(residence.flatRate),
-            })
-          : t("naspi.assume.comune", {
-              comune: residence.comune.name,
-              regionIn: regions.within(residence.region),
-            }),
-      changeLabel: t("naspi.assume.residence.change"),
-      targetId: IDS.region,
-      inNetGroup: true,
-    },
-  ];
 }
 
 function TrustNote({
@@ -175,7 +90,6 @@ export function NaspiResult({
   explained,
   onExplainedChange,
   valueRef,
-  onChange,
 }: NaspiResultProps) {
   const t = useT();
   const rt = useRichT();
@@ -257,11 +171,6 @@ export function NaspiResult({
           {steps.length > 0 && (
             <NextSteps headingId={IDS.checkHeading} title={t("naspi.check.title")} steps={steps} />
           )}
-          <Assumptions
-            headingId={IDS.assumptionsHeading}
-            items={naspiAssumptions(shown, t, f, regions)}
-            onChange={onChange}
-          />
           <NoteLine term={t("result.estimate.term")}>
             {eligible ? t("naspi.note.estimate") : t("naspi.note.decision")}
             <TrustNote verified={verified} withPending={eligible} />
