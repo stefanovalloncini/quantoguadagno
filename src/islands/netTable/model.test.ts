@@ -1,13 +1,12 @@
 import { describe, expect, it } from "vitest";
 import { CAPOLUOGHI, LATEST_SUPPORTED_YEAR, REGION_CODES } from "@/data/index.ts";
-import { calculateSalaryBreakdown, getTaxConfig } from "@/domain/index.ts";
+import { calculateSalaryBreakdown } from "@/domain/index.ts";
 import { COMMON_AMOUNTS, NET_TABLE_AMOUNTS } from "./amounts.ts";
 import {
   amountPage,
   monthlyOf,
   netRow,
   netRows,
-  reachedBrackets,
   REFERENCE_REGION,
   scenarioInput,
   type AmountPage,
@@ -112,17 +111,6 @@ describe.each(NET_TABLE_AMOUNTS)("page for %i € lordi", (gross) => {
     );
   });
 
-  it("breaks the IRPEF down into gross tax and deductions that add up", () => {
-    const irpef = ledger.lines.find((line) => line.id === "irpef");
-    if (ledger.irpefSteps.length === 0) {
-      expect(page.breakdown.irpefGross).toBe(page.breakdown.irpefNet);
-      return;
-    }
-    const total = ledger.irpefSteps.reduce((sum, step) => sum + cents(step.amount), 0);
-    expect(total).toBe(-cents(irpef?.annual ?? 0));
-    expect(ledger.irpefSteps[0]?.id).toBe("gross");
-  });
-
   it("lists every capoluogo once, with the reference one marked", () => {
     expect(page.cities.map((city) => city.residence.region)).toEqual(REGION_CODES);
     const references = page.cities.filter((city) => city.reference);
@@ -173,31 +161,6 @@ describe("ledger details", () => {
     ]);
     expect(pageOf(25_000).ledger.lines.map((line) => line.id)).not.toContain("municipal");
     expect(pageOf(26_000).ledger.notes).toEqual([]);
-  });
-
-  it("describes the INPS rate band by band", () => {
-    const inps = getTaxConfig(YEAR).inps;
-    expect(pageOf(30_000).ledger.inps).toEqual({ kind: "flat", rate: inps.standardRate });
-    expect(pageOf(60_000).ledger.inps).toEqual({
-      kind: "above",
-      rate: inps.standardRate,
-      band: inps.ceiling,
-      rateAbove: inps.aboveCeilingRate,
-    });
-    expect(pageOf(150_000).ledger.inps).toEqual({
-      kind: "capped",
-      rate: inps.standardRate,
-      band: inps.ceiling,
-      rateAbove: inps.aboveCeilingRate,
-      cap: inps.massimale,
-    });
-  });
-
-  it("shows the IRPEF brackets the taxable income reaches", () => {
-    const brackets = getTaxConfig(YEAR).irpefBrackets;
-    expect(reachedBrackets(27_243, brackets)).toHaveLength(1);
-    expect(reachedBrackets(36_324, brackets)).toHaveLength(2);
-    expect(reachedBrackets(54_448, brackets)).toHaveLength(3);
   });
 
   it("adds the credits only where they are due", () => {

@@ -1,0 +1,30 @@
+---
+import { visibleCrumbsOf } from "@/components/chrome/navigation.ts";
+import { LATEST_SUPPORTED_YEAR } from "@/data/index.ts";
+import type { Locale } from "@/i18n/locales.ts";
+import { getMessages } from "@/i18n/messages/index.ts";
+import NetAmountPage, { NET_AMOUNT_NAMESPACES } from "@/islands/NetAmountPage.tsx";
+import { amountHead } from "@/islands/netTable/head.ts";
+import { amountPage } from "@/islands/netTable/model.ts";
+import { loadResidences } from "@/islands/netTable/residences.ts";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import TextPageLayout from "@/layouts/TextPageLayout.astro";
+
+interface Props {
+  readonly locale: Locale;
+  readonly gross: number;
+}
+
+// One amount of the gross to net table, outside the route table: the page brings its own head
+// and breadcrumb trail, and renders on the server only, so it ships no JavaScript.
+const { locale, gross } = Astro.props;
+const page = amountPage(gross, LATEST_SUPPORTED_YEAR, await loadResidences(LATEST_SUPPORTED_YEAR));
+const head = amountHead(page, locale);
+const messages = getMessages(locale, NET_AMOUNT_NAMESPACES);
+---
+
+<BaseLayout locale={locale} head={head}>
+  <TextPageLayout locale={locale} crumbs={visibleCrumbsOf(head.trail)}>
+    <NetAmountPage locale={locale} messages={messages} page={page} />
+  </TextPageLayout>
+</BaseLayout>

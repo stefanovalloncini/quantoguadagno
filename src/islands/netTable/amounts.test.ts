@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { LOCALES } from "@/i18n/locales.ts";
+import { ROUTES, routeForPath } from "@/routes.ts";
 import {
   COMMON_AMOUNTS,
   NET_TABLE_AMOUNTS,
@@ -48,6 +49,20 @@ describe("slugs", () => {
       en: "/en/net-salary/30000-euro-gross",
     });
     expect(netTablePath(150_000, "en")).toBe("/en/net-salary/150000-euro-gross");
+  });
+
+  it("never take the path of a route or of a legacy redirect", () => {
+    const legacy = ROUTES.flatMap((route) => (route.legacy ?? []).map((entry) => entry.from));
+    for (const amount of NET_TABLE_AMOUNTS) {
+      for (const path of Object.values(netTablePaths(amount))) {
+        expect(routeForPath(path)).toBeUndefined();
+        for (const from of legacy) {
+          expect(from.endsWith("/*") ? path.startsWith(from.slice(0, -1)) : path === from).toBe(
+            false,
+          );
+        }
+      }
+    }
   });
 
   it("refuse amounts without a page and slugs of the other language", () => {

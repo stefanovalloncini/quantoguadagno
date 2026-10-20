@@ -3,7 +3,7 @@ import {
   comunaleRuleFor,
   findComune,
   REGION_CODES,
-  type Bracket,
+  type Comune,
   type ComunaleRule,
   type PaymentFrequency,
   type RegionCode,
@@ -14,15 +14,12 @@ import { round } from "@/domain/_math.ts";
 import {
   calculateRaiseImpact,
   calculateSalaryBreakdown,
-  getTaxConfig,
-  resolveInpsRates,
   type CompanySize,
   type ContractType,
   type SalaryBreakdown,
   type SalaryInput,
 } from "@/domain/index.ts";
 import { monthlyShares } from "@/islands/home/monthly.ts";
-import { regionSummary } from "@/islands/home/regionSummary.ts";
 import { neighboursOf } from "./amounts.ts";
 
 /** The reference scenario: a capoluogo, its regional and municipal rules, 13 payslips. */
@@ -35,6 +32,7 @@ export const RAISE_STEP = 1_000;
 
 export interface Residence {
   readonly region: RegionCode;
+  readonly comune: Comune;
   readonly comuneId: string;
   readonly comuneName: string;
   readonly rule: ComunaleRule;
@@ -52,6 +50,7 @@ export function residenceIn(regionComuni: RegionComuni, year: SupportedYear): Re
   if (found === null) throw new Error(`${comune.name} has no addizionale for ${String(year)}`);
   return {
     region,
+    comune,
     comuneId: comune.id,
     comuneName: comune.name,
     rule: found.rule,
@@ -144,34 +143,7 @@ export interface LedgerLine {
   readonly monthly: number;
 }
 
-export interface IrpefStep {
-  readonly id: "gross" | "work" | "wedge";
-  /** The gross tax is positive, each deduction negative. */
-  readonly amount: number;
-}
-
-export type InpsRule =
-  | { readonly kind: "flat"; readonly rate: number }
-  | { readonly kind: "relief"; readonly rate: number }
-  | {
-      readonly kind: "above";
-      readonly rate: number;
-      readonly band: number;
-      readonly rateAbove: number;
-    }
-  | {
-      readonly kind: "capped";
-      readonly rate: number;
-      readonly band: number;
-      readonly rateAbove: number;
-      readonly cap: number;
-    };
-
-export interface RateRange {
-  readonly min: number;
-  readonly max: number;
-}
-
+/** Why a surcharge has no line of its own. */
 export type LedgerNote =
   | { readonly kind: "municipalExempt"; readonly threshold: number }
   | { readonly kind: "municipalNone" }
@@ -180,59 +152,18 @@ export type LedgerNote =
 export interface AmountLedger {
   readonly lines: readonly LedgerLine[];
   readonly net: { readonly annual: number; readonly monthly: number };
-  readonly irpefSteps: readonly IrpefStep[];
-  readonly brackets: readonly Bracket[];
-  readonly inps: InpsRule;
-  readonly regionalRates: RateRange;
-  readonly municipalRates: RateRange;
-  readonly maxTrattamento: number;
   readonly notes: readonly LedgerNote[];
 }
 
-function inpsRule(breakdown: SalaryBreakdown, year: SupportedYear): InpsRule {
-  const config = getTaxConfig(year).inps;
-  const { standardRate: rate, aboveCeilingRate: rateAbove } = resolveInpsRates(config, {
-    contractType: SCENARIO_CONTRACT,
-    companySize: SCENARIO_COMPANY_SIZE,
-    isPublicEmployee: false,
-  });
-  const gross = breakdown.grossAnnual;
-  if (breakdown.inpsExemption > 0) return { kind: "relief", rate };
-  if (gross <= config.ceiling || rateAbove === rate) return { kind: "flat", rate };
-  if (gross <= config.massimale) return { kind: "above", rate, band: config.ceiling, rateAbove };
-  return { kind: "capped", rate, band: config.ceiling, rateAbove, cap: config.massimale };
-}
-
-/** The brackets the income reaches, the first one always included. */
-export function reachedBrackets(income: number, brackets: readonly Bracket[]): readonly Bracket[] {
-  return brackets.filter((bracket, index) => index === 0 || income > bracket.min);
-}
-
-function irpefSteps(breakdown: SalaryBreakdown): readonly IrpefStep[] {
-  const applied = round(breakdown.irpefGross - breakdown.irpefNet);
-  if (applied <= 0) return [];
-  const work = Math.min(breakdown.irpefDeduction, applied);
-  const wedge = round(applied - work);
-  return [
-    { id: "gross", amount: breakdown.irpefGross },
-    ...(work > 0 ? [{ id: "work" as const, amount: -work }] : []),
-    ...(wedge > 0 ? [{ id: "wedge" as const, amount: -wedge }] : []),
-  ];
-}
-
-function rangeOf(rates: readonly number[]): RateRange {
-  return { min: Math.min(...rates), max: Math.max(...rates) };
-}
-
-function municipalRates(rule: ComunaleRule): RateRange {
+function chargesNothing(rule: ComunaleRule): boolean {
   const percents = rule.brackets === undefined ? [rule.rate] : rule.brackets.map((b) => b.rate);
-  return rangeOf(percents.map((percent) => percent / 100));
+  return Math.max(...percents) === 0;
 }
 
 function ledgerNotes(breakdown: SalaryBreakdown, residence: Residence): readonly LedgerNote[] {
   if (breakdown.irpefNet <= 0) return [{ kind: "surchargesNotDue" }];
   if (breakdown.municipalTax > 0) return [];
-  if (municipalRates(residence.rule).max === 0) return [{ kind: "municipalNone" }];
+  if (chargesNothing(residence.rule)) return [{ kind: "municipalNone" }];
   const threshold = residence.rule.exemption ?? 0;
   return threshold > 0 && breakdown.taxableIncome <= threshold
     ? [{ kind: "municipalExempt", threshold }]
@@ -245,11 +176,8 @@ interface ChainEntry {
   readonly annual: number;
 }
 
-export function amountLedger(
-  breakdown: SalaryBreakdown,
-  year: SupportedYear,
-  residence: Residence,
-): AmountLedger {
+/** The lines from the gross to the net, without the ones worth nothing. */
+export function amountLedger(breakdown: SalaryBreakdown, residence: Residence): AmountLedger {
   const b = breakdown;
   const entries: readonly ChainEntry[] = [
     { id: "inps", kind: "deducted", annual: -b.inpsContribution },
@@ -283,16 +211,9 @@ export function amountLedger(
     monthly: b.grossMonthly,
   };
   const afterInps = lines.findIndex((line) => line.id === "inps") + 1;
-  const config = getTaxConfig(year);
   return {
     lines: [gross, ...lines.slice(0, afterInps), taxable, ...lines.slice(afterInps)],
     net: { annual: b.netAnnual, monthly: b.netMonthly },
-    irpefSteps: irpefSteps(b),
-    brackets: reachedBrackets(b.taxableIncome, config.irpefBrackets),
-    inps: inpsRule(b, year),
-    regionalRates: rangeOf(regionSummary(residence.region, year).rates),
-    municipalRates: municipalRates(residence.rule),
-    maxTrattamento: config.trattamentoIntegrativo.maxAnnualBonus,
     notes: ledgerNotes(b, residence),
   };
 }
@@ -372,7 +293,7 @@ export function amountPage(gross: number, year: SupportedYear, residences: Resid
     residence,
     breakdown,
     row: rowOf(breakdown),
-    ledger: amountLedger(breakdown, year, residence),
+    ledger: amountLedger(breakdown, residence),
     cities,
     lowest: extremes(cities, (values) => Math.min(...values)),
     highest: extremes(cities, (values) => Math.max(...values)),

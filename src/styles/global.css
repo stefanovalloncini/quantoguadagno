@@ -36,6 +36,7 @@
 @import "./components/status.css";
 @import "./components/tool-list.css";
 @import "./components/netpage.css";
+@import "./components/pager.css";
 @import "./components/netbar.css";
 @import "./components/compare.css";
 @import "./components/payslip.css";

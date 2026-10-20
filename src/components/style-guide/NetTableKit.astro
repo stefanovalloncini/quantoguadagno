@@ -1,6 +1,13 @@
 ---
+import { LATEST_SUPPORTED_YEAR } from "@/data/index.ts";
+import { amountPage } from "@/islands/netTable/model.ts";
+import { loadResidences } from "@/islands/netTable/residences.ts";
 import { NetTableSpecimens } from "./kit/NetTableSpecimens.tsx";
 import Section from "./Section.astro";
+
+const SHOWN = new Set(["lombardia", "lazio", "campania", "bolzano"]);
+const page = amountPage(30_000, LATEST_SUPPORTED_YEAR, await loadResidences(LATEST_SUPPORTED_YEAR));
+const cities = page.cities.filter((city) => SHOWN.has(city.residence.region));
 ---
 
 <Section id="lordo-netto">
@@ -9,5 +16,5 @@ import Section from "./Section.astro";
     <code class="sg-code">src/islands/netTable</code>: pagine di testo senza JavaScript, costruite
     sul calcolo vero.
   </p>
-  <NetTableSpecimens />
+  <NetTableSpecimens cities={cities} />
 </Section>

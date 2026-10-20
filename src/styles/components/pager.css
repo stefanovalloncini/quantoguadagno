@@ -1,0 +1,52 @@
+/* Previous and next page in a series, as the block form of the GOV.UK pagination: a bold title
+   with its chevron, and under it, past the chevron, the underlined name of the page. */
+.qg-pager {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--s-3);
+}
+
+.qg-pager__link {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-1);
+  min-block-size: var(--target);
+  padding-block: var(--s-1);
+  text-decoration-line: none;
+}
+
+.qg-pager__title {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  font-size: var(--t-body);
+  font-weight: var(--weight-strong);
+  line-height: var(--lh-snug);
+}
+
+/* Past the 1rem chevron and its gap, so the name lines up with the title. */
+.qg-pager__label {
+  margin-inline-start: calc(var(--s-4) + var(--s-2));
+  font-size: var(--t-body);
+  line-height: var(--lh-snug);
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+.qg-pager__link:is(:hover, .is-hover) .qg-pager__label {
+  text-decoration-thickness: inherit;
+}
+
+.qg-pager__all {
+  margin-block-start: var(--s-2);
+  font-size: var(--t-body);
+  line-height: var(--lh-snug);
+}
+
+.qg-pager__all a {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: var(--target);
+}

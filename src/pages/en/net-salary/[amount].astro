@@ -1,0 +1,19 @@
+---
+import NetAmountDocument from "@/components/page/NetAmountDocument.astro";
+import { NET_TABLE_AMOUNTS, netTableSlug } from "@/islands/netTable/amounts.ts";
+
+export function getStaticPaths() {
+  return NET_TABLE_AMOUNTS.map((gross) => ({
+    params: { amount: netTableSlug(gross, "en") },
+    props: { gross },
+  }));
+}
+
+interface Props {
+  readonly gross: number;
+}
+
+const { gross } = Astro.props;
+---
+
+<NetAmountDocument locale="en" gross={gross} />
