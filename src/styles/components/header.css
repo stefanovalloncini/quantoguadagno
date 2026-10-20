@@ -33,42 +33,16 @@
   white-space: nowrap;
 }
 
-.qg-brand:hover {
+.qg-brand:hover:not(:focus-visible) {
   color: var(--inchiostro);
 }
 
-.qg-header__lang {
-  display: none;
-  align-items: center;
-  justify-content: center;
-  min-block-size: var(--target);
-  min-inline-size: var(--target);
-  font-size: var(--t-15);
-  font-weight: var(--weight-medium);
-  color: var(--inchiostro);
-  text-decoration: none;
-}
-
-.qg-header__lang:hover {
-  color: var(--blu);
-  text-decoration-line: underline;
-}
-
-@container qg-page (width >= 77.5rem) {
-  .qg-header__bar {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0 var(--s-6);
-    min-block-size: 4.5rem;
+@container qg-page (width >= 45rem) {
+  .qg-header {
+    --header-block: 4.5rem;
   }
 
   .qg-brand {
-    align-self: center;
-    min-block-size: var(--target);
-  }
-
-  .qg-header__lang {
-    display: inline-flex;
+    font-size: var(--t-24);
   }
 }

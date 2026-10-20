@@ -99,9 +99,3 @@
     border-block-start: 1px solid var(--filetto);
   }
 }
-
-@container qg-page (width >= 77.5rem) {
-  .qg-menu {
-    display: none;
-  }
-}

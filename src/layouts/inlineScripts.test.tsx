@@ -78,9 +78,9 @@ interface Disclosure {
   readonly closeButton: HTMLButtonElement;
 }
 
-function mountDisclosure(kind: "overlay" | "inline"): Disclosure {
+function mountDisclosure(): Disclosure {
   const details = mount(document.createElement("details"));
-  details.setAttribute("data-disclosure", kind);
+  details.setAttribute("data-disclosure", "");
   const summary = document.createElement("summary");
   summary.textContent = "Menu";
   const link = document.createElement("a");
@@ -198,7 +198,7 @@ describe("theme bootstrap", () => {
 
 describe("disclosures", () => {
   it("close on Escape from inside and give focus back to the summary", () => {
-    const { details, summary, link } = mountDisclosure("inline");
+    const { details, summary, link } = mountDisclosure();
     runInlineScript(disclosureScript);
     link.focus();
     pressEscape(link);
@@ -206,56 +206,26 @@ describe("disclosures", () => {
     expect(document.activeElement).toBe(summary);
   });
 
-  it("close an open nav panel on Escape wherever focus is", () => {
-    const { details } = mountDisclosure("overlay");
+  it("ignore Escape pressed outside them", () => {
+    const { details } = mountDisclosure();
     runInlineScript(disclosureScript);
     pressEscape(document.body);
-    expect(details.open).toBe(false);
-  });
-
-  it("close a nav panel on a click outside it, not inside", () => {
-    const { details, link } = mountDisclosure("overlay");
-    runInlineScript(disclosureScript);
-    link.click();
     expect(details.open).toBe(true);
-    document.body.click();
-    expect(details.open).toBe(false);
   });
 
-  it("leave the phone menu open on a click outside it", () => {
-    const { details } = mountDisclosure("inline");
+  it("stay open on a click outside them", () => {
+    const { details } = mountDisclosure();
     runInlineScript(disclosureScript);
     document.body.click();
     expect(details.open).toBe(true);
   });
 
   it("close from their close button and give focus back to the summary", () => {
-    const { details, summary, closeButton } = mountDisclosure("inline");
+    const { details, summary, closeButton } = mountDisclosure();
     runInlineScript(disclosureScript);
     closeButton.click();
     expect(details.open).toBe(false);
     expect(document.activeElement).toBe(summary);
-  });
-
-  it("close a nav panel when focus moves past it", () => {
-    const { details, link } = mountDisclosure("overlay");
-    const next = mount(document.createElement("a"));
-    next.href = "#next";
-    runInlineScript(disclosureScript);
-    link.focus();
-    next.focus();
-    expect(details.open).toBe(false);
-  });
-
-  it("keep one nav panel open at a time", () => {
-    const first = mountDisclosure("overlay");
-    const second = mountDisclosure("overlay");
-    second.details.open = false;
-    runInlineScript(disclosureScript);
-    second.details.open = true;
-    second.details.dispatchEvent(new Event("toggle"));
-    expect(first.details.open).toBe(false);
-    expect(second.details.open).toBe(true);
   });
 });
 

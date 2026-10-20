@@ -10,16 +10,14 @@ const sampleEntries = salary?.entries.slice(0, 3) ?? [];
 <Section id="intestazione">
   <div class="qg-prose" slot="intro">
     <p>
-      L’intestazione e il piè di pagina di questa pagina sono quelli veri. Fino a 77,5rem il menu è
-      un solo <code class="sg-code">&lt;details&gt;</code>: si apre senza JavaScript, spinge in
-      basso la pagina e finisce con lingua, tema e «Chiudi il menu». Da 77,5rem ogni gruppo è un
-      <code class="sg-code">&lt;details name="qg-nav"&gt;</code> a tendina; un gruppo con un solo
-      strumento è un link diretto.
+      L’intestazione e il piè di pagina di questa pagina sono quelli veri. A ogni larghezza
+      l’intestazione ha solo il marchio e il pulsante «Menu», un solo
+      <code class="sg-code">&lt;details&gt;</code>: si apre senza JavaScript, spinge in basso la
+      pagina, mostra i gruppi su tre colonne da 45rem e finisce con lingua, tema e «Chiudi il menu».
     </p>
     <p>
-      Uno script in linea di poche righe chiude i gruppi con Esc, con un clic fuori o quando il
-      focus esce, e fa funzionare «Chiudi il menu». Senza script tutto resta usabile e il pulsante
-      non compare.
+      Uno script in linea di poche righe chiude il menu con Esc e fa funzionare «Chiudi il menu».
+      Senza script tutto resta usabile e il pulsante non compare.
     </p>
   </div>
   <Specimen

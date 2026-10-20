@@ -16,7 +16,7 @@ const { locale, groups, localeLinks } = Astro.props;
 const t = getT(locale, "layout");
 ---
 
-<details class="qg-menu" data-disclosure="inline">
+<details class="qg-menu" data-disclosure>
   <summary class="qg-menu__button">
     <span class="qg-menu__when-closed">{t("menu.open")}</span>
     <span class="qg-menu__when-open" aria-hidden="true">

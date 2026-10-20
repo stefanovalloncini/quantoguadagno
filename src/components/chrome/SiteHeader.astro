@@ -1,6 +1,5 @@
 ---
-import MainNav from "@/components/chrome/MainNav.astro";
-import MobileMenu from "@/components/chrome/MobileMenu.astro";
+import SiteMenu from "@/components/chrome/SiteMenu.astro";
 import type { LocaleLink, NavGroup } from "@/components/chrome/navigation.ts";
 import type { Locale } from "@/i18n/locales.ts";
 import { getT } from "@/i18n/messages/index.ts";
@@ -14,7 +13,6 @@ interface Props {
 
 const { locale, groups, localeLinks } = Astro.props;
 const t = getT(locale, "layout");
-const otherLocales = localeLinks.filter((link) => !link.current);
 ---
 
 <header class="qg-header">
@@ -22,12 +20,6 @@ const otherLocales = localeLinks.filter((link) => !link.current);
     <a class="qg-brand" href={hrefFor("home", locale)}>
       {t("brand.name")}
     </a>
-    <MobileMenu locale={locale} groups={groups} localeLinks={localeLinks} />
-    <MainNav locale={locale} groups={groups} />
-    {otherLocales.map((link) => (
-      <a class="qg-header__lang" href={link.href} lang={link.locale} hreflang={link.locale}>
-        {link.label}
-      </a>
-    ))}
+    <SiteMenu locale={locale} groups={groups} localeLinks={localeLinks} />
   </div>
 </header>

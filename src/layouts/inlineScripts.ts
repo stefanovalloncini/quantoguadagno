@@ -15,8 +15,6 @@ export const LOCALE_OFFER_ATTRIBUTE = "data-locale-offer";
 export const LOCALE_HINT_ATTRIBUTE = "data-locale-hint";
 export const LOCALE_HINT_CLOSE_ATTRIBUTE = "data-locale-hint-close";
 
-export type DisclosureKind = "overlay" | "inline";
-
 const THEME_COLORS = { light: "#ffffff", dark: "#101010" } as const;
 
 export const themeScript = `(function () {
@@ -73,51 +71,24 @@ export const themeScript = `(function () {
 
 export const disclosureScript = `(function () {
   var any = "[${DISCLOSURE_ATTRIBUTE}][open]";
-  var overlay = '[${DISCLOSURE_ATTRIBUTE}="overlay"][open]';
-  function close(details, returnFocus) {
+  function close(details) {
     details.removeAttribute("open");
     var summary = details.querySelector("summary");
-    if (returnFocus && summary !== null) summary.focus();
-  }
-  function closeOverlays(except) {
-    var open = document.querySelectorAll(overlay);
-    for (var i = 0; i < open.length; i++) if (open[i] !== except) close(open[i], false);
+    if (summary !== null) summary.focus();
   }
   document.addEventListener("keydown", function (event) {
     if (event.key !== "Escape") return;
     var target = event.target;
     var owner = target instanceof Element ? target.closest(any) : null;
-    if (owner !== null) close(owner, true);
-    else closeOverlays(null);
+    if (owner !== null) close(owner);
   });
   document.addEventListener("click", function (event) {
     var target = event.target;
     if (!(target instanceof Element)) return;
     var button = target.closest("[${DISCLOSURE_CLOSE_ATTRIBUTE}]");
     var owner = button === null ? null : button.closest("[${DISCLOSURE_ATTRIBUTE}]");
-    if (owner !== null) {
-      close(owner, true);
-      return;
-    }
-    var open = document.querySelectorAll(overlay);
-    for (var i = 0; i < open.length; i++) if (!open[i].contains(target)) close(open[i], false);
+    if (owner !== null) close(owner);
   });
-  document.addEventListener("focusout", function (event) {
-    var target = event.target;
-    var owner = target instanceof Element ? target.closest(overlay) : null;
-    var next = event.relatedTarget;
-    if (owner === null || !(next instanceof Node) || owner.contains(next)) return;
-    close(owner, false);
-  });
-  document.addEventListener(
-    "toggle",
-    function (event) {
-      var details = event.target;
-      if (!(details instanceof HTMLDetailsElement) || !details.open) return;
-      if (details.getAttribute("${DISCLOSURE_ATTRIBUTE}") === "overlay") closeOverlays(details);
-    },
-    true,
-  );
 })();`;
 
 export const localeHintScript = `(function () {
