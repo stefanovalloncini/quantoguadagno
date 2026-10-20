@@ -1,5 +1,6 @@
 import { LOCALES, type Locale } from "@/i18n/locales.ts";
 import { getT } from "@/i18n/messages/index.ts";
+import type { NamedLink } from "@/seo/structuredData.ts";
 import {
   breadcrumbsFor,
   groupedRoutes,
@@ -60,14 +61,16 @@ export function navGroupsFor(
   });
 }
 
+/** Each language links to the same page: the route's, or the given paths of a page outside it. */
 export function localeLinksFor(
   locale: Locale,
   currentId: RouteId | undefined,
+  paths?: Readonly<Record<Locale, string>>,
 ): readonly LocaleLink[] {
   const t = getT(locale, "layout");
   return LOCALES.map((candidate) => ({
     locale: candidate,
-    href: hrefFor(currentId ?? "home", candidate),
+    href: paths?.[candidate] ?? hrefFor(currentId ?? "home", candidate),
     label: t(`locale.${candidate}` as const),
     current: candidate === locale,
   }));
@@ -83,6 +86,11 @@ export function visibleCrumbsFor(route: Route, locale: Locale): readonly Crumb[]
   return breadcrumbsFor(route, locale)
     .slice(0, -1)
     .map((crumb) => ({ href: sitePath(crumb.href), label: t(crumb.label) }));
+}
+
+/** The visible crumbs of a page outside the route table: the ancestors in its trail. */
+export function visibleCrumbsOf(trail: readonly NamedLink[]): readonly Crumb[] {
+  return trail.slice(0, -1).map((crumb) => ({ href: sitePath(crumb.url), label: crumb.name }));
 }
 
 export function navIdFor(prefix: string, groupId: GroupId): string {

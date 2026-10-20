@@ -8,6 +8,7 @@ import {
   ROUTES,
   absoluteUrl,
   alternatesFor,
+  alternatesForPaths,
   breadcrumbsFor,
   groupedRoutes,
   hrefFor,
@@ -424,6 +425,22 @@ describe("links", () => {
       { hreflang: "it", href: "https://quantoguadagno.com/tfr" },
       { hreflang: "en", href: "https://quantoguadagno.com/en/tfr-severance-pay" },
       { hreflang: "x-default", href: "https://quantoguadagno.com/tfr" },
+    ]);
+  });
+
+  it("lists the alternates of a page outside the route table from its paths", () => {
+    expect(
+      alternatesForPaths({
+        it: "/stipendio-netto/30000-euro-lordi",
+        en: "/en/net-salary/30000-euro-gross",
+      }),
+    ).toEqual([
+      { hreflang: "it", href: "https://quantoguadagno.com/stipendio-netto/30000-euro-lordi" },
+      { hreflang: "en", href: "https://quantoguadagno.com/en/net-salary/30000-euro-gross" },
+      {
+        hreflang: "x-default",
+        href: "https://quantoguadagno.com/stipendio-netto/30000-euro-lordi",
+      },
     ]);
   });
 

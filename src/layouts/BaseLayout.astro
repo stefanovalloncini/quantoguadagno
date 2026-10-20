@@ -17,7 +17,7 @@ import {
 import {
   NOT_FOUND_META,
   absoluteUrl,
-  alternatesFor,
+  alternatesForPaths,
   breadcrumbsFor,
   isIndexable,
   pathFor,
@@ -25,6 +25,7 @@ import {
   type PageKind,
   type Route,
 } from "@/routes.ts";
+import type { PageHead } from "@/seo/pageHead.ts";
 import { serializeJsonLd, structuredDataFor } from "@/seo/structuredData.ts";
 import archivoLatin from "@/assets/fonts/Archivo-latin.woff2?url";
 import archivoExpandedLatin from "@/assets/fonts/ArchivoExpanded-600-latin.woff2?url";
@@ -39,18 +40,22 @@ interface Props {
   readonly locale: Locale;
   readonly route?: Route | undefined;
   readonly standalone?: StandalonePage | undefined;
+  /** A page outside the route table brings its own head: see PageHead. */
+  readonly head?: PageHead | undefined;
   readonly kind?: PageKind | undefined;
   readonly footerMap?: boolean;
 }
 
-const { locale, route, standalone, footerMap = true } = Astro.props;
+const { locale, route, standalone, head, footerMap = true } = Astro.props;
 const layout = getT(locale, "layout");
 const meta = getT(locale, "meta");
 
 const pageMeta = route?.meta ?? NOT_FOUND_META;
+// Meta strings may name the tax year, as the title of the gross to net table does.
 const metaValues = { year: LATEST_SUPPORTED_YEAR };
-const pageTitle = standalone?.title ?? meta(pageMeta.title, metaValues);
-const description = standalone?.description ?? meta(pageMeta.description, metaValues);
+const pageTitle = head?.title ?? standalone?.title ?? meta(pageMeta.title, metaValues);
+const description =
+  head?.description ?? standalone?.description ?? meta(pageMeta.description, metaValues);
 const siteName = layout("brand.name");
 const title = layout(route?.id === "home" ? "title.home" : "title.page", {
   site: siteName,
@@ -58,19 +63,27 @@ const title = layout(route?.id === "home" ? "title.home" : "title.page", {
 });
 const kind = route?.kind ?? Astro.props.kind ?? "text";
 const jsBudgetKb = route?.jsBudgetKb;
-const indexable = route !== undefined && isIndexable(route);
-const canonical = indexable ? absoluteUrl(route.path[locale]) : undefined;
-const alternates = indexable ? alternatesFor(route) : [];
+// The same page in each language, from an indexable route or from a page head: it gives the
+// canonical URL and the hreflang alternates. Without it the page is noindex.
+const paths = head?.paths ?? (route !== undefined && isIndexable(route) ? route.path : undefined);
+const indexable = paths !== undefined;
+const canonical = paths === undefined ? undefined : absoluteUrl(paths[locale]);
+const alternates = paths === undefined ? [] : alternatesForPaths(paths);
 const restoreNames = route === undefined ? "" : restoreNamesFor(route).join(" ");
 const openGraphLocale = (value: Locale) => BCP47_TAG[value].replace("-", "_");
 const otherLocales = LOCALES.filter((other) => other !== locale);
 
 const navGroups = navGroupsFor(locale, route?.id);
-const localeLinks = localeLinksFor(locale, route?.id);
+const localeLinks = localeLinksFor(locale, route?.id, head?.paths);
 const offeredLocale =
   locale === DEFAULT_LOCALE ? localeLinks.find((link) => !link.current) : undefined;
 
-const crumbs = route === undefined ? [] : breadcrumbsFor(route, locale);
+const trail =
+  head?.trail ??
+  (route === undefined ? [] : breadcrumbsFor(route, locale)).map((crumb) => ({
+    name: layout(crumb.label),
+    url: crumb.href,
+  }));
 const jsonLd = serializeJsonLd(
   structuredDataFor({
     locale,
@@ -80,7 +93,7 @@ const jsonLd = serializeJsonLd(
     title: pageTitle,
     description,
     canonical,
-    breadcrumbs: crumbs.map((crumb) => ({ name: layout(crumb.label), url: crumb.href })),
+    breadcrumbs: trail,
   }),
 );
 

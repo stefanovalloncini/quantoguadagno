@@ -52,3 +52,31 @@ describe("sitemap", () => {
     }
   });
 });
+
+describe("sitemap with pages outside the route table", () => {
+  const pages = [
+    { it: "/stipendio-netto/30000-euro-lordi", en: "/en/net-salary/30000-euro-gross" },
+    { it: "/stipendio-netto/31000-euro-lordi", en: "/en/net-salary/31000-euro-gross" },
+  ];
+  const withPages = buildSitemap(ROUTES, pages);
+  const pageEntries = [...withPages.matchAll(/<url>([\s\S]*?)<\/url>/g)].map(
+    (match) => match[1] ?? "",
+  );
+
+  it("adds each page once per locale after the routes", () => {
+    expect(pageEntries).toHaveLength(entries.length + pages.length * LOCALES.length);
+    expect(pageEntries.slice(0, entries.length)).toEqual(entries);
+  });
+
+  it("gives each page the alternates of its own paths", () => {
+    const english = pageEntries.find((entry) =>
+      entry.includes("<loc>https://quantoguadagno.com/en/net-salary/30000-euro-gross</loc>"),
+    );
+    expect(english).toContain(
+      '<xhtml:link rel="alternate" hreflang="it" href="https://quantoguadagno.com/stipendio-netto/30000-euro-lordi"/>',
+    );
+    expect(english).toContain(
+      '<xhtml:link rel="alternate" hreflang="x-default" href="https://quantoguadagno.com/stipendio-netto/30000-euro-lordi"/>',
+    );
+  });
+});

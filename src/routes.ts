@@ -397,11 +397,16 @@ export interface Alternate {
   readonly href: string;
 }
 
-export function alternatesFor(route: Route): readonly Alternate[] {
+/** The same page in every locale, plus x-default pointing to the Italian one. */
+export function alternatesForPaths(paths: Readonly<Record<Locale, string>>): readonly Alternate[] {
   return [
-    ...LOCALES.map((locale) => ({ hreflang: locale, href: absoluteUrl(route.path[locale]) })),
-    { hreflang: "x-default", href: absoluteUrl(route.path[DEFAULT_LOCALE]) },
+    ...LOCALES.map((locale) => ({ hreflang: locale, href: absoluteUrl(paths[locale]) })),
+    { hreflang: "x-default", href: absoluteUrl(paths[DEFAULT_LOCALE]) },
   ];
+}
+
+export function alternatesFor(route: Route): readonly Alternate[] {
+  return alternatesForPaths(route.path);
 }
 
 export interface RouteMatch {

@@ -1,16 +1,18 @@
 ---
 import Breadcrumbs from "@/components/chrome/Breadcrumbs.astro";
-import { visibleCrumbsFor } from "@/components/chrome/navigation.ts";
+import { visibleCrumbsFor, type Crumb } from "@/components/chrome/navigation.ts";
 import type { Locale } from "@/i18n/locales.ts";
 import type { Route } from "@/routes.ts";
 
 interface Props {
   readonly locale: Locale;
   readonly route?: Route | undefined;
+  /** For a page outside the route table: its ancestors, which a route derives from its group. */
+  readonly crumbs?: readonly Crumb[] | undefined;
 }
 
 const { locale, route } = Astro.props;
-const crumbs = route === undefined ? [] : visibleCrumbsFor(route, locale);
+const crumbs = Astro.props.crumbs ?? (route === undefined ? [] : visibleCrumbsFor(route, locale));
 ---
 
 <div class="qg-wrap">
