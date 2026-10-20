@@ -59,6 +59,26 @@ function firstYearWithTaxWedgeCut(): SupportedYear | undefined {
 }
 
 const DEFINITION_VALUES: Readonly<Record<string, DefinitionValues>> = {
+  fringe: (year, f) => {
+    const thresholds = param("fringe.welfare", yearStart(year));
+    return {
+      year,
+      general: whole(thresholds.welfareThresholdGeneral, f),
+      children: whole(thresholds.welfareThresholdWithChildren, f),
+    };
+  },
+  buoni: (year, f) => {
+    const date = yearStart(year);
+    return {
+      year,
+      electronic: whole(param("fringe.mealVouchers.electronic", date), f),
+      paper: whole(param("fringe.mealVouchers.paper", date), f),
+    };
+  },
+  premio: (year, f) => {
+    const pdr = param("pdr", yearStart(year));
+    return { year, rate: percentPhrase(pdr.rate, f.locale, "del"), max: whole(pdr.maxAmount, f) };
+  },
   irpef: (year, f) => ({
     year,
     brackets: listText(
@@ -157,9 +177,35 @@ interface SectionDefinition {
 
 const SECTIONS: readonly SectionDefinition[] = [
   {
-    id: "busta-paga",
+    id: "stipendio",
     title: "glossario.section.pay",
     terms: ["ral", "mensilita", "imponibile", "ccnl"],
+  },
+  {
+    id: "busta-paga",
+    title: "glossario.section.payslip",
+    terms: [
+      "competenze",
+      "livello",
+      "minimo",
+      "contingenza",
+      "edr",
+      "scatti",
+      "superminimo",
+      "previdenziale",
+      "fringe",
+      "buoni",
+      "rimborsi",
+      "premio",
+      "arretrati",
+      "conguaglio",
+      "addizionali",
+      "sindacale",
+      "quinto",
+      "ratei",
+      "ferie",
+      "netto",
+    ],
   },
   {
     id: "imposte",

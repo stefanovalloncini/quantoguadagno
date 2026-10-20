@@ -3,7 +3,8 @@ export const it = {
   "glossario.lede":
     "Le parole che trovi in busta paga e nei calcolatori, spiegate in poche righe. Cifre e soglie sono quelle del {year}.",
   "glossario.toc": "In questa pagina",
-  "glossario.section.pay": "Stipendio e busta paga",
+  "glossario.section.pay": "Stipendio e contratto",
+  "glossario.section.payslip": "Le voci della busta paga",
   "glossario.section.taxes": "Imposte",
   "glossario.section.contributions": "Contributi e fine del rapporto",
   "glossario.section.vat": "Partita IVA",
@@ -24,6 +25,66 @@ export const it = {
   "glossario.ccnl.term": "Contratto collettivo nazionale di lavoro (CCNL)",
   "glossario.ccnl.definition":
     "L’accordo tra sindacati e associazioni dei datori di lavoro che fissa, per ogni settore, minimi di paga, livelli, mensilità, ferie e giorni di preavviso.",
+  "glossario.competenze.term": "Competenze e trattenute",
+  "glossario.competenze.definition":
+    "Le due colonne della busta paga. Nelle competenze ci sono le somme a tuo favore, come la paga del mese e gli straordinari; nelle trattenute quelle che il datore di lavoro toglie, come contributi e imposte. Il netto è la differenza tra i due totali.",
+  "glossario.livello.term": "Livello di inquadramento",
+  "glossario.livello.definition":
+    "La posizione che il contratto collettivo ti assegna in base alle mansioni, indicata da un numero o da una sigla. Dal livello dipendono la paga base e, in molti contratti, l’importo degli scatti di anzianità e i giorni di preavviso.",
+  "glossario.minimo.term": "Paga base o minimo tabellare",
+  "glossario.minimo.definition":
+    "La paga minima che il contratto collettivo fissa per il tuo livello, di solito al mese. Insieme alle altre voci fisse, come contingenza, scatti di anzianità e superminimo, forma la paga fissa del mese. Si aggiorna con i rinnovi del contratto.",
+  "glossario.contingenza.term": "Contingenza",
+  "glossario.contingenza.definition":
+    "Un’indennità che un tempo aumentava in automatico con il costo della vita, secondo il meccanismo della scala mobile. Abolita la scala mobile, l’importo è rimasto fermo e oggi è una parte fissa della paga. Alcuni contratti la mostrano come voce a parte, altri l’hanno unita alla paga base.",
+  "glossario.edr.term": "Elemento distinto della retribuzione (EDR)",
+  "glossario.edr.definition":
+    "Un piccolo importo fisso al mese, uguale per tutti i livelli, nato quando è stata abolita la scala mobile. Dove non è stato assorbito dalla paga base o dalla contingenza, compare come voce a parte.",
+  "glossario.scatti.term": "Scatti di anzianità",
+  "glossario.scatti.definition":
+    "Aumenti della paga che maturano dopo un certo numero di anni nella stessa azienda. Quanti sono, ogni quanto arrivano e quanto valgono lo stabilisce il contratto collettivo, spesso in base al livello.",
+  "glossario.superminimo.term": "Superminimo",
+  "glossario.superminimo.definition":
+    "Una somma in più rispetto al minimo del contratto collettivo, che l’azienda ti riconosce all’assunzione o più avanti. Se è assorbibile, quando i minimi salgono con un rinnovo può calare dello stesso importo e il totale resta uguale; se non è assorbibile, l’aumento si aggiunge. Quando la lettera di assunzione non dice niente, di regola è assorbibile.",
+  "glossario.previdenziale.term": "Imponibile previdenziale",
+  "glossario.previdenziale.definition":
+    "La parte della paga su cui si calcolano i contributi dell’Istituto nazionale della previdenza sociale (INPS). Comprende quasi tutto quello che ti spetta nel mese: restano fuori, nei limiti di legge, voci come buoni pasto, fringe benefit e rimborsi delle trasferte. L’imponibile fiscale, su cui si calcola l’imposta sul reddito delle persone fisiche (IRPEF), in genere è questo importo meno i contributi a tuo carico.",
+  "glossario.fringe.term": "Fringe benefit",
+  "glossario.fringe.definition":
+    "Beni e servizi che l’azienda ti dà oltre alla paga, come buoni acquisto, carte carburante o l’auto aziendale che usi anche per te. Nel {year} non pagano né imposte né contributi fino a {general} all’anno in tutto, o {children} se hai figli a carico. Se superi la soglia diventa imponibile tutto il valore, dal primo euro.",
+  "glossario.buoni.term": "Buoni pasto",
+  "glossario.buoni.definition":
+    "Buoni che l’azienda ti dà per pagare i pasti, di solito uno per ogni giorno lavorato. Nel {year} non pagano né imposte né contributi fino a {electronic} al giorno se elettronici e fino a {paper} se cartacei; la parte in più è imponibile come la paga.",
+  "glossario.rimborsi.term": "Rimborsi spese",
+  "glossario.rimborsi.definition":
+    "Le somme che l’azienda ti restituisce quando anticipi spese di lavoro, come viaggi, pasti e alberghi in trasferta. Per le trasferte fuori dal comune in cui lavori, se le spese sono documentate e pagate in modo tracciabile, per esempio con carta o bonifico, di solito non pagano né imposte né contributi.",
+  "glossario.premio.term": "Premio di risultato",
+  "glossario.premio.definition":
+    "Un premio legato ai risultati dell’azienda, per esempio di produttività o qualità, previsto da un contratto aziendale o territoriale. Nel {year}, fino a {max} lordi, paga un’imposta sostitutiva {rate} al posto di IRPEF e addizionali, se lavori nel settore privato e l’anno prima il tuo reddito da lavoro dipendente è rimasto entro il limite di legge. Sul premio paghi comunque i contributi INPS, come sul resto della paga.",
+  "glossario.arretrati.term": "Arretrati",
+  "glossario.arretrati.definition":
+    "Somme che ti spettavano per mesi passati e che ricevi solo ora, per esempio quando un rinnovo del contratto collettivo fa partire gli aumenti da qualche mese prima. Se sono di anni precedenti e dipendono da una legge, da un contratto collettivo o da una sentenza, di solito hanno una tassazione separata: non si sommano al reddito dell’anno e non ti fanno salire di scaglione.",
+  "glossario.conguaglio.term": "Conguaglio",
+  "glossario.conguaglio.definition":
+    "Il ricalcolo dell’IRPEF su tutto quello che il datore di lavoro ti ha pagato nell’anno, con le detrazioni che ti spettano. Se con le trattenute dei mesi precedenti hai pagato troppo ricevi la differenza, se hai pagato poco la paghi. Arriva di solito con la busta paga di dicembre, a volte con quella di gennaio o febbraio; se il rapporto finisce, con l’ultima.",
+  "glossario.addizionali.term": "Saldo e acconto delle addizionali",
+  "glossario.addizionali.definition":
+    "Le addizionali regionale e comunale di un anno si calcolano con il conguaglio di fine anno e le paghi a rate l’anno dopo: è il saldo. Per la comunale, da marzo paghi a rate anche un acconto sull’anno in corso, e così nella stessa busta paga trovi il saldo dell’anno prima e l’acconto di quello nuovo. Se il rapporto finisce, l’ultima busta paga trattiene in una volta tutte le rate che mancano.",
+  "glossario.sindacale.term": "Trattenuta sindacale",
+  "glossario.sindacale.definition":
+    "La quota di iscrizione al sindacato, se hai firmato la delega: il datore di lavoro la toglie dalla busta paga e la versa per te. L’importo lo decide il sindacato, spesso come piccola percentuale della paga.",
+  "glossario.quinto.term": "Cessione del quinto",
+  "glossario.quinto.definition":
+    "Un prestito che restituisci a rate mensili: il datore di lavoro trattiene ogni rata dalla busta paga e la versa alla banca o alla finanziaria. Per legge la rata non può superare un quinto dello stipendio netto, da cui il nome. Se il rapporto finisce prima dell’ultima rata, di solito il debito che resta si salda con il trattamento di fine rapporto (TFR).",
+  "glossario.ratei.term": "Ratei",
+  "glossario.ratei.definition":
+    "Le quote di tredicesima, quattordicesima, ferie e permessi che maturi con ogni mese di lavoro. Quando il rapporto finisce, nell’ultima busta paga ricevi i ratei non ancora pagati, comprese le ferie e, di solito, i permessi che non hai usato.",
+  "glossario.ferie.term": "Ferie, permessi, ROL ed ex festività",
+  "glossario.ferie.definition":
+    "Nel riepilogo della busta paga trovi, per ognuna di queste voci, le ore o i giorni maturati, quelli usati e quelli che ti restano. I permessi per riduzione dell’orario di lavoro (ROL) e le ex festività sono ore di permesso pagato previste dal contratto collettivo, le seconde al posto di alcune festività abolite per legge. Il datore di lavoro di solito ti paga i permessi che non usi entro la scadenza del contratto, ma le ferie minime di legge vanno godute: si pagano solo quando il rapporto finisce.",
+  "glossario.netto.term": "Netto in busta",
+  "glossario.netto.definition":
+    "Quello che ti arriva sul conto: il totale delle competenze meno il totale delle trattenute. Molte buste paga lo arrotondano all’euro e riportano i centesimi al mese dopo. Cambia da un mese all’altro con straordinari, assenze, conguagli e rate delle addizionali.",
   "glossario.irpef.term": "IRPEF",
   "glossario.irpef.definition":
     "L’imposta sul reddito delle persone fisiche. Si calcola a scaglioni sul reddito imponibile; nel {year}: {brackets}.",

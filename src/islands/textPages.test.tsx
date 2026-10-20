@@ -11,7 +11,7 @@ import { DATASETS, listParameters } from "@/data/fonti.ts";
 import { formatMoney } from "@/i18n/numbers.ts";
 import { LOCALES } from "@/i18n/locales.ts";
 import { getMessages } from "@/i18n/messages/index.ts";
-import { dateText } from "@/islands/prose/phrases.ts";
+import { dateText, percentText } from "@/islands/prose/phrases.ts";
 import { routeById } from "@/routes.ts";
 import { SOURCE_REPOSITORY_URL } from "@/sourceRepository.ts";
 import AboutPage from "./AboutPage.tsx";
@@ -147,6 +147,40 @@ describe.each(LOCALES)("Glossario e Informazioni in %s", (locale) => {
     expect(container.textContent).not.toMatch(/NaN|undefined|Infinity|\{/);
     const firstBand = param("inps.firstBand", yearStart(LATEST_SUPPORTED_YEAR));
     expect(container.textContent).toContain(formatMoney(firstBand, locale, { integer: true }));
+  });
+
+  it("apre con un indice che porta a ogni sezione, anche alle voci della busta paga", () => {
+    const { container } = render(
+      <GlossaryPage locale={locale} messages={messagesFor("glossary", locale)} />,
+    );
+    const contents = screen.getByRole("navigation", {
+      name: locale === "it" ? "In questa pagina" : "On this page",
+    });
+    const targets = within(contents)
+      .getAllByRole("link")
+      .map((link) => link.getAttribute("href")?.slice(1) ?? "");
+    expect(targets).toContain("busta-paga");
+    for (const id of targets) expect(container.querySelector(`h2[id="${id}"]`)).not.toBeNull();
+    const ids = [...container.querySelectorAll("[id]")].map((element) => element.id);
+    expect(new Set(ids).size).toBe(ids.length);
+  });
+
+  it("spiega fringe benefit, buoni pasto e premio di risultato con i valori del registro", () => {
+    const { container } = render(
+      <GlossaryPage locale={locale} messages={messagesFor("glossary", locale)} />,
+    );
+    const date = yearStart(LATEST_SUPPORTED_YEAR);
+    const money = (amount: number) => formatMoney(amount, locale, { integer: true });
+    const definition = (id: string) =>
+      container.querySelector(`#busta-paga + dl #${id} .qg-terms__definition`)?.textContent ?? "";
+    const welfare = param("fringe.welfare", date);
+    expect(definition("fringe")).toContain(money(welfare.welfareThresholdGeneral));
+    expect(definition("fringe")).toContain(money(welfare.welfareThresholdWithChildren));
+    expect(definition("buoni")).toContain(money(param("fringe.mealVouchers.electronic", date)));
+    expect(definition("buoni")).toContain(money(param("fringe.mealVouchers.paper", date)));
+    const pdr = param("pdr", date);
+    expect(definition("premio")).toContain(money(pdr.maxAmount));
+    expect(definition("premio")).toContain(percentText(pdr.rate, locale));
   });
 
   it("rimanda al codice sorgente pubblico", () => {

@@ -5,7 +5,8 @@ export const en: Record<MessageKey, string> = {
   "glossario.lede":
     "The words you find on your payslip and in the calculators, explained in a few lines. Figures and thresholds are those for {year}.",
   "glossario.toc": "On this page",
-  "glossario.section.pay": "Salary and payslip",
+  "glossario.section.pay": "Salary and contract",
+  "glossario.section.payslip": "Payslip items",
   "glossario.section.taxes": "Taxes",
   "glossario.section.contributions": "Contributions and the end of employment",
   "glossario.section.vat": "VAT number",
@@ -26,6 +27,66 @@ export const en: Record<MessageKey, string> = {
   "glossario.ccnl.term": "National collective agreement (CCNL)",
   "glossario.ccnl.definition":
     "The agreement between unions and employer associations that sets, for each sector, minimum pay, levels, monthly payments, holidays and notice periods.",
+  "glossario.competenze.term": "Earnings and deductions (competenze e trattenute)",
+  "glossario.competenze.definition":
+    "The two columns of your payslip. Earnings are the amounts in your favour, such as the month’s pay and overtime; deductions are what your employer takes off, such as contributions and taxes. Net pay is the difference between the two totals.",
+  "glossario.livello.term": "Job level (livello di inquadramento)",
+  "glossario.livello.definition":
+    "The position your collective agreement assigns you based on your duties, shown as a number or a code. Your level sets your base pay and, in many agreements, the amount of your seniority increases and your notice period.",
+  "glossario.minimo.term": "Base pay (paga base o minimo tabellare)",
+  "glossario.minimo.definition":
+    "The minimum pay your collective agreement sets for your level, usually as a monthly amount. Together with the other fixed items, such as the cost-of-living allowance, seniority increases and above-minimum pay, it makes up your fixed monthly pay. Each renewal of the agreement updates it.",
+  "glossario.contingenza.term": "Cost-of-living allowance (contingenza)",
+  "glossario.contingenza.definition":
+    "An allowance that used to rise automatically with the cost of living, under the system known as the scala mobile. When the scala mobile was abolished the amount was frozen, and today it is a fixed part of your pay. Some agreements show it as a separate item, others have merged it into base pay.",
+  "glossario.edr.term": "Separate pay element (EDR)",
+  "glossario.edr.definition":
+    "A small fixed monthly amount, the same at every level, introduced when the scala mobile was abolished. Where it has not been absorbed into base pay or the cost-of-living allowance, it appears as a separate item.",
+  "glossario.scatti.term": "Seniority increases (scatti di anzianità)",
+  "glossario.scatti.definition":
+    "Pay rises that come after a set number of years with the same employer. Your collective agreement decides how many there are, how often they come and how much they are worth, often depending on your level.",
+  "glossario.superminimo.term": "Above-minimum pay (superminimo)",
+  "glossario.superminimo.definition":
+    "An amount on top of the collective agreement minimum, which your employer grants when you are hired or later on. If it is absorbable (assorbibile), it can shrink by the same amount when the minimums rise with a renewal, so your total stays the same; if it is not absorbable, you get the rise on top. When your employment letter says nothing about it, it is absorbable as a rule.",
+  "glossario.previdenziale.term": "Contribution base (imponibile previdenziale)",
+  "glossario.previdenziale.definition":
+    "The part of your pay on which contributions to the national social security institute (INPS) are calculated. It covers almost everything you are due in the month, apart from items such as meal vouchers, fringe benefits and business trip reimbursements, which the law leaves out up to set limits. The tax base (imponibile fiscale), on which personal income tax (IRPEF) is calculated, is generally this amount minus your own contributions.",
+  "glossario.fringe.term": "Fringe benefits",
+  "glossario.fringe.definition":
+    "Goods and services your employer gives you on top of your pay, such as shopping vouchers, fuel cards or a company car you also use privately. In {year} they are free of tax and contributions up to {general} a year in total, or {children} if you have dependent children. If you go over the threshold, the whole value becomes taxable, from the first euro.",
+  "glossario.buoni.term": "Meal vouchers (buoni pasto)",
+  "glossario.buoni.definition":
+    "Vouchers your employer gives you to pay for meals, usually one for each day worked. In {year} they are free of tax and contributions up to {electronic} a day if electronic and up to {paper} if on paper; the part above is taxable like your pay.",
+  "glossario.rimborsi.term": "Expense reimbursements (rimborsi spese)",
+  "glossario.rimborsi.definition":
+    "The money your employer pays back when you cover work expenses yourself, such as travel, meals and hotels on a business trip. For trips outside the comune where you work, if the expenses are documented and paid in a traceable way, for example by card or bank transfer, they are usually free of tax and contributions.",
+  "glossario.premio.term": "Performance bonus (premio di risultato)",
+  "glossario.premio.definition":
+    "A bonus tied to the company’s results, for example on productivity or quality, set by a company or local agreement. In {year}, up to {max} gross, it is subject to a {rate} substitute tax instead of IRPEF and the surcharges, if you work in the private sector and your employment income the year before stayed within the legal limit. You still pay INPS contributions on it, as on the rest of your pay.",
+  "glossario.arretrati.term": "Back pay (arretrati)",
+  "glossario.arretrati.definition":
+    "Money due for past months that you receive only now, for example when a renewal of the collective agreement backdates pay rises by a few months. If it relates to earlier years and comes from a law, a collective agreement or a court ruling, it is usually taxed separately: it is not added to the year’s income and does not push you into a higher bracket.",
+  "glossario.conguaglio.term": "Tax adjustment (conguaglio)",
+  "glossario.conguaglio.definition":
+    "The recalculation of IRPEF on everything your employer has paid you in the year, with the deductions you are entitled to. If the tax withheld in earlier months was too high you get the difference back; if it was too low, you pay it. It usually comes with the December payslip, sometimes with the January or February one; if the job ends, with the last one.",
+  "glossario.addizionali.term": "Surcharge balance and advance (saldo e acconto delle addizionali)",
+  "glossario.addizionali.definition":
+    "The regional and municipal surcharges for a year are worked out at the year-end tax adjustment, and you pay them in instalments the following year: this is the balance. For the municipal surcharge you also pay an advance on the current year, in instalments from March, so the same payslip shows last year’s balance and this year’s advance. If the job ends, your last payslip takes all the remaining instalments at once.",
+  "glossario.sindacale.term": "Union dues (trattenuta sindacale)",
+  "glossario.sindacale.definition":
+    "Your union membership fee, if you have signed the authorisation for it: your employer takes it from your payslip and pays it on your behalf. The union sets the amount, often as a small percentage of your pay.",
+  "glossario.quinto.term": "Salary-backed loan (cessione del quinto)",
+  "glossario.quinto.definition":
+    "A loan you repay in monthly instalments: your employer takes each instalment from your payslip and pays it to the bank or finance company. By law the instalment cannot exceed a fifth (un quinto) of your net pay, hence the name. If the job ends before the last instalment, your severance pay (TFR) usually covers the remaining debt.",
+  "glossario.ratei.term": "Accruals (ratei)",
+  "glossario.ratei.definition":
+    "The shares of the thirteenth and fourteenth month, holidays and leave that you build up with each month of work. When the job ends, your last payslip pays out the accruals you have not yet received, including unused holidays and, usually, unused leave.",
+  "glossario.ferie.term": "Holidays and leave (ferie, permessi, ROL ed ex festività)",
+  "glossario.ferie.definition":
+    "The summary on your payslip shows, for each of these, the hours or days accrued, used and left. Leave for reduced working hours (ROL) and ex festività are hours of paid leave set by the collective agreement, the latter in place of some public holidays abolished by law. Your employer usually pays you for leave you have not used by the deadline in the agreement, but you have to take the legal minimum holidays: they are paid out only when the job ends.",
+  "glossario.netto.term": "Take-home pay (netto in busta)",
+  "glossario.netto.definition":
+    "What reaches your bank account: total earnings minus total deductions. Many payslips round it to a whole euro and carry the cents over to the following month. It changes from month to month with overtime, absences, tax adjustments and surcharge instalments.",
   "glossario.irpef.term": "IRPEF",
   "glossario.irpef.definition":
     "Italian personal income tax. It is charged in brackets on taxable income; in {year}: {brackets}.",
