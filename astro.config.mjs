@@ -4,6 +4,7 @@ import react from "@astrojs/react";
 import * as storedValues from "./src/data/storedValues.ts";
 import * as verificationSnapshot from "./src/data/verificationSnapshot.ts";
 import { clientSnapshots } from "./src/integrations/clientSnapshots.ts";
+import { islandPreload } from "./src/integrations/islandPreload.ts";
 import { legacyRedirects } from "./src/integrations/redirects.ts";
 import { SITE_ORIGIN } from "./src/routes.ts";
 
@@ -19,6 +20,7 @@ export default defineConfig({
   integrations: [
     react(),
     legacyRedirects(),
+    islandPreload(),
     clientSnapshots(
       new Map([
         [snapshotPath("./src/data/storedValues.ts"), storedValues],
