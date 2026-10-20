@@ -19,6 +19,7 @@ import {
   type OtherFamilyDeductionConfig,
   type PdrSostitutivaConfig,
   type RegimeImpatriatiConfig,
+  type SelfEmployedDeductionConfig,
   type SpouseDeductionConfig,
   type SupportedYear,
   type TaxWedgeCutConfig,
@@ -77,6 +78,7 @@ export interface YearlyTaxConfig {
   readonly inps: InpsConfig;
   readonly irpefBrackets: readonly Bracket[];
   readonly workDeduction: WorkDeductionConfig;
+  readonly selfEmployedDeduction: SelfEmployedDeductionConfig;
   readonly trattamentoIntegrativo: TrattamentoIntegrativoConfig;
   readonly taxWedgeCut: TaxWedgeCutConfig | null;
   readonly inpsExemption2024: InpsExemption2024Config | null;
@@ -223,6 +225,7 @@ function buildTaxConfig(year: SupportedYear): YearlyTaxConfig {
     },
     irpefBrackets: param("irpef.brackets", at),
     workDeduction: param("irpef.workDeduction", at),
+    selfEmployedDeduction: param("irpef.selfEmployedDeduction", at),
     trattamentoIntegrativo: param("irpef.trattamentoIntegrativo", at),
     taxWedgeCut: param("irpef.taxWedgeCut", at),
     inpsExemption2024: param("inps.employee.exemption2024", at),

@@ -89,6 +89,7 @@ export const en: Record<MessageKey, string> = {
 
   "sources.name.irpef.brackets": "IRPEF brackets",
   "sources.name.irpef.workDeduction": "Employment income deduction",
+  "sources.name.irpef.selfEmployedDeduction": "Self-employment and small business deduction",
   "sources.name.irpef.trattamentoIntegrativo": "Trattamento integrativo",
   "sources.name.irpef.taxWedgeCut": "Tax wedge cut",
   "sources.name.inps.firstBand": "First pay band",
@@ -158,6 +159,10 @@ export const en: Record<MessageKey, string> = {
   "sources.part.bracket.last": "Rate above {min}",
   "sources.part.workDeduction.base": "Employment income deduction with income up to {limit}",
   "sources.part.workDeduction.end": "Income above which the deduction reaches zero",
+  "sources.part.selfEmployedDeduction.base":
+    "Self-employment and small business deduction with income up to {limit}",
+  "sources.part.selfEmployedDeduction.bonus":
+    "Increase of the deduction with income above {from} and up to {to}",
   "sources.part.taxWedgeCut.somma": "Tax wedge cut additional payment, income up to {limit}",
   "sources.part.taxWedgeCut.detrazione": "Tax wedge cut additional deduction, income up to {limit}",
   "sources.part.exemption2024.bracket": "2024 contribution exemption, pay up to {limit} a month",

@@ -101,6 +101,22 @@ const DESCRIBERS: Describers = {
     ),
     row(f.t("sources.part.workDeduction.end"), money(config.thresholds[2], f)),
   ],
+  "irpef.selfEmployedDeduction": (config, f) => [
+    row(
+      f.t("sources.part.selfEmployedDeduction.base", {
+        limit: wholeMoneyText(config.thresholds[0], f.locale),
+      }),
+      money(config.baseDeduction, f),
+    ),
+    row(
+      f.t("sources.part.selfEmployedDeduction.bonus", {
+        from: wholeMoneyText(config.midBracketBonus.above, f.locale),
+        to: wholeMoneyText(config.midBracketBonus.upTo, f.locale),
+      }),
+      money(config.midBracketBonus.amount, f),
+    ),
+    row(f.t("sources.part.workDeduction.end"), money(config.thresholds[2], f)),
+  ],
   "irpef.trattamentoIntegrativo": (config, f) =>
     named("irpef.trattamentoIntegrativo", f, upTo(money(config.maxAnnualBonus, f), f)),
   "irpef.taxWedgeCut": (config, f) => {

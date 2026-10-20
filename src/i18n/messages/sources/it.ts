@@ -87,6 +87,7 @@ export const it = {
 
   "sources.name.irpef.brackets": "Scaglioni IRPEF",
   "sources.name.irpef.workDeduction": "Detrazione per lavoro dipendente",
+  "sources.name.irpef.selfEmployedDeduction": "Detrazione per lavoro autonomo e impresa minore",
   "sources.name.irpef.trattamentoIntegrativo": "Trattamento integrativo",
   "sources.name.irpef.taxWedgeCut": "Taglio del cuneo fiscale",
   "sources.name.inps.firstBand": "Prima fascia di retribuzione",
@@ -159,6 +160,10 @@ export const it = {
   "sources.part.bracket.last": "Aliquota oltre {min}",
   "sources.part.workDeduction.base": "Detrazione per lavoro dipendente con reddito fino a {limit}",
   "sources.part.workDeduction.end": "Reddito oltre il quale la detrazione si azzera",
+  "sources.part.selfEmployedDeduction.base":
+    "Detrazione per lavoro autonomo e impresa con reddito fino a {limit}",
+  "sources.part.selfEmployedDeduction.bonus":
+    "Aumento della detrazione con reddito oltre {from} e fino a {to}",
   "sources.part.taxWedgeCut.somma":
     "Somma aggiuntiva del taglio del cuneo fiscale, reddito fino a {limit}",
   "sources.part.taxWedgeCut.detrazione":

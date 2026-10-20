@@ -26,6 +26,7 @@ export type { DerivedKey, DerivedValue } from "./derived.ts";
 
 export type {
   DetrazioneAggiuntivaConfig,
+  SelfEmployedDeductionConfig,
   SommaAggiuntivaBracket,
   TaxWedgeCutConfig,
   TrattamentoIntegrativoConfig,

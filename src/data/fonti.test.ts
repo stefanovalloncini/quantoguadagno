@@ -36,6 +36,13 @@ const CHECKED_IN_PHASE_0: readonly string[] = [
   ...REGION_CODES.map((code) => `regions.${code}`),
 ];
 
+const CHECKED_ON_2026_10_20: readonly string[] = ["irpef.selfEmployedDeduction"];
+
+const CHECK_SESSIONS: Readonly<Record<string, readonly string[]>> = {
+  "2026-09-28": CHECKED_IN_PHASE_0,
+  "2026-10-20": CHECKED_ON_2026_10_20,
+};
+
 describe("fonti: elenco dei parametri", () => {
   const listing = listParameters();
 
@@ -85,14 +92,16 @@ describe("fonti: da verificare", () => {
     expect(listed.sort()).toEqual(expected.sort());
   });
 
-  it("verificati il 2026-09-28 sono solo i valori controllati nella sessione precedente", () => {
+  it("verificati sono solo i valori controllati, ognuno con la data del suo controllo", () => {
     const verified = STORED_KEYS.filter((key) =>
       STORED_PARAMS[key].entries.some((entry) => entry.source.verified !== undefined),
     );
-    expect(verified.sort()).toEqual([...CHECKED_IN_PHASE_0].sort());
-    for (const key of verified) {
-      for (const entry of STORED_PARAMS[key].entries) {
-        if (entry.source.verified !== undefined) expect(entry.source.verified).toBe("2026-09-28");
+    expect(verified.sort()).toEqual(Object.values(CHECK_SESSIONS).flat().sort());
+    for (const [date, keys] of Object.entries(CHECK_SESSIONS)) {
+      for (const key of STORED_KEYS.filter((candidate) => keys.includes(candidate))) {
+        for (const entry of STORED_PARAMS[key].entries) {
+          if (entry.source.verified !== undefined) expect(entry.source.verified).toBe(date);
+        }
       }
     }
   });
@@ -107,7 +116,7 @@ describe("fonti: da verificare", () => {
     expect(DATASETS.map((dataset) => dataset.key)).toContain("inflation.foi");
   });
 
-  it("l'ultima verifica è quella del 2026-09-28", () => {
-    expect(latestVerification()).toBe("2026-09-28");
+  it("l'ultima verifica è quella del 2026-10-20", () => {
+    expect(latestVerification()).toBe("2026-10-20");
   });
 });

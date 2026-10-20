@@ -15,7 +15,7 @@ src/data/
   define.ts       effective(), revaluedYearly(), cite(), verifiedInPhase0()
   sources.ts      leggi e circolari citate da più parametri
   params/         i parametri per materia, ognuno una lista di { from, value, source }
-    irpef.ts      scaglioni, detrazione lavoro dipendente, trattamento integrativo, cuneo
+    irpef.ts      scaglioni, detrazioni per lavoro dipendente e autonomo, trattamento integrativo, cuneo
     inps.ts       prima fascia, massimale, aliquote dei dipendenti, esonero 2024
     autonomi.ts   aliquote, minimale e riduzioni di artigiani, commercianti, gestione separata
     deductions.ts detrazioni per familiari e per spese

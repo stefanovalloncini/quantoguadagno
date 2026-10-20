@@ -74,6 +74,7 @@ export const PARAMETER_GROUPS: readonly {
     keys: [
       "irpef.brackets",
       "irpef.workDeduction",
+      "irpef.selfEmployedDeduction",
       "irpef.taxWedgeCut",
       "irpef.trattamentoIntegrativo",
     ],

@@ -1,4 +1,4 @@
-import { cite, effective, verifiedInPhase0 } from "../define.ts";
+import { cite, effective, verifiedInPhase0, verifiedOn } from "../define.ts";
 import { L_199_2025, L_207_2024 } from "../sources.ts";
 import type { Bracket } from "../types.ts";
 
@@ -14,6 +14,10 @@ export interface WorkDeductionConfig {
   readonly additionalDeduction: number;
   readonly midBracketFixed: number;
   readonly midBracketBonus: WorkDeductionBonus;
+}
+
+export interface SelfEmployedDeductionConfig extends WorkDeductionConfig {
+  readonly quotientDecimals: number;
 }
 
 export interface TrattamentoIntegrativoConfig {
@@ -53,6 +57,9 @@ const BRACKETS_2026: readonly Bracket[] = [
 
 const L_207_2024_WEDGE = cite(L_207_2024, "art. 1 c. 4-9");
 
+const TUIR_ART_13_URL =
+  "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.del.presidente.della.repubblica:1986-12-22;917~art13";
+
 export const IRPEF_PARAMS = {
   "irpef.brackets": effective<readonly Bracket[]>(
     {
@@ -87,6 +94,23 @@ export const IRPEF_PARAMS = {
       ref: "Art. 13 TUIR, come modificato dall'art. 1 c. 2 L. 213/2023",
       note: "I 65 € tra 25.000 e 35.000 € sono quelli dell'art. 13 c. 1.1",
     },
+  }),
+  "irpef.selfEmployedDeduction": effective<SelfEmployedDeductionConfig>({
+    from: "2024-01-01",
+    value: {
+      thresholds: [5_500, 28_000, 50_000],
+      baseDeduction: 1265,
+      additionalDeduction: 765,
+      midBracketFixed: 500,
+      midBracketBonus: { above: 11_000, upTo: 17_000, amount: 50 },
+      quotientDecimals: 4,
+    },
+    source: verifiedOn("2026-10-20", {
+      ref: "Art. 13 c. 5, 5-ter e 6 TUIR, come modificato dall'art. 1 c. 2 lett. b) L. 234/2021",
+      url: TUIR_ART_13_URL,
+      published: "2021-12-31",
+      note: "Testo uguale nelle versioni in vigore nel 2024, nel 2025 e nel 2026. Si calcola sul reddito complessivo, prima degli oneri deducibili; il quoziente si tronca alla quarta cifra decimale",
+    }),
   }),
   "irpef.trattamentoIntegrativo": effective<TrattamentoIntegrativoConfig>({
     from: "2024-01-01",
