@@ -1,5 +1,5 @@
 :root {
-  --font: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --font: "Archivo", "Archivo fallback", "Helvetica Neue", Arial, sans-serif;
   --wdth-expanded: 125%;
   --wdth-condensed: 87.5%;
 

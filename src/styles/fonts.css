@@ -72,3 +72,25 @@
     U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F,
     U+A720-A7FF;
 }
+
+@font-face {
+  font-family: "Archivo fallback";
+  src: local("Arial"), local("ArialMT");
+  font-weight: 400 600;
+  font-stretch: 100%;
+  size-adjust: 98.45%;
+  ascent-override: 89.18%;
+  descent-override: 21.33%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Archivo fallback";
+  src: local("Arial Bold"), local("Arial-BoldMT");
+  font-weight: 600;
+  font-stretch: 125%;
+  size-adjust: 122.6%;
+  ascent-override: 71.62%;
+  descent-override: 17.13%;
+  line-gap-override: 0%;
+}
