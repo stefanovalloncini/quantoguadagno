@@ -10,14 +10,14 @@
   display: flex;
 }
 
-/* The figure, the primary action and the assumptions, spaced as the calculator's result. */
+/* The figure, the primary action and the notes, spaced as the calculator's result. */
 .qg-netpage__result {
   display: flex;
   flex-direction: column;
   gap: var(--s-6);
 }
 
-.qg-netpage__assumptions {
+.qg-netpage__notes {
   display: flex;
   flex-direction: column;
   gap: var(--s-3);

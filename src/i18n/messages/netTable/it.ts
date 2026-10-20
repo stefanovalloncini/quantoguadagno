@@ -1,6 +1,6 @@
 export const it = {
   "netTable.scenario":
-    "Per un dipendente a tempo indeterminato del settore privato che vive a {city}, con {count} mensilità e nessun familiare a carico.",
+    "Per un dipendente a tempo indeterminato del settore privato che vive a {city}, con {count} mensilità, senza familiari a carico, spese detraibili o benefit.",
   "netTable.action": "Calcola con i tuoi dati",
   "netTable.understand.title": "Per capire il calcolo",
 

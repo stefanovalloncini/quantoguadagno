@@ -80,7 +80,6 @@ function lineText(line: LedgerLine, locale: Locale): string {
 describe.each(LOCALES)("amount pages in %s", (locale) => {
   const messages = getMessages(locale, NET_AMOUNT_NAMESPACES);
   const t = getT(locale, "netTable");
-  const employee = getT(locale, "employee");
   const money = (amount: number) => formatMoney(amount, locale);
 
   function renderPage(gross: number): { page: AmountPage; container: HTMLElement } {
@@ -186,17 +185,12 @@ describe.each(LOCALES)("amount pages in %s", (locale) => {
     ).toBe(hrefFor("netTable", locale));
   });
 
-  it("names every assumption of the scenario, with nothing to change", () => {
+  it("states the whole scenario in the lede, with no list that repeats it", () => {
     const { container } = renderPage(30_000);
-    const list = container.querySelector(".qg-assumptions__list");
-    const text = list?.textContent ?? "";
-    expect(text).toContain(employee("employee.assumption.year", { year: YEAR }));
-    expect(text).toContain("Milano");
-    expect(text).toContain(employee("employee.assumption.frequency", { count: 13 }));
-    expect(text).toContain(employee("employee.assumption.noDependents"));
-    expect(text).toContain(employee("employee.assumption.noExpenses"));
-    expect(text).toContain(employee("employee.assumption.noBenefits"));
-    expect(list?.querySelectorAll("a")).toHaveLength(0);
+    expect(container.querySelector(".qg-lede")?.textContent).toBe(
+      t("netTable.scenario", { city: "Milano", count: 13 }),
+    );
+    expect(container.querySelector(".qg-assumptions")).toBeNull();
   });
 
   // Worked by hand in model.test.ts from the 2026 rules.

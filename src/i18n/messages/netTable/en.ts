@@ -2,7 +2,7 @@ import type { MessageKey } from "./it.ts";
 
 export const en: Record<MessageKey, string> = {
   "netTable.scenario":
-    "For a permanent employee in the private sector who lives in {city}, with {count} payslips a year and no dependants.",
+    "For a permanent employee in the private sector who lives in {city}, with {count} payslips a year and no dependants, deductible expenses or benefits.",
   "netTable.action": "Calculate with your details",
   "netTable.understand.title": "Understanding the calculation",
 

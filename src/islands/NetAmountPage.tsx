@@ -1,13 +1,11 @@
-import { useRegionText } from "@/components/form/regionText.ts";
 import { PageIntro } from "@/components/page/PageIntro.tsx";
 import { Pager, type PagerLink } from "@/components/page/Pager.tsx";
-import { Assumptions, NoteLine } from "@/components/result/Assumptions.tsx";
+import { NoteLine } from "@/components/result/Assumptions.tsx";
 import { ResultFigure } from "@/components/result/ResultFigure.tsx";
 import { latestVerification } from "@/data/index.ts";
 import type { Namespace } from "@/i18n/messages/index.ts";
 import { formatDate } from "@/i18n/numbers.ts";
 import { I18nProvider, useLocale, useRichT, useT } from "@/i18n/react.tsx";
-import { assumptionItems } from "@/islands/home/summaries.ts";
 import { valuesToVerify } from "@/islands/home/trust.ts";
 import { Amount, useViewFormat } from "@/islands/home/viewFormat.tsx";
 import { netTablePath } from "@/islands/netTable/amounts.ts";
@@ -36,7 +34,6 @@ export const NET_AMOUNT_NAMESPACES: readonly Namespace[] = [
 
 const IDS = {
   figure: "netto-titolo",
-  assumptions: "ipotesi-titolo",
   ledger: "dettaglio-titolo",
   months: "mensilita-titolo",
   cities: "capoluoghi-titolo",
@@ -44,10 +41,6 @@ const IDS = {
   employer: "costo-titolo",
   understand: "capire-titolo",
 } as const;
-
-function noChange(): void {
-  return undefined;
-}
 
 interface ContentProps {
   readonly page: AmountPage;
@@ -57,14 +50,12 @@ function NetAmountContent({ page }: ContentProps) {
   const t = useT();
   const rt = useRichT();
   const f = useViewFormat();
-  const regions = useRegionText();
   const locale = useLocale();
   const result = calculatorResult(page, locale);
   const { breakdown: b, residence, year, raise } = page;
   const city = placeName(residence.comuneName);
   const gross = f.whole(page.gross);
   const money = (value: number) => <Amount>{f.money(value)}</Amount>;
-  const assumptions = assumptionItems(result, { t, f, regions, municipalMode: "comune" });
   const checked = latestVerification();
   const pending = valuesToVerify(result.values);
   const amountLink = (amount: number | null): PagerLink | null =>
@@ -100,13 +91,7 @@ function NetAmountContent({ page }: ContentProps) {
             {t("netTable.action")}
           </a>
         </p>
-        <div className="qg-netpage__assumptions">
-          <Assumptions
-            headingId={IDS.assumptions}
-            items={[]}
-            fixed={assumptions.map((item) => ({ id: item.id, text: item.text }))}
-            onChange={noChange}
-          />
+        <div className="qg-netpage__notes">
           <NoteLine term={t("result.estimate.term")}>
             {t("employee.result.estimate")}
             {checked !== null && (
