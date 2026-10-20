@@ -69,6 +69,41 @@ describe("calculateInverseSalary", () => {
     },
   );
 
+  // Each case once returned a gross past a narrow stretch where net already reached the target.
+  it.each([
+    { year: 2026, target: 10_200, below: 9_300 },
+    { year: 2026, target: 15_190, below: 16_520 },
+    { year: 2024, target: 25_996, below: 35_000 },
+  ] as const)(
+    "finds the narrow stretch before a drop: $target in $year",
+    ({ year, target, below }) => {
+      const other = { ...BASE, taxYear: year, paymentFrequency: 13 as const };
+      const r = calculateInverseSalary({ targetNetAnnual: target, other });
+      expect(r.breakdown.netAnnual).toBeGreaterThanOrEqual(target);
+      expect(r.grossAnnual).toBeLessThan(below);
+      const oneCentLess = calculateSalaryBreakdown({ ...other, grossAnnual: r.grossAnnual - 0.01 });
+      expect(oneCentLess.netAnnual).toBeLessThan(target);
+    },
+  );
+
+  it.each([2024, 2026] as const)(
+    "is never beaten by a one-euro scan of every gross up to 70.000 EUR in %i",
+    (year) => {
+      const other = { ...BASE, taxYear: year, paymentFrequency: 13 as const };
+      const nets: number[] = [];
+      for (let gross = 0; gross <= 70_000; gross += 1) {
+        nets.push(calculateSalaryBreakdown({ ...other, grossAnnual: gross }).netAnnual);
+      }
+      const highest = Math.max(...nets);
+      for (let target = 101; target < highest; target += 89) {
+        const scanned = nets.findIndex((net) => net >= target);
+        const r = calculateInverseSalary({ targetNetAnnual: target, other });
+        expect(r.breakdown.netAnnual).toBeGreaterThanOrEqual(target);
+        expect(r.grossAnnual).toBeLessThanOrEqual(scanned + 0.05);
+      }
+    },
+  );
+
   it("says it did not converge when no gross up to the cap reaches the target", () => {
     const r = calculateInverseSalary({ targetNetAnnual: 5_000_000, other: BASE });
     expect(r.converged).toBe(false);
