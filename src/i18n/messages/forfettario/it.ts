@@ -48,7 +48,7 @@ export const it = {
     "Inserisci l’importo previsto come stimato dalla tua cassa.",
   "forfettario.form.mesiAttivita": "Mesi di attività nell’anno",
   "forfettario.form.mesiAttivita.hint":
-    "Il contributo minimo annuo di Artigiani e Commercianti è proporzionato ai mesi di iscrizione.",
+    "Per Artigiani e Commercianti il minimale e il contributo minimo si riducono in proporzione ai mesi di iscrizione.",
   "forfettario.form.isConcurrentFullTimeEmployee":
     "Sono anche lavoratore dipendente full-time (32 ore o più a settimana)",
   "forfettario.form.concurrentEmployeeRal": "RAL dipendente full-time",

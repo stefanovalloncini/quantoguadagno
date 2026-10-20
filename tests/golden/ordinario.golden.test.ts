@@ -98,7 +98,8 @@ const CASES: readonly GoldenCase[] = [
   },
   {
     name: "2024 · artigiano per 6 mesi · la detrazione copre tutta l'imposta",
-    source: "Art. 13 c. 5 lett. b) TUIR; Circ. INPS 33/2024 (minimale 18.415 €, 24%)",
+    source:
+      "Art. 13 c. 5 lett. b) TUIR; Circ. INPS 33/2024 (minimale 18.415 €, 24%); Redditi PF quadro RR (minimale rapportato ai mesi)",
     year: 2024,
     gestion: "artigiani",
     revenue: 20_000,
@@ -117,7 +118,7 @@ const CASES: readonly GoldenCase[] = [
       ["municipalTax", 0],
       ["netAnnual", 3786.48],
     ],
-    forfettario: { coefficient: 0.67, startup: false, netAnnual: 2108.51, difference: -1677.97 },
+    forfettario: { coefficient: 0.67, startup: false, netAnnual: 1253.24, difference: -2533.24 },
   },
 ];
 

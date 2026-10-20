@@ -63,9 +63,44 @@ describe("Artigiani", () => {
 
   it("prorates the contributo fisso when mesiAttivita < 12", () => {
     const r = calculateGestionContribution(
-      base({ gestion: "artigiani", mesiAttivita: 6, imponibile: 18_808 }),
+      base({ gestion: "artigiani", mesiAttivita: 6, imponibile: 9_000 }),
     );
     expect(r.contributoFisso).toBeCloseTo(4_521.36 / 2, 1);
+    expect(r.contributoEccedenza).toBe(0);
+  });
+
+  it("charges the percentage above the prorated minimale in a part year", () => {
+    // minimale = 18_808 * 6 / 12 = 9_404
+    // fixed = 4_521.36 / 2 = 2_260.68
+    // eccedenza = (20_000 - 9_404) * 0.24 = 2_543.04
+    const r = calculateGestionContribution(
+      base({ gestion: "artigiani", mesiAttivita: 6, imponibile: 20_000 }),
+    );
+    expect(r.contributoFisso).toBe(2_260.68);
+    expect(r.contributoEccedenza).toBe(2_543.04);
+    expect(r.contributoTotale).toBe(4_803.72);
+  });
+
+  it("keeps the first band annual in a part year", () => {
+    // eccedenza = (56_224 - 9_404) * 0.24 + (60_000 - 56_224) * 0.25 = 11_236.80 + 944
+    const r = calculateGestionContribution(
+      base({ gestion: "artigiani", mesiAttivita: 6, imponibile: 60_000 }),
+    );
+    expect(r.contributoEccedenza).toBe(12_180.8);
+  });
+
+  it("prorates the massimale only for those insured before 1996", () => {
+    // massimale ante 1996 = 93_707 * 3 / 12 = 23_426.75
+    // eccedenza = (23_426.75 - 4_702) * 0.24 = 4_493.94
+    const before1996 = calculateGestionContribution(
+      base({ gestion: "artigiani", mesiAttivita: 3, imponibile: 40_000, isAnte1996: true }),
+    );
+    expect(before1996.contributoEccedenza).toBe(4_493.94);
+    // from 1996 the massimale stays 122_295: eccedenza = (40_000 - 4_702) * 0.24 = 8_471.52
+    const from1996 = calculateGestionContribution(
+      base({ gestion: "artigiani", mesiAttivita: 3, imponibile: 40_000 }),
+    );
+    expect(from1996.contributoEccedenza).toBe(8_471.52);
   });
 
   it("applies the 35 % discount on the total when forfettarioDiscount35", () => {

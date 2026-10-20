@@ -38,7 +38,7 @@ export const en: Record<MessageKey, string> = {
     "For example a job or a pension: the Gestione Separata rate drops to {article, select, other {}}{rate}.",
   "ordinario.months.label": "Months of activity in the year",
   "ordinario.months.hint":
-    "The minimum contribution is paid in proportion to the months registered.",
+    "The minimum income and the minimum contribution are prorated by the months registered.",
   "ordinario.cassa.label": "Annual contributions to the fund",
   "ordinario.cassa.hint": "What you pay your fund for the year: every fund has its own rules.",
   "ordinario.activity.label": "Your activity",
@@ -104,7 +104,7 @@ export const en: Record<MessageKey, string> = {
   "ordinario.ledger.contributions.minimum": "minimum contribution",
   "ordinario.ledger.contributions.overMinimum": "minimum plus {rate} above {minimale}",
   "ordinario.ledger.contributions.minimumExplain":
-    "Artigiani and Commercianti pay a minimum contribution even when income is below the minimum income of {minimale}: {fixed} for {months, plural, one {# month} other {# months}} of activity.",
+    "Artigiani and Commercianti pay a minimum contribution even when income is below the minimum income. {months, plural, =12 {For a full year the minimum income is {minimale} and the minimum contribution {fixed}.} one {With # month of activity the minimum income drops to {minimale} and the minimum contribution to {fixed}.} other {With # months of activity the minimum income drops to {minimale} and the minimum contribution to {fixed}.}}",
   "ordinario.ledger.contributions.overExplain":
     "Income above the minimum adds {article, select, other {}}{rate}, which becomes {higherArticle, select, other {}}{higherRate} above {band}, up to the ceiling of {massimale}.",
   "ordinario.ledger.contributions.typed": "amount entered",

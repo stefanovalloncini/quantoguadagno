@@ -13,6 +13,7 @@ Parametri contributivi per anno usati dal calcolatore forfettario per le quattro
 - Aliquote: artigiani 24%, commercianti 24,48%, più un punto oltre la prima fascia; contributo di maternità 7,44 € l'anno (0,62 € al mese).
 - Il massimale per chi ha contributi prima del 1996 è la prima fascia più due terzi: la circolare 14/2026 lo scrive per esteso (56.224 + 37.483 = 93.707). Per il 2024 e il 2025 il valore è ricavato con la stessa regola.
 - Il contributo minimo è minimale × aliquota + maternità, e coincide con quello pubblicato nelle circolari.
+- Attività per una parte dell'anno: "Il minimale ed il massimale devono essere rapportati a mesi in caso di attività che non copre l'intero anno, sia per la Gestione degli Artigiani che per quella dei Commercianti. [...] Per i lavoratori privi di anzianità contributiva alla data del 31 dicembre 1995, iscritti a decorrere dal 1° gennaio 1996, il minimale deve essere rapportato ai mesi, mentre il massimale [...] non può essere rapportato ai mesi di attività" (istruzioni Redditi PF 2026, fascicolo 2, quadro RR, p. 41; stesso testo nelle edizioni 2024 e 2025). Il contributo a percentuale si calcola sul "reddito eccedente il minimale" (colonne 24 e 25, p. 43), cioè oltre il minimale già rapportato ai mesi (colonna 10). La prima fascia resta annua: le istruzioni la indicano come "55.448,00 euro annui" e non la rapportano ai mesi.
 - Riduzione del 35% per i forfettari (L. 190/2014 art. 1 c. 77): si applica all'intero contributo, maternità compresa. I minimi ridotti pubblicati per il 2026 (artigiani 2.939 €, commercianti 2.998 €) sono 4.521,36 × 0,65 e 4.611,64 × 0,65.
 - Riduzione del 50% per chi si iscrive per la prima volta dal 2025 (L. 207/2024 art. 1 c. 186), per 36 mesi, alternativa alla riduzione del 35%.
 
@@ -34,6 +35,10 @@ Chi ha anche un reddito da lavoro dipendente oltre la soglia è escluso dal forf
 
 La versione precedente di questa scheda diceva che il 2025 era "identico al 2026" salvo il minimale, e nel codice gli anni 2024 e 2025 erano costruiti copiando il 2026. Risultato: nel 2024 e nel 2025 prima fascia e massimali erano quelli del 2026, il minimale 2024 di artigiani e commercianti era quello del 2023 (17.504 €) e il massimale ante 1996 era 86.334 € in tutti gli anni. Il test `taxConfig.autonomi.test.ts` ora controlla ogni valore contro la circolare dell'anno e verifica che i valori rivalutati crescano da un anno all'altro.
 
+## Correzione di ottobre 2026
+
+Fino al 20 ottobre 2026 il contributo a percentuale partiva dal minimale annuo anche con meno di 12 mesi di attività, e il massimale ante 1996 non si rapportava ai mesi. Un artigiano con sei mesi di attività nel 2026 e 20.000 € di reddito pagava così 2.256,96 € di contributi in meno: (20.000 − 18.808) × 24% = 286,08 € invece di (20.000 − 9.404) × 24% = 2.543,04 €. Ora `src/domain/inpsGestioni.ts` segue le istruzioni del quadro RR, con i casi in `src/domain/inpsGestioni.test.ts`.
+
 ## Cosa il calcolatore non modella
 
 - Le casse professionali (Inarcassa, Cassa Forense, ENPAM e le altre): l'utente inserisce il contributo stimato dalla propria cassa, che il calcolatore usa così com'è.
@@ -43,9 +48,10 @@ La versione precedente di questa scheda diceva che il 2025 era "identico al 2026
 ## Fonti
 
 - Circolare INPS n. 33 del 7/2/2024; n. 38 del 7/2/2025; n. 14 del 9/2/2026 (artigiani e commercianti).
+- Agenzia delle Entrate, istruzioni Redditi PF 2026, fascicolo 2, quadro RR, sezione I (pp. 41-43): https://jws.agenziaentrate.it/jws/dichiarazioni/2026/RPF26/localAppRoot/help/Quadro_RR.pdf (edizioni 2024 e 2025 allo stesso indirizzo con `2024/RPF24` e `2025/RPF25`).
 - Circolari INPS annuali sulla Gestione Separata (2024 n. 8; 2025 n. 27; 2026 n. 8).
 - L. 190/2014 art. 1 c. 54-89 e 77; L. 207/2024.
 
 ## Ultima verifica
 
-2026-09-28
+2026-10-20

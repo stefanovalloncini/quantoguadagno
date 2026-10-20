@@ -35,7 +35,8 @@ export const it = {
   "ordinario.otherPension.hint":
     "Per esempio un lavoro dipendente o una pensione: l’aliquota della Gestione Separata scende {article, select, lo {allo } l {all’} other {al }}{rate}.",
   "ordinario.months.label": "Mesi di attività nell’anno",
-  "ordinario.months.hint": "Il contributo minimo si paga in proporzione ai mesi di iscrizione.",
+  "ordinario.months.hint":
+    "Il minimale e il contributo minimo si riducono in proporzione ai mesi di iscrizione.",
   "ordinario.cassa.label": "Contributi annui alla cassa",
   "ordinario.cassa.hint": "Quanto versi alla tua cassa per l’anno: ogni cassa ha le sue regole.",
   "ordinario.activity.label": "Attività svolta",
@@ -102,7 +103,7 @@ export const it = {
   "ordinario.ledger.contributions.minimum": "contributo minimo",
   "ordinario.ledger.contributions.overMinimum": "minimo più {rate} oltre {minimale}",
   "ordinario.ledger.contributions.minimumExplain":
-    "Artigiani e commercianti pagano un contributo minimo anche se il reddito è più basso del minimale di {minimale}: {fixed} per {months, plural, one {# mese} other {# mesi}} di attività.",
+    "Artigiani e commercianti pagano un contributo minimo anche se il reddito è più basso del minimale. {months, plural, =12 {Per un anno intero il minimale è {minimale} e il contributo minimo {fixed}.} one {Con # mese di attività il minimale scende a {minimale} e il contributo minimo a {fixed}.} other {Con # mesi di attività il minimale scende a {minimale} e il contributo minimo a {fixed}.}}",
   "ordinario.ledger.contributions.overExplain":
     "Sul reddito oltre il minimale si aggiunge {article, select, lo {lo } l {l’} other {il }}{rate}, che diventa {higherArticle, select, lo {lo } l {l’} other {il }}{higherRate} oltre {band}, fino al massimale di {massimale}.",
   "ordinario.ledger.contributions.typed": "importo inserito",

@@ -9,6 +9,8 @@ import { regionSummary } from "@/islands/home/regionSummary.ts";
 import { Amount, type ViewFormat } from "@/islands/home/viewFormat.tsx";
 import type { OrdinarioResult } from "./compute.ts";
 
+const MONTHS_IN_YEAR = 12;
+
 export interface LedgerContext {
   readonly result: OrdinarioResult;
   readonly municipalMode: MunicipalMode;
@@ -90,11 +92,15 @@ function contributionRow(context: LedgerContext): LedgerRow {
     };
   }
   const g = autonomi[values.gestion];
-  const minimale = f.whole(g.minimaleReddito);
+  const minimaleAmount =
+    Math.round((g.minimaleReddito * values.months * 100) / MONTHS_IN_YEAR) / 100;
+  const minimale = Number.isInteger(minimaleAmount)
+    ? f.whole(minimaleAmount)
+    : f.money(minimaleAmount);
   return {
     ...base,
     rule:
-      b.income > g.minimaleReddito
+      b.income > minimaleAmount
         ? t("ordinario.ledger.contributions.overMinimum", { rate: f.percent(g.rate), minimale })
         : t("ordinario.ledger.contributions.minimum"),
     explanation: paragraphs(

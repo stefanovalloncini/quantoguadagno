@@ -48,7 +48,7 @@ export const en: Record<MessageKey, string> = {
   "forfettario.form.cassaManualAmount.hint": "Enter the amount your cassa estimates for the year.",
   "forfettario.form.mesiAttivita": "Months of activity in the year",
   "forfettario.form.mesiAttivita.hint":
-    "The minimum annual contribution for Artigiani and Commercianti is prorated by months of registration.",
+    "For Artigiani and Commercianti the minimum income and the minimum contribution are prorated by months of registration.",
   "forfettario.form.isConcurrentFullTimeEmployee":
     "I am also a full-time employee (32+ hours per week)",
   "forfettario.form.concurrentEmployeeRal": "Full-time employee gross salary",

@@ -162,7 +162,7 @@ describe("OrdinarioCalculator", () => {
     setup("/partita-iva-ordinario?f=20000&s=14000&y=2024&g=artigiani&m=6&a=altre-attivita");
     expect(figure()).toMatch(/3\.786,48\s€/);
     expect(screen.getByText("Lombardia, non dovuta")).toBeInTheDocument();
-    expect(comparison()).toHaveTextContent(/1\.677,97\s€ in meno/);
+    expect(comparison()).toHaveTextContent(/2\.533,24\s€ in meno/);
   });
 
   it("speaks English on the English page", () => {

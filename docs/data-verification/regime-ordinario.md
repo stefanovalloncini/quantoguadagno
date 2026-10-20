@@ -69,8 +69,9 @@ si ottiene dalle righe già arrotondate, come nel calcolatore dello stipendio.
 2. **Contributi** sul reddito, con le regole di `src/domain/inpsGestioni.ts`, le stesse del
    calcolatore del forfettario (scheda `inps-autonomi.md`): Gestione Separata al 26,07%, o al 24%
    per chi ha già un'altra copertura previdenziale, fino al massimale; artigiani e commercianti
-   con il contributo minimo, riproporzionato ai mesi di attività, più l'aliquota sul reddito oltre
-   il minimale e un punto in più oltre la prima fascia; cassa professionale con l'importo annuo
+   con il contributo minimo più l'aliquota sul reddito oltre il minimale e un punto in più oltre la
+   prima fascia (con meno di 12 mesi di attività minimale e contributo minimo si riproporzionano ai
+   mesi, scheda `inps-autonomi.md`); cassa professionale con l'importo annuo
    inserito. Il contributo minimo dei commercianti 2026 è 18.808 × 24,48% + 7,44 = 4.611,64 €.
 3. **Reddito imponibile** = reddito meno contributi, mai sotto zero: i contributi previdenziali
    obbligatori si deducono dal reddito complessivo (art. 10 c. 1 lett. e) TUIR).
@@ -216,16 +217,17 @@ Compensi 18.000 €, costi 2.000 €.
 Ricavi 20.000 €, costi 14.000 €, attività da luglio.
 
 - Reddito: 6.000,00
-- Contributi: minimo (18.415 × 24% + 7,44) × 6 / 12 = 4.427,04 / 2 = 2.213,52; niente oltre il
-  minimale
+- Contributi: minimo (18.415 × 24% + 7,44) × 6 / 12 = 4.427,04 / 2 = 2.213,52; il minimale di
+  sei mesi è 18.415 × 6 / 12 = 9.207,50, sopra il reddito, quindi niente oltre il minimale
 - Reddito imponibile: 6.000 − 2.213,52 = 3.786,48
 - IRPEF lorda: 3.786,48 × 23% = 870,89
 - Detrazione sul reddito di 6.000: 1.247,94, se ne usano 870,89
 - IRPEF netta: 0, e quindi niente addizionali
 - Netto annuo: 6.000 − 2.213,52 = **3.786,48 €**
-- Forfettario, altre attività (67%): reddito 13.400,00; contributi 2.213,52; imposta 15% su
-  11.186,48 = 1.677,97; netto 20.000 − 2.213,52 − 1.677,97 − 14.000 = **2.108,51 €**: con costi
-  così alti conviene l'ordinario, di 1.677,97 €.
+- Forfettario, altre attività (67%): reddito 13.400,00; contributi 2.213,52 di minimo più
+  (13.400 − 9.207,50) × 24% = 1.006,20, in tutto 3.219,72; imposta 15% su 10.180,28 = 1.527,04;
+  netto 20.000 − 3.219,72 − 1.527,04 − 14.000 = **1.253,24 €**: con costi così alti conviene
+  l'ordinario, di 2.533,24 €.
 
 ## Limiti noti
 

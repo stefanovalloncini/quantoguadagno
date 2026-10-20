@@ -52,15 +52,20 @@ function calcArtigianiCommercianti(
   g: GestionAutonomiConfig,
 ): AutonomiBreakdown {
   const mesi = Math.min(12, Math.max(1, Math.floor(input.mesiAttivita)));
+  const share = mesi / 12;
 
   const fissoMinimoYearly = g.minimaleReddito * g.rate + g.maternityYearly;
-  const contributoFisso = (fissoMinimoYearly * mesi) / 12;
+  const contributoFisso = fissoMinimoYearly * share;
 
-  const cap = input.isAnte1996 ? g.massimaleAnte1996 : g.massimale;
+  // Redditi PF, quadro RR sez. I: for an activity that covers part of the year the minimale is
+  // prorated by months, and so is the massimale of those insured before 1996; the massimale
+  // from 1996 and the first band stay annual.
+  const minimale = g.minimaleReddito * share;
+  const cap = input.isAnte1996 ? g.massimaleAnte1996 * share : g.massimale;
 
   let eccedenza = 0;
-  if (input.imponibile > g.minimaleReddito) {
-    const overMinimo = Math.min(input.imponibile, g.band1Ceiling) - g.minimaleReddito;
+  if (input.imponibile > minimale) {
+    const overMinimo = Math.min(input.imponibile, g.band1Ceiling, cap) - minimale;
     eccedenza += Math.max(0, overMinimo) * g.rate;
     if (input.imponibile > g.band1Ceiling) {
       const over1st = Math.min(input.imponibile, cap) - g.band1Ceiling;
